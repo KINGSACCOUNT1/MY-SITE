@@ -600,6 +600,52 @@
             `;
             selectedMethod = 'BTC';
             document.getElementById('cryptoTypeInput').value = 'BTC';
+            
+            // Add Bank Transfer option
+            addBankTransferOption(container);
+        }
+        
+        // Add Bank Transfer payment method
+        function addBankTransferOption(container) {
+            const bankDiv = document.createElement('div');
+            bankDiv.className = 'payment-method';
+            bankDiv.style.background = 'rgba(59, 130, 246, 0.1)';
+            bankDiv.style.borderColor = 'rgba(59, 130, 246, 0.3)';
+            bankDiv.onclick = () => selectBankMethod();
+            
+            bankDiv.innerHTML = `
+                <div class="payment-icon" style="font-size: 2rem;">🏦</div>
+                <div class="payment-name">Bank Transfer</div>
+                <div class="payment-desc">Contact support</div>
+            `;
+            container.appendChild(bankDiv);
+        }
+        
+        // Handle Bank Transfer selection
+        function selectBankMethod() {
+            // Check if Tawk.to is loaded
+            if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+                // Open chat widget
+                Tawk_API.maximize();
+                
+                // Wait for widget to open, then send pre-filled message
+                setTimeout(() => {
+                    Tawk_API.addEvent('Bank Deposit Request', {
+                        'user': '{{ user.email }}',
+                        'user_id': '{{ user.id }}',
+                        'action': 'deposit_bank_transfer',
+                        'message': 'I would like to make a deposit via bank transfer. Please provide your bank account details.'
+                    });
+                }, 500);
+                
+                // Show success message
+                showDepositToast('Chat opened! Please request bank details from support.', 'success');
+            } else {
+                // Fallback if Tawk.to not loaded
+                showDepositToast('Please use the chat widget at the bottom-right to contact support for bank transfer details.', 'info');
+                // Alternative: redirect to contact page
+                // window.location.href = '/contact/';
+            }
         }
 
         function selectPaymentMethod(element, method) {

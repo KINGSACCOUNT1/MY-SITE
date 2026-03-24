@@ -1,15 +1,15 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Email - Elite Wealth Capital</title>
-    <link rel="icon" type="image/webp" href="{% static 'images/logo.webp' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css?v=20260308' %}">
-    <link rel="stylesheet" href="{% static 'css/glassmorphism-theme.css?v=20260308' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-</head>
+
+{% block title %}Verify Email - Elite Wealth Capital{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/style.css?v=20260308' %}">
+<link rel="stylesheet" href="{% static 'css/glassmorphism-theme.css?v=20260308' %}">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
 <body class="main-site auth-page">
     <div class="auth-background"><div class="auth-gradient"></div></div>
     <a href="{% url 'home' %}" class="back-home"><span>←</span> Back to Home</a>
@@ -42,6 +42,9 @@
             {% endif %}
         </div>
     </div>
-    <script src="{% static 'js/main.js?v=20260308' %}"></script>
 </body>
-</html>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/main.js?v=20260308' %}"></script>
+{% endblock %}

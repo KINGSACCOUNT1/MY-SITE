@@ -436,8 +436,22 @@ def withdraw(request):
             messages.error(request, 'Invalid amount.')
             return redirect('withdraw')
         
-        crypto_type = request.POST.get('crypto_type')
-        wallet_address = request.POST.get('wallet_address', '').strip()
+        # Get withdrawal method (crypto or bank)
+        withdrawal_method = request.POST.get('withdrawal_method', 'crypto').strip().lower()
+        
+        # Get method-specific fields
+        if withdrawal_method == 'crypto':
+            crypto_type = request.POST.get('crypto_type', '').strip()
+            wallet_address = request.POST.get('wallet_address', '').strip()
+            bank_name = ''
+            account_number = ''
+            account_name = ''
+        else:  # bank transfer
+            crypto_type = ''
+            wallet_address = ''
+            bank_name = request.POST.get('bank_name', '').strip()
+            account_number = request.POST.get('account_number', '').strip()
+            account_name = request.POST.get('account_name', '').strip()
         
         min_with = getattr(settings, 'MIN_WITHDRAWAL', 10)
         if amount < Decimal(str(min_with)):
@@ -448,12 +462,21 @@ def withdraw(request):
             messages.error(request, f'Insufficient balance. Your balance is ${request.user.balance:,.2f}')
             return redirect('withdraw')
         
-        if crypto_type not in ['BTC', 'ETH', 'USDT', 'USDC', 'LTC']:
-            messages.error(request, 'Invalid cryptocurrency selected.')
-            return redirect('withdraw')
-        
-        if not wallet_address:
-            messages.error(request, 'Please enter your wallet address.')
+        # Validate based on withdrawal method
+        if withdrawal_method == 'crypto':
+            if crypto_type not in ['BTC', 'ETH', 'USDT', 'USDC', 'LTC']:
+                messages.error(request, 'Invalid cryptocurrency selected.')
+                return redirect('withdraw')
+            
+            if not wallet_address:
+                messages.error(request, 'Please enter your wallet address.')
+                return redirect('withdraw')
+        elif withdrawal_method == 'bank':
+            if not bank_name or not account_number or not account_name:
+                messages.error(request, 'Please provide all bank account details.')
+                return redirect('withdraw')
+        else:
+            messages.error(request, 'Invalid withdrawal method.')
             return redirect('withdraw')
         
         # Create withdrawal request and deduct from balance atomically
@@ -466,8 +489,12 @@ def withdraw(request):
             withdrawal = Withdrawal.objects.create(
                 user=user,
                 amount=amount,
+                withdrawal_method=withdrawal_method,
                 crypto_type=crypto_type,
-                wallet_address=wallet_address
+                wallet_address=wallet_address,
+                bank_name=bank_name,
+                account_number=account_number,
+                account_name=account_name
             )
             # Deduct from balance (will be refunded if rejected)
             user.balance -= amount
@@ -475,20 +502,26 @@ def withdraw(request):
         request.user.refresh_from_db()
         
         # Log activity
+        withdrawal_destination = wallet_address[:20] if withdrawal_method == 'crypto' else f'{bank_name} ({account_number[-4:]})'
         ActivityLog.objects.create(
             user=request.user,
             action='withdrawal_request',
-            description=f'Withdrawal request of ${amount:,.2f} {crypto_type}',
+            description=f'Withdrawal request of ${amount:,.2f} via {withdrawal_method.upper()}',
             ip_address=get_client_ip(request),
             user_agent=request.META.get('HTTP_USER_AGENT', '')
         )
         
         # Notify user
+        if withdrawal_method == 'crypto':
+            message = f'Your withdrawal of ${amount:,.2f} to {wallet_address[:20]}... is pending approval.'
+        else:
+            message = f'Your withdrawal of ${amount:,.2f} to {bank_name} account ending in {account_number[-4:]} is pending approval.'
+            
         Notification.objects.create(
             user=request.user,
             notification_type='info',
             title='Withdrawal Requested',
-            message=f'Your withdrawal of ${amount:,.2f} to {wallet_address[:20]}... is pending approval.'
+            message=message
         )
         
         # Send email notification to admin for processing

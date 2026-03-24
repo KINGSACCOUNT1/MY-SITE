@@ -160,7 +160,8 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navigation (can be hidden by setting hide_nav=True in template context) -->
+    {% if not hide_nav %}
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}">
@@ -215,6 +216,7 @@
             </div>
         </div>
     </nav>
+    {% endif %}
     
     <!-- Messages -->
     {% if messages %}

@@ -204,8 +204,22 @@ class Withdrawal(models.Model):
         decimal_places=2,
         validators=[MinValueValidator(Decimal('0.01'))]
     )
-    crypto_type = models.CharField(max_length=10, choices=CRYPTO_CHOICES)
-    wallet_address = models.CharField(max_length=255)
+    
+    # Withdrawal method (crypto or bank)
+    withdrawal_method = models.CharField(
+        max_length=20,
+        choices=[('crypto', 'Cryptocurrency'), ('bank', 'Bank Transfer')],
+        default='crypto'
+    )
+    
+    # Crypto withdrawal fields
+    crypto_type = models.CharField(max_length=10, choices=CRYPTO_CHOICES, blank=True)
+    wallet_address = models.CharField(max_length=255, blank=True)
+    
+    # Bank withdrawal fields
+    bank_name = models.CharField(max_length=255, blank=True)
+    account_number = models.CharField(max_length=100, blank=True)
+    account_name = models.CharField(max_length=255, blank=True)
     
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     admin_note = models.TextField(blank=True)
