@@ -1,5 +1,10 @@
+from unittest.mock import patch, MagicMock
+import json
+import urllib.error
+
 from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
+from django.core.management import call_command
 from django.urls import reverse
 from django.utils import timezone
 from datetime import timedelta
@@ -192,3 +197,102 @@ class DepositCryptoTypeValidationTests(TestCase):
         })
         # Should not create a deposit
         self.assertFalse(Deposit.objects.filter(user=self.user).exists())
+
+
+# ---------------------------------------------------------------------------
+# check_api_config management command tests
+# ---------------------------------------------------------------------------
+
+class CheckApiConfigCommandTests(TestCase):
+    """Tests for the check_api_config management command."""
+
+    def _run_command(self, **kwargs):
+        """Helper: run command and capture stdout."""
+        from io import StringIO
+        out = StringIO()
+        call_command('check_api_config', stdout=out, **kwargs)
+        return out.getvalue()
+
+    @patch('django.conf.settings.BYBIT_API_KEY', '', create=True)
+    @patch('django.conf.settings.BYBIT_API_SECRET', '', create=True)
+    def test_missing_credentials_reported(self):
+        """Command reports an error when credentials are not set."""
+        with self.settings(BYBIT_API_KEY='', BYBIT_API_SECRET=''):
+            output = self._run_command()
+        self.assertIn('NOT SET', output)
+        self.assertIn('missing', output.lower())
+
+    def test_masked_key_hides_value(self):
+        """_mask helper never returns the full secret."""
+        from investments.management.commands.check_api_config import _mask
+        secret = 'ABCDEF1234567890'
+        result = _mask(secret)
+        # Only the first 4 chars visible; the rest must be asterisks
+        self.assertTrue(result.startswith('ABCD'))
+        self.assertNotIn('EF1234567890', result)
+
+    def test_mask_empty_string(self):
+        """_mask on an empty string returns a descriptive placeholder."""
+        from investments.management.commands.check_api_config import _mask
+        self.assertEqual(_mask(''), '<not set>')
+
+    def test_mask_short_string(self):
+        """_mask on a short string (≤ 4 chars) still works without error."""
+        from investments.management.commands.check_api_config import _mask
+        result = _mask('AB')
+        self.assertTrue(result.startswith('AB'))
+
+    @patch('urllib.request.urlopen')
+    def test_valid_credentials_success(self, mock_urlopen):
+        """Command reports success when Bybit returns retCode=0."""
+        mock_response = MagicMock()
+        mock_response.read.return_value = json.dumps(
+            {'retCode': 0, 'retMsg': 'OK', 'result': {'address': '1A2B3C'}}
+        ).encode('utf-8')
+        mock_urlopen.return_value.__enter__ = lambda s: mock_response
+        mock_urlopen.return_value.__exit__ = MagicMock(return_value=False)
+
+        with self.settings(BYBIT_API_KEY='test-key-1234', BYBIT_API_SECRET='test-secret-5678'):
+            output = self._run_command()
+        self.assertIn('VALID', output)
+
+    @patch('urllib.request.urlopen')
+    def test_invalid_credentials_failure(self, mock_urlopen):
+        """Command reports failure when Bybit returns a non-zero retCode."""
+        mock_response = MagicMock()
+        mock_response.read.return_value = json.dumps(
+            {'retCode': 10003, 'retMsg': 'Invalid api_key'}
+        ).encode('utf-8')
+        mock_urlopen.return_value.__enter__ = lambda s: mock_response
+        mock_urlopen.return_value.__exit__ = MagicMock(return_value=False)
+
+        with self.settings(BYBIT_API_KEY='bad-key-1234', BYBIT_API_SECRET='bad-secret-5678'):
+            output = self._run_command()
+        self.assertIn('FAILED', output)
+        self.assertIn('10003', output)
+
+    @patch('urllib.request.urlopen', side_effect=urllib.error.URLError('timed out'))
+    def test_network_error_reported(self, _mock):
+        """Command reports a network error when the Bybit endpoint is unreachable."""
+        with self.settings(BYBIT_API_KEY='any-key-1234', BYBIT_API_SECRET='any-secret-5678'):
+            output = self._run_command()
+        self.assertIn('FAILED', output)
+        self.assertIn('Network error', output)
+
+    @patch('urllib.request.urlopen')
+    def test_actual_key_value_never_printed(self, mock_urlopen):
+        """Command output must never contain the raw API key or secret."""
+        mock_response = MagicMock()
+        mock_response.read.return_value = json.dumps(
+            {'retCode': 0, 'retMsg': 'OK', 'result': {}}
+        ).encode('utf-8')
+        mock_urlopen.return_value.__enter__ = lambda s: mock_response
+        mock_urlopen.return_value.__exit__ = MagicMock(return_value=False)
+
+        key = 'UNIQUEKEY99887766'
+        secret = 'UNIQUESECRET11223344'
+        with self.settings(BYBIT_API_KEY=key, BYBIT_API_SECRET=secret):
+            output = self._run_command()
+        # The raw values must not appear in stdout
+        self.assertNotIn(key[4:], output)
+        self.assertNotIn(secret[4:], output)
