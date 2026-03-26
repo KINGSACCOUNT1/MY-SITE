@@ -40,6 +40,11 @@ def process_user_mature_investments(user):
                 # Lock user row for update
                 user_locked = type(user).objects.select_for_update().get(pk=user.pk)
                 
+                # Recheck investment status to prevent double payout
+                investment.refresh_from_db()
+                if investment.status != 'active':
+                    continue  # Already processed
+                
                 # Calculate total payout
                 total_payout = investment.amount + investment.expected_profit
                 
@@ -176,17 +181,34 @@ def referrals(request):
 @login_required
 def transactions(request):
     """Transaction history page."""
+    from django.core.paginator import Paginator
+    
     user = request.user
     tx_type = request.GET.get('type', 'all')
     
-    deposits = Deposit.objects.filter(user=user).select_related('confirmed_by').order_by('-created_at')
-    withdrawals = Withdrawal.objects.filter(user=user).select_related('processed_by').order_by('-created_at')
-    investments = Investment.objects.filter(user=user).select_related('plan').order_by('-start_date')
+    deposits = []
+    withdrawals = []
+    investments = []
+    
+    if tx_type in ['all', 'deposit']:
+        deposits_qs = Deposit.objects.filter(user=user).select_related('confirmed_by').order_by('-created_at')
+        deposit_paginator = Paginator(deposits_qs, 50)
+        deposits = deposit_paginator.get_page(request.GET.get('deposit_page', 1))
+    
+    if tx_type in ['all', 'withdrawal']:
+        withdrawals_qs = Withdrawal.objects.filter(user=user).select_related('processed_by').order_by('-created_at')
+        withdrawal_paginator = Paginator(withdrawals_qs, 50)
+        withdrawals = withdrawal_paginator.get_page(request.GET.get('withdrawal_page', 1))
+    
+    if tx_type in ['all', 'investment']:
+        investments_qs = Investment.objects.filter(user=user).select_related('plan').order_by('-start_date')
+        investment_paginator = Paginator(investments_qs, 50)
+        investments = investment_paginator.get_page(request.GET.get('investment_page', 1))
     
     context = {
-        'deposits': deposits if tx_type in ['all', 'deposit'] else [],
-        'withdrawals': withdrawals if tx_type in ['all', 'withdrawal'] else [],
-        'investments': investments if tx_type in ['all', 'investment'] else [],
+        'deposits': deposits,
+        'withdrawals': withdrawals,
+        'investments': investments,
         'tx_type': tx_type,
     }
     return render(request, 'transactions.html', context)
@@ -206,7 +228,7 @@ def export_transactions(request):
     
     # Deposits
     if export_type in ['all', 'deposit']:
-        for deposit in Deposit.objects.filter(user=user).order_by('-created_at'):
+        for deposit in Deposit.objects.filter(user=user).select_related('user', 'confirmed_by').order_by('-created_at'):
             writer.writerow([
                 deposit.created_at.strftime('%Y-%m-%d %H:%M'),
                 'Deposit',
@@ -217,7 +239,7 @@ def export_transactions(request):
     
     # Withdrawals
     if export_type in ['all', 'withdrawal']:
-        for withdrawal in Withdrawal.objects.filter(user=user).order_by('-created_at'):
+        for withdrawal in Withdrawal.objects.filter(user=user).select_related('user', 'processed_by').order_by('-created_at'):
             writer.writerow([
                 withdrawal.created_at.strftime('%Y-%m-%d %H:%M'),
                 'Withdrawal',
@@ -513,10 +535,10 @@ def admin_panel(request):
     total_invested = Investment.objects.filter(status='active').aggregate(t=Sum('amount'))['t'] or Decimal('0')
     total_profit_paid = CustomUser.objects.filter(is_staff=False).aggregate(t=Sum('total_profit'))['t'] or Decimal('0')
 
-    pending_withdrawals_qs = Withdrawal.objects.filter(status='pending').select_related('user').order_by('-created_at')
-    pending_deposits_qs = Deposit.objects.filter(status='pending').select_related('user').order_by('-created_at')
-    pending_loans_qs = Loan.objects.filter(status='pending').select_related('user').order_by('-created_at')
-    pending_kyc_qs = KYCDocument.objects.filter(status='submitted').select_related('user').order_by('-submitted_at')
+    pending_withdrawals_qs = Withdrawal.objects.filter(status='pending').select_related('user').order_by('-created_at')[:50]
+    pending_deposits_qs = Deposit.objects.filter(status='pending').select_related('user').order_by('-created_at')[:50]
+    pending_loans_qs = Loan.objects.filter(status='pending').select_related('user').order_by('-created_at')[:50]
+    pending_kyc_qs = KYCDocument.objects.filter(status='submitted').select_related('user').order_by('-submitted_at')[:50]
 
     pending_withdrawals_amount = pending_withdrawals_qs.aggregate(t=Sum('amount'))['t'] or Decimal('0')
 

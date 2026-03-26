@@ -156,7 +156,7 @@ class TestimonialPopup {
             padding: ${isMobile ? '10px' : '12px'};
             max-width: ${isMobile ? 'calc(100% - 20px)' : '300px'};
             box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(245, 158, 11, 0.2);
-            z-index: 9990;
+            z-index: 500;
             display: none;
             font-family: 'Inter', 'Roboto', arial, sans-serif;
             transform: translateY(20px);

@@ -12,21 +12,23 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 if not SECRET_KEY:
     if DEBUG:
         # Only allow fallback in DEBUG mode for development
-        SECRET_KEY = 'django-insecure-dev-key-only'
+        import secrets
+        SECRET_KEY = secrets.token_urlsafe(50)
+        print("WARNING: Using random SECRET_KEY for development")
     else:
         from django.core.exceptions import ImproperlyConfigured
         raise ImproperlyConfigured(
             'SECRET_KEY environment variable must be set in production. '
             'Add SECRET_KEY to your .env file or environment variables.'
         )
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,elite-wealth-capita.com,www.elite-wealth-capita.com,.railway.app,.onrender.com,elitewealthcapita.uk,www.elitewealthcapita.uk').split(',')
 CSRF_TRUSTED_ORIGINS = ['https://*.railway.app', 'https://*.onrender.com', 'https://elite-wealth-capita.com', 'https://www.elite-wealth-capita.com', 'https://elitewealthcapita.uk', 'https://www.elitewealthcapita.uk']
@@ -408,8 +410,14 @@ CORS_ALLOWED_ORIGINS = [
 
 
 # Celery Configuration
-CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0')
-CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://localhost:6379/0')
+CELERY_BROKER_URL = os.getenv(
+    'CELERY_BROKER_URL',
+    'redis://:changeme@localhost:6379/0'  # Default with password placeholder
+)
+CELERY_RESULT_BACKEND = os.getenv(
+    'CELERY_RESULT_BACKEND', 
+    'redis://:changeme@localhost:6379/0'
+)
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
@@ -446,7 +454,7 @@ LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
 
 # Session settings
-SESSION_COOKIE_AGE = 60 * 60 * 24 * 30  # 30 days
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7  # 7 days
 SESSION_SAVE_EVERY_REQUEST = True
 
 
@@ -459,8 +467,8 @@ if not DEBUG:
     SECURE_SSL_REDIRECT = False  # Render handles SSL at load balancer
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    CSRF_COOKIE_SAMESITE = 'Lax'  # Allow CSRF cookie for same-site requests
-    SESSION_COOKIE_SAMESITE = 'Lax'  # Allow session cookie for same-site requests
+    CSRF_COOKIE_SAMESITE = 'Strict'  # Allow CSRF cookie for same-site requests
+    SESSION_COOKIE_SAMESITE = 'Strict'  # Allow session cookie for same-site requests
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True

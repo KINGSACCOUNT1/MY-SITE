@@ -218,7 +218,7 @@
         gap: 10px;
         color: white;
         font-weight: 500;
-        z-index: 9999;
+        z-index: 200;
         transform: translateX(120%);
         transition: transform 0.3s ease;
         background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : type === 'warning' ? '#f59e0b' : '#3b82f6'};

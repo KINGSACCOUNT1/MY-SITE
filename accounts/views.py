@@ -334,7 +334,7 @@ def forgot_password(request):
                 
                 # Build reset URL
                 reset_url = request.build_absolute_uri(
-                    reverse('reset_password', kwargs={'token': token})
+                    reverse('reset_password_token', kwargs={'token': token})
                 )
                 
                 # Send email

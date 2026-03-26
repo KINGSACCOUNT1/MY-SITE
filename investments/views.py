@@ -645,16 +645,25 @@ def repay_loan(request, loan_id):
         if amount > remaining_loan_balance:
             amount = remaining_loan_balance  # Cap at remaining balance
         
-        # Process repayment
-        request.user.balance -= amount
-        request.user.save()
-        
-        loan.amount_repaid += amount
-        if loan.is_fully_repaid:
-            loan.status = 'completed'
-        else:
-            loan.status = 'repaying'
-        loan.save()
+        # Process repayment with proper locking
+        with transaction.atomic():
+            user = CustomUser.objects.select_for_update().get(pk=request.user.pk)
+            loan = Loan.objects.select_for_update().get(pk=loan_id, user=user)
+            
+            # Recheck balance after lock
+            if amount > user.balance:
+                messages.error(request, 'Insufficient balance.')
+                return redirect('loans')
+            
+            user.balance -= amount
+            user.save()
+            
+            loan.amount_repaid += amount
+            if loan.is_fully_repaid:
+                loan.status = 'completed'
+            else:
+                loan.status = 'repaying'
+            loan.save()
         
         # Create repayment record
         LoanRepayment.objects.create(
@@ -760,11 +769,23 @@ def cards_page(request):
                 messages.error(request, 'Insufficient balance.')
                 return redirect('cards')
             
-            # Transfer from balance to card
-            request.user.balance -= amount
-            request.user.save()
-            active_card.balance += amount
-            active_card.save()
+            # Transfer from balance to card with proper locking
+            with transaction.atomic():
+                user = CustomUser.objects.select_for_update().get(pk=request.user.pk)
+                card = VirtualCard.objects.select_for_update().get(pk=active_card.pk)
+                
+                # Recheck balance after lock
+                if amount > user.balance:
+                    messages.error(request, 'Insufficient balance.')
+                    return redirect('cards')
+                
+                user.balance -= amount
+                user.save()
+                card.balance += amount
+                card.save()
+                
+                # Update active_card reference for activity log
+                active_card = card
             
             ActivityLog.objects.create(
                 user=request.user,
@@ -887,13 +908,17 @@ def upgrade_page(request):
         amount = Decimal(str(tiers[requested_tier]['price']))
         
         if payment_method == 'balance':
-            if request.user.balance < amount:
-                messages.error(request, f'Insufficient balance. Need ${amount:,.2f}, have ${request.user.balance:,.2f}')
-                return redirect('upgrade')
-            
-            # Deduct from balance
-            request.user.balance -= amount
-            request.user.save()
+            # Deduct from balance with proper locking
+            with transaction.atomic():
+                user = CustomUser.objects.select_for_update().get(pk=request.user.pk)
+                
+                # Recheck balance after lock
+                if user.balance < amount:
+                    messages.error(request, f'Insufficient balance. Need ${amount:,.2f}, have ${user.balance:,.2f}')
+                    return redirect('upgrade')
+                
+                user.balance -= amount
+                user.save()
             status = 'paid'
         else:
             status = 'pending'
