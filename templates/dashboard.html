@@ -118,7 +118,7 @@
             </a>
         </nav>
         <div class="mobile-drawer-footer">
-            <a href="{% url 'accounts:logout' %}" class="mobile-drawer-link logout">
+            <a href="{% url 'accounts:logout' %}" class="mobile-drawer-link logout" onclick="event.preventDefault(); document.getElementById('logout-form-dashboard').submit();">
                 <span class="drawer-icon">🚪</span> Logout
             </a>
         </div>
@@ -225,7 +225,7 @@
                     </div>
                 </div>
 
-                <a href="{% url 'logout' %}" class="btn-secondary" aria-label="Log out of account">Logout</a>
+                <a href="{% url 'logout' %}" class="btn-secondary" aria-label="Log out of account" onclick="event.preventDefault(); document.getElementById('logout-form-dashboard').submit();">Logout</a>
             </div>
         </div>
     </nav>
@@ -864,6 +864,12 @@
         }
     });
     </script>
+
+    <!-- Hidden logout form for POST request -->
+    <form id="logout-form-dashboard" method="POST" action="{% url 'logout' %}" style="display: none;">
+        {% csrf_token %}
+    </form>
+
 </body>
 
 </html>

@@ -369,9 +369,14 @@
         <span class="admin-badge">Staff</span>
         <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
         <a href="/admin/" class="nav-link">Django Admin</a>
-        <a href="{% url 'logout' %}" class="nav-link" style="color:#f87171;">Logout</a>
+        <a href="{% url 'logout' %}" class="nav-link" style="color:#f87171;" onclick="event.preventDefault(); document.getElementById('logout-form-admin').submit();">Logout</a>
     </div>
 </nav>
+
+<!-- Hidden logout form for POST request -->
+<form id="logout-form-admin" method="POST" action="{% url 'logout' %}" style="display: none;">
+    {% csrf_token %}
+</form>
 
 <div class="admin-body">
 

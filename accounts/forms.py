@@ -186,8 +186,7 @@ class ForgotPasswordForm(forms.Form):
     
     def clean_email(self):
         email = self.cleaned_data.get('email', '').lower()
-        if not CustomUser.objects.filter(email=email).exists():
-            raise forms.ValidationError('No account found with this email address.')
+        # Don't reveal if email exists - return silently for security
         return email
 
 

@@ -227,11 +227,12 @@
     <footer class="footer">
         <p>&copy; 2024 Elite Wealth Capital. All rights reserved.</p>
         <p style="margin-top: 10px;">
-            <a href="/terms">Terms</a> | <a href="/privacy-policy">Privacy</a> | <a href="/contact">Contact</a>
+            <a href="{% url 'terms' %}">Terms</a> | <a href="{% url 'privacy_policy' %}">Privacy</a> | <a href="{% url 'contact' %}">Contact</a>
         </p>
     </footer>
 
         <script defer src="{% static 'js/main.js' %}"></script>
+        <script defer src="{% static 'js/testimonials-popup.js' %}"></script>
 </body>
 </html>
 

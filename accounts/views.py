@@ -11,6 +11,7 @@ from django.http import JsonResponse
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.core.exceptions import ValidationError
 from django.db import transaction
+from django.views.decorators.http import require_http_methods
 from django_ratelimit.decorators import ratelimit
 import logging
 from .models import CustomUser, ActivityLog, Referral
@@ -45,11 +46,11 @@ def login_view(request):
                 user = form.get_user()
                 logger.info(f"Login attempt for user: {user.email}")
                 
-                # Handle "remember me"
-                if not form.cleaned_data.get('remember_me'):
-                    request.session.set_expiry(0)  # Browser close
-                else:
+                # Handle "remember me" - set session expiry
+                if form.cleaned_data.get('remember_me'):
                     request.session.set_expiry(60 * 60 * 24 * 30)  # 30 days
+                else:
+                    request.session.set_expiry(0)  # Browser close
                 
                 login(request, user, backend='accounts.backends.EmailBackend')
                 logger.info(f"Login successful for: {user.email}")
@@ -91,8 +92,11 @@ def login_view(request):
     return render(request, 'login.html', {'form': form})
 
 
+from django.views.decorators.http import require_http_methods
+
+@require_http_methods(["POST"])
 def logout_view(request):
-    """User logout view."""
+    """User logout view - POST only for CSRF protection."""
     if request.user.is_authenticated:
         ActivityLog.objects.create(
             user=request.user,
