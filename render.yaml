@@ -1,12 +1,11 @@
 # Render Blueprint for Elite Wealth Capital
 # Auto-deploy enabled with instant rollover
 
-# databases:
-#   - name: elite-wealth-db
-#     databaseName: elite_wealth
-#     user: elite_admin
-#     plan: free
-# NOTE: Database section commented out - using existing free database instead
+databases:
+  - name: elite-wealth-db
+    databaseName: elite_wealth
+    user: elite_admin
+    plan: free
 
 services:
   - type: web
@@ -27,10 +26,11 @@ services:
     # Kill old instance quickly (5 seconds grace period)
     maxShutdownDelaySeconds: 5
     
-    # Environment variables
     envVars:
       - key: DATABASE_URL
-        sync: false  # Use your existing Render database URL
+        fromDatabase:
+          name: elite-wealth-db
+          property: connectionString
       - key: DJANGO_SETTINGS_MODULE
         value: elite_wealth.settings
       - key: DEBUG
