@@ -20,7 +20,7 @@ class SiteSettings(models.Model):
     # Company Information
     site_name = models.CharField(max_length=100, default='Elite Wealth Capital')
     site_tagline = models.CharField(max_length=200, default='Your Gateway to Financial Freedom')
-    company_email = models.EmailField(default='support@elitewealthcapita.uk')
+    company_email = models.EmailField(default='admin@elitewealthcapita.uk')
     company_phone = models.CharField(max_length=20, default='+44 20 7946 0958')
     company_address = models.TextField(default='London, United Kingdom')
     
