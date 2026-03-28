@@ -135,65 +135,8 @@
         }]
     }
     </script>
-</head>
 
-<body class="main-site">
-
-    <!-- =================== HORIZONTAL CRYPTO TICKER =================== -->
-    <div class="crypto-ticker-horizontal">
-        <div class="ticker-track">
-            <!-- Populated by JavaScript -->
-        </div>
-    </div>
-
-    <!-- =================== NAVIGATION BAR =================== -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <a href="{% url 'home' %}" class="navbar-logo">
-                <img src="{% static 'images/logo.webp' %}" alt="Elite Wealth Capital Logo" width="40" height="40"
-                    style="height: 40px; width: 40px; object-fit: contain; margin-right: 0.5rem;">
-                <div style="display: flex; flex-direction: column; line-height: 1;">
-                    <span
-                        style="font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; color: white;">ELITE</span>
-                    <span style="font-size: 0.6rem; font-weight: 600; letter-spacing: 2px; color: #FFD700;">WEALTH
-                        CAPITAL</span>
-                </div>
-            </a>
-
-            <ul class="navbar-menu" id="navbarMenu">
-                <li><a href="{% url 'home' %}" class="navbar-link active">Home</a></li>
-                <li><a href="/investment-plans" class="navbar-link">Investment Plans</a></li>
-                <li><a href="/upgrade" class="navbar-link">Upgrade</a></li>
-                <li><a href="/certificate" class="navbar-link">Certificates</a></li>
-                <li><a href="/partners" class="navbar-link">Partners</a></li>
-                <li><a href="/reviews" class="navbar-link">Reviews</a></li>
-                <li><a href="/about" class="navbar-link">About</a></li>
-                <li><a href="/contact" class="navbar-link">Contact</a></li>
-
-                <!-- Mobile Auth Buttons (inside drawer) -->
-                <li class="mobile-auth-links">
-                    <a href="{% url 'login' %}" class="btn-login">Login</a>
-                    <a href="{% url 'signup' %}" class="btn-signup">Get Started →</a>
-                </li>
-
-                <div class="navbar-auth desktop-auth">
-                </div>
-            </ul>
-
-
-            <!-- Mobile Header Auth Buttons (Always visible on mobile) -->
-            <div class="mobile-header-auth">
-                <a href="{% url 'signup' %}" class="btn-signup-mobile">Get Started</a>
-            </div>
-
-            <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
-
+    <!-- Page-specific styles -->
     <style>
         /* Mobile Auth Buttons */
         .mobile-header-auth {
@@ -289,7 +232,6 @@
             object-fit: cover;
         }
         
-        /* Mobile: Use image instead of video for performance */
         @media (max-width: 768px) {
             .hero-video {
                 display: none;
@@ -305,7 +247,6 @@
             }
         }
         
-        /* Ensure hero content is always readable */
         .hero-content {
             position: relative;
             z-index: 10 !important;
@@ -316,7 +257,88 @@
         .hero-text .hero-badge {
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
+
+        /* Crypto Price Cards */
+        .cp-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 0.75rem;
+            padding: 1.1rem 1rem;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .cp-card:hover { transform: translateY(-2px); border-color: rgba(255,215,0,0.3); }
+        .cp-symbol { font-weight: 800; font-size: 1.1rem; color: #fff; }
+        .cp-name { font-size: 0.72rem; color: #64748b; margin-top: 2px; }
+        .cp-price { font-size: 1rem; font-weight: 700; color: #e2e8f0; margin-top: 0.6rem; }
+        .cp-change { font-size: 0.78rem; font-weight: 600; margin-top: 0.25rem; }
+        .cp-change.up { color: #00A86B; }
+        .cp-change.dn { color: #EF4444; }
+        .cp-skeleton {
+            background: rgba(255,255,255,0.04);
+            border-radius: 0.75rem;
+            height: 100px;
+            animation: cpPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes cpPulse { 0%,100%{opacity:.3} 50%{opacity:.7} }
     </style>
+</head>
+
+<body class="main-site">
+
+    <!-- =================== HORIZONTAL CRYPTO TICKER =================== -->
+    <div class="crypto-ticker-horizontal">
+        <div class="ticker-track">
+            <!-- Populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- =================== NAVIGATION BAR =================== -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="{% url 'home' %}" class="navbar-logo">
+                <img src="{% static 'images/logo.webp' %}" alt="Elite Wealth Capital Logo" width="40" height="40"
+                    style="height: 40px; width: 40px; object-fit: contain; margin-right: 0.5rem;">
+                <div style="display: flex; flex-direction: column; line-height: 1;">
+                    <span
+                        style="font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; color: white;">ELITE</span>
+                    <span style="font-size: 0.6rem; font-weight: 600; letter-spacing: 2px; color: #FFD700;">WEALTH
+                        CAPITAL</span>
+                </div>
+            </a>
+
+            <ul class="navbar-menu" id="navbarMenu">
+                <li><a href="{% url 'home' %}" class="navbar-link active">Home</a></li>
+                <li><a href="/investment-plans" class="navbar-link">Investment Plans</a></li>
+                <li><a href="/upgrade" class="navbar-link">Upgrade</a></li>
+                <li><a href="/certificate" class="navbar-link">Certificates</a></li>
+                <li><a href="/partners" class="navbar-link">Partners</a></li>
+                <li><a href="/reviews" class="navbar-link">Reviews</a></li>
+                <li><a href="/about" class="navbar-link">About</a></li>
+                <li><a href="/contact" class="navbar-link">Contact</a></li>
+
+                <!-- Mobile Auth Buttons (inside drawer) -->
+                <li class="mobile-auth-links">
+                    <a href="{% url 'login' %}" class="btn-login">Login</a>
+                    <a href="{% url 'signup' %}" class="btn-signup">Get Started →</a>
+                </li>
+
+                <div class="navbar-auth desktop-auth">
+                </div>
+            </ul>
+
+
+            <!-- Mobile Header Auth Buttons (Always visible on mobile) -->
+            <div class="mobile-header-auth">
+                <a href="{% url 'signup' %}" class="btn-signup-mobile">Get Started</a>
+            </div>
+
+            <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
 
     <!-- =================== HERO SECTION =================== -->
     <section class="hero-section" style="position: relative; overflow: hidden; min-height: 100vh;">
@@ -712,30 +734,6 @@
             </div>
         </div>
     </section>
-
-    <style>
-        .cp-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 0.75rem;
-            padding: 1.1rem 1rem;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-        .cp-card:hover { transform: translateY(-2px); border-color: rgba(255,215,0,0.3); }
-        .cp-symbol { font-weight: 800; font-size: 1.1rem; color: #fff; }
-        .cp-name { font-size: 0.72rem; color: #64748b; margin-top: 2px; }
-        .cp-price { font-size: 1rem; font-weight: 700; color: #e2e8f0; margin-top: 0.6rem; }
-        .cp-change { font-size: 0.78rem; font-weight: 600; margin-top: 0.25rem; }
-        .cp-change.up { color: #00A86B; }
-        .cp-change.dn { color: #EF4444; }
-        .cp-skeleton {
-            background: rgba(255,255,255,0.04);
-            border-radius: 0.75rem;
-            height: 100px;
-            animation: cpPulse 1.5s ease-in-out infinite;
-        }
-        @keyframes cpPulse { 0%,100%{opacity:.3} 50%{opacity:.7} }
-    </style>
 
     <script>
         (async function loadCryptoMarket() {
