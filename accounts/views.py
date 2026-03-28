@@ -86,24 +86,38 @@ def signup_view(request):
         user.email_verification_token = secrets.token_urlsafe(32)
         user.email_verification_sent_at = timezone.now()
         
-        # Add signup bonus
-        user.balance = 20.00  # $20 welcome bonus
-        
-        # Handle referral
+        # Handle referral - New user gets $20 ONLY if using referral code
         if referral_code:
             try:
                 referrer = CustomUser.objects.get(referral_code=referral_code)
                 user.referred_by = referrer
+                user.balance = 20.00  # New user gets $20 with referral code
+                
+                # Referrer gets $30 bonus
+                referrer.referral_bonus += 30.00
+                referrer.save()
                 
                 # Create referral record
                 Referral.objects.create(
                     referrer=referrer,
                     referred=user,
                     bonus_amount=30.00,
-                    status='pending'
+                    status='completed'
+                )
+                
+                # Create notification for referrer
+                from notifications.models import Notification
+                Notification.objects.create(
+                    user=referrer,
+                    title='Referral Bonus Earned',
+                    message=f'You earned $30 for referring {user.full_name}!',
+                    notification_type='referral'
                 )
             except CustomUser.DoesNotExist:
-                pass
+                user.balance = 0.00  # Invalid referral code = $0
+        else:
+            # No referral code = $0 starting balance
+            user.balance = 0.00
         
         user.save()
         

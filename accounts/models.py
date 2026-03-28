@@ -37,10 +37,16 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     """Custom User model with investment platform features"""
     
     ACCOUNT_TYPE_CHOICES = [
-        ('beginner', 'Beginner'),
-        ('intermediate', 'Intermediate'),
-        ('advanced', 'Advanced'),
-        ('vip', 'VIP'),
+        ('starter', 'Starter Plan'),           # $30-399
+        ('advance', 'Advance Plan'),           # $400-999
+        ('intro', 'Intro Plan'),               # $1000-2999
+        ('region', 'Region Plan'),             # $3000-4999
+        ('pro', 'Pro Plan'),                   # $5000-9999
+        ('premium', 'Premium Plan'),           # $10000-24999
+        ('executive', 'Executive Plan'),       # $25000-49999
+        ('elite', 'Elite Plan'),               # $50000-99999
+        ('platinum', 'Platinum Plan'),         # $100000-249999
+        ('diamond', 'Diamond Plan'),           # $250000+
     ]
     
     KYC_STATUS_CHOICES = [
