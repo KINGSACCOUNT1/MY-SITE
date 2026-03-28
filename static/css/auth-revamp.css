@@ -4,11 +4,11 @@
    ============================================ */
 
 :root {
-     --auth-bg-dark: #0f172a;
+     --auth-bg-dark: #0A1F44;
      --auth-bg-card: rgba(30, 41, 59, 0.7);
      --auth-input-bg: rgba(255, 255, 255, 0.05);
      --auth-input-border: rgba(255, 255, 255, 0.1);
-     --auth-primary: #F59E0B;
+     --auth-primary: #FFD700;
      /* Gold */
 }
 
@@ -31,7 +31,7 @@ body.auth-page-revamped {
 /* Left Side - Visuals */
 .auth-visual-side {
      position: relative;
-     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+     background: linear-gradient(135deg, #0A1F44 0%, #1e293b 100%);
      display: flex;
      flex-direction: column;
      justify-content: center;
@@ -48,7 +48,7 @@ body.auth-page-revamped {
      left: 0;
      right: 0;
      bottom: 0;
-     background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.15), transparent 70%);
+     background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.15), transparent 70%);
      pointer-events: none;
 }
 
@@ -162,7 +162,7 @@ body.auth-page-revamped {
      background: rgba(255, 255, 255, 0.08);
      border-color: var(--auth-primary);
      outline: none;
-     box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+     box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.1);
 }
 
 .input-icon {
@@ -253,7 +253,7 @@ body.auth-page-revamped {
 .btn-modern-full {
      width: 100%;
      padding: 1rem;
-     background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+     background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%);
      border: none;
      border-radius: 12px;
      color: white;
@@ -269,7 +269,7 @@ body.auth-page-revamped {
 
 .btn-modern-full:hover {
      transform: translateY(-2px);
-     box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2);
+     box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
 }
 
 .btn-modern-full:disabled {

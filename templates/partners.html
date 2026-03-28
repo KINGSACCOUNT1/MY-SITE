@@ -1,237 +1,643 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Partners - Elite Wealth Capital</title>
     <meta name="description" content="Elite Wealth Capital partners with leading financial institutions and technology providers worldwide.">
-    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/webp" href="{% static 'images/logo.webp' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css?v=20260308' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css?v=20260308' %}">
+    <link rel="stylesheet" href="{% static 'css/glassmorphism-theme.css?v=20260308' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile.css?v=20260320' %}">
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script async type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #f8fafc; }
-        
-        .navbar {
-            background: rgba(15, 25, 38, 0.95);
-            padding: 1rem 2rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+        :root {
+            --navy: #0A1F44;
+            --gold: #FFD700;
+            --emerald: #00A86B;
+            --card-bg: rgba(20, 20, 20, 0.85);
+        }
+
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            background: transparent;
+            padding: 1rem 0;
+            margin-bottom: 1.5rem;
+            color: #94a3b8;
+        }
+
+        .breadcrumb a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: #FFA500;
+        }
+
+        .breadcrumb-separator {
+            margin: 0 0.5rem;
+        }
+
+        /* Partner Section Styles */
+        .partners-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .section-header h2 {
+            color: var(--gold);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 0.75rem;
         }
-        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo img { height: 40px; }
-        .logo span { color: #fff; font-weight: 700; font-size: 1.25rem; }
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { color: #94a3b8; text-decoration: none; font-weight: 500; }
-        .nav-links a:hover { color: #3b82f6; }
-        
-        .page-header {
-            background: linear-gradient(135deg, #0f1926 0%, #1e293b 100%);
-            padding: 140px 0 80px;
-            text-align: center;
-            color: white;
+
+        .section-header p {
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-left: 2.5rem;
         }
-        .page-header h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .page-header p { color: #94a3b8; font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
-        
-        .partners-section { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
-        .section-title { text-align: center; margin-bottom: 50px; }
-        .section-title h2 { font-size: 2rem; color: #1e293b; margin-bottom: 10px; }
-        .section-title p { color: #64748b; }
-        
+
         .partners-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
+
         .partner-card {
-            background: white;
+            background: linear-gradient(145deg, rgba(20, 30, 48, 0.95), rgba(10, 31, 68, 0.95));
+            border: 1px solid rgba(255, 215, 0, 0.2);
             border-radius: 12px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
+
+        .partner-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--emerald));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .partner-card:hover::before {
+            transform: scaleX(1);
+        }
+
         .partner-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.15);
         }
-        .partner-logo {
-            height: 60px;
-            width: auto;
-            margin-bottom: 20px;
-            filter: grayscale(100%);
-            opacity: 0.7;
-            transition: all 0.3s;
+
+        .partner-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
-        .partner-card:hover .partner-logo {
-            filter: grayscale(0%);
-            opacity: 1;
-        }
-        .partner-name { font-weight: 600; color: #1e293b; margin-bottom: 5px; }
-        .partner-type { font-size: 0.85rem; color: #64748b; }
-        
-        .benefits-section {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            padding: 60px 20px;
-            margin: 60px 0;
-        }
-        .benefits-grid {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            color: white;
-        }
-        .benefit-item { text-align: center; padding: 20px; }
-        .benefit-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
+
+        .partner-logo-container {
+            width: 100%;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 15px;
-        }
-        .benefit-icon svg { width: 30px; height: 30px; fill: white; }
-        .benefit-item h3 { margin-bottom: 10px; }
-        .benefit-item p { opacity: 0.9; font-size: 0.9rem; }
-        
-        .cta-section { text-align: center; padding: 60px 20px; }
-        .cta-section h2 { font-size: 2rem; color: #1e293b; margin-bottom: 15px; }
-        .cta-section p { color: #64748b; margin-bottom: 25px; }
-        .cta-btn {
-            display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: white;
-            font-weight: 600;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
-            text-decoration: none;
+            padding: 1rem;
         }
-        
-        .footer {
-            background: #0f1926;
-            color: #94a3b8;
-            padding: 40px 20px;
+
+        .partner-logo {
+            max-width: 140px;
+            max-height: 60px;
+            filter: brightness(0.9);
+            transition: all 0.3s ease;
+        }
+
+        .partner-card:hover .partner-logo {
+            filter: brightness(1.2);
+            transform: scale(1.05);
+        }
+
+        .partner-name {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
             text-align: center;
         }
-        .footer a { color: #3b82f6; text-decoration: none; }
-        
-        @media (max-width: 768px) { .nav-links { display: none; } }
+
+        .partner-type {
+            color: var(--emerald);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .partner-description {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .partner-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .benefit-badge {
+            background: rgba(0, 168, 107, 0.2);
+            color: var(--emerald);
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 168, 107, 0.3);
+        }
+
+        .external-link-icon {
+            display: inline-block;
+            margin-left: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .partner-card:hover .external-link-icon {
+            opacity: 1;
+        }
+
+        /* Stats Section */
+        .partners-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--navy), #0d2847);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-number {
+            color: var(--gold);
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .partners-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .section-header p {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+
+            .partner-card {
+                padding: 1.5rem;
+            }
+
+            .partners-stats {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
-<body>
-    <nav class="navbar">
-        <a href="{% url 'home' %}" class="logo">
-            <img src="{% static 'images/logo.png' %}" alt="Elite Wealth Capital" width="40" height="40">
-            <span>Elite Wealth Capital</span>
-        </a>
-        <div class="nav-links">
-            <a href="{% url 'home' %}">Home</a>
-            <a href="/about">About</a>
-            <a href="/investment-plans">Invest</a>
-            <a href="/contact">Contact</a>
-            <a href="{% url 'login' %}">Login</a>
+
+<body class="dashboard-site">
+    <!-- Crypto Ticker -->
+    <div class="crypto-ticker-horizontal">
+        <div class="ticker-track"></div>
+    </div>
+
+    <nav class="dashboard-nav">
+        <div class="container-fluid">
+            <a href="{% url 'dashboard' %}" class="nav-brand"
+                style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                <img src="{% static 'images/logo.webp' %}" alt="Elite Wealth Capital" width="40" height="40" style="height: 40px;">
+                <span class="logo-text">Elite Wealth Capital</span>
+            </a>
+            <div class="nav-user">
+                <span class="user-name" id="userName">Loading...</span>
+                <button class="btn-secondary" onclick="logout()" aria-label="Log out of your account">Logout</button>
+            </div>
         </div>
     </nav>
 
-    <div class="page-header">
-        <h1>Our Trusted Partners</h1>
-        <p>We collaborate with industry-leading financial institutions and technology providers</p>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="{% url 'dashboard' %}" class="sidebar-link"><span class="icon">📊</span><span>Dashboard</span></a>
+                <a href="{% url 'invest' %}" class="sidebar-link"><span class="icon">💰</span><span>Invest</span></a>
+                <a href="{% url 'add_funds' %}" class="sidebar-link"><span class="icon">💳</span><span>Add Funds</span></a>
+                <a href="{% url 'withdraw' %}" class="sidebar-link"><span class="icon">💸</span><span>Withdraw</span></a>
+                <a href="{% url 'loans' %}" class="sidebar-link"><span class="icon">🏦</span><span>Get Loan</span></a>
+                <a href="{% url 'cards' %}" class="sidebar-link"><span class="icon">💎</span><span>Virtual Cards</span></a>
+                <a href="{% url 'transactions' %}" class="sidebar-link"><span class="icon">📝</span><span>Transactions</span></a>
+                <a href="{% url 'dispute' %}" class="sidebar-link"><span class="icon">⚠️</span><span>Disputes & Support</span></a>
+                <a href="{% url 'accounts:profile' %}" class="sidebar-link"><span class="icon">⚙️</span><span>Account Settings</span></a>
+                <a href="{% url 'upgrade' %}" class="sidebar-link"><span class="icon">⭐</span><span>Upgrade</span></a>
+                <a href="{% url 'agent_application' %}" class="sidebar-link"><span class="icon">🤝</span><span>Become Agent</span></a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <h1>🤝 Our Strategic Partners</h1>
+                <p>Industry-leading platforms powering seamless transactions and secure investments</p>
+            </div>
+
+            <!-- Breadcrumb Navigation -->
+            <div class="breadcrumb">
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+                <span class="breadcrumb-separator">›</span>
+                <span>Our Partners</span>
+            </div>
+
+            <!-- Partnership Stats -->
+            <div class="partners-stats">
+                <div class="stat-item">
+                    <div class="stat-number">9+</div>
+                    <div class="stat-label">Global Partners</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Coverage</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Countries Served</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Uptime Guarantee</div>
+                </div>
+            </div>
+
+            <!-- Crypto Payment Partners Section -->
+            <section class="partners-section">
+                <div class="section-header">
+                    <h2>
+                        <span>💳</span>
+                        <span>Crypto Payment Partners</span>
+                    </h2>
+                    <p>Secure and instant payment processing solutions</p>
+                </div>
+
+                <div class="partners-grid">
+                    <div class="partner-card">
+                        <a href="https://www.binance.com" target="_blank" rel="noopener noreferrer" class="partner-link">
+                            <div class="partner-logo-container">
+                                <div class="partner-name" style="font-size: 2rem;">🟡 Binance Pay</div>
+                            </div>
+                            <h3 class="partner-name">Binance Pay<span class="external-link-icon">↗</span></h3>
+                            <div class="partner-type">Payment Gateway</div>
+                            <p class="partner-description">
+                                World's largest crypto payment platform with instant settlements and zero transaction fees.
+                            </p>
+                            <div class="partner-benefits">
+                                <span class="benefit-badge">Instant Settlement</span>
+                                <span class="benefit-badge">Zero Fees</span>
+                                <span class="benefit-badge">Multi-Currency</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="partner-card">
+                        <a href="https://www.coinbase.com" target="_blank" rel="noopener noreferrer" class="partner-link">
+                            <div class="partner-logo-container">
+                                <div class="partner-name" style="font-size: 2rem;">🔵 Coinbase</div>
+                            </div>
+                            <h3 class="partner-name">Coinbase Commerce<span class="external-link-icon">↗</span></h3>
+                            <div class="partner-type">Payment Gateway</div>
+                            <p class="partner-description">
+                                Trusted payment solution with enterprise-grade security and regulatory compliance.
+                            </p>
+                            <div class="partner-benefits">
+                                <span class="benefit-badge">Enterprise Security</span>
+                                <span class="benefit-badge">Regulated</span>
+                                <span class="benefit-badge">US-Based</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="partner-card">
+                        <a href="https://www.paypal.com" target="_blank" rel="noopener noreferrer" class="partner-link">
+                            <div class="partner-logo-container">
+                                <div class="partner-name" style="font-size: 2rem;">💙 PayPal</div>
+                            </div>
+                            <h3 class="partner-name">PayPal<span class="external-link-icon">↗</span></h3>
+                            <div class="partner-type">Payment Gateway</div>
+                            <p class="partner-description">
+                                Global payment leader supporting crypto transactions with buyer protection.
+                            </p>
+                            <div class="partner-benefits">
+                                <span class="benefit-badge">Buyer Protection</span>
+                                <span class="benefit-badge">Global Coverage</span>
+                                <span class="benefit-badge">Trusted Brand</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="partner-card">
+                        <a href="https://stripe.com" target="_blank" rel="noopener noreferrer" class="partner-link">
+                            <div class="partner-logo-container">
+                                <div class="partner-name" style="font-size: 2rem;">🟣 Stripe</div>
+                            </div>
+                            <h3 class="partner-name">Stripe<span class="external-link-icon">↗</span></h3>
+                            <div class="partner-type">Payment Gateway</div>
+                            <p class="partner-description">
+                                Advanced payment infrastructure with crypto support and fraud prevention.
+                            </p>
+                            <div class="partner-benefits">
+                                <span class="benefit-badge">Fraud Prevention</span>
+                                <span class="benefit-badge">API Integration</span>
+                                <span class="benefit-badge">Developer-Friendly</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exchange Partners Section -->
+            <section class="partners-section">
+                <div class="section-header">
+                    <h2>
+                        <span>📈</span>
+                        <span>Exchange Partners</span>
+                    </h2>
+                    <p>Top-tier cryptocurrency exchanges for optimal trading execution</p>
+                </div>
+
+                <div class="partners-grid">
+                    <div class="partner-card">
+                        <a href="https://www.bybit.com" target="_blank" rel="noopener noreferrer" class="partner-link">
+                            <div class="partner-logo-container">
+                                <div class="partner-name" style="font-size: 2rem;">⚡ Bybit</div>
+                            </div>
+                            <h3 class="partner-name">Bybit<span class="external-link-icon">↗</span></h3>
+                            <div class="partner-type">Crypto Exchange</div>
+                            <p class="partner-description">
+                                High-performance derivatives exchange with advanced trading tools and liquidity.
+                            </p>
+                            <div class="partner-benefits">
+                                <span class="benefit-badge">Low Latency</span>
+                                <span class="benefit-badge">Derivatives</span>
+                                <span class="benefit-badge">High Liquidity</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="partner-card">
+                        <a href="https://www.binance.com" target="_blank" rel="noopener noreferrer" class="partner-link">
+                            <div class="partner-logo-container">
+                                <div class="partner-name" style="font-size: 2rem;">🟡 Binance</div>
+                            </div>
+                            <h3 class="partner-name">Binance<span class="external-link-icon">↗</span></h3>
+                            <div class="partner-type">Crypto Exchange</div>
+                            <p class="partner-description">
+                                World's largest crypto exchange by volume with unmatched asset diversity.
+                            </p>
+                            <div class="partner-benefits">
+                                <span class="benefit-badge">Largest Volume</span>
+                                <span class="benefit-badge">600+ Assets</span>
+                                <span class="benefit-badge">Global Leader</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="partner-card">
+                        <a href="https://www.coinbase.com" target="_blank" rel="noopener noreferrer" class="partner-link">
+                            <div class="partner-logo-container">
+                                <div class="partner-name" style="font-size: 2rem;">🔵 Coinbase</div>
+                            </div>
+                            <h3 class="partner-name">Coinbase<span class="external-link-icon">↗</span></h3>
+                            <div class="partner-type">Crypto Exchange</div>
+                            <p class="partner-description">
+                                Publicly-traded exchange offering institutional-grade security and compliance.
+                            </p>
+                            <div class="partner-benefits">
+                                <span class="benefit-badge">Publicly Traded</span>
+                                <span class="benefit-badge">Institutional</span>
+                                <span class="benefit-badge">Insured Custody</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="partner-card">
+                        <a href="https://www.okx.com" target="_blank" rel="noopener noreferrer" class="partner-link">
+                            <div class="partner-logo-container">
+                                <div class="partner-name" style="font-size: 2rem;">⚫ OKX</div>
+                            </div>
+                            <h3 class="partner-name">OKX<span class="external-link-icon">↗</span></h3>
+                            <div class="partner-type">Crypto Exchange</div>
+                            <p class="partner-description">
+                                Leading exchange with comprehensive trading products and Web3 integration.
+                            </p>
+                            <div class="partner-benefits">
+                                <span class="benefit-badge">Web3 Wallet</span>
+                                <span class="benefit-badge">DeFi Access</span>
+                                <span class="benefit-badge">NFT Platform</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="partner-card">
+                        <a href="https://www.kucoin.com" target="_blank" rel="noopener noreferrer" class="partner-link">
+                            <div class="partner-logo-container">
+                                <div class="partner-name" style="font-size: 2rem;">🟢 KuCoin</div>
+                            </div>
+                            <h3 class="partner-name">KuCoin<span class="external-link-icon">↗</span></h3>
+                            <div class="partner-type">Crypto Exchange</div>
+                            <p class="partner-description">
+                                People's exchange with extensive altcoin selection and innovative trading features.
+                            </p>
+                            <div class="partner-benefits">
+                                <span class="benefit-badge">700+ Coins</span>
+                                <span class="benefit-badge">Trading Bots</span>
+                                <span class="benefit-badge">Passive Income</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Wallet Integrations Section -->
+            <section class="partners-section">
+                <div class="section-header">
+                    <h2>
+                        <span>👛</span>
+                        <span>Wallet Integrations</span>
+                    </h2>
+                    <p>Connect with your favorite crypto wallets for seamless transactions</p>
+                </div>
+
+                <div class="partners-grid">
+                    <div class="partner-card">
+                        <a href="https://metamask.io" target="_blank" rel="noopener noreferrer" class="partner-link">
+                            <div class="partner-logo-container">
+                                <div class="partner-name" style="font-size: 2rem;">🦊 MetaMask</div>
+                            </div>
+                            <h3 class="partner-name">MetaMask<span class="external-link-icon">↗</span></h3>
+                            <div class="partner-type">Web3 Wallet</div>
+                            <p class="partner-description">
+                                Leading Ethereum wallet with 30M+ users, enabling secure DeFi and dApp access.
+                            </p>
+                            <div class="partner-benefits">
+                                <span class="benefit-badge">30M+ Users</span>
+                                <span class="benefit-badge">DeFi Ready</span>
+                                <span class="benefit-badge">Multi-Chain</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="partner-card">
+                        <a href="https://trustwallet.com" target="_blank" rel="noopener noreferrer" class="partner-link">
+                            <div class="partner-logo-container">
+                                <div class="partner-name" style="font-size: 2rem;">🛡️ Trust Wallet</div>
+                            </div>
+                            <h3 class="partner-name">Trust Wallet<span class="external-link-icon">↗</span></h3>
+                            <div class="partner-type">Mobile Wallet</div>
+                            <p class="partner-description">
+                                Official Binance wallet supporting 100+ blockchains with built-in Web3 browser.
+                            </p>
+                            <div class="partner-benefits">
+                                <span class="benefit-badge">100+ Chains</span>
+                                <span class="benefit-badge">Mobile First</span>
+                                <span class="benefit-badge">Open Source</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Partnership Benefits -->
+            <div style="background: linear-gradient(135deg, var(--emerald), #007a56); border-radius: 12px; padding: 3rem 2rem; text-align: center; margin-top: 3rem; color: white;">
+                <h2 style="font-size: 2rem; margin-bottom: 1rem;">Why Our Partners Matter</h2>
+                <p style="font-size: 1.1rem; max-width: 800px; margin: 0 auto 2rem; opacity: 0.95;">
+                    We partner with the world's most trusted platforms to ensure your transactions are secure, 
+                    fast, and reliable. Our strategic partnerships enable us to offer competitive rates, 
+                    enhanced security, and seamless user experience.
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                    <div>
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem;">🔒</div>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Enhanced Security</h3>
+                        <p style="font-size: 0.9rem; opacity: 0.9;">Multi-layer protection through industry leaders</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem;">⚡</div>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Instant Processing</h3>
+                        <p style="font-size: 0.9rem; opacity: 0.9;">Lightning-fast deposits and withdrawals</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem;">🌍</div>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Global Reach</h3>
+                        <p style="font-size: 0.9rem; opacity: 0.9;">Access to 150+ countries worldwide</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem;">💎</div>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Premium Service</h3>
+                        <p style="font-size: 0.9rem; opacity: 0.9;">VIP support and priority processing</p>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <section class="partners-section">
-        <div class="section-title">
-            <h2>Strategic Partners</h2>
-            <p>Building a stronger financial future together</p>
+    <script src="{% static 'js/main.js?v=20260308' %}"></script>
+    <script src="{% static 'js/dashboard.js?v=20260308' %}"></script>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav">
+        <div class="nav-items">
+            <a href="{% url 'dashboard' %}">
+                <span class="icon">📊</span>
+                <span>Home</span>
+            </a>
+            <a href="{% url 'invest' %}">
+                <span class="icon">💰</span>
+                <span>Invest</span>
+            </a>
+            <a href="{% url 'add_funds' %}">
+                <span class="icon">💳</span>
+                <span>Deposit</span>
+            </a>
+            <a href="{% url 'withdraw' %}">
+                <span class="icon">💸</span>
+                <span>Withdraw</span>
+            </a>
+            <a href="{% url 'accounts:profile' %}">
+                <span class="icon">⚙️</span>
+                <span>Settings</span>
+            </a>
         </div>
-        <div class="partners-grid">
-            <div class="partner-card">
-                <img src="{% static 'images/logo-binance.png' %}" alt="Binance" class="partner-logo" width="120" height="60">
-                <h3 class="partner-name">Binance</h3>
-                <p class="partner-type">Crypto Exchange</p>
-            </div>
-            <div class="partner-card">
-                <img src="{% static 'images/logo-coinbase.png' %}" alt="Coinbase" class="partner-logo" width="120" height="60">
-                <h3 class="partner-name">Coinbase</h3>
-                <p class="partner-type">Crypto Exchange</p>
-            </div>
-            <div class="partner-card">
-                <img src="{% static 'images/logo-bybit.png' %}" alt="Bybit" class="partner-logo" width="120" height="60">
-                <h3 class="partner-name">Bybit</h3>
-                <p class="partner-type">Crypto Exchange</p>
-            </div>
-            <div class="partner-card">
-                <img src="{% static 'images/logo-kucoin.png' %}" alt="KuCoin" class="partner-logo" width="120" height="60">
-                <h3 class="partner-name">KuCoin</h3>
-                <p class="partner-type">Crypto Exchange</p>
-            </div>
-            <div class="partner-card">
-                <img src="{% static 'images/logo-okx.png' %}" alt="OKX" class="partner-logo" width="120" height="60">
-                <h3 class="partner-name">OKX</h3>
-                <p class="partner-type">Crypto Exchange</p>
-            </div>
-            <div class="partner-card">
-                <img src="{% static 'images/logo-metamask.png' %}" alt="MetaMask" class="partner-logo" width="120" height="60">
-                <h3 class="partner-name">MetaMask</h3>
-                <p class="partner-type">Crypto Wallet</p>
-            </div>
-            <div class="partner-card">
-                <img src="{% static 'images/logo-trustwallet.png' %}" alt="Trust Wallet" class="partner-logo" width="120" height="60">
-                <h3 class="partner-name">Trust Wallet</h3>
-                <p class="partner-type">Crypto Wallet</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="benefits-section">
-        <div class="benefits-grid">
-            <div class="benefit-item">
-                <div class="benefit-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-                </div>
-                <h3>Enhanced Security</h3>
-                <p>Multi-layer protection through our security partners</p>
-            </div>
-            <div class="benefit-item">
-                <div class="benefit-icon">
-                    <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
-                </div>
-                <h3>Global Payments</h3>
-                <p>Fast deposits and withdrawals worldwide</p>
-            </div>
-            <div class="benefit-item">
-                <div class="benefit-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                </div>
-                <h3>Compliance</h3>
-                <p>Regulatory compliance across all jurisdictions</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section">
-        <h2>Become a Partner</h2>
-        <p>Interested in partnering with Elite Wealth Capital? Get in touch with our team.</p>
-        <a href="/contact" class="cta-btn">Contact Us</a>
-    </section>
-
-    <footer class="footer">
-        <p>&copy; 2024 Elite Wealth Capital. All rights reserved.</p>
-        <p style="margin-top: 10px;">
-            <a href="/terms">Terms</a> | <a href="/privacy-policy">Privacy</a> | <a href="/contact">Contact</a>
-        </p>
-    </footer>
-
-        <script defer src="{% static 'js/main.js' %}"></script>
+    </nav>
 </body>
-</html>
 
+</html>

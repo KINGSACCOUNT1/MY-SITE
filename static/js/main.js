@@ -60,100 +60,83 @@
         });
     }
 
-    // Crypto Ticker — powered by the internal /investments/api/ticker/ endpoint (CoinGecko)
+    // Crypto Ticker — Static display (admin manages wallet addresses separately)
     async function initCryptoTicker() {
-        // Ensure the ticker container exists in the DOM.
-        // Pages like dashboard/investment-plans include it in their HTML;
-        // all other pages get it injected here so it appears site-wide.
-        let tickerContainer = document.querySelector('.crypto-ticker-horizontal');
-        if (!tickerContainer) {
-            tickerContainer = document.createElement('div');
-            tickerContainer.className = 'crypto-ticker-horizontal';
-            tickerContainer.innerHTML = '<div class="ticker-track"></div>';
-            document.body.insertBefore(tickerContainer, document.body.firstChild);
-        }
-
-        // Apply inline styles so the bar renders correctly even before style.css
-        // has fully loaded (style.css uses media="print"→onload lazy-loading).
-        tickerContainer.style.cssText = [
-            'position:fixed', 'top:0', 'left:0', 'right:0', 'z-index:1001',
-            'height:40px', 'overflow:hidden', 'display:flex', 'align-items:center',
-            'background:rgba(10,16,32,0.98)',
-            'border-bottom:1px solid rgba(212,175,55,0.35)',
-            'backdrop-filter:blur(8px)',
-        ].join(';');
-
-        // Inject the @keyframes definition once so the ticker animation always
-        // works — even when style.css is still lazy-loading.
-        if (!document.getElementById('ewc-ticker-kf')) {
-            var kfStyle = document.createElement('style');
-            kfStyle.id = 'ewc-ticker-kf';
-            kfStyle.textContent = '@keyframes ewcTicker{from{transform:translateX(0)}to{transform:translateX(-50%)}}';
-            document.head.appendChild(kfStyle);
-        }
-
-        const tickerTrack = tickerContainer.querySelector('.ticker-track');
+        const tickerTrack = document.querySelector('.ticker-track');
         if (!tickerTrack) return;
 
-        tickerTrack.style.cssText = [
-            'display:flex', 'align-items:center', 'gap:0', 'white-space:nowrap',
-            'animation:ewcTicker 45s linear infinite',
-        ].join(';');
-
-        // Static fallback data shown while live prices load or if the API is
-        // temporarily unreachable (CoinGecko free tier).
-        const fallbackCoins = [
-            { symbol: 'BTC',  price: 84000,    change: 1.25  },
-            { symbol: 'ETH',  price: 2000,     change: -0.85 },
-            { symbol: 'USDT', price: 1.00,     change: 0.00  },
-            { symbol: 'USDC', price: 1.00,     change: 0.00  },
-            { symbol: 'LTC',  price: 92,       change: 0.60  },
-            { symbol: 'BNB',  price: 580,      change: 0.92  },
-            { symbol: 'SOL',  price: 135,      change: 2.15  },
-            { symbol: 'XRP',  price: 2.20,     change: 1.35  },
-            { symbol: 'ADA',  price: 0.72,     change: -0.45 },
-            { symbol: 'DOGE', price: 0.18,     change: 3.20  },
+        const cryptos = [
+            { symbol: 'BTC',   name: 'Bitcoin',    price: 84000,    change: 1.25  },
+            { symbol: 'ETH',   name: 'Ethereum',   price: 2000,     change: -0.85 },
+            { symbol: 'USDT',  name: 'Tether',     price: 1.00,     change: 0.00  },
+            { symbol: 'BNB',   name: 'BNB',        price: 580,      change: 0.92  },
+            { symbol: 'SOL',   name: 'Solana',     price: 135,      change: 2.15  },
+            { symbol: 'XRP',   name: 'XRP',        price: 2.20,     change: 1.35  },
+            { symbol: 'USDC',  name: 'USD Coin',   price: 1.00,     change: 0.00  },
+            { symbol: 'ADA',   name: 'Cardano',    price: 0.72,     change: -0.45 },
+            { symbol: 'AVAX',  name: 'Avalanche',  price: 22,       change: 1.80  },
+            { symbol: 'DOGE',  name: 'Dogecoin',   price: 0.18,     change: 3.20  },
+            { symbol: 'TRX',   name: 'TRON',       price: 0.24,     change: 0.50  },
+            { symbol: 'DOT',   name: 'Polkadot',   price: 5.20,     change: -1.20 },
+            { symbol: 'LINK',  name: 'Chainlink',  price: 13.50,    change: 2.30  },
+            { symbol: 'MATIC', name: 'Polygon',    price: 0.45,     change: -0.80 },
+            { symbol: 'LTC',   name: 'Litecoin',   price: 92,       change: 0.60  },
+            { symbol: 'UNI',   name: 'Uniswap',    price: 7.80,     change: 1.10  },
+            { symbol: 'SHIB',  name: 'Shiba Inu',  price: 0.0000135,change: 4.50  },
+            { symbol: 'ATOM',  name: 'Cosmos',     price: 4.80,     change: -0.70 },
+            { symbol: 'XLM',   name: 'Stellar',    price: 0.28,     change: 1.90  },
+            { symbol: 'XMR',   name: 'Monero',     price: 215,      change: 0.40  }
         ];
 
-        function renderTicker(coins) {
-            let html = '';
-            coins.forEach(c => {
-                const rawPrice = c.price_usd !== undefined ? c.price_usd : c.price;
-                if (rawPrice === null || rawPrice === undefined) return;
-                const numPrice = parseFloat(rawPrice);
-                const change = parseFloat(c.change_24h !== undefined ? c.change_24h : (c.change || 0));
-                const changeFixed  = Math.abs(change).toFixed(2);
-                const changeColor  = change >= 0 ? '#10b981' : '#ef4444';
-                const changeSymbol = change >= 0 ? '▲' : '▼';
-                const priceStr = numPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: numPrice < 0.01 ? 6 : 2 });
-                // Use inline styles on every item for guaranteed rendering
-                html += `<span style="display:inline-flex;align-items:center;gap:5px;padding:0 18px;height:40px;border-right:1px solid rgba(212,175,55,0.18);font-size:0.78rem;font-family:inherit;">`
-                      + `<span style="font-weight:700;color:#d4af37;">${c.symbol}</span>`
-                      + `<span style="color:#f1f5f9;font-weight:500;">$${priceStr}</span>`
-                      + `<span style="color:${changeColor};font-size:0.72rem;">${changeSymbol}${changeFixed}%</span>`
-                      + `</span>`;
-            });
-            // Duplicate for seamless infinite loop
-            tickerTrack.innerHTML = html + html;
-        }
+        let tickerHTML = '';
+        cryptos.forEach(crypto => {
+            const changeFixed = crypto.change.toFixed(2);
+            const changeClass = crypto.change >= 0 ? 'positive' : 'negative';
+            const changeSymbol = crypto.change >= 0 ? '+' : '';
+            tickerHTML += `
+                <div class="ticker-item">
+                    <span class="crypto-symbol">${crypto.symbol}</span>
+                    <span class="crypto-price">$${crypto.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: crypto.price < 0.01 ? 8 : 2 })}</span>
+                    <span class="crypto-change ${changeClass}">${changeSymbol}${changeFixed}%</span>
+                </div>
+            `;
+        });
 
-        // Show fallback immediately so the bar is never empty
-        renderTicker(fallbackCoins);
+        tickerTrack.innerHTML = tickerHTML + tickerHTML; // Duplicate for seamless loop
 
-        // Fetch live prices from the internal endpoint (which uses CoinGecko)
-        try {
-            const response = await fetch('/investments/api/ticker/');
-            if (response.ok) {
-                const json = await response.json();
-                if (json.success && json.tickers && json.tickers.length) {
-                    // Only replace fallback if we got actual price data back
-                    const withPrices = json.tickers.filter(t => t.price_usd !== null);
-                    if (withPrices.length) renderTicker(withPrices);
+        // Update price cards if they exist
+        updatePriceCards(cryptos);
+    }
+
+    // Update static price cards with live Bybit data
+    function updatePriceCards(cryptos) {
+        const priceMap = {};
+        cryptos.forEach(crypto => {
+            priceMap[crypto.symbol] = crypto;
+        });
+
+        document.querySelectorAll('.price-card').forEach(card => {
+            const symbolEl = card.querySelector('.price-symbol');
+            if (!symbolEl) return;
+
+            const symbol = symbolEl.textContent.trim();
+            const coinData = priceMap[symbol];
+
+            if (coinData) {
+                const priceEl = card.querySelector('.price-value');
+                const changeEl = card.querySelector('.price-change');
+
+                if (priceEl) {
+                    priceEl.textContent = `$${coinData.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                }
+                if (changeEl) {
+                    const change = coinData.change.toFixed(1);
+                    const isPositive = coinData.change >= 0;
+                    changeEl.textContent = `${isPositive ? '+' : ''}${change}%`;
+                    changeEl.className = `price-change ${isPositive ? 'positive' : 'negative'}`;
                 }
             }
-        } catch (_) {
-            // Network error — fallback data already rendered; silently continue
-        }
+        });
     }
 
     // Toast Notifications
@@ -177,10 +160,10 @@
         gap: 10px;
         color: white;
         font-weight: 500;
-        z-index: 9999;
+        z-index: 200;
         transform: translateX(120%);
         transition: transform 0.3s ease;
-        background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : type === 'warning' ? '#f59e0b' : '#3b82f6'};
+        background: ${type === 'success' ? '#00A86B' : type === 'error' ? '#ef4444' : type === 'warning' ? '#FFD700' : '#3b82f6'};
         box-shadow: 0 10px 40px rgba(0,0,0,0.3);
     `;
 

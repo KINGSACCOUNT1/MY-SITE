@@ -36,8 +36,8 @@
             font-size: 0.95rem;
             flex-shrink: 0;
         }
-        .rank-1 { background: linear-gradient(135deg, #FFD700, #FFA500); color: #0f172a; box-shadow: 0 0 12px rgba(255,215,0,0.4); }
-        .rank-2 { background: linear-gradient(135deg, #C0C0C0, #A8A9AD); color: #0f172a; }
+        .rank-1 { background: linear-gradient(135deg, #FFD700, #FFA500); color: #0A1F44; box-shadow: 0 0 12px rgba(255,215,0,0.4); }
+        .rank-2 { background: linear-gradient(135deg, #C0C0C0, #A8A9AD); color: #0A1F44; }
         .rank-3 { background: linear-gradient(135deg, #CD7F32, #A0522D); color: #fff; }
         .rank-other { background: rgba(255,255,255,0.08); color: #94a3b8; }
         .referrer-name {
@@ -52,9 +52,9 @@
             gap: 0.5rem;
         }
         .count-pill {
-            background: rgba(245,158,11,0.15);
-            border: 1px solid rgba(245,158,11,0.3);
-            color: #F59E0B;
+            background: rgba(255, 215, 0,0.15);
+            border: 1px solid rgba(255, 215, 0,0.3);
+            color: #FFD700;
             padding: 0.25rem 0.75rem;
             border-radius: 999px;
             font-weight: 700;
@@ -64,12 +64,12 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: #10B981;
+            background: #00A86B;
             flex-shrink: 0;
         }
         .your-rank-banner {
-            background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(245,158,11,0.05));
-            border: 1px solid rgba(245,158,11,0.3);
+            background: linear-gradient(135deg, rgba(255, 215, 0,0.15), rgba(255, 215, 0,0.05));
+            border: 1px solid rgba(255, 215, 0,0.3);
             border-radius: 1rem;
             padding: 1.5rem;
             text-align: center;
@@ -113,11 +113,11 @@
             <div class="nav-user">
                 {% if user.profile_image %}
                 <a href="{% url 'accounts:profile' %}" aria-label="Profile">
-                    <img src="{{ user.profile_image.url }}" alt="{{ user.full_name }}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #F59E0B;">
+                    <img src="{{ user.profile_image.url }}" alt="{{ user.full_name }}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #FFD700;">
                 </a>
                 {% else %}
                 <a href="{% url 'accounts:profile' %}" aria-label="Profile">
-                    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#D97706);display:flex;align-items:center;justify-content:center;color:#0f172a;font-weight:700;font-size:0.9rem;">
+                    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#FFD700,#DAA520);display:flex;align-items:center;justify-content:center;color:#0A1F44;font-weight:700;font-size:0.9rem;">
                         {{ user.full_name|first|upper }}
                     </div>
                 </a>
@@ -155,9 +155,9 @@
             <!-- Your Stats -->
             <div class="your-rank-banner">
                 <div style="font-size:2rem;margin-bottom:0.5rem;">🎯</div>
-                <h3 style="color:#F59E0B;margin-bottom:0.25rem;">Your Referral Stats</h3>
+                <h3 style="color:#FFD700;margin-bottom:0.25rem;">Your Referral Stats</h3>
                 <p style="color:#94a3b8;font-size:0.9rem;margin-bottom:1rem;">
-                    Your code: <strong style="color:#F59E0B;">{{ referral_code }}</strong>
+                    Your code: <strong style="color:#FFD700;">{{ referral_code }}</strong>
                 </p>
                 <div style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;">
                     <div>
@@ -165,7 +165,7 @@
                         <div style="color:#64748b;font-size:0.85rem;">Active Referrals</div>
                     </div>
                     <div>
-                        <div style="font-size:2rem;font-weight:800;color:#10B981;">${{ referral_bonus|floatformat:2 }}</div>
+                        <div style="font-size:2rem;font-weight:800;color:#00A86B;">${{ referral_bonus|floatformat:2 }}</div>
                         <div style="color:#64748b;font-size:0.85rem;">Total Earned</div>
                     </div>
                 </div>
@@ -178,7 +178,7 @@
 
             <!-- How Referrals Work -->
             <div class="glass-card" style="padding:1.5rem;margin-bottom:2rem;">
-                <h4 style="color:#F59E0B;margin-bottom:1rem;">💡 How It Works</h4>
+                <h4 style="color:#FFD700;margin-bottom:1rem;">💡 How It Works</h4>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
                     <div style="text-align:center;padding:1rem;background:rgba(255,255,255,0.04);border-radius:0.75rem;">
                         <div style="font-size:2rem;">🔗</div>
@@ -207,7 +207,7 @@
 
                 {% if top_referrers %}
                 {% for referrer in top_referrers %}
-                <div class="leaderboard-row {% if referrer == user %}" style="background:rgba(245,158,11,0.07);border-left:3px solid #F59E0B;{% endif %}">
+                <div class="leaderboard-row {% if referrer == user %}" style="background:rgba(255, 215, 0,0.07);border-left:3px solid #FFD700;{% endif %}">
                     <div class="rank-badge rank-{% if forloop.counter <= 3 %}{{ forloop.counter }}{% else %}other{% endif %}">
                         {% if forloop.counter == 1 %}🥇
                         {% elif forloop.counter == 2 %}🥈
@@ -217,7 +217,7 @@
                     <div style="flex:1;min-width:0;">
                         <div class="referrer-name">
                             {{ referrer.full_name|truncatechars:25 }}
-                            {% if referrer == user %}<span style="color:#F59E0B;font-size:0.75rem;"> ← You</span>{% endif %}
+                            {% if referrer == user %}<span style="color:#FFD700;font-size:0.75rem;"> ← You</span>{% endif %}
                         </div>
                         <div style="color:#64748b;font-size:0.75rem;margin-top:0.15rem;">
                             ${{ referrer.referral_bonus|floatformat:2 }} earned

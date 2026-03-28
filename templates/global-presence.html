@@ -1,0 +1,364 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Presence - Elite Wealth Capital</title>
+    <link rel="icon" type="image/webp" href="{% static 'images/logo.webp' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css?v=20260308' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css?v=20260308' %}">
+    <link rel="stylesheet" href="{% static 'css/glassmorphism-theme.css?v=20260308' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile.css?v=20260320' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0A1F44;
+            --gold: #FFD700;
+            --emerald: #00A86B;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--navy), #1e3a5f);
+            padding: 140px 0 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .breadcrumbs {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: #94a3b8;
+        }
+
+        .breadcrumbs a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .offices-container {
+            max-width: 1200px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+        }
+
+        .office-card {
+            background: rgba(20, 20, 20, 0.85);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .office-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 15px;
+        }
+
+        .flag-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--gold), #ffa500);
+        }
+
+        .office-title h2 {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+
+        .office-title p {
+            color: #94a3b8;
+        }
+
+        .office-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .detail-group {
+            background: rgba(255, 215, 0, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--gold);
+        }
+
+        .detail-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 1.1rem;
+            color: #fff;
+            word-break: break-word;
+        }
+
+        .detail-value a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .detail-value a:hover {
+            text-decoration: underline;
+        }
+
+        .map-placeholder {
+            background: linear-gradient(135deg, #1e3a5f, var(--navy));
+            border-radius: 12px;
+            padding: 60px 20px;
+            text-align: center;
+            margin: 40px 0;
+            border: 2px dashed var(--gold);
+        }
+
+        .map-placeholder h3 {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .regulations-section {
+            background: rgba(0, 168, 107, 0.1);
+            border: 1px solid var(--emerald);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .regulations-section h3 {
+            color: var(--emerald);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .regulation-badge {
+            display: inline-block;
+            background: rgba(0, 168, 107, 0.2);
+            color: var(--emerald);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .office-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .office-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="dashboard-site">
+    <!-- Crypto Ticker -->
+    <div class="crypto-ticker-horizontal">
+        <div class="ticker-track"></div>
+    </div>
+
+    <nav class="dashboard-nav">
+        <div class="container-fluid">
+            <a href="{% url 'dashboard' %}" class="nav-brand"
+                style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                <img src="{% static 'images/logo.webp' %}" alt="Elite Wealth Capital" width="40" height="40"
+                    style="height: 40px;">
+                <span class="logo-text">Elite Wealth Capital</span>
+            </a>
+            <div class="nav-user">
+                {% if user.is_authenticated %}
+                <span class="user-name">{{ user.get_full_name|default:user.username }}</span>
+                <a href="{% url 'accounts:logout' %}" class="btn-secondary">Logout</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn-secondary">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Home</a>
+            <span>/</span>
+            <span>Global Presence</span>
+        </div>
+        <h1>🌍 Our Global Presence</h1>
+        <p style="color: #94a3b8; max-width: 600px; margin: 0 auto;">Operating in key financial centers worldwide to
+            serve our international clients</p>
+    </div>
+
+    <div class="offices-container">
+        <!-- World Map Placeholder -->
+        <div class="map-placeholder">
+            <h3>🗺️ Operating in 3 Strategic Locations</h3>
+            <p style="color: #94a3b8;">Norway • United Kingdom • United States</p>
+        </div>
+
+        <!-- Norway Office -->
+        <div class="office-card">
+            <div class="office-header">
+                <div class="flag-icon">🇳🇴</div>
+                <div class="office-title">
+                    <h2>Oslo, Norway</h2>
+                    <p>European Headquarters</p>
+                </div>
+            </div>
+            <div class="office-details">
+                <div class="detail-group">
+                    <div class="detail-label">📍 Address</div>
+                    <div class="detail-value">Storgata 23, 0184 Oslo, Norway</div>
+                </div>
+                <div class="detail-group">
+                    <div class="detail-label">📞 Phone</div>
+                    <div class="detail-value"><a href="tel:+4721950000">+47 21 95 00 00</a></div>
+                </div>
+                <div class="detail-group">
+                    <div class="detail-label">✉️ Email</div>
+                    <div class="detail-value"><a
+                            href="mailto:oslo@elitewealthcapita.uk">oslo@elitewealthcapita.uk</a></div>
+                </div>
+            </div>
+            <div class="regulations-section">
+                <h3>🛡️ Regulatory Compliance</h3>
+                <span class="regulation-badge">Finanstilsynet Registered</span>
+                <span class="regulation-badge">EU MiFID II Compliant</span>
+                <span class="regulation-badge">GDPR Certified</span>
+            </div>
+        </div>
+
+        <!-- UK Office -->
+        <div class="office-card">
+            <div class="office-header">
+                <div class="flag-icon">🇬🇧</div>
+                <div class="office-title">
+                    <h2>London, United Kingdom</h2>
+                    <p>Primary Operations Center</p>
+                </div>
+            </div>
+            <div class="office-details">
+                <div class="detail-group">
+                    <div class="detail-label">📍 Address</div>
+                    <div class="detail-value">123 Canary Wharf, London E14 5AB, UK</div>
+                </div>
+                <div class="detail-group">
+                    <div class="detail-label">📞 Phone</div>
+                    <div class="detail-value"><a href="tel:+442079460958">+44 20 7946 0958</a></div>
+                </div>
+                <div class="detail-group">
+                    <div class="detail-label">✉️ Email</div>
+                    <div class="detail-value"><a
+                            href="mailto:london@elitewealthcapita.uk">london@elitewealthcapita.uk</a></div>
+                </div>
+            </div>
+            <div class="regulations-section">
+                <h3>🛡️ Regulatory Compliance</h3>
+                <span class="regulation-badge">FCA Compliant</span>
+                <span class="regulation-badge">Companies House Registered</span>
+                <span class="regulation-badge">ICO Data Protection</span>
+            </div>
+        </div>
+
+        <!-- US Office -->
+        <div class="office-card">
+            <div class="office-header">
+                <div class="flag-icon">🇺🇸</div>
+                <div class="office-title">
+                    <h2>New York, United States</h2>
+                    <p>Americas Regional Office</p>
+                </div>
+            </div>
+            <div class="office-details">
+                <div class="detail-group">
+                    <div class="detail-label">📍 Address</div>
+                    <div class="detail-value">350 Fifth Avenue, New York, NY 10118, USA</div>
+                </div>
+                <div class="detail-group">
+                    <div class="detail-label">📞 Phone</div>
+                    <div class="detail-value"><a href="tel:+12127363100">+1 (212) 736-3100</a></div>
+                </div>
+                <div class="detail-group">
+                    <div class="detail-label">✉️ Email</div>
+                    <div class="detail-value"><a
+                            href="mailto:newyork@elitewealthcapita.uk">newyork@elitewealthcapita.uk</a></div>
+                </div>
+            </div>
+            <div class="regulations-section">
+                <h3>🛡️ Regulatory Compliance</h3>
+                <span class="regulation-badge">SEC Registered</span>
+                <span class="regulation-badge">FinCEN Compliant</span>
+                <span class="regulation-badge">State Licensed</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/main.js?v=20260308' %}"></script>
+    <script src="{% static 'js/dashboard.js?v=20260308' %}"></script>
+    <script>
+        // Initialize crypto ticker
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof initCryptoTicker === 'function') {
+                initCryptoTicker();
+            }
+        });
+    </script>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav">
+        <div class="nav-items">
+            <a href="{% url 'dashboard' %}">
+                <span class="icon">📊</span>
+                <span>Home</span>
+            </a>
+            <a href="{% url 'invest' %}">
+                <span class="icon">💰</span>
+                <span>Invest</span>
+            </a>
+            <a href="{% url 'add_funds' %}">
+                <span class="icon">💳</span>
+                <span>Deposit</span>
+            </a>
+            <a href="{% url 'accounts:profile' %}">
+                <span class="icon">⚙️</span>
+                <span>Settings</span>
+            </a>
+        </div>
+    </nav>
+</body>
+
+</html>

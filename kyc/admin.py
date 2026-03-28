@@ -46,9 +46,9 @@ class KYCDocumentAdmin(admin.ModelAdmin):
 
     def status_badge(self, obj):
         colors = {
-            'pending': '#f59e0b',
+            'pending': '#FFD700',
             'submitted': '#3b82f6',
-            'verified': '#10b981',
+            'verified': '#00A86B',
             'rejected': '#ef4444',
         }
         return format_html(

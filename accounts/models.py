@@ -86,12 +86,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     kyc_status = models.CharField(max_length=20, choices=KYC_STATUS, default='pending')
     
     # Security
+    # TODO: SECURITY - These fields store sensitive tokens in plain text
+    # Should use Django's default_token_generator or hash before storage
     two_fa_enabled = models.BooleanField(default=False)
-    two_fa_secret = models.CharField(max_length=32, blank=True)
+    two_fa_secret = models.CharField(max_length=32, blank=True)  # TODO: Hash this
     email_verified = models.BooleanField(default=False)
-    email_verification_token = models.CharField(max_length=100, blank=True, null=True)
+    email_verification_token = models.CharField(max_length=100, blank=True, null=True)  # TODO: Use Django's token generator
     email_verification_sent_at = models.DateTimeField(null=True, blank=True)
-    password_reset_token = models.CharField(max_length=100, blank=True, null=True)
+    password_reset_token = models.CharField(max_length=100, blank=True, null=True)  # TODO: Use Django's token generator
     password_reset_sent_at = models.DateTimeField(null=True, blank=True)
     failed_login_attempts = models.IntegerField(default=0)
     locked_until = models.DateTimeField(null=True, blank=True)

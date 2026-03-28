@@ -24,34 +24,34 @@
     <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
 
     <style>
-        body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; color: #f1f5f9; }
+        body { background: linear-gradient(135deg, #0A1F44 0%, #1e293b 100%); min-height: 100vh; color: #f1f5f9; }
 
         /* ---- NAVBAR ---- */
-        .navbar { position: sticky; top: 0; z-index: 1000; background: rgba(10,22,40,0.97); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(245,158,11,0.25); }
+        .navbar { position: sticky; top: 0; z-index: 1000; background: rgba(10,22,40,0.97); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 215, 0,0.25); }
         .navbar-container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 70px; }
         .navbar-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
         .navbar-logo img { height: 40px; width: 40px; object-fit: contain; }
         .navbar-logo-text { display: flex; flex-direction: column; line-height: 1; }
         .navbar-logo-text span:first-child { font-size: 1.15rem; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
-        .navbar-logo-text span:last-child { font-size: 0.55rem; font-weight: 700; color: #F59E0B; letter-spacing: 2px; }
+        .navbar-logo-text span:last-child { font-size: 0.55rem; font-weight: 700; color: #FFD700; letter-spacing: 2px; }
         .navbar-links { display: flex; gap: 0.25rem; align-items: center; }
         .nav-link { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 0.5rem 0.75rem; border-radius: 6px; transition: color 0.2s, background 0.2s; }
         .nav-link:hover, .nav-link.active { color: #fff; background: rgba(255,255,255,0.08); }
         .navbar-actions { display: flex; gap: 0.75rem; align-items: center; }
         .btn-nav-login { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.9rem; font-weight: 600; padding: 0.5rem 1.1rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); transition: background 0.2s; }
         .btn-nav-login:hover { background: rgba(255,255,255,0.1); color: #fff; }
-        .btn-nav-signup { background: linear-gradient(135deg,#F59E0B,#D97706); color: #0f172a; text-decoration: none; font-size: 0.9rem; font-weight: 700; padding: 0.5rem 1.25rem; border-radius: 6px; transition: opacity 0.2s; }
+        .btn-nav-signup { background: linear-gradient(135deg,#FFD700,#DAA520); color: #0A1F44; text-decoration: none; font-size: 0.9rem; font-weight: 700; padding: 0.5rem 1.25rem; border-radius: 6px; transition: opacity 0.2s; }
         .btn-nav-signup:hover { opacity: 0.9; }
         .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
         .mobile-menu-btn span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: all 0.3s; }
         .mobile-nav { display: none; background: rgba(10,22,40,0.98); padding: 1rem 1.5rem 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); }
         .mobile-nav a { display: block; color: rgba(255,255,255,0.85); text-decoration: none; font-size: 1rem; font-weight: 500; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
         .mobile-nav a:last-child { border-bottom: none; }
-        .mobile-nav a:hover { color: #F59E0B; }
+        .mobile-nav a:hover { color: #FFD700; }
         .mobile-nav .mobile-btns { display: flex; gap: 0.75rem; margin-top: 1rem; }
         .mobile-nav .mobile-btns a { border: none; padding: 0.75rem 1rem; border-radius: 8px; text-align: center; font-weight: 700; font-size: 0.95rem; flex: 1; }
         .mobile-nav .mobile-btns .mb-login { background: rgba(255,255,255,0.1); color: #fff; }
-        .mobile-nav .mobile-btns .mb-signup { background: linear-gradient(135deg,#F59E0B,#D97706); color: #0f172a; }
+        .mobile-nav .mobile-btns .mb-signup { background: linear-gradient(135deg,#FFD700,#DAA520); color: #0A1F44; }
 
         @media (max-width: 900px) {
             .navbar-links, .navbar-actions { display: none; }
@@ -68,18 +68,18 @@
         .about-section { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
         .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
         .about-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 2rem; backdrop-filter: blur(10px); transition: transform 0.2s, border-color 0.2s; }
-        .about-card:hover { transform: translateY(-4px); border-color: rgba(245,158,11,0.4); }
-        .about-card h2 { font-size: 1.2rem; font-weight: 700; color: #F59E0B; margin-bottom: 1rem; }
+        .about-card:hover { transform: translateY(-4px); border-color: rgba(255, 215, 0,0.4); }
+        .about-card h2 { font-size: 1.2rem; font-weight: 700; color: #FFD700; margin-bottom: 1rem; }
         .about-card p, .about-card li { color: rgba(255,255,255,0.8); line-height: 1.7; font-size: 0.95rem; }
         .about-card ul { list-style: none; padding: 0; }
         .about-card ul li { padding: 0.35rem 0; }
         .locations { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-        .location { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3); color: #F59E0B; padding: 0.35rem 0.85rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+        .location { background: rgba(255, 215, 0,0.12); border: 1px solid rgba(255, 215, 0,0.3); color: #FFD700; padding: 0.35rem 0.85rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
         .mission-vision { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem; }
         .mission-vision h3 { font-size: 0.95rem; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 0.4rem; }
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem; }
         .stat { text-align: center; background: rgba(255,255,255,0.04); border-radius: 10px; padding: 1rem 0.5rem; }
-        .stat h3 { font-size: 1.6rem; font-weight: 800; color: #F59E0B; margin-bottom: 0.25rem; }
+        .stat h3 { font-size: 1.6rem; font-weight: 800; color: #FFD700; margin-bottom: 0.25rem; }
         .stat p { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
 
         @media (max-width: 600px) {
@@ -88,14 +88,14 @@
         }
 
         /* ---- FOOTER ---- */
-        .site-footer { background: rgba(5,10,20,0.98); border-top: 1px solid rgba(245,158,11,0.2); padding: 3rem 1.5rem 1.5rem; }
+        .site-footer { background: rgba(5,10,20,0.98); border-top: 1px solid rgba(255, 215, 0,0.2); padding: 3rem 1.5rem 1.5rem; }
         .footer-inner { max-width: 1100px; margin: 0 auto; }
         .footer-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2rem; margin-bottom: 2.5rem; }
-        .footer-col h4 { color: #F59E0B; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 1rem; }
+        .footer-col h4 { color: #FFD700; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 1rem; }
         .footer-col ul { list-style: none; padding: 0; }
         .footer-col ul li { margin-bottom: 0.5rem; }
         .footer-col ul li a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
-        .footer-col ul li a:hover { color: #F59E0B; }
+        .footer-col ul li a:hover { color: #FFD700; }
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 1.5rem; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.8rem; }
     </style>
 </head>

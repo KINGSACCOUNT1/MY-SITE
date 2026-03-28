@@ -1,0 +1,14 @@
+{% load static %}
+<picture>
+    {% if webp_src %}
+    <source srcset="{{ webp_src }}" type="image/webp">
+    {% endif %}
+    <img 
+        src="{{ fallback_src }}" 
+        alt="{{ alt }}" 
+        {% if css_class %}class="{{ css_class }}"{% endif %}
+        {% if loading %}loading="{{ loading }}"{% endif %}
+        {% if width %}width="{{ width }}"{% endif %}
+        {% if height %}height="{{ height }}"{% endif %}
+    >
+</picture>

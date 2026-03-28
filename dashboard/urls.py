@@ -16,6 +16,7 @@ urlpatterns = [
     path('investment-plans/', views.investment_plans, name='investment_plans'),
     path('certificate/', views.certificate, name='certificate'),
     path('partners/', views.partners, name='partners'),
+    path('global-presence/', views.global_presence, name='global_presence'),
     path('terms/', views.terms, name='terms'),
     path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
     path('news/', views.news, name='news'),

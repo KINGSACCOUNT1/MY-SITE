@@ -12,21 +12,23 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 if not SECRET_KEY:
     if DEBUG:
         # Only allow fallback in DEBUG mode for development
-        SECRET_KEY = 'django-insecure-dev-key-only'
+        import secrets
+        SECRET_KEY = secrets.token_urlsafe(50)
+        print("WARNING: Using random SECRET_KEY for development")
     else:
         from django.core.exceptions import ImproperlyConfigured
         raise ImproperlyConfigured(
             'SECRET_KEY environment variable must be set in production. '
             'Add SECRET_KEY to your .env file or environment variables.'
         )
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,elite-wealth-capita.com,www.elite-wealth-capita.com,.railway.app,.onrender.com,elitewealthcapita.uk,www.elitewealthcapita.uk').split(',')
 CSRF_TRUSTED_ORIGINS = ['https://*.railway.app', 'https://*.onrender.com', 'https://elite-wealth-capita.com', 'https://www.elite-wealth-capita.com', 'https://elitewealthcapita.uk', 'https://www.elitewealthcapita.uk']
@@ -48,14 +50,21 @@ INSTALLED_APPS = [
     
     # Third Party
     'corsheaders',
+    # 'rest_framework',  # Commented out - add djangorestframework to requirements.txt if needed
+    # 'rest_framework_simplejwt',  # Commented out - add djangorestframework-simplejwt to requirements.txt if needed
+    # 'drf_yasg',  # Commented out - add drf-yasg to requirements.txt if needed
+    # 'channels',  # Commented out - add channels to requirements.txt if needed
     
     # Local Apps
+    'core.apps.CoreConfig',  # Core utilities and performance tools
     'accounts.apps.AccountsConfig',
     'investments.apps.InvestmentsConfig',
     'dashboard.apps.DashboardConfig',
     'tasks.apps.TasksConfig',
     'kyc.apps.KycConfig',
     'notifications.apps.NotificationsConfig',
+    'messaging.apps.MessagingConfig',
+    'api.apps.ApiConfig',
 ]
 
 # Jazzmin Admin Settings
@@ -308,9 +317,12 @@ def dashboard_callback(request, context):
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.gzip.GZipMiddleware',  # GZip compression for performance
+    'django.middleware.cache.UpdateCacheMiddleware',  # Cache middleware (must be first after GZip)
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',  # Cache middleware (must be after Common)
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -338,7 +350,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'elite_wealth.wsgi.application'
-ASGI_APPLICATION = 'elite_wealth.asgi.application'
+# ASGI_APPLICATION = 'elite_wealth.asgi.application'  # Commented out - not using Channels
 
 
 # Database
@@ -388,14 +400,16 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = '/static/'
+# Support CDN for static files if configured
+STATIC_URL = os.getenv('CDN_URL', '/static/')
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 # Use CompressedStaticFilesStorage instead of Manifest version to avoid source map issues
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Media files (uploads)
-MEDIA_URL = '/media/'
+# Support CDN for media files if configured
+MEDIA_URL = os.getenv('CDN_MEDIA_URL', '/media/')
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
@@ -407,13 +421,29 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
-# Celery Configuration
-CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0')
-CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://localhost:6379/0')
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = TIME_ZONE
+# Celery Configuration - Commented out (not currently used)
+# Uncomment when you need background tasks like daily profit calculation
+# CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0')
+# CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://localhost:6379/0')
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_TIMEZONE = TIME_ZONE
+
+
+# Cache Configuration - Local Memory Cache (simple and fast for single instance)
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'elite-wealth-cache',
+        'TIMEOUT': 300,  # 5 minutes default
+    }
+}
+
+# Cache middleware settings
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 600  # 10 minutes for page caching
+CACHE_MIDDLEWARE_KEY_PREFIX = 'ewc_page'
 
 
 # Email Configuration (Zoho Mail SMTP)
@@ -446,7 +476,7 @@ LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
 
 # Session settings
-SESSION_COOKIE_AGE = 60 * 60 * 24 * 30  # 30 days
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7  # 7 days
 SESSION_SAVE_EVERY_REQUEST = True
 
 
@@ -459,8 +489,8 @@ if not DEBUG:
     SECURE_SSL_REDIRECT = False  # Render handles SSL at load balancer
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    CSRF_COOKIE_SAMESITE = 'Lax'  # Allow CSRF cookie for same-site requests
-    SESSION_COOKIE_SAMESITE = 'Lax'  # Allow session cookie for same-site requests
+    CSRF_COOKIE_SAMESITE = 'Strict'  # Allow CSRF cookie for same-site requests
+    SESSION_COOKIE_SAMESITE = 'Strict'  # Allow session cookie for same-site requests
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
@@ -482,3 +512,99 @@ MIN_DEPOSIT = 30
 MIN_WITHDRAWAL = 50
 REFERRAL_BONUS_PERCENT = 5
 
+# Wallet addresses are managed in Django admin (WalletAddress model)
+# Bybit is a payment partner only - no API integration
+
+
+# ===== REST Framework Configuration =====
+from datetime import timedelta
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+    ),
+    'DATETIME_FORMAT': '%Y-%m-%d %H:%M:%S',
+    'DATE_FORMAT': '%Y-%m-%d',
+}
+
+# JWT Configuration
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'UPDATE_LAST_LOGIN': True,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+}
+
+# Swagger/OpenAPI Configuration
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
+    'USE_SESSION_AUTH': False,
+    'JSON_EDITOR': True,
+    'SHOW_REQUEST_HEADERS': True,
+    'SUPPORTED_SUBMIT_METHODS': ['get', 'post', 'put', 'delete', 'patch'],
+}
+
+
+# ===== Django Channels Configuration =====
+# Commented out - Channels not installed
+# Uncomment when you add channels/channels-redis to requirements.txt
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             'hosts': [os.getenv('REDIS_URL', 'redis://127.0.0.1:6379/2')],
+#             'capacity': 1500,
+#             'expiry': 10,
+#         },
+#     },
+# }
+
+
+# ===== Payment Gateway Configuration =====
+# Stripe
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
+STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET', '')
+
+# PayPal
+PAYPAL_MODE = os.getenv('PAYPAL_MODE', 'sandbox')  # sandbox or live
+PAYPAL_CLIENT_ID = os.getenv('PAYPAL_CLIENT_ID', '')
+PAYPAL_CLIENT_SECRET = os.getenv('PAYPAL_CLIENT_SECRET', '')
+
+# Coinbase Commerce
+COINBASE_COMMERCE_API_KEY = os.getenv('COINBASE_COMMERCE_API_KEY', '')
+COINBASE_COMMERCE_WEBHOOK_SECRET = os.getenv('COINBASE_COMMERCE_WEBHOOK_SECRET', '')

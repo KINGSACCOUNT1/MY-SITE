@@ -156,13 +156,13 @@ class TestimonialPopup {
             padding: ${isMobile ? '10px' : '12px'};
             max-width: ${isMobile ? 'calc(100% - 20px)' : '300px'};
             box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(245, 158, 11, 0.2);
-            z-index: 9990;
+            z-index: 500;
             display: none;
             font-family: 'Inter', 'Roboto', arial, sans-serif;
             transform: translateY(20px);
             opacity: 0;
             transition: all 0.4s ease;
-            border-left: 3px solid #F59E0B;
+            border-left: 3px solid #FFD700;
         `;
         document.body.appendChild(div);
         this.popupElement = div;
@@ -193,18 +193,18 @@ class TestimonialPopup {
             <div style="display: flex; gap: ${isMobile ? '8px' : '10px'}; align-items: flex-start;">
                 <img src="${data.avatar}" 
                      alt="${data.name}" 
-                     style="width: ${isMobile ? '36px' : '42px'}; height: ${isMobile ? '36px' : '42px'}; border-radius: 50%; object-fit: cover; border: 2px solid #F59E0B; flex-shrink: 0;"
-                     onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(data.name)}&background=F59E0B&color=fff&size=42'">
+                     style="width: ${isMobile ? '36px' : '42px'}; height: ${isMobile ? '36px' : '42px'}; border-radius: 50%; object-fit: cover; border: 2px solid #FFD700; flex-shrink: 0;"
+                     onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(data.name)}&background=FFD700&color=000&size=42'">
                 <div style="flex: 1; min-width: 0;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span style="font-weight: 600; color: #fff; font-size: ${isMobile ? '0.8rem' : '0.85rem'};">${data.name}</span>
-                        <span style="color: #10B981; font-size: 0.65rem;">✓ Verified</span>
+                        <span style="color: #00A86B; font-size: 0.65rem;">✓ Verified</span>
                     </div>
                     <div style="font-size: 0.65rem; color: #94a3b8; margin: 2px 0;">📍 ${data.location}</div>
                     <div style="color: #fbbc04; font-size: 0.7rem; letter-spacing: 0;">${stars}</div>
                     <p style="color: #e2e8f0; font-size: ${isMobile ? '0.75rem' : '0.8rem'}; margin: 4px 0 0 0; line-height: 1.3;">"${data.text}"</p>
                     <div style="display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.65rem;">
-                        <span style="color: #10B981;">💰 ${data.investedAmount}</span>
+                        <span style="color: #00A86B;">💰 ${data.investedAmount}</span>
                         <span style="color: #64748b;">👥 ${investorCount}+</span>
                     </div>
                 </div>

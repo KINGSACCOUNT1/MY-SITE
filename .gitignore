@@ -120,6 +120,9 @@ deploy.bat
 *.backup
 *.old
 
+# Test files (keep only in proper test directories)
+test_settings.py
+
 # Debug/utility scripts
 check_templates.py
 check_templates_simple.py

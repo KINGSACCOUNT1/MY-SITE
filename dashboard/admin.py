@@ -58,9 +58,9 @@ class DisputeAdmin(admin.ModelAdmin):
 
     def status_badge(self, obj):
         colors = {
-            'pending': '#f59e0b',
+            'pending': '#FFD700',
             'under_review': '#3b82f6',
-            'resolved': '#10b981',
+            'resolved': '#00A86B',
             'closed': '#6b7280',
         }
         color = colors.get(obj.status, '#6b7280')

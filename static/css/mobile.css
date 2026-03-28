@@ -22,7 +22,7 @@ input[type="button"],
 
 /* Improve tap highlight for Android */
 * {
-    -webkit-tap-highlight-color: rgba(245, 158, 11, 0.2);
+    -webkit-tap-highlight-color: rgba(255, 215, 0, 0.2);
 }
 
 /* Prevent text size adjustment on orientation change */
@@ -93,7 +93,7 @@ select {
 
 /* Better select styling for mobile */
 select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23F59E0B' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23FFD700' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
     padding-right: 40px;
@@ -128,8 +128,8 @@ select:focus,
 textarea:focus,
 button:focus {
     outline: none;
-    border-color: #F59E0B;
-    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
+    border-color: #FFD700;
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
 }
 
 /* =================== MOBILE BUTTONS =================== */
@@ -153,8 +153,8 @@ button,
 
 /* Primary button */
 .btn-primary {
-    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-    color: #0a1628;
+    background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%);
+    color: #0A1F44;
     border: none;
     padding: 14px 28px;
     font-size: 1rem;
@@ -162,19 +162,19 @@ button,
 
 .btn-primary:active {
     transform: scale(0.98);
-    background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+    background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
 }
 
 /* Secondary button */
 .btn-secondary {
     background: transparent;
     color: #fff;
-    border: 2px solid #F59E0B;
+    border: 2px solid #FFD700;
     padding: 12px 26px;
 }
 
 .btn-secondary:active {
-    background: rgba(245, 158, 11, 0.1);
+    background: rgba(255, 215, 0, 0.1);
 }
 
 /* Full-width button on mobile */
@@ -266,13 +266,13 @@ button,
 
 .mobile-nav-link:hover,
 .mobile-nav-link:active {
-    background: rgba(245, 158, 11, 0.1);
-    color: #F59E0B;
+    background: rgba(255, 215, 0, 0.1);
+    color: #FFD700;
 }
 
 .mobile-nav-link.active {
-    background: rgba(245, 158, 11, 0.2);
-    color: #F59E0B;
+    background: rgba(255, 215, 0, 0.2);
+    color: #FFD700;
 }
 
 /* =================== MOBILE CARDS =================== */
@@ -339,7 +339,7 @@ button,
     table.mobile-stack tbody td::before {
         content: attr(data-label);
         font-weight: 600;
-        color: #F59E0B;
+        color: #FFD700;
     }
 }
 
@@ -701,7 +701,7 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     -webkit-text-fill-color: #fff !important;
-    -webkit-box-shadow: 0 0 0px 1000px #0f172a inset !important;
+    -webkit-box-shadow: 0 0 0px 1000px #0A1F44 inset !important;
     transition: background-color 5000s ease-in-out 0s;
     caret-color: #fff;
 }

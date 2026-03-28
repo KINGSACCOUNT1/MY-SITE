@@ -28,7 +28,7 @@ def calculate_daily_profits():
     from investments.models import Investment
     from notifications.models import Notification
     
-    active_investments = Investment.objects.filter(status='active')
+    active_investments = Investment.objects.filter(status='active').select_related('plan', 'user')
     credited_count = 0
     
     for investment in active_investments:
@@ -61,7 +61,7 @@ def check_completed_investments():
     from notifications.models import Notification
     
     now = timezone.now()
-    completed = Investment.objects.filter(status='active', end_date__lte=now)
+    completed = Investment.objects.filter(status='active', end_date__lte=now).select_related('plan', 'user')
     count = 0
     
     for investment in completed:

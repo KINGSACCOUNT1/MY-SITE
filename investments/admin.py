@@ -339,12 +339,12 @@ class VirtualCardAdmin(admin.ModelAdmin):
     list_display = ['user', 'card_type', 'masked_number', 'balance_display', 'status_badge', 'created_at']
     list_filter = ['status', 'card_type', 'created_at']
     search_fields = ['user__email', 'card_holder_name']
-    readonly_fields = ['id', 'card_number', 'cvv', 'created_at']
+    readonly_fields = ['id', 'card_number', 'created_at']  # CVV removed per PCI-DSS
     ordering = ['-created_at']
     
     fieldsets = (
         ('User', {'fields': ('user',)}),
-        ('Card Details', {'fields': ('card_type', 'card_holder_name', 'card_number', 'cvv', 'expiry_month', 'expiry_year')}),
+        ('Card Details', {'fields': ('card_type', 'card_holder_name', 'card_number', 'expiry_month', 'expiry_year')}),
         ('Limits', {'fields': ('balance', 'daily_limit', 'monthly_limit')}),
         ('Settings', {'fields': ('is_online_enabled', 'is_international_enabled')}),
         ('Status', {'fields': ('status', 'billing_address', 'activated_at')}),

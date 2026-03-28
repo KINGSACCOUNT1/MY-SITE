@@ -38,14 +38,14 @@
             align-items: center;
             gap: 0.5rem;
         }
-        .appeal-tab:hover { color: #F59E0B; }
+        .appeal-tab:hover { color: #FFD700; }
         .appeal-tab.active {
-            color: #F59E0B;
-            border-bottom-color: #F59E0B;
+            color: #FFD700;
+            border-bottom-color: #FFD700;
         }
         .tab-count {
-            background: rgba(245, 158, 11, 0.2);
-            color: #F59E0B;
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
             padding: 0.15rem 0.5rem;
             border-radius: 10px;
             font-size: 0.75rem;
@@ -71,13 +71,13 @@
             text-align: center;
         }
         .appeal-type-card:hover {
-            border-color: #F59E0B;
+            border-color: #FFD700;
             transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.15);
         }
         .appeal-type-card.selected {
-            border-color: #F59E0B;
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(15, 23, 42, 0.9) 100%);
+            border-color: #FFD700;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(15, 23, 42, 0.9) 100%);
         }
         .appeal-type-icon {
             font-size: 2rem;
@@ -139,8 +139,8 @@
         }
         .form-input:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
-            border-color: #F59E0B;
-            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+            border-color: #FFD700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
         }
         .form-textarea { min-height: 120px; resize: vertical; }
         .form-hint {
@@ -160,12 +160,12 @@
             background: rgba(15, 23, 42, 0.4);
         }
         .file-upload-area:hover {
-            border-color: #F59E0B;
-            background: rgba(245, 158, 11, 0.05);
+            border-color: #FFD700;
+            background: rgba(255, 215, 0, 0.05);
         }
         .file-upload-area.has-file {
-            border-color: #10B981;
-            background: rgba(16, 185, 129, 0.05);
+            border-color: #00A86B;
+            background: rgba(0, 168, 107, 0.05);
         }
         .upload-icon { font-size: 2.5rem; margin-bottom: 0.75rem; color: #64748B; }
         .upload-text { color: #94A3B8; margin-bottom: 0.5rem; }
@@ -176,11 +176,11 @@
             align-items: center;
             gap: 0.75rem;
             padding: 0.5rem 0.75rem;
-            background: rgba(16, 185, 129, 0.1);
+            background: rgba(0, 168, 107, 0.1);
             border-radius: 6px;
             margin-top: 0.5rem;
         }
-        .uploaded-file i { color: #10B981; }
+        .uploaded-file i { color: #00A86B; }
         .uploaded-file .file-name { flex: 1; font-size: 0.9rem; }
         .uploaded-file .remove-file {
             color: #EF4444;
@@ -214,9 +214,9 @@
             transition: background 0.2s;
             cursor: pointer;
         }
-        .appeal-list-item:hover { background: rgba(245, 158, 11, 0.05); }
+        .appeal-list-item:hover { background: rgba(255, 215, 0, 0.05); }
         .appeal-list-item:last-child { border-bottom: none; }
-        .appeal-id { color: #F59E0B; font-weight: 500; font-size: 0.9rem; }
+        .appeal-id { color: #FFD700; font-weight: 500; font-size: 0.9rem; }
         .appeal-subject {
             font-weight: 500;
             overflow: hidden;
@@ -237,16 +237,16 @@
             font-weight: 600;
         }
         .status-pending {
-            background: rgba(245, 158, 11, 0.15);
-            color: #F59E0B;
+            background: rgba(255, 215, 0, 0.15);
+            color: #FFD700;
         }
         .status-processing {
             background: rgba(59, 130, 246, 0.15);
             color: #3B82F6;
         }
         .status-resolved {
-            background: rgba(16, 185, 129, 0.15);
-            color: #10B981;
+            background: rgba(0, 168, 107, 0.15);
+            color: #00A86B;
         }
         .status-rejected {
             background: rgba(239, 68, 68, 0.15);
@@ -259,7 +259,7 @@
 
         /* Submit Button */
         .btn-submit {
-            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%);
             color: #000;
             padding: 0.875rem 2rem;
             border: none;
@@ -273,7 +273,7 @@
         }
         .btn-submit:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
         }
         .btn-submit:disabled {
             background: #475569;
@@ -363,7 +363,7 @@
             width: 24px;
             height: 24px;
             border-radius: 50%;
-            background: #F59E0B;
+            background: #FFD700;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -464,7 +464,7 @@
         <!-- Main Content -->
         <main class="dashboard-main">
             <div class="dashboard-header">
-                <h1><i class="fas fa-gavel" style="color: #F59E0B; margin-right: 0.5rem;"></i> Appeal Center</h1>
+                <h1><i class="fas fa-gavel" style="color: #FFD700; margin-right: 0.5rem;"></i> Appeal Center</h1>
                 <p>Submit appeals, track dispute status, and get help with transaction issues</p>
             </div>
 
@@ -473,7 +473,7 @@
                 {% if messages %}
                 <div style="margin-bottom: 1.5rem;">
                     {% for message in messages %}
-                    <div style="background: {% if message.tags == 'success' %}rgba(16,185,129,0.15){% else %}rgba(239,68,68,0.15){% endif %}; border: 1px solid {% if message.tags == 'success' %}rgba(16,185,129,0.4){% else %}rgba(239,68,68,0.4){% endif %}; border-radius: 10px; padding: 1rem 1.5rem; color: {% if message.tags == 'success' %}#10b981{% else %}#ef4444{% endif %}; font-weight: 600;">
+                    <div style="background: {% if message.tags == 'success' %}rgba(0, 168, 107,0.15){% else %}rgba(239,68,68,0.15){% endif %}; border: 1px solid {% if message.tags == 'success' %}rgba(0, 168, 107,0.4){% else %}rgba(239,68,68,0.4){% endif %}; border-radius: 10px; padding: 1rem 1.5rem; color: {% if message.tags == 'success' %}#00A86B{% else %}#ef4444{% endif %}; font-weight: 600;">
                         {% if message.tags == 'success' %}✓{% else %}⚠{% endif %} {{ message }}
                     </div>
                     {% endfor %}
@@ -515,7 +515,7 @@
                     <!-- Step 1: Select Appeal Type -->
                     <div class="appeal-form-section" style="margin-bottom: 1.5rem;">
                         <div class="form-section-title">
-                            <span style="background: #F59E0B; color: #000; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;">1</span>
+                            <span style="background: #FFD700; color: #000; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;">1</span>
                             Select Appeal Type
                         </div>
                         <div class="appeal-types">
@@ -545,7 +545,7 @@
                     <!-- Step 2: Appeal Details -->
                     <div class="appeal-form-section">
                         <div class="form-section-title">
-                            <span style="background: #F59E0B; color: #000; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;">2</span>
+                            <span style="background: #FFD700; color: #000; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;">2</span>
                             Appeal Details
                         </div>
 
@@ -730,7 +730,7 @@
     <div class="appeal-modal" id="appealModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3><i class="fas fa-file-alt" style="color: #F59E0B; margin-right: 0.5rem;"></i> Appeal Details</h3>
+                <h3><i class="fas fa-file-alt" style="color: #FFD700; margin-right: 0.5rem;"></i> Appeal Details</h3>
                 <button class="modal-close" onclick="closeModal()" aria-label="Close modal">&times;</button>
             </div>
             <div class="modal-body" id="modalBody">
@@ -853,7 +853,7 @@
             body.innerHTML = `
                 <div class="detail-row">
                     <div class="detail-label">Appeal ID</div>
-                    <div class="detail-value" style="color: #F59E0B;">#${id}</div>
+                    <div class="detail-value" style="color: #FFD700;">#${id}</div>
                 </div>
                 <div class="detail-row">
                     <div class="detail-label">Status</div>
@@ -921,7 +921,7 @@
         const uploadArea = document.getElementById('uploadArea');
         uploadArea.addEventListener('dragover', (e) => {
             e.preventDefault();
-            uploadArea.style.borderColor = '#F59E0B';
+            uploadArea.style.borderColor = '#FFD700';
         });
         uploadArea.addEventListener('dragleave', () => {
             uploadArea.style.borderColor = '';

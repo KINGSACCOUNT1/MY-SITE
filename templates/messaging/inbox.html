@@ -1,0 +1,77 @@
+{% extends 'dashboard-base.html' %}
+{% load humanize %}
+
+{% block title %}Inbox - Messaging{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <div class="card bg-dark border-gold">
+                <div class="card-header bg-dark border-bottom border-gold">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0 text-gold">
+                            <i class="fas fa-inbox me-2"></i>Inbox
+                        </h4>
+                        <a href="{% url 'messaging:send_message' %}" class="btn btn-gold btn-sm">
+                            <i class="fas fa-plus me-1"></i>New Message
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% if conversations %}
+                        <div class="list-group list-group-flush">
+                            {% for item in conversations %}
+                            <a href="{% url 'messaging:conversation_detail' item.conversation.id %}" 
+                               class="list-group-item list-group-item-action bg-darker border-gold-subtle mb-2 rounded">
+                                <div class="d-flex w-100 justify-content-between align-items-start">
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-user-circle fa-2x text-gold me-3"></i>
+                                            <div>
+                                                <h6 class="mb-0 text-white">
+                                                    {% for participant in item.other_participants %}
+                                                        {{ participant.get_full_name|default:participant.email }}
+                                                        {% if not forloop.last %}, {% endif %}
+                                                    {% endfor %}
+                                                </h6>
+                                                {% if item.conversation.subject %}
+                                                <small class="text-muted">{{ item.conversation.subject }}</small>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        {% if item.last_message %}
+                                        <p class="mb-1 text-light small">
+                                            {{ item.last_message.content|truncatewords:15 }}
+                                        </p>
+                                        <small class="text-muted">
+                                            <i class="far fa-clock me-1"></i>
+                                            {{ item.last_message.created_at|naturaltime }}
+                                        </small>
+                                        {% endif %}
+                                    </div>
+                                    {% if item.unread_count > 0 %}
+                                    <span class="badge bg-gold text-dark rounded-pill ms-3">
+                                        {{ item.unread_count }}
+                                    </span>
+                                    {% endif %}
+                                </div>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-inbox fa-4x text-muted mb-3"></i>
+                            <h5 class="text-muted">No messages yet</h5>
+                            <p class="text-muted">Start a conversation to connect with others</p>
+                            <a href="{% url 'messaging:send_message' %}" class="btn btn-gold">
+                                <i class="fas fa-plus me-1"></i>Send Your First Message
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

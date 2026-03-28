@@ -35,10 +35,10 @@
             font-size: 1.1rem;
             flex-shrink: 0;
         }
-        .log-icon.login    { background: rgba(16,185,129,0.15); }
+        .log-icon.login    { background: rgba(0, 168, 107,0.15); }
         .log-icon.logout   { background: rgba(100,116,139,0.15); }
         .log-icon.deposit  { background: rgba(59,130,246,0.15); }
-        .log-icon.withdraw { background: rgba(245,158,11,0.15); }
+        .log-icon.withdraw { background: rgba(255, 215, 0,0.15); }
         .log-icon.invest   { background: rgba(168,85,247,0.15); }
         .log-icon.kyc      { background: rgba(236,72,153,0.15); }
         .log-icon.password { background: rgba(239,68,68,0.15); }
@@ -79,9 +79,9 @@
             transition: all 0.2s;
         }
         .page-btn:hover, .page-btn.active {
-            background: #F59E0B;
-            border-color: #F59E0B;
-            color: #0f172a;
+            background: #FFD700;
+            border-color: #FFD700;
+            color: #0A1F44;
         }
     </style>
 </head>
@@ -130,11 +130,11 @@
                 {% if user.profile_image %}
                 <a href="{% url 'accounts:profile' %}" style="text-decoration:none;" aria-label="Profile">
                     <img src="{{ user.profile_image.url }}" alt="{{ user.full_name }}"
-                        style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #F59E0B;">
+                        style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #FFD700;">
                 </a>
                 {% else %}
                 <a href="{% url 'accounts:profile' %}" style="text-decoration:none;" aria-label="Profile">
-                    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#D97706);display:flex;align-items:center;justify-content:center;color:#0f172a;font-weight:700;font-size:0.9rem;">
+                    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#FFD700,#DAA520);display:flex;align-items:center;justify-content:center;color:#0A1F44;font-weight:700;font-size:0.9rem;">
                         {{ user.full_name|first|upper }}
                     </div>
                 </a>
@@ -173,7 +173,7 @@
             <div style="margin-bottom:1.5rem;">
                 {% for message in messages %}
                 <div style="padding:1rem;border-radius:0.5rem;margin-bottom:0.5rem;
-                    {% if message.tags == 'success' %}background:rgba(16,185,129,0.2);border:1px solid #10B981;color:#10B981;
+                    {% if message.tags == 'success' %}background:rgba(0, 168, 107,0.2);border:1px solid #00A86B;color:#00A86B;
                     {% elif message.tags == 'error' %}background:rgba(239,68,68,0.2);border:1px solid #EF4444;color:#EF4444;
                     {% else %}background:rgba(59,130,246,0.2);border:1px solid #3B82F6;color:#3B82F6;{% endif %}">
                     {{ message }}

@@ -7,12 +7,12 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#0a1628">
+    <meta name="theme-color" content="#0A1F44">
     <meta name="format-detection" content="telephone=no">
     <title>{% block title %}Elite Wealth Capital{% endblock %}</title>
     
     <!-- Content Security Policy Meta Tag -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com https://cdnjs.cloudflare.com https://translate.google.com https://translate.googleapis.com https://embed.tawk.to https://va.tawk.to; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://embed.tawk.to; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://api.coingecko.com https://va.tawk.to wss://va.tawk.to; frame-src 'self' https://embed.tawk.to; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com https://cdnjs.cloudflare.com https://translate.google.com https://translate.googleapis.com https://embed.tawk.to https://va.tawk.to; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://embed.tawk.to; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://va.tawk.to wss://va.tawk.to; frame-src 'self' https://embed.tawk.to; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Elite Wealth Capital - Premier cryptocurrency investment platform. Invest in digital assets, real estate, and agricultural commodities with daily returns.">
@@ -23,8 +23,10 @@
     <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE">
     
     <!-- Preconnect for performance optimization -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="dns-prefetch" href="https://api.coingecko.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="dns-prefetch" href="https://consent.cookiebot.com">
     
     <!-- Open Graph / Social Media -->
@@ -217,7 +219,7 @@
         </div>
     </nav>
     {% endif %}
-
+    
     <!-- Messages -->
     {% if messages %}
     <div class="container mt-3">
@@ -289,12 +291,22 @@
     <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/69c1f2a729e9681c3d64de5d/1jkepnodo';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
+        try {
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/69c1f2a729e9681c3d64de5d/1jkepnodo';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            
+            // Add error handler for failed script loading
+            s1.onerror = function() {
+                console.error('Tawk.to widget failed to load');
+            };
+            
+            s0.parentNode.insertBefore(s1,s0);
+        } catch(e) {
+            console.error('Tawk.to initialization error:', e);
+        }
     })();
     </script>
     

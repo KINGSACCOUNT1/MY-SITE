@@ -19,6 +19,16 @@ COPY . .
 RUN mkdir -p /app/media /app/staticfiles
 RUN chmod +x /app/entrypoint.sh
 
+# Create non-root user
+RUN useradd -m -u 1000 appuser && \
+    chown -R appuser:appuser /app
+
+# Switch to non-root user
+USER appuser
+
 EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD python -c "import requests; requests.get('http://localhost:8000/', timeout=2)" || exit 1
 
 ENTRYPOINT ["/app/entrypoint.sh"]

@@ -96,20 +96,20 @@
 
             <!-- Referral Link Card -->
             <div class="glass-card" style="padding: 2rem; margin-bottom: 2rem;">
-                <h3 style="margin-bottom: 1rem; color: #F59E0B;">🔗 Your Referral Link</h3>
+                <h3 style="margin-bottom: 1rem; color: #FFD700;">🔗 Your Referral Link</h3>
                 <p style="color: #94a3b8; margin-bottom: 1rem;">Share this link with friends and earn $30 when they join!</p>
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
                     <input type="text" id="referralLink" 
                         value="{{ request.build_absolute_uri|slice:':-1' }}{% url 'signup' %}?ref={{ referral_code }}" 
                         readonly
-                        style="flex: 1; min-width: 250px; padding: 0.75rem 1rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #fff; font-family: monospace;">
+                        style="flex: 1; min-width: 250px; padding: 0.75rem 1rem; background: #0A1F44; border: 1px solid #334155; border-radius: 8px; color: #fff; font-family: monospace;">
                     <button onclick="copyReferralLink()" class="btn-primary" style="padding: 0.75rem 1.5rem;">
                         📋 Copy Link
                     </button>
                 </div>
                 <p style="color: #64748b; font-size: 0.875rem; margin-top: 0.75rem;">
-                    Referral Code: <strong style="color: #F59E0B;">{{ referral_code }}</strong> &nbsp;|&nbsp;
-                    <a href="{% url 'referral_leaderboard' %}" style="color:#F59E0B;text-decoration:none;">🏆 View Leaderboard</a>
+                    Referral Code: <strong style="color: #FFD700;">{{ referral_code }}</strong> &nbsp;|&nbsp;
+                    <a href="{% url 'referral_leaderboard' %}" style="color:#FFD700;text-decoration:none;">🏆 View Leaderboard</a>
                 </p>
             </div>
 

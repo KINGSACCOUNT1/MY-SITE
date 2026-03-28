@@ -102,12 +102,12 @@
                             {% for dep in deposits %}
                             <tr>
                                 <td>{{ dep.created_at|date:"M d, Y H:i" }}</td>
-                                <td><span class="badge badge-deposit" style="background: #10B981; color: white; padding: 0.25rem 0.5rem; border-radius: 4px;">Deposit</span></td>
-                                <td style="color: #10B981;">+${{ dep.amount|floatformat:2 }}</td>
+                                <td><span class="badge badge-deposit" style="background: #00A86B; color: white; padding: 0.25rem 0.5rem; border-radius: 4px;">Deposit</span></td>
+                                <td style="color: #00A86B;">+${{ dep.amount|floatformat:2 }}</td>
                                 <td>
                                     <span class="status-badge" style="
-                                        {% if dep.status == 'confirmed' %}background: rgba(16, 185, 129, 0.2); color: #10B981;
-                                        {% elif dep.status == 'pending' %}background: rgba(245, 158, 11, 0.2); color: #F59E0B;
+                                        {% if dep.status == 'confirmed' %}background: rgba(0, 168, 107, 0.2); color: #00A86B;
+                                        {% elif dep.status == 'pending' %}background: rgba(255, 215, 0, 0.2); color: #FFD700;
                                         {% else %}background: rgba(239, 68, 68, 0.2); color: #EF4444;{% endif %}
                                         padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">
                                         {{ dep.status|title }}
@@ -135,9 +135,9 @@
                                 <td style="color: #EF4444;">-${{ wd.amount|floatformat:2 }}</td>
                                 <td>
                                     <span class="status-badge" style="
-                                        {% if wd.status == 'completed' %}background: rgba(16, 185, 129, 0.2); color: #10B981;
+                                        {% if wd.status == 'completed' %}background: rgba(0, 168, 107, 0.2); color: #00A86B;
                                         {% elif wd.status == 'approved' %}background: rgba(59, 130, 246, 0.2); color: #3B82F6;
-                                        {% elif wd.status == 'pending' %}background: rgba(245, 158, 11, 0.2); color: #F59E0B;
+                                        {% elif wd.status == 'pending' %}background: rgba(255, 215, 0, 0.2); color: #FFD700;
                                         {% else %}background: rgba(239, 68, 68, 0.2); color: #EF4444;{% endif %}
                                         padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">
                                         {{ wd.status|title }}
@@ -165,9 +165,9 @@
                                 <td style="color: #3B82F6;">-${{ inv.amount|floatformat:2 }}</td>
                                 <td>
                                     <span class="status-badge" style="
-                                        {% if inv.status == 'active' %}background: rgba(16, 185, 129, 0.2); color: #10B981;
+                                        {% if inv.status == 'active' %}background: rgba(0, 168, 107, 0.2); color: #00A86B;
                                         {% elif inv.status == 'completed' %}background: rgba(59, 130, 246, 0.2); color: #3B82F6;
-                                        {% else %}background: rgba(245, 158, 11, 0.2); color: #F59E0B;{% endif %}
+                                        {% else %}background: rgba(255, 215, 0, 0.2); color: #FFD700;{% endif %}
                                         padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">
                                         {{ inv.status|title }}
                                     </span>

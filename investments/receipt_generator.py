@@ -17,12 +17,12 @@ class ReceiptGenerator:
     """Generate professional PDF receipts for transactions"""
     
     # Brand colors
-    GOLD = HexColor('#F59E0B')
-    DARK_BLUE = HexColor('#0f172a')
+    GOLD = HexColor('#FFD700')
+    DARK_BLUE = HexColor('#0A1F44')
     LIGHT_BLUE = HexColor('#1e3a8a')
     WHITE = HexColor('#ffffff')
     GRAY = HexColor('#94a3b8')
-    GREEN = HexColor('#10B981')
+    GREEN = HexColor('#00A86B')
     RED = HexColor('#EF4444')
     
     def __init__(self):
@@ -87,7 +87,7 @@ class ReceiptGenerator:
             'completed': self.GREEN,
             'confirmed': self.GREEN,
             'approved': self.GREEN,
-            'pending': HexColor('#F59E0B'),
+            'pending': HexColor('#FFD700'),
             'processing': HexColor('#3B82F6'),
             'rejected': self.RED,
             'failed': self.RED,

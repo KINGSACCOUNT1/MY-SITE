@@ -35,12 +35,12 @@ class SecurityHeadersMiddleware:
         # Content-Security-Policy Header
         response['Content-Security-Policy'] = (
             "default-src 'self'; "
-            "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com https://cdnjs.cloudflare.com https://consent.cookiebot.com https://translate.google.com https://translate.googleapis.com https://www.google-analytics.com; "
-            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; "
+            "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com https://cdnjs.cloudflare.com https://consent.cookiebot.com https://translate.google.com https://translate.googleapis.com https://www.google-analytics.com https://embed.tawk.to https://va.tawk.to; "
+            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://embed.tawk.to; "
             "img-src 'self' data: https: blob:; "
             "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; "
-            "connect-src 'self' https://api.coingecko.com https://www.google-analytics.com; "
-            "frame-src 'self'; "
+            "connect-src 'self' https://www.google-analytics.com https://va.tawk.to wss://va.tawk.to; "
+            "frame-src 'self' https://embed.tawk.to; "
             "worker-src blob: 'self'; "
             "object-src 'none'; "
             "base-uri 'self'; "

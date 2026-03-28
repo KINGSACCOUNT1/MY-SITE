@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login - Elite Wealth Capital | Access Your Account{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script defer src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="{% static 'css/style.css?v=20260308' %}">
+<link rel="stylesheet" href="{% static 'css/auth-revamp.css' %}">
+<link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+
+<!-- Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L35DKWMCL2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-L35DKWMCL2');
+</script>
+{% endblock %}
+
+{% block content %}
+<body class="auth-page-revamped">
+
+    <div class="auth-split-container">
+        <!-- Visual Side (Left) -->
+        <div class="auth-visual-side">
+            <!-- Back Home Absolute -->
+            <a href="{% url 'home' %}"
+                style="position: absolute; top: 40px; left: 40px; color: white; text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 500; opacity: 0.8; transition: 0.3s; z-index: 10;">
+                <i data-lucide="arrow-left" style="width: 20px;"></i> Back to Home
+            </a>
+
+            <div class="auth-brand-large">
+                <img src="{% static 'images/logo.webp' %}" alt="Elite Wealth Capital" width="40" height="40">
+                <h1>Welcome<br>Back</h1>
+            </div>
+
+            <p style="font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,0.8); max-width: 500px;">
+                Access your investment dashboard and track your portfolio performance in real-time.
+            </p>
+
+            <div style="margin-top: 3rem; display: flex; gap: 2rem;">
+                <div>
+                    <h3 style="color: #FFD700; font-size: 1.5rem; margin-bottom: 0.5rem;">$127M+</h3>
+                    <p style="color: rgba(255,255,255,0.6);">Assets Managed</p>
+                </div>
+                <div>
+                    <h3 style="color: #00A86B; font-size: 1.5rem; margin-bottom: 0.5rem;">50K+</h3>
+                    <p style="color: rgba(255,255,255,0.6);">Active Investors</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Side (Right) -->
+        <div class="auth-form-side">
+            <div class="auth-form-container">
+                <h2 class="auth-form-title">Sign In to Your Account</h2>
+                <p class="auth-form-subtitle">Enter your credentials to access your dashboard</p>
+
+                {% if messages %}
+                <div style="margin-bottom: 1.5rem;">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" style="padding: 1rem; border-radius: 8px; margin-bottom: 1rem; 
+                         background: {% if message.tags == 'error' %}rgba(239, 68, 68, 0.1); border: 1px solid #EF4444; color: #FCA5A5;{% else %}rgba(0, 168, 107, 0.1); border: 1px solid #00A86B; color: #6EE7B7;{% endif %}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <form method="POST" class="auth-form">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-icon-wrapper">
+                            <i data-lucide="mail" class="input-icon"></i>
+                            <input type="email" name="email" id="email" 
+                                   placeholder="Enter your email" required 
+                                   value="{{ form.email.value|default:'' }}">
+                        </div>
+                        {% if form.email.errors %}
+                        <span class="error-text">{{ form.email.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-icon-wrapper">
+                            <i data-lucide="lock" class="input-icon"></i>
+                            <input type="password" name="password" id="password" 
+                                   placeholder="Enter your password" required>
+                            <button type="button" class="toggle-password" onclick="togglePassword('password', this)">
+                                <i data-lucide="eye"></i>
+                            </button>
+                        </div>
+                        {% if form.password.errors %}
+                        <span class="error-text">{{ form.password.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" name="remember_me" id="remember_me">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="{% url 'forgot_password' %}" style="color: #FFD700; text-decoration: none; font-size: 0.9rem;">
+                            Forgot Password?
+                        </a>
+                    </div>
+
+                    <button type="submit" class="auth-submit-btn">
+                        Sign In
+                        <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+                    </button>
+                </form>
+
+                <div class="auth-divider">
+                    <span>New to Elite Wealth Capital?</span>
+                </div>
+
+                <a href="{% url 'signup' %}" class="auth-secondary-btn">
+                    Create New Account
+                    <i data-lucide="user-plus" style="width: 18px; height: 18px;"></i>
+                </a>
+
+                <p class="auth-footer-text">
+                    By signing in, you agree to our 
+                    <a href="{% url 'terms' %}">Terms of Service</a> and 
+                    <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
+        // Toggle password visibility
+        function togglePassword(inputId, button) {
+            const input = document.getElementById(inputId);
+            const icon = button.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.setAttribute('data-lucide', 'eye-off');
+            } else {
+                input.type = 'password';
+                icon.setAttribute('data-lucide', 'eye');
+            }
+            
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+    </script>
+
+</body>
+{% endblock %}

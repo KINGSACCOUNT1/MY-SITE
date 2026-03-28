@@ -7,8 +7,8 @@
 const chartColors = {
     primary: '#6366f1',
     secondary: '#8b5cf6',
-    success: '#10b981',
-    warning: '#f59e0b',
+    success: '#00A86B',
+    warning: '#FFD700',
     danger: '#ef4444',
     info: '#3b82f6',
     gradient1: ['rgba(99, 102, 241, 0.8)', 'rgba(99, 102, 241, 0.1)'],

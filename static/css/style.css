@@ -25,13 +25,13 @@
     --accent-blue: #3B82F6;
     --accent-cyan: #06b6d4;
     --accent-purple: #8B5CF6;
-    --accent-green: #10b981;
-    --accent-gold: #F59E0B;
+    --accent-green: #00A86B;
+    --accent-gold: #FFD700;
     --accent-red: #ef4444;
 
     /* Gradients */
     --gradient-accent: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
-    --gradient-gold: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    --gradient-gold: linear-gradient(135deg, #FFD700 0%, #DAA520 100%);
     --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
 
     /* Shadows */
@@ -56,7 +56,7 @@ html {
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: visible;
     color: var(--text-white);
 }
 
@@ -101,7 +101,7 @@ body.main-site::before {
 
 /* === NAVIGATION === */
 .navbar {
-    background: rgba(10, 22, 40, 0.95);
+    background: rgba(10, 31, 68, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -958,7 +958,7 @@ section {
 
 /* === FOOTER === */
 .footer {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background: linear-gradient(135deg, #0A1F44 0%, #1e293b 100%);
     padding: 60px 0 30px;
     border-top: 1px solid var(--glass-border);
 }
@@ -1220,8 +1220,8 @@ section {
     padding-left: 3rem;
 }
 
-.bg-gradient-hero {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+.bg-gradient-navy {
+    background: linear-gradient(135deg, #0A1F44 0%, #1e293b 100%);
 }
 
 /* === FORMS === */
@@ -1359,7 +1359,7 @@ footer a:hover {
 
 .crypto-symbol {
     font-weight: 700;
-    color: var(--accent-gold);
+    color: #FFD700;
 }
 
 .crypto-price {
@@ -1373,8 +1373,8 @@ footer a:hover {
 }
 
 .crypto-change.positive {
-    color: #10b981;
-    background: rgba(16, 185, 129, 0.1);
+    color: #00A86B;
+    background: rgba(0, 168, 107, 0.1);
 }
 
 .crypto-change.negative {
@@ -1781,7 +1781,7 @@ footer a:hover {
 
 .auth-background {
     min-height: 100vh;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    background: linear-gradient(135deg, #0A1F44 0%, #1e293b 50%, #0A1F44 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2170,7 +2170,7 @@ footer a:hover {
 }
 
 .badge-warning {
-    background: rgba(245, 158, 11, 0.2);
+    background: rgba(255, 215, 0, 0.2);
     color: var(--accent-gold);
 }
 
@@ -2685,7 +2685,7 @@ footer a:hover {
    ============================================ */
 
 .bg-gradient-navy {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background: linear-gradient(135deg, #0A1F44 0%, #1e293b 100%);
 }
 
 /* ============================================
@@ -2700,7 +2700,7 @@ footer a:hover {
 
 .dashboard-site {
     min-height: 100vh;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background: linear-gradient(135deg, #0A1F44 0%, #1e293b 100%);
 }
 
 .dashboard-main {
@@ -2925,12 +2925,12 @@ footer a:hover {
 .status-badge.active,
 .status-check,
 .status-open {
-    background: rgba(16, 185, 129, 0.2);
+    background: rgba(0, 168, 107, 0.2);
     color: var(--accent-green);
 }
 
 .status-badge.pending {
-    background: rgba(245, 158, 11, 0.2);
+    background: rgba(255, 215, 0, 0.2);
     color: var(--accent-gold);
 }
 

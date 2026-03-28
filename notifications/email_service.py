@@ -122,9 +122,9 @@ Elite Wealth Capital Admin Alerts
     
     html_message = f"""
     <html>
-    <body style="font-family: Arial, sans-serif; background-color: #0f172a; color: #fff; padding: 20px;">
-        <div style="max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 12px; padding: 30px; border: 1px solid #334155;">
-            <h2 style="color: #F59E0B; margin-top: 0;">🔔 New Deposit Pending Verification</h2>
+    <body style="font-family: Arial, sans-serif; background-color: #0A1F44; color: #fff; padding: 20px;">
+        <div style="max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #1e293b 0%, #0A1F44 100%); border-radius: 12px; padding: 30px; border: 1px solid #334155;">
+            <h2 style="color: #FFD700; margin-top: 0;">🔔 New Deposit Pending Verification</h2>
             
             <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
                 <tr>
@@ -137,7 +137,7 @@ Elite Wealth Capital Admin Alerts
                 </tr>
                 <tr>
                     <td style="padding: 10px; border-bottom: 1px solid #334155; color: #94a3b8;">Amount:</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #334155; color: #10b981; font-weight: bold; font-size: 18px;">${deposit.amount:,.2f}</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #334155; color: #00A86B; font-weight: bold; font-size: 18px;">${deposit.amount:,.2f}</td>
                 </tr>
                 <tr>
                     <td style="padding: 10px; border-bottom: 1px solid #334155; color: #94a3b8;">Crypto:</td>
@@ -149,7 +149,7 @@ Elite Wealth Capital Admin Alerts
                 </tr>
                 <tr>
                     <td style="padding: 10px; border-bottom: 1px solid #334155; color: #94a3b8;">Screenshot:</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #334155; color: {'#10b981' if deposit.proof_image else '#ef4444'};">{'✅ Attached' if deposit.proof_image else '❌ Not provided'}</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #334155; color: {'#00A86B' if deposit.proof_image else '#ef4444'};">{'✅ Attached' if deposit.proof_image else '❌ Not provided'}</td>
                 </tr>
                 <tr>
                     <td style="padding: 10px; color: #94a3b8;">Submitted:</td>
@@ -158,7 +158,7 @@ Elite Wealth Capital Admin Alerts
             </table>
             
             <a href="https://elitewealthcapita.uk/admin/investments/deposit/{deposit.id}/change/" 
-               style="display: inline-block; background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); color: #000; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 20px;">
+               style="display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%); color: #000; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 20px;">
                 ✓ Verify Deposit in Admin Panel
             </a>
             
@@ -202,8 +202,8 @@ Elite Wealth Capital Admin Alerts
     
     html_message = f"""
     <html>
-    <body style="font-family: Arial, sans-serif; background-color: #0f172a; color: #fff; padding: 20px;">
-        <div style="max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 12px; padding: 30px; border: 1px solid #334155;">
+    <body style="font-family: Arial, sans-serif; background-color: #0A1F44; color: #fff; padding: 20px;">
+        <div style="max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #1e293b 0%, #0A1F44 100%); border-radius: 12px; padding: 30px; border: 1px solid #334155;">
             <h2 style="color: #ef4444; margin-top: 0;">💸 New Withdrawal Request</h2>
             
             <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
@@ -230,7 +230,7 @@ Elite Wealth Capital Admin Alerts
             </table>
             
             <a href="https://elitewealthcapita.uk/admin/investments/withdrawal/{withdrawal.id}/change/" 
-               style="display: inline-block; background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); color: #000; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 20px;">
+               style="display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%); color: #000; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 20px;">
                 ✓ Process Withdrawal
             </a>
             
@@ -300,20 +300,20 @@ Elite Wealth Capital Team
     
     html_message = f"""
     <html>
-    <body style="font-family: Arial, sans-serif; background-color: #0f172a; color: #fff; padding: 20px;">
-        <div style="max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 12px; padding: 30px; border: 1px solid #334155;">
+    <body style="font-family: Arial, sans-serif; background-color: #0A1F44; color: #fff; padding: 20px;">
+        <div style="max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #1e293b 0%, #0A1F44 100%); border-radius: 12px; padding: 30px; border: 1px solid #334155;">
             <img src="https://elitewealthcapita.uk/static/images/logo.webp" alt="Elite Wealth Capital" style="height: 50px; margin-bottom: 20px;">
             
-            <h2 style="color: #10b981; margin-top: 0;">✅ Deposit Confirmed!</h2>
+            <h2 style="color: #00A86B; margin-top: 0;">✅ Deposit Confirmed!</h2>
             
             <p style="color: #94a3b8;">Dear {deposit.user.full_name or 'Valued Investor'},</p>
             <p style="color: #fff;">Great news! Your deposit has been confirmed and credited to your account.</p>
             
-            <div style="background: #0f172a; border-radius: 8px; padding: 20px; margin: 20px 0; border: 1px solid #334155;">
+            <div style="background: #0A1F44; border-radius: 8px; padding: 20px; margin: 20px 0; border: 1px solid #334155;">
                 <table style="width: 100%;">
                     <tr>
                         <td style="color: #94a3b8; padding: 5px 0;">Amount:</td>
-                        <td style="color: #10b981; font-weight: bold; text-align: right;">${deposit.amount:,.2f}</td>
+                        <td style="color: #00A86B; font-weight: bold; text-align: right;">${deposit.amount:,.2f}</td>
                     </tr>
                     <tr>
                         <td style="color: #94a3b8; padding: 5px 0;">Crypto:</td>
@@ -321,13 +321,13 @@ Elite Wealth Capital Team
                     </tr>
                     <tr>
                         <td style="color: #94a3b8; padding: 5px 0;">New Balance:</td>
-                        <td style="color: #F59E0B; font-weight: bold; text-align: right;">${deposit.user.balance:,.2f}</td>
+                        <td style="color: #FFD700; font-weight: bold; text-align: right;">${deposit.user.balance:,.2f}</td>
                     </tr>
                 </table>
             </div>
             
             <a href="https://elitewealthcapita.uk/invest/" 
-               style="display: inline-block; background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); color: #000; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">
+               style="display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%); color: #000; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">
                 Start Investing Now →
             </a>
             

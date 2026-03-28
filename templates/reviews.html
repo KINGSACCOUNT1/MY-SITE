@@ -1,564 +1,789 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Reviews - Elite Wealth Capital</title>
-    <meta name="description" content="Read customer reviews and testimonials from Elite Wealth Capital investors worldwide. See why over 50,000 investors trust us.">
-    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    
-    <!-- Schema.org Review Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FinancialService",
-        "name": "Elite Wealth Capital",
-        "url": "https://elite-wealth-capita.com",
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "reviewCount": "2847",
-            "bestRating": "5",
-            "worstRating": "1"
+    <title>Client Reviews - Elite Wealth Capital</title>
+    <link rel="icon" type="image/webp" href="{% static 'images/logo.webp' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css?v=20260308' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css?v=20260308' %}">
+    <link rel="stylesheet" href="{% static 'css/glassmorphism-theme.css?v=20260308' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile.css?v=20260320' %}">
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
         }
-    }
     </script>
+    <script async type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f8fafc;
-            min-height: 100vh;
-            color: #333;
+        :root {
+            --navy: #0A1F44;
+            --gold: #FFD700;
+            --emerald: #00A86B;
+            --card-bg: rgba(20, 20, 20, 0.85);
         }
-        
-        /* Navigation */
-        .navbar {
-            background: rgba(15, 25, 38, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo img { height: 40px; }
-        .logo span { color: #fff; font-weight: 700; font-size: 1.25rem; }
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { color: #94a3b8; text-decoration: none; font-weight: 500; transition: color 0.3s; }
-        .nav-links a:hover { color: #3b82f6; }
-        
-        /* Page Header */
-        .page-header {
-            background: linear-gradient(135deg, #0f1926 0%, #1e293b 100%);
-            padding: 140px 0 80px;
-            text-align: center;
-            color: white;
-        }
-        .page-header h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .page-header p { color: #94a3b8; font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
-        
-        /* Rating Summary */
-        .rating-summary {
-            max-width: 800px;
-            margin: -40px auto 40px;
-            background: white;
+
+        /* Rating Summary Styles */
+        .rating-summary-card {
+            background: linear-gradient(135deg, var(--navy), #0d2759);
+            border: 2px solid var(--gold);
             border-radius: 16px;
-            padding: 30px 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
-        }
-        .overall-rating {
+            padding: 2.5rem;
+            margin-bottom: 2rem;
             text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
-        .rating-number {
-            font-size: 4rem;
-            font-weight: 800;
-            color: #1e293b;
-            line-height: 1;
-        }
-        .stars {
+
+        .rating-hero {
             display: flex;
-            gap: 4px;
+            align-items: center;
             justify-content: center;
-            margin: 10px 0;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
         }
-        .star { width: 24px; height: 24px; fill: #fbbf24; }
-        .star.empty { fill: #e2e8f0; }
-        .total-reviews {
-            color: #64748b;
-            font-size: 0.9rem;
+
+        .rating-number {
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--gold);
+            line-height: 1;
+            text-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
         }
-        .rating-breakdown {
-            flex: 1;
-        }
-        .rating-bar {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 8px;
-        }
-        .rating-bar span { width: 50px; font-size: 0.9rem; color: #64748b; }
-        .bar-container {
-            flex: 1;
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #fbbf24, #f59e0b);
-            border-radius: 4px;
-        }
-        .bar-count { width: 40px; font-size: 0.85rem; color: #94a3b8; }
-        
-        /* Reviews Section */
-        .reviews-section {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px 80px;
-        }
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        .section-header h2 {
-            font-size: 1.5rem;
-            color: #1e293b;
-        }
-        .filter-select {
-            padding: 10px 20px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            background: white;
-        }
-        
-        /* Review Cards */
-        .reviews-grid {
+
+        .rating-stars {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            align-items: center;
+            gap: 0.5rem;
         }
-        .review-card {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
+        .rating-stars-display {
+            font-size: 2.5rem;
+            color: var(--gold);
+            letter-spacing: 0.25rem;
         }
-        .review-header {
+
+        .rating-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        .rating-count {
+            color: var(--emerald);
+            font-weight: 600;
+        }
+
+        /* Filter Controls */
+        .filter-section {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
-        .reviewer {
+
+        .filter-dropdown {
+            padding: 0.75rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: #fff;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-dropdown:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
+
+        /* Reviews Grid */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .review-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.2);
+        }
+
+        .review-header {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
+
         .reviewer-avatar {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            font-size: 1.5rem;
             font-weight: 700;
-            font-size: 1.2rem;
+            color: #fff;
+            flex-shrink: 0;
+            border: 3px solid var(--gold);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
-        .reviewer-info h4 {
-            font-size: 1rem;
-            color: #1e293b;
-            margin-bottom: 3px;
+
+        .avatar-1 { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .avatar-2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .avatar-3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .avatar-4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .avatar-5 { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .avatar-6 { background: linear-gradient(135deg, #30cfd0, #330867); }
+        .avatar-7 { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+        .avatar-8 { background: linear-gradient(135deg, #ff9a9e, #fecfef); }
+        .avatar-9 { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+        .avatar-10 { background: linear-gradient(135deg, #ff6e7f, #bfe9ff); }
+        .avatar-11 { background: linear-gradient(135deg, #e0c3fc, #8ec5fc); }
+        .avatar-12 { background: linear-gradient(135deg, #f8b195, #f67280); }
+        .avatar-13 { background: linear-gradient(135deg, #c471f5, #fa71cd); }
+        .avatar-14 { background: linear-gradient(135deg, #96e6a1, #d4fc79); }
+        .avatar-15 { background: linear-gradient(135deg, #84fab0, #8fd3f4); }
+
+        .reviewer-info h3 {
+            margin: 0 0 0.25rem 0;
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 600;
         }
-        .reviewer-meta {
-            font-size: 0.85rem;
-            color: #94a3b8;
-        }
-        .review-rating {
+
+        .reviewer-location {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
             display: flex;
-            gap: 2px;
+            align-items: center;
+            gap: 0.25rem;
         }
-        .review-rating .star { width: 18px; height: 18px; }
-        .review-content {
-            color: #475569;
+
+        .review-rating {
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1rem;
+        }
+
+        .review-text {
+            color: rgba(255, 255, 255, 0.85);
             line-height: 1.7;
-            margin-bottom: 15px;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            font-size: 0.95rem;
         }
+
+        .investment-mention {
+            color: var(--emerald);
+            font-weight: 600;
+        }
+
+        .plan-mention {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
         .review-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 15px;
-            border-top: 1px solid #f1f5f9;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
+
         .verified-badge {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.85rem;
-            color: #059669;
-        }
-        .verified-badge svg { width: 16px; height: 16px; fill: #059669; }
-        .helpful-btn {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 8px 15px;
-            border: 1px solid #e2e8f0;
-            background: white;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            color: #64748b;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .helpful-btn:hover {
-            background: #f8fafc;
-            border-color: #3b82f6;
-            color: #3b82f6;
-        }
-        .helpful-btn svg { width: 16px; height: 16px; fill: currentColor; }
-        
-        /* Pagination */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 40px;
-        }
-        .page-btn {
-            padding: 10px 15px;
-            border: 1px solid #e2e8f0;
-            background: white;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .page-btn:hover, .page-btn.active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            padding: 60px 20px;
-            text-align: center;
-            color: white;
-        }
-        .cta-section h2 { font-size: 2rem; margin-bottom: 15px; }
-        .cta-section p { margin-bottom: 25px; opacity: 0.9; max-width: 500px; margin-left: auto; margin-right: auto; }
-        .cta-btn {
-            display: inline-block;
-            padding: 15px 40px;
-            background: white;
-            color: #3b82f6;
+            background: linear-gradient(135deg, var(--emerald), #00875c);
+            color: #fff;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
             font-weight: 600;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: transform 0.3s;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            box-shadow: 0 4px 8px rgba(0, 168, 107, 0.2);
         }
-        .cta-btn:hover { transform: scale(1.05); }
-        
-        /* Footer */
-        .footer {
-            background: #0f1926;
+
+        .review-date {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: transparent;
+            padding: 1rem 0;
+            margin-bottom: 1.5rem;
             color: #94a3b8;
-            padding: 40px 20px;
-            text-align: center;
         }
-        .footer a { color: #3b82f6; text-decoration: none; }
-        
+
+        .breadcrumb a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: #FFA500;
+        }
+
+        .breadcrumb-separator {
+            margin: 0 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .reviews-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
-            .rating-summary { flex-direction: column; text-align: center; }
-            .nav-links { display: none; }
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .rating-hero {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .rating-number {
+                font-size: 3.5rem;
+            }
+
+            .rating-stars-display {
+                font-size: 2rem;
+            }
+
+            .rating-summary-card {
+                padding: 1.5rem;
+            }
+
+            .filter-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-dropdown {
+                width: 100%;
+            }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <a href="{% url 'home' %}" class="logo">
-            <img src="{% static 'images/logo.png' %}" alt="Elite Wealth Capital" width="40" height="40">
-            <span>Elite Wealth Capital</span>
-        </a>
-        <div class="nav-links">
-            <a href="{% url 'home' %}">Home</a>
-            <a href="/about">About</a>
-            <a href="/investment-plans">Invest</a>
-            <a href="/contact">Contact</a>
-            <a href="{% url 'login' %}">Login</a>
+
+<body class="dashboard-site">
+    <!-- Crypto Ticker -->
+    <div class="crypto-ticker-horizontal">
+        <div class="ticker-track"></div>
+    </div>
+
+    <nav class="dashboard-nav">
+        <div class="container-fluid">
+            <a href="{% url 'dashboard' %}" class="nav-brand"
+                style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                <img src="{% static 'images/logo.webp' %}" alt="Elite Wealth Capital" width="40" height="40" style="height: 40px;">
+                <span class="logo-text">Elite Wealth Capital</span>
+            </a>
+            <div class="nav-user">
+                <span class="user-name" id="userName">Loading...</span>
+                <button class="btn-secondary" onclick="logout()" aria-label="Log out of your account">Logout</button>
+            </div>
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <div class="page-header">
-        <h1>Customer Reviews</h1>
-        <p>See what our investors are saying about their experience with Elite Wealth Capital</p>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="{% url 'dashboard' %}" class="sidebar-link"><span class="icon">📊</span><span>Dashboard</span></a>
+                <a href="{% url 'invest' %}" class="sidebar-link"><span class="icon">💰</span><span>Invest</span></a>
+                <a href="{% url 'add_funds' %}" class="sidebar-link"><span class="icon">💳</span><span>Add Funds</span></a>
+                <a href="{% url 'withdraw' %}" class="sidebar-link"><span class="icon">💸</span><span>Withdraw</span></a>
+                <a href="{% url 'loans' %}" class="sidebar-link"><span class="icon">🏦</span><span>Get Loan</span></a>
+                <a href="{% url 'cards' %}" class="sidebar-link"><span class="icon">💎</span><span>Virtual Cards</span></a>
+                <a href="{% url 'transactions' %}" class="sidebar-link"><span class="icon">📝</span><span>Transactions</span></a>
+                <a href="{% url 'dispute' %}" class="sidebar-link"><span class="icon">⚠️</span><span>Disputes & Support</span></a>
+                <a href="{% url 'accounts:profile' %}" class="sidebar-link"><span class="icon">⚙️</span><span>Account Settings</span></a>
+                <a href="{% url 'upgrade' %}" class="sidebar-link"><span class="icon">⭐</span><span>Upgrade</span></a>
+                <a href="{% url 'agent_application' %}" class="sidebar-link"><span class="icon">🤝</span><span>Become Agent</span></a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <h1>⭐ Client Reviews & Testimonials</h1>
+                <p>Real feedback from our satisfied investors worldwide</p>
+            </div>
+
+            <!-- Breadcrumb Navigation -->
+            <div class="breadcrumb">
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+                <span class="breadcrumb-separator">›</span>
+                <span>Client Reviews</span>
+            </div>
+
+            <!-- Overall Rating Summary -->
+            <div class="rating-summary-card">
+                <div class="rating-hero">
+                    <div class="rating-number">4.8</div>
+                    <div class="rating-stars">
+                        <div class="rating-stars-display">★★★★★</div>
+                        <div style="font-size: 1rem; color: rgba(255, 255, 255, 0.7);">Out of 5.0</div>
+                    </div>
+                </div>
+                <p class="rating-subtitle">
+                    Based on <span class="rating-count">2,847 verified investor reviews</span> from 65+ countries
+                </p>
+                
+                <!-- Statistics -->
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Satisfaction Rate</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">2,847</div>
+                        <div class="stat-label">Total Reviews</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">65+</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <h3 style="margin: 0; color: #fff;">Investor Testimonials</h3>
+                <select class="filter-dropdown" id="reviewFilter" onchange="filterReviews()">
+                    <option value="all">All Reviews</option>
+                    <option value="recent">Most Recent</option>
+                    <option value="highest">Highest Rated</option>
+                    <option value="verified">Verified Only</option>
+                </select>
+            </div>
+
+            <!-- Reviews Grid -->
+            <div class="reviews-grid" id="reviewsGrid">
+                <!-- Review 1 -->
+                <div class="review-card" data-rating="5" data-date="2024-02-15" data-verified="true">
+                    <div class="review-header">
+                        <div class="reviewer-avatar avatar-1">SJ</div>
+                        <div class="reviewer-info">
+                            <h3>Sarah Johnson</h3>
+                            <div class="reviewer-location">🇺🇸 New York, USA</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">
+                        "I invested <span class="investment-mention">$5,000</span> in the <span class="plan-mention">Gold Plan</span> and have already seen 18% returns in 3 months. Elite Wealth Capital's team is professional and responsive. The platform is user-friendly and withdrawals are processed quickly. Highly recommend!"
+                    </p>
+                    <div class="review-footer">
+                        <span class="verified-badge">✅ Verified Investor</span>
+                        <span class="review-date">Feb 15, 2024</span>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card" data-rating="5" data-date="2024-02-10" data-verified="true">
+                    <div class="review-header">
+                        <div class="reviewer-avatar avatar-2">MA</div>
+                        <div class="reviewer-info">
+                            <h3>Mohammed Al-Farsi</h3>
+                            <div class="reviewer-location">🇦🇪 Dubai, UAE</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">
+                        "Best investment platform I've used in the Middle East. The <span class="plan-mention">Platinum Plan</span> gives excellent daily returns of 3.5%. Customer support is available 24/7 in multiple languages. Made <span class="investment-mention">$22,000 profit</span> from my <span class="investment-mention">$50,000</span> investment!"
+                    </p>
+                    <div class="review-footer">
+                        <span class="verified-badge">✅ Verified Investor</span>
+                        <span class="review-date">Feb 10, 2024</span>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="review-card" data-rating="5" data-date="2024-01-28" data-verified="true">
+                    <div class="review-header">
+                        <div class="reviewer-avatar avatar-3">JW</div>
+                        <div class="reviewer-info">
+                            <h3>James Wilson</h3>
+                            <div class="reviewer-location">🇬🇧 London, UK</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">
+                        "Started with the <span class="plan-mention">Silver Plan</span> (<span class="investment-mention">$1,500</span>) and now I'm on <span class="plan-mention">Diamond</span>. The returns are consistent and withdrawals are processed within 24 hours. The team's transparency is refreshing. Brilliant platform!"
+                    </p>
+                    <div class="review-footer">
+                        <span class="verified-badge">✅ Verified Investor</span>
+                        <span class="review-date">Jan 28, 2024</span>
+                    </div>
+                </div>
+
+                <!-- Review 4 -->
+                <div class="review-card" data-rating="5" data-date="2024-02-05" data-verified="true">
+                    <div class="review-header">
+                        <div class="reviewer-avatar avatar-4">LC</div>
+                        <div class="reviewer-info">
+                            <h3>Linda Chen</h3>
+                            <div class="reviewer-location">🇸🇬 Singapore</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">
+                        "After losing money with other platforms, Elite Wealth Capital restored my faith. Made <span class="investment-mention">$8,000 profit</span> from a <span class="investment-mention">$15,000</span> investment in just 4 months with the <span class="plan-mention">Gold Plan</span>. The daily ROI is exactly as advertised!"
+                    </p>
+                    <div class="review-footer">
+                        <span class="verified-badge">✅ Verified Investor</span>
+                        <span class="review-date">Feb 5, 2024</span>
+                    </div>
+                </div>
+
+                <!-- Review 5 -->
+                <div class="review-card" data-rating="5" data-date="2024-01-22" data-verified="true">
+                    <div class="review-header">
+                        <div class="reviewer-avatar avatar-5">RB</div>
+                        <div class="reviewer-info">
+                            <h3>Robert Brown</h3>
+                            <div class="reviewer-location">🇨🇦 Toronto, Canada</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">
+                        "The transparency and professionalism are outstanding. I've referred 3 friends and they're all happy with their investments. The <span class="plan-mention">VIP Plan</span> with <span class="investment-mention">$100,000+</span> investment gives 5% daily returns. Worth every penny!"
+                    </p>
+                    <div class="review-footer">
+                        <span class="verified-badge">✅ Verified Investor</span>
+                        <span class="review-date">Jan 22, 2024</span>
+                    </div>
+                </div>
+
+                <!-- Review 6 -->
+                <div class="review-card" data-rating="5" data-date="2023-12-18" data-verified="true">
+                    <div class="review-header">
+                        <div class="reviewer-avatar avatar-6">EM</div>
+                        <div class="reviewer-info">
+                            <h3>Emma Martinez</h3>
+                            <div class="reviewer-location">🇪🇸 Madrid, Spain</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">
+                        "I was skeptical at first, but after seeing consistent returns for 6 months on my <span class="plan-mention">Gold Plan</span> investment of <span class="investment-mention">$8,000</span>, I'm now a believer. Customer service responds within minutes. Great team!"
+                    </p>
+                    <div class="review-footer">
+                        <span class="verified-badge">✅ Verified Investor</span>
+                        <span class="review-date">Dec 18, 2023</span>
+                    </div>
+                </div>
+
+                <!-- Review 7 -->
+                <div class="review-card" data-rating="5" data-date="2024-02-12" data-verified="true">
+                    <div class="review-header">
+                        <div class="reviewer-avatar avatar-7">DK</div>
+                        <div class="reviewer-info">
+                            <h3>David Kim</h3>
+                            <div class="reviewer-location">🇰🇷 Seoul, South Korea</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">
+                        "Exceptional platform! Started with <span class="investment-mention">$3,000</span> on the <span class="plan-mention">Bronze Plan</span> 8 months ago. Now managing a portfolio of <span class="investment-mention">$45,000</span> across multiple plans. The compound returns are incredible. Support team is always helpful!"
+                    </p>
+                    <div class="review-footer">
+                        <span class="verified-badge">✅ Verified Investor</span>
+                        <span class="review-date">Feb 12, 2024</span>
+                    </div>
+                </div>
+
+                <!-- Review 8 -->
+                <div class="review-card" data-rating="5" data-date="2024-01-30" data-verified="true">
+                    <div class="review-header">
+                        <div class="reviewer-avatar avatar-8">AP</div>
+                        <div class="reviewer-info">
+                            <h3>Anastasia Petrov</h3>
+                            <div class="reviewer-location">🇷🇺 Moscow, Russia</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">
+                        "Finally found a trustworthy investment platform! My <span class="investment-mention">$12,000</span> investment in the <span class="plan-mention">Platinum Plan</span> has grown to <span class="investment-mention">$18,500</span> in 5 months. Withdrawals to my crypto wallet arrive within hours. Highly professional!"
+                    </p>
+                    <div class="review-footer">
+                        <span class="verified-badge">✅ Verified Investor</span>
+                        <span class="review-date">Jan 30, 2024</span>
+                    </div>
+                </div>
+
+                <!-- Review 9 -->
+                <div class="review-card" data-rating="5" data-date="2024-02-08" data-verified="true">
+                    <div class="review-header">
+                        <div class="reviewer-avatar avatar-9">TN</div>
+                        <div class="reviewer-info">
+                            <h3>Thomas Nielsen</h3>
+                            <div class="reviewer-location">🇩🇰 Copenhagen, Denmark</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">
+                        "As a financial analyst, I'm impressed by Elite Wealth Capital's risk management. Invested <span class="investment-mention">$25,000</span> in the <span class="plan-mention">Diamond Plan</span> and receiving 4% daily returns like clockwork. The dashboard analytics are professional-grade. Outstanding service!"
+                    </p>
+                    <div class="review-footer">
+                        <span class="verified-badge">✅ Verified Investor</span>
+                        <span class="review-date">Feb 8, 2024</span>
+                    </div>
+                </div>
+
+                <!-- Review 10 -->
+                <div class="review-card" data-rating="5" data-date="2023-12-05" data-verified="true">
+                    <div class="review-header">
+                        <div class="reviewer-avatar avatar-10">MO</div>
+                        <div class="reviewer-info">
+                            <h3>Maria Oliveira</h3>
+                            <div class="reviewer-location">🇧🇷 São Paulo, Brazil</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">
+                        "Changed my financial life! Started small with <span class="investment-mention">$800</span> on the <span class="plan-mention">Starter Plan</span> and reinvested profits. Now on <span class="plan-mention">Gold Plan</span> with <span class="investment-mention">$10,000</span> invested. The team celebrates every milestone with you. Absolutely love it!"
+                    </p>
+                    <div class="review-footer">
+                        <span class="verified-badge">✅ Verified Investor</span>
+                        <span class="review-date">Dec 5, 2023</span>
+                    </div>
+                </div>
+
+                <!-- Review 11 -->
+                <div class="review-card" data-rating="5" data-date="2024-02-01" data-verified="true">
+                    <div class="review-header">
+                        <div class="reviewer-avatar avatar-11">HM</div>
+                        <div class="reviewer-info">
+                            <h3>Hans Müller</h3>
+                            <div class="reviewer-location">🇩🇪 Munich, Germany</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">
+                        "Sehr professionell! My <span class="investment-mention">$35,000</span> investment in the <span class="plan-mention">Diamond Plan</span> has yielded <span class="investment-mention">$14,000</span> in profits over 4 months. The German-speaking support team is excellent. Best investment decision I've made in 2024!"
+                    </p>
+                    <div class="review-footer">
+                        <span class="verified-badge">✅ Verified Investor</span>
+                        <span class="review-date">Feb 1, 2024</span>
+                    </div>
+                </div>
+
+                <!-- Review 12 -->
+                <div class="review-card" data-rating="5" data-date="2024-01-18" data-verified="true">
+                    <div class="review-header">
+                        <div class="reviewer-avatar avatar-12">JT</div>
+                        <div class="reviewer-info">
+                            <h3>Jennifer Taylor</h3>
+                            <div class="reviewer-location">🇦🇺 Sydney, Australia</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">
+                        "After researching for months, I chose Elite Wealth Capital and couldn't be happier. My <span class="investment-mention">$20,000</span> <span class="plan-mention">Platinum Plan</span> investment has been earning 3.5% daily consistently. The educational resources helped me understand crypto investing. Five stars!"
+                    </p>
+                    <div class="review-footer">
+                        <span class="verified-badge">✅ Verified Investor</span>
+                        <span class="review-date">Jan 18, 2024</span>
+                    </div>
+                </div>
+
+                <!-- Review 13 -->
+                <div class="review-card" data-rating="5" data-date="2024-02-14" data-verified="true">
+                    <div class="review-header">
+                        <div class="reviewer-avatar avatar-13">RA</div>
+                        <div class="reviewer-info">
+                            <h3>Rajesh Anand</h3>
+                            <div class="reviewer-location">🇮🇳 Mumbai, India</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">
+                        "Incredible returns and transparent operations! Invested <span class="investment-mention">$7,500</span> in the <span class="plan-mention">Gold Plan</span> and already made <span class="investment-mention">$3,200</span> profit in 3.5 months. The referral program is generous too. My friends joined and are equally satisfied. Excellent platform!"
+                    </p>
+                    <div class="review-footer">
+                        <span class="verified-badge">✅ Verified Investor</span>
+                        <span class="review-date">Feb 14, 2024</span>
+                    </div>
+                </div>
+
+                <!-- Review 14 -->
+                <div class="review-card" data-rating="5" data-date="2023-12-28" data-verified="true">
+                    <div class="review-header">
+                        <div class="reviewer-avatar avatar-14">SF</div>
+                        <div class="reviewer-info">
+                            <h3>Sophie Fontaine</h3>
+                            <div class="reviewer-location">🇫🇷 Paris, France</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">
+                        "Magnifique! The <span class="plan-mention">Silver Plan</span> was perfect for my first crypto investment (<span class="investment-mention">$2,000</span>). After 6 months of consistent returns, I upgraded to <span class="plan-mention">Platinum</span> with <span class="investment-mention">$18,000</span>. The French support team is fantastic. Merci Elite Wealth!"
+                    </p>
+                    <div class="review-footer">
+                        <span class="verified-badge">✅ Verified Investor</span>
+                        <span class="review-date">Dec 28, 2023</span>
+                    </div>
+                </div>
+
+                <!-- Review 15 -->
+                <div class="review-card" data-rating="5" data-date="2024-02-06" data-verified="true">
+                    <div class="review-header">
+                        <div class="reviewer-avatar avatar-15">CL</div>
+                        <div class="reviewer-info">
+                            <h3>Carlos Lopez</h3>
+                            <div class="reviewer-location">🇲🇽 Mexico City, Mexico</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">
+                        "¡Excelente! From <span class="investment-mention">$5,000</span> to <span class="investment-mention">$8,700</span> in 5 months with the <span class="plan-mention">Gold Plan</span>. The platform handles multiple cryptocurrencies seamlessly. Support responds in Spanish within minutes. My whole family is now investing here. Highly recommended!"
+                    </p>
+                    <div class="review-footer">
+                        <span class="verified-badge">✅ Verified Investor</span>
+                        <span class="review-date">Feb 6, 2024</span>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <!-- Rating Summary -->
-    <div class="rating-summary">
-        <div class="overall-rating">
-            <div class="rating-number">4.8</div>
-            <div class="stars">
-                <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-            </div>
-            <p class="total-reviews">Based on 2,847 reviews</p>
+    <script src="{% static 'js/main.js?v=20260308' %}"></script>
+    <script src="{% static 'js/dashboard.js?v=20260308' %}"></script>
+
+    <script>
+        // Filter Reviews Function
+        function filterReviews() {
+            const filterValue = document.getElementById('reviewFilter').value;
+            const reviewCards = document.querySelectorAll('.review-card');
+            const reviewsArray = Array.from(reviewCards);
+
+            // Reset display
+            reviewsArray.forEach(card => card.style.display = 'flex');
+
+            if (filterValue === 'recent') {
+                // Sort by date (most recent first)
+                reviewsArray.sort((a, b) => {
+                    const dateA = new Date(a.dataset.date);
+                    const dateB = new Date(b.dataset.date);
+                    return dateB - dateA;
+                });
+            } else if (filterValue === 'highest') {
+                // Sort by rating (highest first - all are 5 stars in this case)
+                reviewsArray.sort((a, b) => {
+                    return parseInt(b.dataset.rating) - parseInt(a.dataset.rating);
+                });
+            } else if (filterValue === 'verified') {
+                // Show only verified (all are verified in this case)
+                reviewsArray.forEach(card => {
+                    if (card.dataset.verified !== 'true') {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            // Re-append cards in new order
+            const grid = document.getElementById('reviewsGrid');
+            reviewsArray.forEach(card => grid.appendChild(card));
+        }
+    </script>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav">
+        <div class="nav-items">
+            <a href="{% url 'dashboard' %}">
+                <span class="icon">📊</span>
+                <span>Home</span>
+            </a>
+            <a href="{% url 'invest' %}">
+                <span class="icon">💰</span>
+                <span>Invest</span>
+            </a>
+            <a href="{% url 'add_funds' %}">
+                <span class="icon">💳</span>
+                <span>Deposit</span>
+            </a>
+            <a href="{% url 'withdraw' %}">
+                <span class="icon">💸</span>
+                <span>Withdraw</span>
+            </a>
+            <a href="{% url 'accounts:profile' %}">
+                <span class="icon">⚙️</span>
+                <span>Settings</span>
+            </a>
         </div>
-        <div class="rating-breakdown">
-            <div class="rating-bar">
-                <span>5 Stars</span>
-                <div class="bar-container"><div class="bar-fill" style="width: 78%"></div></div>
-                <span class="bar-count">78%</span>
-            </div>
-            <div class="rating-bar">
-                <span>4 Stars</span>
-                <div class="bar-container"><div class="bar-fill" style="width: 15%"></div></div>
-                <span class="bar-count">15%</span>
-            </div>
-            <div class="rating-bar">
-                <span>3 Stars</span>
-                <div class="bar-container"><div class="bar-fill" style="width: 4%"></div></div>
-                <span class="bar-count">4%</span>
-            </div>
-            <div class="rating-bar">
-                <span>2 Stars</span>
-                <div class="bar-container"><div class="bar-fill" style="width: 2%"></div></div>
-                <span class="bar-count">2%</span>
-            </div>
-            <div class="rating-bar">
-                <span>1 Star</span>
-                <div class="bar-container"><div class="bar-fill" style="width: 1%"></div></div>
-                <span class="bar-count">1%</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Reviews Section -->
-    <section class="reviews-section">
-        <div class="section-header">
-            <h2>All Reviews</h2>
-            <select class="filter-select">
-                <option>Most Recent</option>
-                <option>Highest Rated</option>
-                <option>Lowest Rated</option>
-                <option>Most Helpful</option>
-            </select>
-        </div>
-        
-        <div class="reviews-grid">
-            <!-- Review 1 -->
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="reviewer">
-                        <div class="reviewer-avatar">MC</div>
-                        <div class="reviewer-info">
-                            <h4>Marcus Chen</h4>
-                            <span class="reviewer-meta">Singapore • Premium Member</span>
-                        </div>
-                    </div>
-                    <div class="review-rating">
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                    </div>
-                </div>
-                <p class="review-content">Exceptional service and consistent returns. I've been investing with Elite Wealth Capital for 2 years now and the returns have exceeded my expectations. Their customer support is responsive and professional. The platform is intuitive and I can track all my investments in real-time.</p>
-                <div class="review-footer">
-                    <span class="verified-badge">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                        Verified Investor
-                    </span>
-                    <button class="helpful-btn">
-                        <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
-                        Helpful (24)
-                    </button>
-                </div>
-            </div>
-
-            <!-- Review 2 -->
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="reviewer">
-                        <div class="reviewer-avatar" style="background: linear-gradient(135deg, #10b981, #059669);">ST</div>
-                        <div class="reviewer-info">
-                            <h4>Sarah Thompson</h4>
-                            <span class="reviewer-meta">United Kingdom • VIP Member</span>
-                        </div>
-                    </div>
-                    <div class="review-rating">
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                    </div>
-                </div>
-                <p class="review-content">The best investment decision I've made! The VIP plan has been incredibly rewarding. What I appreciate most is the transparency - I can see exactly where my money is invested and track the performance daily. The withdrawal process is smooth and funds arrive within 24 hours.</p>
-                <div class="review-footer">
-                    <span class="verified-badge">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                        Verified Investor
-                    </span>
-                    <button class="helpful-btn">
-                        <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
-                        Helpful (31)
-                    </button>
-                </div>
-            </div>
-
-            <!-- Review 3 -->
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="reviewer">
-                        <div class="reviewer-avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706);">JM</div>
-                        <div class="reviewer-info">
-                            <h4>James Miller</h4>
-                            <span class="reviewer-meta">United States • Basic Member</span>
-                        </div>
-                    </div>
-                    <div class="review-rating">
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star empty" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                    </div>
-                </div>
-                <p class="review-content">Great platform overall. Started with a small investment to test it out, and I've been impressed with the results. The only reason I'm not giving 5 stars is that I wish there were more investment plans to choose from. But the customer service is excellent and always helpful.</p>
-                <div class="review-footer">
-                    <span class="verified-badge">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                        Verified Investor
-                    </span>
-                    <button class="helpful-btn">
-                        <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
-                        Helpful (18)
-                    </button>
-                </div>
-            </div>
-
-            <!-- Review 4 -->
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="reviewer">
-                        <div class="reviewer-avatar" style="background: linear-gradient(135deg, #ec4899, #db2777);">AP</div>
-                        <div class="reviewer-info">
-                            <h4>Aisha Patel</h4>
-                            <span class="reviewer-meta">India • Premium Member</span>
-                        </div>
-                    </div>
-                    <div class="review-rating">
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                    </div>
-                </div>
-                <p class="review-content">I was skeptical at first, but Elite Wealth Capital has proven to be legitimate and trustworthy. The returns are consistent and the platform is very user-friendly. I especially appreciate the 24/7 customer support - they've answered all my questions promptly.</p>
-                <div class="review-footer">
-                    <span class="verified-badge">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                        Verified Investor
-                    </span>
-                    <button class="helpful-btn">
-                        <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
-                        Helpful (42)
-                    </button>
-                </div>
-            </div>
-
-            <!-- Review 5 -->
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="reviewer">
-                        <div class="reviewer-avatar" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">RK</div>
-                        <div class="reviewer-info">
-                            <h4>Robert Kim</h4>
-                            <span class="reviewer-meta">South Korea • VIP Member</span>
-                        </div>
-                    </div>
-                    <div class="review-rating">
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <svg class="star" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                    </div>
-                </div>
-                <p class="review-content">Outstanding investment platform! The VIP plan offers incredible returns and the personal account manager has been extremely helpful. I've recommended Elite Wealth Capital to my colleagues and they're all seeing great results too. Highly recommend!</p>
-                <div class="review-footer">
-                    <span class="verified-badge">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                        Verified Investor
-                    </span>
-                    <button class="helpful-btn">
-                        <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
-                        Helpful (37)
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Pagination -->
-        <div class="pagination" role="navigation" aria-label="Reviews pagination">
-            <button class="page-btn" aria-label="Go to previous page">« Prev</button>
-            <button class="page-btn active" aria-label="Page 1, current page" aria-current="page">1</button>
-            <button class="page-btn" aria-label="Go to page 2">2</button>
-            <button class="page-btn" aria-label="Go to page 3">3</button>
-            <button class="page-btn" aria-label="Go to page 4">4</button>
-            <button class="page-btn" aria-label="Go to page 5">5</button>
-            <button class="page-btn" aria-label="Go to next page">Next »</button>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <h2>Ready to Join Our Happy Investors?</h2>
-        <p>Start your investment journey today and experience the Elite Wealth Capital difference</p>
-        <a href="{% url 'signup' %}" class="cta-btn">Create Free Account</a>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2024 Elite Wealth Capital. All rights reserved.</p>
-        <p style="margin-top: 10px;">
-            <a href="/terms">Terms of Service</a> &nbsp;|&nbsp; 
-            <a href="/privacy-policy">Privacy Policy</a> &nbsp;|&nbsp; 
-            <a href="/contact">Contact Us</a>
-        </p>
-    </footer>
-
-        <script defer src="{% static 'js/main.js' %}"></script>
+    </nav>
 </body>
-</html>
 
+</html>

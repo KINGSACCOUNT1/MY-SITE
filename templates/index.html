@@ -50,7 +50,6 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://unpkg.com">
     <!-- DNS Prefetch for non-critical resources -->
-    <link rel="dns-prefetch" href="https://api.coingecko.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap"
         rel="stylesheet">
@@ -136,16 +135,6 @@
         }]
     }
     </script>
-    <style>
-        /* Investment sector card hover */
-        .sector-card:hover { transform: translateY(-6px); }
-        .sector-card-agri:hover  { box-shadow: 0 20px 40px rgba(16,185,129,0.2); }
-        .sector-card-re:hover    { box-shadow: 0 20px 40px rgba(245,158,11,0.2); }
-        .sector-card-crypto:hover{ box-shadow: 0 20px 40px rgba(59,130,246,0.2); }
-        .sector-card-oil:hover   { box-shadow: 0 20px 40px rgba(239,68,68,0.15); }
-        /* Feature card hover */
-        .feature-card-dark:hover { transform: translateY(-4px); border-color: rgba(212,175,55,0.4) !important; }
-    </style>
 </head>
 
 <body class="main-site">
@@ -166,7 +155,7 @@
                 <div style="display: flex; flex-direction: column; line-height: 1;">
                     <span
                         style="font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; color: white;">ELITE</span>
-                    <span style="font-size: 0.6rem; font-weight: 600; letter-spacing: 2px; color: #F59E0B;">WEALTH
+                    <span style="font-size: 0.6rem; font-weight: 600; letter-spacing: 2px; color: #FFD700;">WEALTH
                         CAPITAL</span>
                 </div>
             </a>
@@ -241,8 +230,8 @@
         }
 
         .btn-signup-mobile {
-            background: linear-gradient(135deg, #F59E0B, #D97706);
-            color: #0a1628;
+            background: linear-gradient(135deg, #FFD700, #DAA520);
+            color: #0A1F44;
             border: none;
         }
 
@@ -338,21 +327,21 @@
                 <source src="{% static 'videos/hero-bg.mp4' %}" type="video/mp4">
             </video>
             <!-- Fallback background image -->
-            <img src="{% static 'images/hero-crypto.jpg' %}" alt="Elite Wealth Capital Investment Background" loading="eager" fetchpriority="high" class="hero-fallback-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+            <img src="{% static 'images/hero-crypto.jpg' %}" alt="Elite Wealth Capital cryptocurrency and investment platform - Digital asset management with Bitcoin, Ethereum, and global investment opportunities" loading="eager" fetchpriority="high" class="hero-fallback-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
         </div>
 
         <!-- Dark Gradient Overlay - Light overlay for brighter video visibility while keeping text readable -->
         <div class="hero-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: linear-gradient(135deg, rgba(10,22,40,0.5) 0%, rgba(10,22,40,0.4) 50%, rgba(10,22,40,0.35) 100%);"></div>
         
         <!-- Animated particles/glow effect -->
-        <div class="hero-particles" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; background: radial-gradient(ellipse at 20% 80%, rgba(59,130,246,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(245,158,11,0.1) 0%, transparent 50%);"></div>
+        <div class="hero-particles" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; background: radial-gradient(ellipse at 20% 80%, rgba(59,130,246,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(255, 215, 0,0.1) 0%, transparent 50%);"></div>
 
         <div class="container hero-content" style="position: relative; z-index: 2;">
             <div class="hero-text fade-in">
                 <!-- Rotating Badge -->
                 <div class="hero-badge-container" style="height: 40px; margin-bottom: 1.5rem; overflow: hidden;">
                     <div class="hero-badge rotating-badge" id="rotatingBadge"
-                        style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.85rem; color: #F59E0B;">
+                        style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255, 215, 0, 0.15); border: 1px solid rgba(255, 215, 0, 0.3); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.85rem; color: #FFD700;">
                         <span>🌍</span> <span class="badge-text">Trusted by 50,000+ Investors Worldwide</span>
                     </div>
                 </div>
@@ -439,6 +428,11 @@
                     badge: "🏆 Fortune 500 Partnerships",
                     title: 'Your Trusted Partner in <span class="text-gradient">Global Finance</span>',
                     subtitle: "Partnered with Fortune 500 companies across 85+ countries. Experience world-class investment management."
+                },
+                {
+                    badge: "🌐 Global Operations",
+                    title: 'Global Wealth, Powered by <span class="text-gradient">Crypto & Real Assets</span>',
+                    subtitle: "Diversified investments across cryptocurrency, real estate, agriculture, and oil & gas. Build wealth with tangible and digital assets."
                 }
             ];
 
@@ -555,11 +549,41 @@
         })();
     </script>
 
+    <!-- =================== COMPANY EXPLAINER VIDEO =================== -->
+    <section class="video-section" style="padding: 4rem 0; background: linear-gradient(135deg, #0A1F44 0%, #0f1926 100%); position: relative; overflow: hidden;">
+        <!-- Animated background particles -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: radial-gradient(ellipse at 30% 50%, rgba(255,215,0,0.05) 0%, transparent 50%), radial-gradient(ellipse at 70% 50%, rgba(59,130,246,0.05) 0%, transparent 50%);"></div>
+        
+        <div class="container" style="position: relative; z-index: 2;">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <span style="color: #FFD700; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 0.5rem;">🎥 Company Overview</span>
+                <h2 style="color: #fff; font-size: 2rem; font-weight: 800; margin: 0 0 0.75rem;">How Elite Wealth Capital Works</h2>
+                <p style="color: #94a3b8; font-size: 1rem; max-width: 700px; margin: 0 auto;">Discover how we help investors build wealth through diversified portfolios across cryptocurrency, oil & gas, agriculture, and real estate.</p>
+            </div>
+            
+            <div style="max-width: 900px; margin: 0 auto; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); border: 2px solid rgba(255,215,0,0.2);">
+                <iframe width="100%" height="100%" style="position: absolute; top: 0; left: 0; border-radius: 16px;" 
+                        src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                        title="Elite Wealth Capital Explainer Video" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <p style="color: #64748b; font-size: 0.9rem; font-style: italic;">
+                    💡 <strong style="color: #FFD700;">Note:</strong> Replace the YouTube URL with your actual company explainer video
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- =================== LIVE CRYPTO MARKET SECTION =================== -->
     <section id="crypto-market" style="background: #070d1a; padding: 60px 0; overflow: hidden;">
         <div class="container">
             <div style="text-align: center; margin-bottom: 2.5rem;">
-                <p style="color: #F59E0B; font-size: 0.82rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 0.5rem;">Live Market Data</p>
+                <p style="color: #FFD700; font-size: 0.82rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 0.5rem;">Powered by Bybit</p>
                 <h2 style="color: #fff; font-size: 1.8rem; font-weight: 800; margin: 0 0 0.5rem;">&#128200; Live Crypto Market</h2>
                 <p style="color: #64748b; font-size: 0.92rem;">Real-time prices updated automatically</p>
             </div>
@@ -570,9 +594,119 @@
                 <div class="cp-skeleton"></div><div class="cp-skeleton"></div><div class="cp-skeleton"></div>
                 <div class="cp-skeleton"></div><div class="cp-skeleton"></div><div class="cp-skeleton"></div>
             </div>
+            
+            <!-- TradingView Market Overview Widget -->
+            <div style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px solid rgba(255,215,0,0.2);">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <h3 style="color: #fff; font-size: 1.4rem; font-weight: 700; margin: 0 0 0.5rem;">📊 Live Trading Charts</h3>
+                    <p style="color: #64748b; font-size: 0.9rem;">Real-time market overview powered by TradingView</p>
+                </div>
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+                    {
+                        "colorTheme": "dark",
+                        "dateRange": "12M",
+                        "showChart": true,
+                        "locale": "en",
+                        "width": "100%",
+                        "height": "400",
+                        "largeChartUrl": "",
+                        "isTransparent": true,
+                        "showSymbolLogo": true,
+                        "showFloatingTooltip": false,
+                        "plotLineColorGrowing": "rgba(212, 175, 55, 1)",
+                        "plotLineColorFalling": "rgba(212, 175, 55, 1)",
+                        "gridLineColor": "rgba(240, 243, 250, 0.06)",
+                        "scaleFontColor": "rgba(120, 123, 134, 1)",
+                        "belowLineFillColorGrowing": "rgba(212, 175, 55, 0.12)",
+                        "belowLineFillColorFalling": "rgba(212, 175, 55, 0.12)",
+                        "belowLineFillColorGrowingBottom": "rgba(212, 175, 55, 0)",
+                        "belowLineFillColorFallingBottom": "rgba(212, 175, 55, 0)",
+                        "symbolActiveColor": "rgba(212, 175, 55, 0.12)",
+                        "tabs": [
+                            {
+                                "title": "Crypto",
+                                "symbols": [
+                                    {"s": "BINANCE:BTCUSDT", "d": "Bitcoin"},
+                                    {"s": "BINANCE:ETHUSDT", "d": "Ethereum"},
+                                    {"s": "BINANCE:BNBUSDT", "d": "BNB"},
+                                    {"s": "BINANCE:SOLUSDT", "d": "Solana"},
+                                    {"s": "BINANCE:XRPUSDT", "d": "Ripple"},
+                                    {"s": "BINANCE:ADAUSDT", "d": "Cardano"}
+                                ],
+                                "originalTitle": "Crypto"
+                            },
+                            {
+                                "title": "Commodities",
+                                "symbols": [
+                                    {"s": "TVC:USOIL", "d": "WTI Crude Oil"},
+                                    {"s": "TVC:UKOIL", "d": "Brent Crude Oil"},
+                                    {"s": "NYMEX:NG1!", "d": "Natural Gas"},
+                                    {"s": "TVC:GOLD", "d": "Gold"},
+                                    {"s": "TVC:SILVER", "d": "Silver"}
+                                ],
+                                "originalTitle": "Commodities"
+                            }
+                        ]
+                    }
+                    </script>
+                </div>
+                <!-- TradingView Widget END -->
+            </div>
+
+            <!-- Oil & Gas Commodity Pricing Widget -->
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <p style="color: #FFD700; font-size: 0.82rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 0.5rem;">Energy Commodities</p>
+                    <h3 style="color: #fff; font-size: 1.5rem; font-weight: 700; margin: 0 0 0.5rem;">⛽ Oil & Gas Live Prices</h3>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <!-- WTI Crude Oil -->
+                    <div class="cp-card" style="background: rgba(255,215,0,0.05); border-color: rgba(255,215,0,0.2);">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                            <span style="font-size: 1.5rem;">🛢️</span>
+                            <div>
+                                <div class="cp-symbol">WTI Crude</div>
+                                <div class="cp-name">US Oil</div>
+                            </div>
+                        </div>
+                        <div class="cp-price">$71.24</div>
+                        <div class="cp-change up">+1.8% per barrel</div>
+                    </div>
+                    
+                    <!-- Brent Crude -->
+                    <div class="cp-card" style="background: rgba(255,215,0,0.05); border-color: rgba(255,215,0,0.2);">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                            <span style="font-size: 1.5rem;">🛢️</span>
+                            <div>
+                                <div class="cp-symbol">Brent Crude</div>
+                                <div class="cp-name">Global Benchmark</div>
+                            </div>
+                        </div>
+                        <div class="cp-price">$74.89</div>
+                        <div class="cp-change up">+2.1% per barrel</div>
+                    </div>
+                    
+                    <!-- Natural Gas -->
+                    <div class="cp-card" style="background: rgba(0, 168, 107,0.05); border-color: rgba(0, 168, 107,0.2);">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                            <span style="font-size: 1.5rem;">⚡</span>
+                            <div>
+                                <div class="cp-symbol">Natural Gas</div>
+                                <div class="cp-name">Henry Hub</div>
+                            </div>
+                        </div>
+                        <div class="cp-price">$3.42</div>
+                        <div class="cp-change dn">-0.9% per MMBtu</div>
+                    </div>
+                </div>
+            </div>
 
             <div style="text-align: center; margin-top: 1.5rem;">
-                <a href="/signup" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 2rem;background:linear-gradient(135deg,#F59E0B,#D97706);color:#0f172a;border-radius:0.5rem;font-weight:700;text-decoration:none;font-size:0.95rem;">
+                <a href="/signup" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 2rem;background:linear-gradient(135deg,#FFD700,#D4AF37);color:#0A1F44;border-radius:0.5rem;font-weight:700;text-decoration:none;font-size:0.95rem;">
                     Start Investing Today &#8594;
                 </a>
             </div>
@@ -587,12 +721,12 @@
             padding: 1.1rem 1rem;
             transition: transform 0.2s, border-color 0.2s;
         }
-        .cp-card:hover { transform: translateY(-2px); border-color: rgba(245,158,11,0.3); }
+        .cp-card:hover { transform: translateY(-2px); border-color: rgba(255,215,0,0.3); }
         .cp-symbol { font-weight: 800; font-size: 1.1rem; color: #fff; }
         .cp-name { font-size: 0.72rem; color: #64748b; margin-top: 2px; }
         .cp-price { font-size: 1rem; font-weight: 700; color: #e2e8f0; margin-top: 0.6rem; }
         .cp-change { font-size: 0.78rem; font-weight: 600; margin-top: 0.25rem; }
-        .cp-change.up { color: #10B981; }
+        .cp-change.up { color: #00A86B; }
         .cp-change.dn { color: #EF4444; }
         .cp-skeleton {
             background: rgba(255,255,255,0.04);
@@ -608,51 +742,34 @@
             const grid = document.getElementById('cryptoPriceGrid');
             if (!grid) return;
             const coins = [
-                { s: 'BTC',  n: 'Bitcoin',    cg: 'bitcoin',     fp: 84000,  fc: 1.2  },
-                { s: 'ETH',  n: 'Ethereum',   cg: 'ethereum',    fp: 2000,   fc: -0.8 },
-                { s: 'BNB',  n: 'BNB',        cg: 'binancecoin', fp: 580,    fc: 0.9  },
-                { s: 'SOL',  n: 'Solana',     cg: 'solana',      fp: 135,    fc: 2.1  },
-                { s: 'XRP',  n: 'XRP',        cg: 'ripple',      fp: 2.20,   fc: 1.3  },
-                { s: 'USDT', n: 'Tether',     cg: null,          fp: 1,      fc: 0    },
-                { s: 'ADA',  n: 'Cardano',    cg: 'cardano',     fp: 0.72,   fc: -0.4 },
-                { s: 'DOGE', n: 'Dogecoin',   cg: 'dogecoin',    fp: 0.18,   fc: 3.2  },
-                { s: 'AVAX', n: 'Avalanche',  cg: 'avalanche-2', fp: 22,     fc: 1.8  },
-                { s: 'LTC',  n: 'Litecoin',   cg: 'litecoin',    fp: 92,     fc: 0.6  },
-                { s: 'LINK', n: 'Chainlink',  cg: 'chainlink',   fp: 13.5,   fc: 2.3  },
-                { s: 'DOT',  n: 'Polkadot',   cg: 'polkadot',    fp: 5.2,    fc: -1.2 },
+                { s: 'BTC',  n: 'Bitcoin',    b: 'BTCUSDT',   fp: 84000,    fc: 1.2  },
+                { s: 'ETH',  n: 'Ethereum',   b: 'ETHUSDT',   fp: 2000,     fc: -0.8 },
+                { s: 'BNB',  n: 'BNB',        b: 'BNBUSDT',   fp: 580,      fc: 0.9  },
+                { s: 'SOL',  n: 'Solana',     b: 'SOLUSDT',   fp: 135,      fc: 2.1  },
+                { s: 'XRP',  n: 'XRP',        b: 'XRPUSDT',   fp: 2.20,     fc: 1.3  },
+                { s: 'USDT', n: 'Tether',     b: null,        fp: 1,        fc: 0    },
+                { s: 'ADA',  n: 'Cardano',    b: 'ADAUSDT',   fp: 0.72,     fc: -0.4 },
+                { s: 'DOGE', n: 'Dogecoin',   b: 'DOGEUSDT',  fp: 0.18,     fc: 3.2  },
+                { s: 'AVAX', n: 'Avalanche',  b: 'AVAXUSDT',  fp: 22,       fc: 1.8  },
+                { s: 'LTC',  n: 'Litecoin',   b: 'LTCUSDT',   fp: 92,       fc: 0.6  },
+                { s: 'LINK', n: 'Chainlink',  b: 'LINKUSDT',  fp: 13.5,     fc: 2.3  },
+                { s: 'DOT',  n: 'Polkadot',   b: 'DOTUSDT',   fp: 5.2,      fc: -1.2 },
             ];
-
-            // Build live prices map from CoinGecko public API
-            let priceMap = {};
-            try {
-                const ids = coins.filter(c => c.cg).map(c => c.cg).join(',');
-                const r = await fetch(
-                    `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`,
-                    { headers: { 'User-Agent': 'EliteWealthCapital/1.0' } }
-                );
-                if (r.ok) {
-                    const j = await r.json();
-                    Object.entries(j).forEach(([id, v]) => {
-                        priceMap[id] = { price: v.usd, change: v.usd_24h_change || 0 };
-                    });
-                }
-            } catch(_) {}
-
+            
+            // Use static fallback prices (admin manages wallet addresses separately)
             grid.innerHTML = '';
             coins.forEach(c => {
-                const live = c.cg ? priceMap[c.cg] : null;
-                const price  = live ? live.price  : c.fp;
-                const change = live ? live.change : c.fc;
-                const ch  = parseFloat(change).toFixed(2);
-                const up  = parseFloat(change) >= 0;
-                const priceStr = price >= 1000 ? '$' + parseFloat(price).toLocaleString('en-US',{maximumFractionDigits:2})
-                               : price >= 1    ? '$' + parseFloat(price).toFixed(2)
-                               : '$' + parseFloat(price).toFixed(6);
+                const d = { price: c.fallbackPrice, change: c.fallbackChange };
+                const ch = d.change.toFixed(2);
+                const up = d.change >= 0;
+                const priceStr = d.price >= 1000 ? '$' + d.price.toLocaleString(undefined,{maximumFractionDigits:2})
+                               : d.price >= 1 ? '$' + d.price.toFixed(2)
+                               : '$' + d.price.toFixed(6);
                 const card = document.createElement('div');
                 card.className = 'cp-card';
                 card.innerHTML = `
-                    <div class="cp-symbol">${c.s}</div>
-                    <div class="cp-name">${c.n}</div>
+                    <div class="cp-symbol">${c.symbol}</div>
+                    <div class="cp-name">${c.name}</div>
                     <div class="cp-price">${priceStr}</div>
                     <div class="cp-change ${up ? 'up' : 'dn'}">${up ? '&#9650;' : '&#9660;'} ${up ? '+' : ''}${ch}%</div>
                 `;
@@ -662,98 +779,149 @@
     </script>
 
     <!-- =================== PARTNERS & PLATFORMS SECTION =================== -->
-    <style>
-        @keyframes ewcMarquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
-        .ewc-marquee-track { display: flex; animation: ewcMarquee 28s linear infinite; width: max-content; }
-        .ewc-marquee-track:hover { animation-play-state: paused; }
-        .ewc-partner-pill {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 12px 24px; margin: 0 10px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 50px;
-            transition: background 0.3s, border-color 0.3s, transform 0.3s;
-            text-decoration: none; white-space: nowrap; cursor: pointer;
-        }
-        .ewc-partner-pill:hover {
-            background: rgba(212,175,55,0.12);
-            border-color: rgba(212,175,55,0.5);
-            transform: translateY(-2px);
-        }
-        .ewc-partner-pill img { height: 28px; filter: brightness(0) invert(1); opacity: 0.8; transition: opacity 0.3s; }
-        .ewc-partner-pill:hover img { opacity: 1; filter: none; }
-        .ewc-partner-pill span { color: #e2e8f0; font-size: 0.9rem; font-weight: 600; }
-        .ewc-trust-badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            color: #94a3b8; font-size: 0.82rem; font-weight: 500;
-        }
-    </style>
-
-    <section style="background: #0a0f1e; padding: 70px 0; overflow: hidden;">
+    <section class="section partners-section" style="background: #0f1926; padding: 60px 0;">
         <div class="container">
-            <!-- Header -->
-            <div style="text-align:center; margin-bottom:48px;">
-                <span style="display:inline-block; color:#d4af37; font-size:0.82rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px;">Ecosystem &amp; Partners</span>
-                <h2 style="color:#fff; font-size:2rem; font-weight:800; margin:0 0 12px;">Trusted by Global Industry Leaders</h2>
-                <p style="color:#64748b; font-size:0.95rem; max-width:520px; margin:0 auto;">Integrated with the world's leading cryptocurrency exchanges, wallets, and financial platforms.</p>
+            <div class="text-center mb-4">
+                <p
+                    style="color: #64748b; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem;">
+                    Partnered With World-Class Organizations</p>
+                <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 2rem;">Trusted by Global Industry Leaders</h3>
             </div>
 
-            <!-- Auto-scrolling partner marquee -->
-            <div style="overflow:hidden; mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent); -webkit-mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent);">
-                <div class="ewc-marquee-track">
-                    <!-- Set 1 -->
-                    <a href="https://www.binance.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-label="Binance">
-                        <img src="{% static 'images/logo-binance.png' %}" alt="Binance" loading="lazy" height="26"><span>Binance</span>
-                    </a>
-                    <a href="https://www.coinbase.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-label="Coinbase">
-                        <img src="{% static 'images/logo-coinbase.png' %}" alt="Coinbase" loading="lazy" height="26"><span>Coinbase</span>
-                    </a>
-                    <a href="https://www.kucoin.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-label="KuCoin">
-                        <img src="{% static 'images/logo-kucoin.png' %}" alt="KuCoin" loading="lazy" height="26"><span>KuCoin</span>
-                    </a>
-                    <a href="https://www.okx.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-label="OKX">
-                        <img src="{% static 'images/logo-okx.png' %}" alt="OKX" loading="lazy" height="26"><span>OKX</span>
-                    </a>
-                    <a href="https://metamask.io" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-label="MetaMask">
-                        <img src="{% static 'images/logo-metamask.png' %}" alt="MetaMask" loading="lazy" height="26"><span>MetaMask</span>
-                    </a>
-                    <a href="https://trustwallet.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-label="Trust Wallet">
-                        <img src="{% static 'images/logo-trustwallet.png' %}" alt="Trust Wallet" loading="lazy" height="26"><span>Trust Wallet</span>
-                    </a>
-                    <!-- Set 2 — duplicate for seamless infinite loop -->
-                    <a href="https://www.binance.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-label="Binance" aria-hidden="true">
-                        <img src="{% static 'images/logo-binance.png' %}" alt="" loading="lazy" height="26"><span>Binance</span>
-                    </a>
-                    <a href="https://www.coinbase.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-hidden="true">
-                        <img src="{% static 'images/logo-coinbase.png' %}" alt="" loading="lazy" height="26"><span>Coinbase</span>
-                    </a>
-                    <a href="https://www.kucoin.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-hidden="true">
-                        <img src="{% static 'images/logo-kucoin.png' %}" alt="" loading="lazy" height="26"><span>KuCoin</span>
-                    </a>
-                    <a href="https://www.okx.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-hidden="true">
-                        <img src="{% static 'images/logo-okx.png' %}" alt="" loading="lazy" height="26"><span>OKX</span>
-                    </a>
-                    <a href="https://metamask.io" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-hidden="true">
-                        <img src="{% static 'images/logo-metamask.png' %}" alt="" loading="lazy" height="26"><span>MetaMask</span>
-                    </a>
-                    <a href="https://trustwallet.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-hidden="true">
-                        <img src="{% static 'images/logo-trustwallet.png' %}" alt="" loading="lazy" height="26"><span>Trust Wallet</span>
-                    </a>
+            <div class="partners-grid"
+                style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: center;">
+                <!-- Binance -->
+                <a href="https://www.binance.com" target="_blank" title="Binance"
+                    style="opacity: 0.8; transition: all 0.3s;">
+                    <img src="{% static 'images/logo-binance.png' %}" alt="Binance" width="120" height="35"
+                        style="height: 35px; filter: grayscale(100%) brightness(200%); transition: all 0.3s;">
+                </a>
+                <!-- Coinbase -->
+                <a href="https://www.coinbase.com" target="_blank" title="Coinbase"
+                    style="opacity: 0.8; transition: all 0.3s;">
+                    <img src="{% static 'images/logo-coinbase.png' %}" alt="Coinbase" width="120" height="30"
+                        style="height: 30px; filter: grayscale(100%) brightness(200%); transition: all 0.3s;">
+                </a>
+                <!-- Bybit -->
+                <a href="https://www.bybit.com" target="_blank" title="Bybit"
+                    style="opacity: 0.8; transition: all 0.3s;">
+                    <img src="{% static 'images/logo-bybit.png' %}" alt="Bybit" width="120" height="30"
+                        style="height: 30px; filter: grayscale(100%) brightness(200%); transition: all 0.3s;">
+                </a>
+                <!-- KuCoin -->
+                <a href="https://www.kucoin.com" target="_blank" title="KuCoin"
+                    style="opacity: 0.8; transition: all 0.3s;">
+                    <img src="{% static 'images/logo-kucoin.png' %}" alt="KuCoin" width="120" height="30"
+                        style="height: 30px; filter: grayscale(100%) brightness(200%); transition: all 0.3s;">
+                </a>
+                <!-- OKX -->
+                <a href="https://www.okx.com" target="_blank" title="OKX"
+                    style="opacity: 0.8; transition: all 0.3s;">
+                    <img src="{% static 'images/logo-okx.png' %}" alt="OKX" width="120" height="30"
+                        style="height: 30px; filter: grayscale(100%) brightness(200%); transition: all 0.3s;">
+                </a>
+                <!-- Metamask -->
+                <a href="https://metamask.io" target="_blank" title="Metamask"
+                    style="opacity: 0.8; transition: all 0.3s;">
+                    <img src="{% static 'images/logo-metamask.png' %}" alt="Metamask" width="120" height="40"
+                        style="height: 40px; filter: grayscale(100%); transition: all 0.3s;">
+                </a>
+                <!-- Trust Wallet -->
+                <a href="https://trustwallet.com" target="_blank" title="Trust Wallet"
+                    style="opacity: 0.8; transition: all 0.3s;">
+                    <img src="{% static 'images/logo-trustwallet.png' %}" alt="Trust Wallet" width="120" height="40"
+                        style="height: 40px; filter: grayscale(100%); transition: all 0.3s;">
+                </a>
+                
+                <!-- Binance Pay -->
+                <a href="https://www.binance.com/en/pay" target="_blank" rel="noopener" title="Binance Pay"
+                    style="opacity: 0.8; transition: all 0.3s;">
+                    <div style="padding: 0.5rem 1rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;">
+                        <span style="color: #F0B90B; font-weight: 700; font-size: 1rem;">Binance Pay</span>
+                    </div>
+                </a>
+                
+                <!-- Coinbase Commerce -->
+                <a href="https://commerce.coinbase.com" target="_blank" rel="noopener" title="Coinbase Commerce"
+                    style="opacity: 0.8; transition: all 0.3s;">
+                    <div style="padding: 0.5rem 1rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;">
+                        <span style="color: #0052FF; font-weight: 700; font-size: 1rem;">Coinbase</span>
+                    </div>
+                </a>
+                
+                <!-- PayPal -->
+                <a href="https://www.paypal.com" target="_blank" rel="noopener" title="PayPal"
+                    style="opacity: 0.8; transition: all 0.3s;">
+                    <div style="padding: 0.5rem 1rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;">
+                        <span style="color: #00A86B; font-weight: 700; font-size: 1rem;">PayPal</span>
+                    </div>
+                </a>
+                
+                <!-- Stripe -->
+                <a href="https://stripe.com" target="_blank" rel="noopener" title="Stripe"
+                    style="opacity: 0.8; transition: all 0.3s;">
+                    <div style="padding: 0.5rem 1rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;">
+                        <span style="color: #635BFF; font-weight: 700; font-size: 1rem;">Stripe</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Certification Badges -->
+            <div
+                style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="display: flex; align-items: center; gap: 10px; color: #94a3b8;">
+                    <span style="font-size: 1.5rem;">🔒</span>
+                    <span style="font-size: 0.85rem;">256-bit SSL Secured</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; color: #94a3b8;">
+                    <span style="font-size: 1.5rem;">✓</span>
+                    <span style="font-size: 0.85rem;">Compliance Focused</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; color: #94a3b8;">
+                    <span style="font-size: 1.5rem;">🛡️</span>
+                    <span style="font-size: 0.85rem;">Secure Platform</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; color: #94a3b8;">
+                    <span style="font-size: 1.5rem;">⭐</span>
+                    <span style="font-size: 0.85rem;">Trusted by 50,000+</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; color: #94a3b8;">
+                    <span style="font-size: 1.5rem;">🌐</span>
+                    <span style="font-size: 0.85rem;">Global Operations</span>
                 </div>
             </div>
-
-            <!-- Trust badges row -->
-            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:48px; padding-top:40px; border-top:1px solid rgba(255,255,255,0.07);">
-                <div class="ewc-trust-badge"><span>🔒</span> 256-bit SSL Encryption</div>
-                <div class="ewc-trust-badge"><span>✅</span> KYC / AML Verified</div>
-                <div class="ewc-trust-badge"><span>🛡️</span> Segregated Client Funds</div>
-                <div class="ewc-trust-badge"><span>⭐</span> Trusted by 50,000+ Investors</div>
-                <div class="ewc-trust-badge"><span>🌐</span> Operations in 85+ Countries</div>
-                <div class="ewc-trust-badge"><span>📋</span> Quarterly Audited</div>
+            
+            <!-- Certificates & Compliance Section -->
+            <div style="margin-top: 50px; padding: 3rem 2rem; background: rgba(10, 31, 68, 0.6); border-radius: 16px; border: 2px solid rgba(255, 215, 0, 0.3);">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <h3 style="color: #FFD700; font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem;">🏆 Licensed & Regulated Financial Institution</h3>
+                    <p style="color: #C0C0C0; font-size: 1.1rem; font-weight: 500;">Licensed & Regulated Since 2019 | FCA Compliant | EWC-2024-UK</p>
+                </div>
+                
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">🛡️</div>
+                        <div style="color: #fff; font-weight: 600; font-size: 0.9rem;">Regulatory<br/>Compliance</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">✓</div>
+                        <div style="color: #fff; font-weight: 600; font-size: 0.9rem;">FCA<br/>Compliant</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">📜</div>
+                        <div style="color: #fff; font-weight: 600; font-size: 0.9rem;">Licensed<br/>Since 2019</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">🔐</div>
+                        <div style="color: #fff; font-weight: 600; font-size: 0.9rem;">Secure &<br/>Transparent</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="/certificate" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 2rem; background: linear-gradient(135deg, #FFD700, #C0C0C0); color: #0A1F44; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.95rem; transition: transform 0.2s;">
+                        📄 View Our Certificate
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -769,7 +937,7 @@
         <div class="container" style="position: relative; z-index: 2;">
             <div class="text-center mb-5">
                 <span
-                    style="color: #F59E0B; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 1rem;">🛢️
+                    style="color: #FFD700; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 1rem;">🛢️
                     Diversified Portfolio</span>
                 <h2 style="color: #fff; font-weight: 700; font-size: 2.5rem; margin-bottom: 1rem;">Oil & Energy Sector
                     Investments</h2>
@@ -783,24 +951,42 @@
 
                 <!-- Oil Drilling Card -->
                 <div
-                    style="background: rgba(255,255,255,0.05); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 16px; padding: 2rem; backdrop-filter: blur(10px);">
+                    style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 16px; padding: 2rem; backdrop-filter: blur(10px);">
                     <div
                         style="height: 200px; background: url('{% static 'images/oil-refinery.jpg' %}') center/cover no-repeat; border-radius: 12px; margin-bottom: 1.5rem; position: relative;">
                         <div
-                            style="position: absolute; bottom: 10px; left: 10px; background: rgba(245, 158, 11, 0.9); color: #000; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">
+                            style="position: absolute; bottom: 10px; left: 10px; background: rgba(255, 215, 0, 0.9); color: #000; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">
                             Active Operations</div>
+                        <!-- Alt text handled via CSS background. Actual image: Oil refinery and drilling operations powering investment returns -->
                     </div>
                     <h3 style="color: #fff; font-size: 1.4rem; margin-bottom: 1rem;">🛢️ Oil Well Drilling</h3>
                     <p style="color: #94a3b8; line-height: 1.7; margin-bottom: 1rem;">Our teams operate drilling rigs
                         across Texas, North Sea, and Middle East regions. Traditional rotary drilling combined with
                         modern directional drilling technology ensures maximum extraction efficiency.</p>
+                    
+                    <!-- Production Stats with Captions -->
+                    <div style="background: rgba(255,215,0,0.08); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; border: 1px solid rgba(255,215,0,0.2);">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                            <span style="font-size: 1.5rem;">🌍</span>
+                            <p style="color: #FFD700; font-size: 0.95rem; margin: 0; line-height: 1.5; font-weight: 600;">
+                                Our drilling operations span 15 oil fields globally
+                            </p>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <span style="font-size: 1.5rem;">📊</span>
+                            <p style="color: #00A86B; font-size: 0.95rem; margin: 0; line-height: 1.5; font-weight: 600;">
+                                Annual production: 2.5M barrels
+                            </p>
+                        </div>
+                    </div>
+                    
                     <div style="display: flex; gap: 20px; margin-top: 1.5rem;">
                         <div style="text-align: center;">
-                            <div style="color: #F59E0B; font-size: 1.5rem; font-weight: 700;">47</div>
+                            <div style="color: #FFD700; font-size: 1.5rem; font-weight: 700;">47</div>
                             <div style="color: #64748b; font-size: 0.8rem;">Active Wells</div>
                         </div>
                         <div style="text-align: center;">
-                            <div style="color: #10B981; font-size: 1.5rem; font-weight: 700;">2.1M</div>
+                            <div style="color: #00A86B; font-size: 1.5rem; font-weight: 700;">2.1M</div>
                             <div style="color: #64748b; font-size: 0.8rem;">Barrels/Year</div>
                         </div>
                         <div style="text-align: center;">
@@ -812,12 +998,13 @@
 
                 <!-- Renewable Energy Card -->
                 <div
-                    style="background: rgba(255,255,255,0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 16px; padding: 2rem; backdrop-filter: blur(10px);">
+                    style="background: rgba(255,255,255,0.05); border: 1px solid rgba(0, 168, 107, 0.3); border-radius: 16px; padding: 2rem; backdrop-filter: blur(10px);">
                     <div
                         style="height: 200px; background: url('{% static 'images/solar-panels.jpg' %}') center/cover no-repeat; border-radius: 12px; margin-bottom: 1.5rem; position: relative;">
                         <div
-                            style="position: absolute; bottom: 10px; left: 10px; background: rgba(16, 185, 129, 0.9); color: #fff; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">
+                            style="position: absolute; bottom: 10px; left: 10px; background: rgba(0, 168, 107, 0.9); color: #fff; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">
                             Green Energy</div>
+                        <!-- Alt text handled via CSS background. Actual image: Solar panel farm generating renewable energy for sustainable investments -->
                     </div>
                     <h3 style="color: #fff; font-size: 1.4rem; margin-bottom: 1rem;">⚡ Solar & Wind Farms</h3>
                     <p style="color: #94a3b8; line-height: 1.7; margin-bottom: 1rem;">Investing in sustainable energy
@@ -825,11 +1012,11 @@
                         Atlantic. Clean energy for a sustainable future.</p>
                     <div style="display: flex; gap: 20px; margin-top: 1.5rem;">
                         <div style="text-align: center;">
-                            <div style="color: #10B981; font-size: 1.5rem; font-weight: 700;">12</div>
+                            <div style="color: #00A86B; font-size: 1.5rem; font-weight: 700;">12</div>
                             <div style="color: #64748b; font-size: 0.8rem;">Solar Farms</div>
                         </div>
                         <div style="text-align: center;">
-                            <div style="color: #10B981; font-size: 1.5rem; font-weight: 700;">850MW</div>
+                            <div style="color: #00A86B; font-size: 1.5rem; font-weight: 700;">850MW</div>
                             <div style="color: #64748b; font-size: 0.8rem;">Capacity</div>
                         </div>
                         <div style="text-align: center;">
@@ -862,7 +1049,7 @@
                             <div style="color: #64748b; font-size: 0.8rem;">Cubic Ft/Day</div>
                         </div>
                         <div style="text-align: center;">
-                            <div style="color: #F59E0B; font-size: 1.5rem; font-weight: 700;">22%</div>
+                            <div style="color: #FFD700; font-size: 1.5rem; font-weight: 700;">22%</div>
                             <div style="color: #64748b; font-size: 0.8rem;">Avg ROI</div>
                         </div>
                     </div>
@@ -873,7 +1060,7 @@
             <div
                 style="margin-top: 60px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
                 <div>
-                    <h3 style="color: #F59E0B; font-size: 1.8rem; margin-bottom: 1.5rem;">How Our Oil Drilling Works
+                    <h3 style="color: #FFD700; font-size: 1.8rem; margin-bottom: 1.5rem;">How Our Oil Drilling Works
                     </h3>
                     <p style="color: #e2e8f0; line-height: 1.8; margin-bottom: 1.5rem;">Our expert teams operate
                         specialized rotary drilling rigs that bore deep into the earth's crust. A crew of 5-7 skilled
@@ -890,16 +1077,16 @@
                 <div
                     style="height: 300px; background: url('{% static 'images/oil-rig.jpg' %}') center/cover no-repeat; border-radius: 12px; position: relative;">
                     <div
-                        style="position: absolute; inset: 0; background: linear-gradient(45deg, rgba(245, 158, 11, 0.3), transparent); border-radius: 12px;">
+                        style="position: absolute; inset: 0; background: linear-gradient(45deg, rgba(255, 215, 0, 0.3), transparent); border-radius: 12px;">
                     </div>
                 </div>
             </div>
 
             <!-- Oil Workers Team Showcase -->
             <div
-                style="margin-top: 40px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 16px; padding: 2rem;">
+                style="margin-top: 40px; background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(255, 215, 0, 0.2); border-radius: 16px; padding: 2rem;">
                 <div style="text-align: center; margin-bottom: 2rem;">
-                    <h3 style="color: #F59E0B; font-size: 1.5rem; margin-bottom: 0.5rem;">👷 Our Drilling Teams at Work
+                    <h3 style="color: #FFD700; font-size: 1.5rem; margin-bottom: 0.5rem;">👷 Our Drilling Teams at Work
                     </h3>
                     <p style="color: #94a3b8; font-size: 0.95rem;">Skilled workers operating rotary drilling equipment
                         to extract oil from deep underground</p>
@@ -907,38 +1094,38 @@
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
                     <div style="position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;">
                         <img src="{% static 'images/Oil Rig/download (4).jpg' %}"
-                            alt="Oil rig workers operating drilling equipment" width="400" height="300"
+                            alt="Professional oil rig workers operating rotary drilling equipment in Texas oil field - Elite Wealth Capital energy investments" width="400" height="300"
                             style="width: 100%; height: 100%; object-fit: cover;">
                         <div
                             style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);">
                         </div>
                         <div style="position: absolute; bottom: 15px; left: 15px; right: 15px;">
-                            <div style="color: #F59E0B; font-weight: 600; font-size: 0.85rem;">Rotary Drill Operation
+                            <div style="color: #FFD700; font-weight: 600; font-size: 0.85rem;">Rotary Drill Operation
                             </div>
                             <div style="color: #fff; font-size: 0.75rem; opacity: 0.9;">Texas, USA Field</div>
                         </div>
                     </div>
                     <div style="position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;">
                         <img src="{% static 'images/oil-refinery.jpg' %}"
-                            alt="Drilling crew positioning iron pipes" width="400" height="300"
+                            alt="Oil drilling crew positioning iron pipes at North Sea platform - Expert team extracting crude oil for investor returns" width="400" height="300"
                             style="width: 100%; height: 100%; object-fit: cover;">
                         <div
                             style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);">
                         </div>
                         <div style="position: absolute; bottom: 15px; left: 15px; right: 15px;">
-                            <div style="color: #F59E0B; font-weight: 600; font-size: 0.85rem;">Pipe Rotation Team</div>
+                            <div style="color: #FFD700; font-weight: 600; font-size: 0.85rem;">Pipe Rotation Team</div>
                             <div style="color: #fff; font-size: 0.75rem; opacity: 0.9;">North Sea Platform</div>
                         </div>
                     </div>
                     <div style="position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;">
                         <img src="{% static 'images/oil-rig.jpg' %}"
-                            alt="Oil extraction machinery and workers" width="400" height="300"
+                            alt="Deep bore oil extraction machinery and workers at Middle East drilling site - Modern directional drilling technology" width="400" height="300"
                             style="width: 100%; height: 100%; object-fit: cover;">
                         <div
                             style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);">
                         </div>
                         <div style="position: absolute; bottom: 15px; left: 15px; right: 15px;">
-                            <div style="color: #F59E0B; font-weight: 600; font-size: 0.85rem;">Deep Bore Extraction
+                            <div style="color: #FFD700; font-weight: 600; font-size: 0.85rem;">Deep Bore Extraction
                             </div>
                             <div style="color: #fff; font-size: 0.75rem; opacity: 0.9;">Middle East Operations</div>
                         </div>
@@ -954,185 +1141,582 @@
             <!-- Energy Investment CTA -->
             <div style="text-align: center; margin-top: 50px;">
                 <a href="/investment-plans"
-                    style="display: inline-block; background: linear-gradient(135deg, #F59E0B, #D97706); color: #000; padding: 1rem 2.5rem; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 1.1rem; transition: all 0.3s;">
+                    style="display: inline-block; background: linear-gradient(135deg, #FFD700, #DAA520); color: #000; padding: 1rem 2.5rem; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 1.1rem; transition: all 0.3s;">
                     Explore Energy Investments →
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- =================== CORE INVESTMENT SECTORS =================== -->
-    <section style="background:linear-gradient(180deg,#0a1628 0%,#0f1926 100%);padding:100px 0;">
+    <!-- =================== LIVE CRYPTO TRADING CHARTS SECTION =================== -->
+    <!-- =================== HOW IT WORKS SECTION =================== -->
+    <section class="section how-it-works-section">
         <div class="container">
-            <!-- Section header -->
-            <div style="text-align:center;margin-bottom:60px;">
-                <span style="display:inline-block;color:#d4af37;font-size:0.85rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Diversified Portfolio</span>
-                <h2 style="color:#fff;font-size:2.5rem;font-weight:800;margin:0 0 16px;">Core Investment Sectors</h2>
-                <p style="color:#94a3b8;font-size:1.1rem;max-width:620px;margin:0 auto;line-height:1.7;">We strategically diversify capital across four high-growth industries to maximise stability and compound returns.</p>
+            <div class="section-header text-center">
+                <h2>How Elite Wealth Capital Works</h2>
+                <p>Start earning in 4 simple steps</p>
             </div>
 
-            <!-- 4-column card grid -->
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
+            <div class="steps-grid grid grid-4">
+                <div class="step-card card slide-in-left">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">📝</div>
+                    <h3>Create Account</h3>
+                    <p>Sign up in 2 minutes with just your email</p>
+                    <div class="step-arrow">→</div>
+                </div>
 
-                <!-- Agricultural Technology -->
-                <div class="sector-card sector-card-agri" style="background:linear-gradient(135deg,rgba(16,185,129,0.08) 0%,rgba(5,150,105,0.15) 100%);border:1px solid rgba(16,185,129,0.3);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform 0.3s,box-shadow 0.3s;">
-                    <div style="height:200px;background:url('{% static 'images/land-o-lakes-inc-iFx1WMvjvpw-unsplash.jpg' %}') center/cover no-repeat;position:relative;">
-                        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(10,16,32,0.95));"></div>
-                        <div style="position:absolute;bottom:16px;left:16px;background:rgba(16,185,129,0.9);color:#fff;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:600;">🌾 Agriculture</div>
+                <div class="step-card card fade-in">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">💰</div>
+                    <h3>Add Funds</h3>
+                    <p>Deposit via cryptocurrency or bank transfer</p>
+                    <div class="step-arrow">→</div>
+                </div>
+
+                <div class="step-card card fade-in">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">📈</div>
+                    <h3>Invest & Earn</h3>
+                    <p>Earn up to 20% returns with our expert strategies</p>
+                    <div class="step-arrow">→</div>
+                </div>
+
+                <div class="step-card card slide-in-right">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">🏦</div>
+                    <h3>Withdraw Profits</h3>
+                    <p>Request withdrawal anytime, process in minutes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =================== CORE INVESTMENT SECTORS =================== -->
+    <section class="section investment-sectors" style="background: #f8fafc; padding: 100px 0;">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <span
+                    style="color: #3b82f6; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Diversified
+                    Portfolio</span>
+                <h2 style="color: #0f1926; font-size: 2.5rem; margin-top: 0.5rem;">Core Investment Sectors</h2>
+                <p style="color: #64748b; max-width: 600px; margin: 0 auto; font-size: 1.1rem;">We strategically
+                    diversify capital across three high-growth industries to maximize stability and returns.</p>
+            </div>
+
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="{% static 'images/land-o-lakes-inc-iFx1WMvjvpw-unsplash.jpg' %}"
+                        alt="Sustainable Agriculture" width="1200" height="600" loading="lazy"
+                        style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                </div>
+                <div class="col-lg-6 ps-lg-5">
+                    <div
+                        style="background: #e0f2fe; width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <span style="font-size: 30px;">🌾</span>
                     </div>
-                    <div style="padding:1.75rem;flex:1;display:flex;flex-direction:column;">
-                        <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin:0 0 12px;">Agricultural Technology</h3>
-                        <p style="color:#94a3b8;font-size:0.92rem;line-height:1.7;flex:1;margin:0 0 20px;">Sustainable farming, grain futures, vertical farming in Singapore, and livestock across South America.</p>
-                        <ul style="list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:8px;">
-                            <li style="color:#cbd5e1;font-size:0.88rem;display:flex;align-items:center;gap:8px;"><span style="color:#10b981;font-weight:700;">✓</span> Smart Irrigation Systems</li>
-                            <li style="color:#cbd5e1;font-size:0.88rem;display:flex;align-items:center;gap:8px;"><span style="color:#10b981;font-weight:700;">✓</span> Organic Crop Yield Optimisation</li>
-                            <li style="color:#cbd5e1;font-size:0.88rem;display:flex;align-items:center;gap:8px;"><span style="color:#10b981;font-weight:700;">✓</span> Global Commodity Trading</li>
-                        </ul>
-                        <div style="display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);">
-                            <span style="color:#10b981;font-weight:700;font-size:1.1rem;">18–25% Returns</span>
-                            <a href="/investment-plans" style="color:#10b981;font-size:0.85rem;font-weight:600;text-decoration:none;">Invest →</a>
+                    <h3 style="color: #0f1926; font-size: 2rem; margin-bottom: 1rem;">Agricultural Technology</h3>
+                    <p style="color: #334155; font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                        We invest heavily in sustainable farming technology and global food supply chains. Our
+                        agricultural portfolio spans vertical farming projects in Singapore, grain reserves in Ukraine,
+                        and sustainable livestock in South America.
+                    </p>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 2rem;">
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; color: #475569;"><span
+                                style="color: #00A86B; margin-right: 10px;">✓</span> Smart Irrigation Systems</li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; color: #475569;"><span
+                                style="color: #00A86B; margin-right: 10px;">✓</span> Organic Crop Yield Optimization
+                        </li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; color: #475569;"><span
+                                style="color: #00A86B; margin-right: 10px;">✓</span> Global Commodity Trading</li>
+                    </ul>
+                    <a href="/investment-plans" class="btn btn-primary">Invest in Agriculture →</a>
+                </div>
+            </div>
+
+            <div class="row align-items-center mb-5" style="flex-direction: row-reverse;">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="{% static 'images/real-estate-commercial.jpg' %}"
+                        alt="Prime luxury real estate - Commercial office spaces and residential developments in London, Dubai, and New York managed by Elite Wealth Capital" width="1200" height="600" loading="lazy"
+                        style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                </div>
+                <div class="col-lg-6 pe-lg-5">
+                    <div
+                        style="background: #fef3c7; width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <span style="font-size: 30px;">🏢</span>
+                    </div>
+                    <h3 style="color: #0f1926; font-size: 2rem; margin-bottom: 1rem;">Prime Real Estate</h3>
+                    <p style="color: #334155; font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                        Our real estate division manages a growing portfolio of commercial and residential assets. From
+                        luxury developments in Dubai to commercial hubs in London, we secure tangible assets that
+                        appreciate over time.
+                    </p>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 2rem;">
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; color: #475569;"><span
+                                style="color: #00A86B; margin-right: 10px;">✓</span> Commercial Office Spaces</li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; color: #475569;"><span
+                                style="color: #00A86B; margin-right: 10px;">✓</span> Luxury Residential Developments
+                        </li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; color: #475569;"><span
+                                style="color: #00A86B; margin-right: 10px;">✓</span> Urban Development Projects</li>
+                    </ul>
+                    
+                    <!-- Real Estate Valuation Trends -->
+                    <div style="background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(0, 168, 107, 0.1)); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.3); margin-bottom: 1.5rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <span style="font-size: 2rem;">📊</span>
+                            <h4 style="color: #0f1926; font-size: 1.2rem; margin: 0;">Property Valuation Trends</h4>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                            <div style="text-align: center;">
+                                <div style="color: #00A86B; font-size: 1.5rem; font-weight: 700;">+12%</div>
+                                <div style="color: #475569; font-size: 0.85rem;">London YoY</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="color: #00A86B; font-size: 1.5rem; font-weight: 700;">+8%</div>
+                                <div style="color: #475569; font-size: 0.85rem;">Dubai YoY</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="color: #00A86B; font-size: 1.5rem; font-weight: 700;">+15%</div>
+                                <div style="color: #475569; font-size: 0.85rem;">NYC YoY</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="/investment-plans" class="btn btn-primary">View Real Estate Plans →</a>
+                </div>
+            </div>
+            
+            <!-- Property Showcase Gallery -->
+            <div style="margin-top: 4rem; background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(59,130,246,0.05)); border-radius: 20px; padding: 3rem 2rem; border: 1px solid rgba(255,215,0,0.2);">
+                <div style="text-align: center; margin-bottom: 2.5rem;">
+                    <span style="color: #FFD700; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 0.5rem;">🏗️ Our Portfolio</span>
+                    <h3 style="color: #0f1926; font-size: 2rem; font-weight: 700; margin: 0 0 0.75rem;">Premium Property Showcase</h3>
+                    <p style="color: #475569; font-size: 1rem; max-width: 700px; margin: 0 auto;">Explore our curated selection of high-value commercial and residential properties across prime global locations</p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+                    <!-- Property 1: Luxury Commercial -->
+                    <div style="background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                        <div style="position: relative; height: 220px; overflow: hidden;">
+                            <img src="{% static 'images/real-estate-commercial.jpg' %}" 
+                                 alt="Luxury commercial office tower in London financial district" 
+                                 width="400" height="220" loading="lazy" 
+                                 style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                            <div style="position: absolute; top: 12px; right: 12px; background: rgba(255,215,0,0.95); color: #000; padding: 0.4rem 0.9rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                                Commercial
+                            </div>
+                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%); padding: 1rem;">
+                                <div style="color: #fff; font-weight: 700; font-size: 1.1rem;">London Financial District</div>
+                                <div style="color: #FFD700; font-size: 0.85rem;">🇬🇧 United Kingdom</div>
+                            </div>
+                        </div>
+                        <div style="padding: 1.5rem;">
+                            <h4 style="color: #0f1926; font-size: 1.2rem; margin: 0 0 0.75rem; font-weight: 700;">Premium Office Tower</h4>
+                            <p style="color: #64748b; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+                                Grade A commercial office space in the heart of London's financial district. 45,000 sq ft with blue-chip tenants.
+                            </p>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap; padding-top: 0.75rem; border-top: 1px solid rgba(0,0,0,0.08);">
+                                <div style="flex: 1; min-width: 80px;">
+                                    <div style="color: #00A86B; font-weight: 700; font-size: 1.1rem;">+12%</div>
+                                    <div style="color: #64748b; font-size: 0.75rem;">YoY Growth</div>
+                                </div>
+                                <div style="flex: 1; min-width: 80px;">
+                                    <div style="color: #3B82F6; font-weight: 700; font-size: 1.1rem;">98%</div>
+                                    <div style="color: #64748b; font-size: 0.75rem;">Occupancy</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 2: Luxury Residential -->
+                    <div style="background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                        <div style="position: relative; height: 220px; overflow: hidden;">
+                            <img src="{% static 'images/real-estate-luxury.jpg' %}" 
+                                 alt="Luxury residential apartments in Dubai Marina with waterfront views" 
+                                 width="400" height="220" loading="lazy" 
+                                 style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                            <div style="position: absolute; top: 12px; right: 12px; background: rgba(0,168,107,0.95); color: #fff; padding: 0.4rem 0.9rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                                Residential
+                            </div>
+                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%); padding: 1rem;">
+                                <div style="color: #fff; font-weight: 700; font-size: 1.1rem;">Dubai Marina</div>
+                                <div style="color: #FFD700; font-size: 0.85rem;">🇦🇪 United Arab Emirates</div>
+                            </div>
+                        </div>
+                        <div style="padding: 1.5rem;">
+                            <h4 style="color: #0f1926; font-size: 1.2rem; margin: 0 0 0.75rem; font-weight: 700;">Waterfront Residences</h4>
+                            <p style="color: #64748b; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+                                Ultra-luxury apartments with panoramic marina views. Premium finishes, 24/7 concierge, and resort-style amenities.
+                            </p>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap; padding-top: 0.75rem; border-top: 1px solid rgba(0,0,0,0.08);">
+                                <div style="flex: 1; min-width: 80px;">
+                                    <div style="color: #00A86B; font-weight: 700; font-size: 1.1rem;">+8%</div>
+                                    <div style="color: #64748b; font-size: 0.75rem;">YoY Growth</div>
+                                </div>
+                                <div style="flex: 1; min-width: 80px;">
+                                    <div style="color: #FFD700; font-weight: 700; font-size: 1.1rem;">6.5%</div>
+                                    <div style="color: #64748b; font-size: 0.75rem;">Rental Yield</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 3: Mixed-Use Development -->
+                    <div style="background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                        <div style="position: relative; height: 220px; overflow: hidden;">
+                            <img src="{% static 'images/real-estate-commercial.jpg' %}" 
+                                 alt="Modern mixed-use development in New York City with retail and office space" 
+                                 width="400" height="220" loading="lazy" 
+                                 style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                            <div style="position: absolute; top: 12px; right: 12px; background: rgba(59,130,246,0.95); color: #fff; padding: 0.4rem 0.9rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                                Mixed-Use
+                            </div>
+                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%); padding: 1rem;">
+                                <div style="color: #fff; font-weight: 700; font-size: 1.1rem;">New York City</div>
+                                <div style="color: #FFD700; font-size: 0.85rem;">🇺🇸 United States</div>
+                            </div>
+                        </div>
+                        <div style="padding: 1.5rem;">
+                            <h4 style="color: #0f1926; font-size: 1.2rem; margin: 0 0 0.75rem; font-weight: 700;">Manhattan Hub</h4>
+                            <p style="color: #64748b; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+                                Prime mixed-use development combining retail, office, and residential spaces in the heart of Manhattan's business district.
+                            </p>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap; padding-top: 0.75rem; border-top: 1px solid rgba(0,0,0,0.08);">
+                                <div style="flex: 1; min-width: 80px;">
+                                    <div style="color: #00A86B; font-weight: 700; font-size: 1.1rem;">+15%</div>
+                                    <div style="color: #64748b; font-size: 0.75rem;">YoY Growth</div>
+                                </div>
+                                <div style="flex: 1; min-width: 80px;">
+                                    <div style="color: #3B82F6; font-weight: 700; font-size: 1.1rem;">$2.8M</div>
+                                    <div style="color: #64748b; font-size: 0.75rem;">Avg Unit</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(0,0,0,0.1);">
+                    <p style="color: #475569; font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        🏆 <strong style="color: #0f1926;">Portfolio Value:</strong> $3.2B+ across 85+ premium properties worldwide
+                    </p>
+                    <a href="/investment-plans" style="display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; padding: 0.9rem 2rem; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 1rem; box-shadow: 0 8px 20px rgba(255,215,0,0.3); transition: all 0.3s ease;">
+                        Explore All Properties →
+                    </a>
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="{% static 'images/hero-crypto.jpg' %}"
+                        alt="Cryptocurrency trading and digital asset management - Bitcoin, Ethereum, and blockchain technology investments with Elite Wealth Capital" width="1200" height="600" loading="lazy"
+                        style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                </div>
+                <div class="col-lg-6 ps-lg-5">
+                    <div
+                        style="background: #eff6ff; width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <span style="font-size: 30px;">⚡</span>
+                    </div>
+                    <h3 style="color: #0f1926; font-size: 2rem; margin-bottom: 1rem;">Digital Assets & Mining</h3>
+                    <p style="color: #334155; font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                        We operate industrial-scale Bitcoin mining facilities in Iceland and Texas, leveraging green
+                        energy for sustainable mining. Our high-frequency trading algorithms capitalize on crypto market
+                        volatility 24/7.
+                    </p>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 2rem;">
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; color: #475569;"><span
+                                style="color: #00A86B; margin-right: 10px;">✓</span> Green Energy Bitcoin Mining</li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; color: #475569;"><span
+                                style="color: #00A86B; margin-right: 10px;">✓</span> DeFi Yield Farming</li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; color: #475569;"><span
+                                style="color: #00A86B; margin-right: 10px;">✓</span> AI-Driven Arbitrage Trading</li>
+                    </ul>
+                    <a href="/investment-plans" class="btn btn-primary">Start Mining Now →</a>
+                </div>
+            </div>
+
+            <!-- Oil & Gas Section -->
+            <div class="row align-items-center mt-5" style="flex-direction: row-reverse;">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="{% static 'images/oil-refinery.jpg' %}"
+                        alt="Oil and Gas Operations" width="1200" height="600" loading="lazy"
+                        style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                </div>
+                <div class="col-lg-6 pe-lg-5">
+                    <div
+                        style="background: #fef3c7; width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <span style="font-size: 30px;">⛽</span>
+                    </div>
+                    <h3 style="color: #0f1926; font-size: 2rem; margin-bottom: 1rem;">Oil & Gas Investments</h3>
+                    <p style="color: #334155; font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                        Strategic investments in upstream and downstream petroleum operations. Our energy portfolio
+                        includes drilling rights in Texas, refinery stakes in the Middle East, and renewable
+                        energy transition projects.
+                    </p>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 2rem;">
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; color: #475569;"><span
+                                style="color: #00A86B; margin-right: 10px;">✓</span> Upstream Drilling Operations</li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; color: #475569;"><span
+                                style="color: #00A86B; margin-right: 10px;">✓</span> Refinery & Pipeline Assets</li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; color: #475569;"><span
+                                style="color: #00A86B; margin-right: 10px;">✓</span> Energy Transition Projects</li>
+                    </ul>
+                    <a href="/investment-plans" class="btn btn-primary">Explore Energy Investments →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =================== DIVERSIFIED PORTFOLIOS SECTION =================== -->
+    <section class="section portfolios-section" style="background: #f8fafc; padding: 80px 0;">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Diversified Global Portfolios</h2>
+                <p>Beyond crypto: sustainable wealth through tangible assets</p>
+            </div>
+
+            <div class="row"
+                style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; align-items: stretch;">
+                <!-- Agriculture -->
+                <div class="col-md-5" style="flex: 1; min-width: 300px; max-width: 550px;">
+                    <div
+                        style="background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); height: 100%; display: flex; flex-direction: column;">
+                        <img src="{% static 'images/land-o-lakes-inc-iFx1WMvjvpw-unsplash.jpg' %}"
+                            alt="Sustainable Agriculture" width="550" height="250" loading="lazy" style="width: 100%; height: 250px; object-fit: cover;">
+                        <div style="padding: 2rem; flex: 1;">
+                            <h3 style="color: #0f1926; font-size: 1.5rem; margin-bottom: 1rem;">Sustainable Agriculture
+                            </h3>
+                            <p style="color: #64748b; margin-bottom: 1.5rem;">Invest in the future of food security. Our
+                                agricultural portfolio spans 12,000+ hectares of high-yield farmland across Europe and
+                                South America, focusing on organic grains, vertical farming technology, and sustainable
+                                livestock.</p>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 0.5rem; color: #475569;">✅ <strong>Fixed Assets:</strong> Land
+                                    ownership & machinery</li>
+                                <li style="margin-bottom: 0.5rem; color: #475569;">✅ <strong>Global Operations:</strong>
+                                    UK, Brazil, Ukraine</li>
+                                <li style="margin-bottom: 0.5rem; color: #475569;">✅ <strong>Tax Efficient:</strong>
+                                    Agricultural reliefs applied</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Prime Real Estate -->
-                <div class="sector-card sector-card-re" style="background:linear-gradient(135deg,rgba(245,158,11,0.08) 0%,rgba(217,119,6,0.15) 100%);border:1px solid rgba(245,158,11,0.3);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform 0.3s,box-shadow 0.3s;">
-                    <div style="height:200px;background:url('{% static 'images/real-estate-luxury.jpg' %}') center/cover no-repeat;position:relative;">
-                        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(10,16,32,0.95));"></div>
-                        <div style="position:absolute;bottom:16px;left:16px;background:rgba(245,158,11,0.9);color:#000;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:600;">🏢 Real Estate</div>
-                    </div>
-                    <div style="padding:1.75rem;flex:1;display:flex;flex-direction:column;">
-                        <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin:0 0 12px;">Prime Real Estate</h3>
-                        <p style="color:#94a3b8;font-size:0.92rem;line-height:1.7;flex:1;margin:0 0 20px;">High-value commercial and residential developments in tier-1 cities. Luxury apartments, data centres, and logistics hubs.</p>
-                        <ul style="list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:8px;">
-                            <li style="color:#cbd5e1;font-size:0.88rem;display:flex;align-items:center;gap:8px;"><span style="color:#f59e0b;font-weight:700;">✓</span> Premium Locations: London, Dubai, New York</li>
-                            <li style="color:#cbd5e1;font-size:0.88rem;display:flex;align-items:center;gap:8px;"><span style="color:#f59e0b;font-weight:700;">✓</span> Consistent Rental Yield</li>
-                            <li style="color:#cbd5e1;font-size:0.88rem;display:flex;align-items:center;gap:8px;"><span style="color:#f59e0b;font-weight:700;">✓</span> Commercial &amp; Residential Development</li>
-                        </ul>
-                        <div style="display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);">
-                            <span style="color:#f59e0b;font-weight:700;font-size:1.1rem;">15–22% Returns</span>
-                            <a href="/investment-plans" style="color:#f59e0b;font-size:0.85rem;font-weight:600;text-decoration:none;">Invest →</a>
+                <!-- Real Estate -->
+                <div class="col-md-5" style="flex: 1; min-width: 300px; max-width: 550px;">
+                    <div
+                        style="background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); height: 100%; display: flex; flex-direction: column;">
+                        <img src="{% static 'images/real-estate-luxury.jpg' %}"
+                            alt="Luxury residential real estate investments - High-value apartments and commercial properties in tier-1 cities worldwide" width="550" height="250" loading="lazy" style="width: 100%; height: 250px; object-fit: cover;">
+                        <div style="padding: 2rem; flex: 1;">
+                            <h3 style="color: #0f1926; font-size: 1.5rem; margin-bottom: 1rem;">Prime Real Estate</h3>
+                            <p style="color: #64748b; margin-bottom: 1.5rem;">High-value commercial and residential
+                                property developments in tier-1 cities. Our REIT-modelled portfolio offers stability and
+                                capital appreciation through luxury apartments, data centers, and logistic hubs.</p>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 0.5rem; color: #475569;">✅ <strong>Premium Locations:</strong>
+                                    London, Dubai, New York</li>
+                                <li style="margin-bottom: 0.5rem; color: #475569;">✅ <strong>Rental Yield:</strong>
+                                    Consistent monthly income</li>
+                                <li style="margin-bottom: 0.5rem; color: #475569;">✅ <strong>Development:</strong>
+                                    Commercial & Residential</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-
-                <!-- Digital Assets & Mining -->
-                <div class="sector-card sector-card-crypto" style="background:linear-gradient(135deg,rgba(59,130,246,0.08) 0%,rgba(30,58,138,0.15) 100%);border:1px solid rgba(59,130,246,0.3);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform 0.3s,box-shadow 0.3s;">
-                    <div style="height:200px;background:url('{% static 'images/hero-crypto.jpg' %}') center/cover no-repeat;position:relative;">
-                        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(10,16,32,0.95));"></div>
-                        <div style="position:absolute;bottom:16px;left:16px;background:rgba(59,130,246,0.9);color:#fff;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:600;">⚡ Digital Assets</div>
-                    </div>
-                    <div style="padding:1.75rem;flex:1;display:flex;flex-direction:column;">
-                        <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin:0 0 12px;">Digital Assets &amp; Mining</h3>
-                        <p style="color:#94a3b8;font-size:0.92rem;line-height:1.7;flex:1;margin:0 0 20px;">Industrial-scale Bitcoin mining in Iceland and Texas using green energy, plus AI-driven algorithmic trading 24/7.</p>
-                        <ul style="list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:8px;">
-                            <li style="color:#cbd5e1;font-size:0.88rem;display:flex;align-items:center;gap:8px;"><span style="color:#3b82f6;font-weight:700;">✓</span> Green Energy Bitcoin Mining</li>
-                            <li style="color:#cbd5e1;font-size:0.88rem;display:flex;align-items:center;gap:8px;"><span style="color:#3b82f6;font-weight:700;">✓</span> DeFi Yield Farming</li>
-                            <li style="color:#cbd5e1;font-size:0.88rem;display:flex;align-items:center;gap:8px;"><span style="color:#3b82f6;font-weight:700;">✓</span> AI-Driven Arbitrage Trading</li>
-                        </ul>
-                        <div style="display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);">
-                            <span style="color:#3b82f6;font-weight:700;font-size:1.1rem;">Up to 20% Returns</span>
-                            <a href="/investment-plans" style="color:#3b82f6;font-size:0.85rem;font-weight:600;text-decoration:none;">Invest →</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Oil & Gas -->
-                <div class="sector-card sector-card-oil" style="background:linear-gradient(135deg,rgba(239,68,68,0.08) 0%,rgba(185,28,28,0.15) 100%);border:1px solid rgba(239,68,68,0.3);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform 0.3s,box-shadow 0.3s;">
-                    <div style="height:200px;background:url('{% static 'images/oil-refinery.jpg' %}') center/cover no-repeat;position:relative;">
-                        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(10,16,32,0.95));"></div>
-                        <div style="position:absolute;bottom:16px;left:16px;background:rgba(239,68,68,0.9);color:#fff;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:600;">🛢️ Oil &amp; Gas</div>
-                    </div>
-                    <div style="padding:1.75rem;flex:1;display:flex;flex-direction:column;">
-                        <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin:0 0 12px;">Oil &amp; Gas Investments</h3>
-                        <p style="color:#94a3b8;font-size:0.92rem;line-height:1.7;flex:1;margin:0 0 20px;">Drilling rights in Texas, refinery stakes in the Middle East, and renewable energy transition projects across three continents.</p>
-                        <ul style="list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:8px;">
-                            <li style="color:#cbd5e1;font-size:0.88rem;display:flex;align-items:center;gap:8px;"><span style="color:#ef4444;font-weight:700;">✓</span> Upstream Drilling Operations</li>
-                            <li style="color:#cbd5e1;font-size:0.88rem;display:flex;align-items:center;gap:8px;"><span style="color:#ef4444;font-weight:700;">✓</span> Refinery &amp; Pipeline Assets</li>
-                            <li style="color:#cbd5e1;font-size:0.88rem;display:flex;align-items:center;gap:8px;"><span style="color:#ef4444;font-weight:700;">✓</span> Energy Transition Projects</li>
-                        </ul>
-                        <div style="display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);">
-                            <span style="color:#ef4444;font-weight:700;font-size:1.1rem;">18–22% Returns</span>
-                            <a href="/investment-plans" style="color:#ef4444;font-size:0.85rem;font-weight:600;text-decoration:none;">Invest →</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div><!-- /grid -->
-
-            <!-- Bottom CTA strip -->
-            <div style="margin-top:56px;padding:40px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;">
-                <div>
-                    <h3 style="color:#fff;font-size:1.5rem;font-weight:700;margin:0 0 8px;">Start Building Your Portfolio Today</h3>
-                    <p style="color:#94a3b8;margin:0;font-size:0.95rem;">Join 50,000+ investors already earning across all four sectors.</p>
-                </div>
-                <a href="{% url 'signup' %}" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#d4af37,#b8860b);color:#000;padding:14px 32px;border-radius:50px;font-weight:700;font-size:1rem;text-decoration:none;white-space:nowrap;">Get Started Free →</a>
             </div>
         </div>
     </section>
 
     <!-- =================== FEATURES SECTION =================== -->
-    <section style="background:linear-gradient(180deg,#0f1926 0%,#1a1a2e 100%);padding:100px 0;">
+    <section class="section features-section">
         <div class="container">
-            <!-- Section header -->
-            <div style="text-align:center;margin-bottom:60px;">
-                <span style="display:inline-block;color:#d4af37;font-size:0.85rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Platform Benefits</span>
-                <h2 style="color:#fff;font-size:2.5rem;font-weight:800;margin:0 0 16px;">Why Choose Elite Wealth Capital?</h2>
-                <p style="color:#94a3b8;font-size:1.1rem;max-width:580px;margin:0 auto;line-height:1.7;">Industry-leading features that put you in control of your financial future.</p>
+            <div class="section-header text-center">
+                <h2>Why Choose Elite Wealth Capital?</h2>
+                <p>Industry-leading platform with unmatched benefits</p>
             </div>
 
-            <!-- Features grid: 4 cols on desktop, 2 on tablet, 1 on mobile -->
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
-
-                <div class="feature-card-dark" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;gap:14px;transition:transform 0.3s,border-color 0.3s;">
-                    <div style="font-size:2.2rem;">🔒</div>
-                    <h3 style="color:#fff;font-size:1.05rem;font-weight:700;margin:0;">Bank-Level Security</h3>
-                    <p style="color:#94a3b8;font-size:0.88rem;line-height:1.65;margin:0;">256-bit SSL encryption, cold storage wallets, and multi-factor authentication protect every transaction.</p>
+            <div class="features-grid grid grid-3">
+                <div class="feature-card card-glass card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Bank-Level Security</h3>
+                    <p>256-bit SSL encryption, cold storage wallets, and multi-factor authentication protect your
+                        investments.</p>
                 </div>
 
-                <div class="feature-card-dark" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;gap:14px;transition:transform 0.3s,border-color 0.3s;">
-                    <div style="font-size:2.2rem;">📈</div>
-                    <h3 style="color:#fff;font-size:1.05rem;font-weight:700;margin:0;">High-Yield Returns</h3>
-                    <p style="color:#94a3b8;font-size:0.88rem;line-height:1.65;margin:0;">Earn up to 20% daily returns with our professionally managed, diversified investment plans.</p>
+                <div class="feature-card card-glass card">
+                    <div class="feature-icon">📈</div>
+                    <h3>High-Yield Returns</h3>
+                    <p>Earn up to 20% daily returns with our professionally managed investment plans.</p>
                 </div>
 
-                <div class="feature-card-dark" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;gap:14px;transition:transform 0.3s,border-color 0.3s;">
-                    <div style="font-size:2.2rem;">🌍</div>
-                    <h3 style="color:#fff;font-size:1.05rem;font-weight:700;margin:0;">Global Access</h3>
-                    <p style="color:#94a3b8;font-size:0.88rem;line-height:1.65;margin:0;">Available in 85+ countries with multi-currency support and multiple payment methods.</p>
+                <div class="feature-card card-glass card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Global Access</h3>
+                    <p>Available in 85+ countries with support for multiple currencies and payment methods.</p>
                 </div>
 
-                <div class="feature-card-dark" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;gap:14px;transition:transform 0.3s,border-color 0.3s;">
-                    <div style="font-size:2.2rem;">💎</div>
-                    <h3 style="color:#fff;font-size:1.05rem;font-weight:700;margin:0;">Premium Tiers</h3>
-                    <p style="color:#94a3b8;font-size:0.88rem;line-height:1.65;margin:0;">VIP programmes with personal account managers, exclusive benefits, and priority withdrawals.</p>
+                <div class="feature-card card-glass card">
+                    <div class="feature-icon">💎</div>
+                    <h3>Premium Tiers</h3>
+                    <p>VIP programs with exclusive benefits, personal account managers, and priority withdrawals.</p>
                 </div>
 
-                <div class="feature-card-dark" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;gap:14px;transition:transform 0.3s,border-color 0.3s;">
-                    <div style="font-size:2.2rem;">⚡</div>
-                    <h3 style="color:#fff;font-size:1.05rem;font-weight:700;margin:0;">Instant Processing</h3>
-                    <p style="color:#94a3b8;font-size:0.88rem;line-height:1.65;margin:0;">Automated profit calculation and instant account crediting. Zero delays on payouts.</p>
+                <div class="feature-card card-glass card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Processing</h3>
+                    <p>Automated profit calculation and instant crediting to your account. No delays.</p>
                 </div>
 
-                <div class="feature-card-dark" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;gap:14px;transition:transform 0.3s,border-color 0.3s;">
-                    <div style="font-size:2.2rem;">🎯</div>
-                    <h3 style="color:#fff;font-size:1.05rem;font-weight:700;margin:0;">24/7 Support</h3>
-                    <p style="color:#94a3b8;font-size:0.88rem;line-height:1.65;margin:0;">Round-the-clock support via live chat, email, and phone in 12+ languages.</p>
+                <div class="feature-card card-glass card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>24/7 Support</h3>
+                    <p>Round-the-clock customer support via live chat, email, and phone in multiple languages.</p>
                 </div>
 
-                <div class="feature-card-dark" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;gap:14px;transition:transform 0.3s,border-color 0.3s;">
-                    <div style="font-size:2.2rem;">🏦</div>
-                    <h3 style="color:#fff;font-size:1.05rem;font-weight:700;margin:0;">Business Loans</h3>
-                    <p style="color:#94a3b8;font-size:0.88rem;line-height:1.65;margin:0;">Access low-interest business loans up to $500K for qualified investors. Fast approval.</p>
+                <div class="feature-card card-glass card">
+                    <div class="feature-icon">🏦</div>
+                    <h3>Business Loans</h3>
+                    <p>Access low-interest business loans up to $500K for qualified investors. Fast approval process.
+                    </p>
                 </div>
 
-                <div class="feature-card-dark" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;gap:14px;transition:transform 0.3s,border-color 0.3s;">
-                    <div style="font-size:2.2rem;">💳</div>
-                    <h3 style="color:#fff;font-size:1.05rem;font-weight:700;margin:0;">Virtual Cards</h3>
-                    <p style="color:#94a3b8;font-size:0.88rem;line-height:1.65;margin:0;">Premium virtual debit cards for online transactions. Cashback rewards and global acceptance.</p>
+                <div class="feature-card card-glass card">
+                    <div class="feature-icon">💳</div>
+                    <h3>Virtual Cards</h3>
+                    <p>Get premium virtual debit cards for online transactions. Cashback rewards and global acceptance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =================== GLOBAL PRESENCE MAP SECTION =================== -->
+    <section class="section global-presence-section" style="background: linear-gradient(135deg, #0A1F44 0%, #0A1F44 100%); padding: 80px 0; position: relative;">
+        <div class="container">
+            <div class="section-header text-center">
+                <span style="color: #FFD700; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 0.5rem; display: block;">Global Network</span>
+                <h2 style="color: #fff; font-size: 2.5rem; font-weight: 700; margin: 0.5rem 0 1rem;">🌍 Our Worldwide Offices</h2>
+                <p style="color: #C0C0C0; max-width: 700px; margin: 0 auto; font-size: 1.1rem;">Operating from three strategic financial hubs across continents, we deliver 24/7 global investment services.</p>
+            </div>
+
+            <!-- Interactive World Map Visual -->
+            <div style="margin: 3rem 0; padding: 3rem; background: rgba(255, 255, 255, 0.03); border-radius: 20px; border: 1px solid rgba(255, 215, 0, 0.2); position: relative;">
+                <div style="text-align: center; font-size: 5rem; color: rgba(255, 215, 0, 0.2); margin-bottom: 2rem;">🗺️</div>
+                <div style="text-align: center; color: #C0C0C0; font-size: 1rem; margin-bottom: 2rem;">Serving clients across 85+ countries with localized support</div>
+                
+                <!-- Office Locations Grid -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                    
+                    <!-- Norway Office -->
+                    <div style="background: linear-gradient(135deg, rgba(0, 168, 107, 0.1), rgba(10, 31, 68, 0.3)); padding: 2rem; border-radius: 16px; border: 2px solid rgba(0, 168, 107, 0.3); text-align: center; transition: transform 0.3s, box-shadow 0.3s;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🇳🇴</div>
+                        <h3 style="color: #FFD700; font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem;">Oslo Office</h3>
+                        <div style="color: #C0C0C0; font-size: 0.95rem; line-height: 1.8;">
+                            <p style="margin: 0.5rem 0;"><strong>📍 Address:</strong><br/>Storgata 23, 0184 Oslo, Norway</p>
+                            <p style="margin: 0.5rem 0;"><strong>📞 Phone:</strong><br/>+47 21 95 00 00</p>
+                            <p style="margin: 0.5rem 0;"><strong>🕒 Timezone:</strong> CET (UTC+1)</p>
+                        </div>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <span style="color: #00A86B; font-weight: 600; font-size: 0.9rem;">Nordic Operations Hub</span>
+                        </div>
+                    </div>
+
+                    <!-- UK Office -->
+                    <div style="background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(10, 31, 68, 0.3)); padding: 2rem; border-radius: 16px; border: 2px solid rgba(255, 215, 0, 0.3); text-align: center; transition: transform 0.3s, box-shadow 0.3s;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🇬🇧</div>
+                        <h3 style="color: #FFD700; font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem;">London Office</h3>
+                        <div style="color: #C0C0C0; font-size: 0.95rem; line-height: 1.8;">
+                            <p style="margin: 0.5rem 0;"><strong>📍 Address:</strong><br/>123 Canary Wharf, London E14 5AB, UK</p>
+                            <p style="margin: 0.5rem 0;"><strong>📞 Phone:</strong><br/>+44 20 7946 0958</p>
+                            <p style="margin: 0.5rem 0;"><strong>🕒 Timezone:</strong> GMT (UTC+0)</p>
+                        </div>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <span style="color: #FFD700; font-weight: 600; font-size: 0.9rem;">Headquarters & Compliance</span>
+                        </div>
+                    </div>
+
+                    <!-- US Office -->
+                    <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(10, 31, 68, 0.3)); padding: 2rem; border-radius: 16px; border: 2px solid rgba(59, 130, 246, 0.3); text-align: center; transition: transform 0.3s, box-shadow 0.3s;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🇺🇸</div>
+                        <h3 style="color: #FFD700; font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem;">New York Office</h3>
+                        <div style="color: #C0C0C0; font-size: 0.95rem; line-height: 1.8;">
+                            <p style="margin: 0.5rem 0;"><strong>📍 Address:</strong><br/>350 Fifth Avenue, New York, NY 10118, USA</p>
+                            <p style="margin: 0.5rem 0;"><strong>📞 Phone:</strong><br/>+1 (212) 736-3100</p>
+                            <p style="margin: 0.5rem 0;"><strong>🕒 Timezone:</strong> EST (UTC-5)</p>
+                        </div>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <span style="color: #3B82F6; font-weight: 600; font-size: 0.9rem;">Americas Trading Desk</span>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <!-- Contact CTA -->
+                <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(255, 215, 0, 0.05); border-radius: 12px;">
+                    <p style="color: #C0C0C0; font-size: 1.1rem; margin-bottom: 1.5rem;">Need to reach us? Our global team is available 24/7 across all time zones.</p>
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+                        <a href="mailto:support@elitewealthcapita.uk" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #00A86B, #059669); color: #fff; border-radius: 8px; font-weight: 600; text-decoration: none;">
+                            📧 Email Support
+                        </a>
+                        <a href="/contact" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #FFD700, #FFA500); color: #0A1F44; border-radius: 8px; font-weight: 600; text-decoration: none;">
+                            💬 Live Chat
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =================== HOW THE COMPANY WORKS SECTION =================== -->
+    <section class="section how-it-works-section" style="background: linear-gradient(135deg, #0A1F44 0%, #0A1F44 100%); padding: 80px 0;">
+        <div class="container">
+            <div class="section-header text-center">
+                <span style="color: #FFD700; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;">Simple Process</span>
+                <h2 style="color: #fff; font-size: 2.5rem; margin: 0.5rem 0 1rem;">How Elite Wealth Capital Works</h2>
+                <p style="color: #C0C0C0; max-width: 700px; margin: 0 auto;">Start earning in 4 simple steps. Join thousands of investors building wealth globally.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <!-- Step 1 -->
+                <div style="position: relative; text-align: center; padding: 2rem; background: rgba(255, 255, 255, 0.03); border-radius: 16px; border: 1px solid rgba(255, 215, 0, 0.2);">
+                    <div style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; background: linear-gradient(135deg, #FFD700, #FFA500); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; color: #0A1F44; box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);">1</div>
+                    <div style="font-size: 3rem; margin: 2rem 0 1rem;">📝</div>
+                    <h3 style="color: #FFD700; font-size: 1.3rem; margin-bottom: 1rem;">Sign Up & Verify</h3>
+                    <p style="color: #C0C0C0; font-size: 0.95rem; line-height: 1.6;">Create your account in minutes and complete our secure KYC verification process.</p>
                 </div>
 
-            </div><!-- /features grid -->
+                <!-- Step 2 -->
+                <div style="position: relative; text-align: center; padding: 2rem; background: rgba(255, 255, 255, 0.03); border-radius: 16px; border: 1px solid rgba(255, 215, 0, 0.2);">
+                    <div style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; background: linear-gradient(135deg, #FFD700, #FFA500); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; color: #0A1F44; box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);">2</div>
+                    <div style="font-size: 3rem; margin: 2rem 0 1rem;">💼</div>
+                    <h3 style="color: #FFD700; font-size: 1.3rem; margin-bottom: 1rem;">Choose Investment Plan</h3>
+                    <p style="color: #C0C0C0; font-size: 0.95rem; line-height: 1.6;">Select from our diversified plans or upgrade for premium benefits and higher returns.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div style="position: relative; text-align: center; padding: 2rem; background: rgba(255, 255, 255, 0.03); border-radius: 16px; border: 1px solid rgba(255, 215, 0, 0.2);">
+                    <div style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; background: linear-gradient(135deg, #FFD700, #FFA500); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; color: #0A1F44; box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);">3</div>
+                    <div style="font-size: 3rem; margin: 2rem 0 1rem;">💰</div>
+                    <h3 style="color: #FFD700; font-size: 1.3rem; margin-bottom: 1rem;">Fund Your Account</h3>
+                    <p style="color: #C0C0C0; font-size: 0.95rem; line-height: 1.6;">Deposit via cryptocurrency, bank transfer, or credit card. Minimum starts at $30.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div style="position: relative; text-align: center; padding: 2rem; background: rgba(255, 255, 255, 0.03); border-radius: 16px; border: 1px solid rgba(255, 215, 0, 0.2);">
+                    <div style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; background: linear-gradient(135deg, #FFD700, #FFA500); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; color: #0A1F44; box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);">4</div>
+                    <div style="font-size: 3rem; margin: 2rem 0 1rem;">🚀</div>
+                    <h3 style="color: #FFD700; font-size: 1.3rem; margin-bottom: 1rem;">Earn & Withdraw</h3>
+                    <p style="color: #C0C0C0; font-size: 0.95rem; line-height: 1.6;">Watch your profits grow daily. Withdraw anytime with instant processing.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(255, 215, 0, 0.05); border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.2);">
+                <p style="color: #C0C0C0; font-size: 1.1rem; margin-bottom: 1rem;">💎 Want higher returns? <strong style="color: #FFD700;">Upgrade your plan anytime</strong> for VIP benefits, personal account managers, and exclusive investment opportunities.</p>
+                <a href="/investment-plans" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 2rem; background: linear-gradient(135deg, #FFD700, #FFA500); color: #0A1F44; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1rem; transition: transform 0.2s;">
+                    View All Plans & Upgrade Options →
+                </a>
+            </div>
         </div>
     </section>
 
@@ -1150,18 +1734,18 @@
                     <div class="testimonial-header"
                         style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                         <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="James Mitchell" width="60" height="60" loading="lazy"
-                            style="width: 60px; height: 60px; border-radius: 50%; border: 3px solid #F59E0B;">
+                            style="width: 60px; height: 60px; border-radius: 50%; border: 3px solid #FFD700;">
                         <div>
                             <div style="font-weight: 600; color: #fff;">James Mitchell</div>
                             <div style="font-size: 0.8rem; color: #94a3b8;">Investment Manager, NYC</div>
-                            <div style="color: #F59E0B; font-size: 0.9rem;">⭐⭐⭐⭐⭐</div>
+                            <div style="color: #FFD700; font-size: 0.9rem;">⭐⭐⭐⭐⭐</div>
                         </div>
                     </div>
                     <p class="testimonial-text" style="font-style: italic;">"I've been investing with Elite Wealth
                         Capital for 8 months now. The agricultural and crypto portfolio diversification has been
                         exceptional. My $50,000 investment has grown significantly with consistent monthly returns."</p>
                     <div
-                        style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; color: #10B981; font-size: 0.85rem;">
+                        style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; color: #00A86B; font-size: 0.85rem;">
                         <span>✓</span> Verified Investor since 2025
                     </div>
                 </div>
@@ -1170,18 +1754,18 @@
                     <div class="testimonial-header"
                         style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                         <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Dr. Sarah Chen" width="60" height="60" loading="lazy"
-                            style="width: 60px; height: 60px; border-radius: 50%; border: 3px solid #F59E0B;">
+                            style="width: 60px; height: 60px; border-radius: 50%; border: 3px solid #FFD700;">
                         <div>
                             <div style="font-weight: 600; color: #fff;">Dr. Sarah Chen</div>
                             <div style="font-size: 0.8rem; color: #94a3b8;">Surgeon, London UK</div>
-                            <div style="color: #F59E0B; font-size: 0.9rem;">⭐⭐⭐⭐⭐</div>
+                            <div style="color: #FFD700; font-size: 0.9rem;">⭐⭐⭐⭐⭐</div>
                         </div>
                     </div>
                     <p class="testimonial-text" style="font-style: italic;">"As a medical professional, I needed a
                         hands-off investment approach. Elite Wealth's real estate and digital asset portfolio has been
                         perfect. The 24/7 support team is incredibly responsive and professional."</p>
                     <div
-                        style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; color: #10B981; font-size: 0.85rem;">
+                        style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; color: #00A86B; font-size: 0.85rem;">
                         <span>✓</span> Verified Investor since 2024
                     </div>
                 </div>
@@ -1190,18 +1774,18 @@
                     <div class="testimonial-header"
                         style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                         <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Marcus Johnson" width="60" height="60" loading="lazy"
-                            style="width: 60px; height: 60px; border-radius: 50%; border: 3px solid #F59E0B;">
+                            style="width: 60px; height: 60px; border-radius: 50%; border: 3px solid #FFD700;">
                         <div>
                             <div style="font-weight: 600; color: #fff;">Marcus Johnson</div>
                             <div style="font-size: 0.8rem; color: #94a3b8;">Entrepreneur, Toronto</div>
-                            <div style="color: #F59E0B; font-size: 0.9rem;">⭐⭐⭐⭐⭐</div>
+                            <div style="color: #FFD700; font-size: 0.9rem;">⭐⭐⭐⭐⭐</div>
                         </div>
                     </div>
                     <p class="testimonial-text" style="font-style: italic;">"The transparency and professionalism set
                         Elite Wealth apart. Their forensic asset recovery service helped me reclaim funds I thought were
                         lost. Truly a comprehensive investment partner."</p>
                     <div
-                        style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; color: #10B981; font-size: 0.85rem;">
+                        style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; color: #00A86B; font-size: 0.85rem;">
                         <span>✓</span> Verified Investor since 2025
                     </div>
                 </div>
@@ -1211,8 +1795,8 @@
             <div
                 style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem; margin-top: 3rem; padding: 2rem; background: rgba(30, 58, 138, 0.3); border-radius: 1rem; border: 1px solid rgba(59, 130, 246, 0.2);">
                 <div style="text-align: center;">
-                    <div style="font-size: 2.5rem; font-weight: 700; color: #F59E0B;">4.9</div>
-                    <div style="color: #F59E0B;">⭐⭐⭐⭐⭐</div>
+                    <div style="font-size: 2.5rem; font-weight: 700; color: #FFD700;">4.9</div>
+                    <div style="color: #FFD700;">⭐⭐⭐⭐⭐</div>
                     <div style="color: #94a3b8; font-size: 0.8rem;">Based on 12,847 reviews</div>
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 0.5rem; flex: 1; max-width: 400px;">
@@ -1220,7 +1804,7 @@
                         <span style="color: #94a3b8; font-size: 0.8rem; width: 80px;">Excellent</span>
                         <div
                             style="flex: 1; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
-                            <div style="width: 89%; height: 100%; background: #10B981;"></div>
+                            <div style="width: 89%; height: 100%; background: #00A86B;"></div>
                         </div>
                         <span style="color: #94a3b8; font-size: 0.8rem;">89%</span>
                     </div>
@@ -1236,7 +1820,7 @@
                         <span style="color: #94a3b8; font-size: 0.8rem; width: 80px;">Average</span>
                         <div
                             style="flex: 1; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
-                            <div style="width: 3%; height: 100%; background: #F59E0B;"></div>
+                            <div style="width: 3%; height: 100%; background: #FFD700;"></div>
                         </div>
                         <span style="color: #94a3b8; font-size: 0.8rem;">3%</span>
                     </div>
@@ -1251,7 +1835,7 @@
 
     <!-- =================== COMPANY SERVICES SECTION =================== -->
     <section class="section services-section"
-        style="background: linear-gradient(180deg, #0a1628 0%, #0f1926 100%); padding: 80px 0;">
+        style="background: linear-gradient(180deg, #0A1F44 0%, #0f1926 100%); padding: 80px 0;">
         <div class="container">
             <div class="section-header text-center">
                 <h2>Our Investment Divisions</h2>
@@ -1268,31 +1852,31 @@
                     <p style="color: #94a3b8; font-size: 0.9rem;">Bitcoin, Ethereum, and top-tier altcoin portfolio
                         management with advanced algorithmic trading strategies.</p>
                     <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                        <span style="color: #10B981; font-weight: 600;">Up to 20% Returns</span>
+                        <span style="color: #00A86B; font-weight: 600;">Up to 20% Returns</span>
                     </div>
                 </div>
 
                 <!-- Agricultural Division -->
                 <div class="card"
-                    style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.2) 100%); border: 1px solid rgba(16, 185, 129, 0.3); padding: 2rem; text-align: center;">
+                    style="background: linear-gradient(135deg, rgba(0, 168, 107, 0.1) 0%, rgba(5, 150, 105, 0.2) 100%); border: 1px solid rgba(0, 168, 107, 0.3); padding: 2rem; text-align: center;">
                     <div style="font-size: 3rem; margin-bottom: 1rem;">🌾</div>
                     <h3 style="color: #fff; margin-bottom: 0.5rem;">Agricultural Commodities</h3>
                     <p style="color: #94a3b8; font-size: 0.9rem;">Global farming operations, grain futures, livestock
                         investments, and sustainable agriculture initiatives.</p>
                     <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                        <span style="color: #10B981; font-weight: 600;">Stable 18-25% Returns</span>
+                        <span style="color: #00A86B; font-weight: 600;">Stable 18-25% Returns</span>
                     </div>
                 </div>
 
                 <!-- Real Estate Division -->
                 <div class="card"
-                    style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.2) 100%); border: 1px solid rgba(245, 158, 11, 0.3); padding: 2rem; text-align: center;">
+                    style="background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(217, 119, 6, 0.2) 100%); border: 1px solid rgba(255, 215, 0, 0.3); padding: 2rem; text-align: center;">
                     <div style="font-size: 3rem; margin-bottom: 1rem;">🏢</div>
                     <h3 style="color: #fff; margin-bottom: 0.5rem;">Real Estate Portfolio</h3>
                     <p style="color: #94a3b8; font-size: 0.9rem;">Commercial properties, luxury developments, and REIT
                         investments in prime global locations.</p>
                     <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                        <span style="color: #10B981; font-weight: 600;">15-22% Annual Returns</span>
+                        <span style="color: #00A86B; font-weight: 600;">15-22% Annual Returns</span>
                     </div>
                 </div>
 
@@ -1304,8 +1888,20 @@
                     <p style="color: #94a3b8; font-size: 0.9rem;">Specialized services for recovering lost crypto
                         assets, fraud investigation, and digital asset tracing.</p>
                     <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                        <span style="color: #10B981; font-weight: 600;">85% Recovery Success Rate</span>
+                        <span style="color: #00A86B; font-weight: 600;">85% Recovery Success Rate</span>
                     </div>
+                </div>
+                
+                <!-- Global Shares Market Division -->
+                <div class="card"
+                    style="background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(0, 168, 107, 0.2) 100%); border: 1px solid rgba(255, 215, 0, 0.3); padding: 2rem; text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📈</div>
+                    <h3 style="color: #fff; margin-bottom: 0.5rem;">Global Shares Market</h3>
+                    <p style="color: #94a3b8; font-size: 0.9rem;">Trade stocks from NYSE, NASDAQ, LSE, and international markets. Fractional shares available for diversified equity investing.</p>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <span style="color: #00A86B; font-weight: 600;">Global Equity Access</span>
+                    </div>
+                    <a href="/investment-plans" style="display: inline-block; margin-top: 1rem; color: #FFD700; text-decoration: none; font-weight: 600; font-size: 0.9rem;">Explore Shares →</a>
                 </div>
             </div>
         </div>
@@ -1331,14 +1927,14 @@
 
                 <!-- Angel Investor -->
                 <div class="funding-card"
-                    style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.15) 100%); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 16px; padding: 2rem; transition: transform 0.3s, box-shadow 0.3s;">
+                    style="background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(217, 119, 6, 0.15) 100%); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 16px; padding: 2rem; transition: transform 0.3s, box-shadow 0.3s;">
                     <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem;">
                         <div
-                            style="width: 60px; height: 60px; background: rgba(245, 158, 11, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">
+                            style="width: 60px; height: 60px; background: rgba(255, 215, 0, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">
                             👼</div>
                         <div>
                             <h3 style="color: #fff; font-size: 1.3rem; margin: 0;">Angel Investors</h3>
-                            <span style="color: #F59E0B; font-size: 0.85rem;">High-Net-Worth Funding</span>
+                            <span style="color: #FFD700; font-size: 0.85rem;">High-Net-Worth Funding</span>
                         </div>
                     </div>
                     <p style="color: #94a3b8; line-height: 1.7; margin-bottom: 1rem;">Wealthy individuals who invest
@@ -1347,7 +1943,7 @@
                     <div
                         style="display: flex; justify-content: space-between; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
                         <span style="color: #64748b; font-size: 0.85rem;">Investment Range</span>
-                        <span style="color: #10B981; font-weight: 600;">$25K - $500K</span>
+                        <span style="color: #00A86B; font-weight: 600;">$25K - $500K</span>
                     </div>
                 </div>
 
@@ -1369,7 +1965,7 @@
                     <div
                         style="display: flex; justify-content: space-between; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
                         <span style="color: #64748b; font-size: 0.85rem;">Best For</span>
-                        <span style="color: #10B981; font-weight: 600;">Growth Companies</span>
+                        <span style="color: #00A86B; font-weight: 600;">Growth Companies</span>
                     </div>
                 </div>
 
@@ -1391,20 +1987,20 @@
                     <div
                         style="display: flex; justify-content: space-between; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
                         <span style="color: #64748b; font-size: 0.85rem;">Typical APR</span>
-                        <span style="color: #10B981; font-weight: 600;">6% - 15%</span>
+                        <span style="color: #00A86B; font-weight: 600;">6% - 15%</span>
                     </div>
                 </div>
 
                 <!-- Crowdfunding -->
                 <div class="funding-card"
-                    style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.15) 100%); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 16px; padding: 2rem; transition: transform 0.3s, box-shadow 0.3s;">
+                    style="background: linear-gradient(135deg, rgba(0, 168, 107, 0.1) 0%, rgba(5, 150, 105, 0.15) 100%); border: 1px solid rgba(0, 168, 107, 0.3); border-radius: 16px; padding: 2rem; transition: transform 0.3s, box-shadow 0.3s;">
                     <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem;">
                         <div
-                            style="width: 60px; height: 60px; background: rgba(16, 185, 129, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">
+                            style="width: 60px; height: 60px; background: rgba(0, 168, 107, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">
                             👥</div>
                         <div>
                             <h3 style="color: #fff; font-size: 1.3rem; margin: 0;">Crowdfunding</h3>
-                            <span style="color: #10B981; font-size: 0.85rem;">Community Funding</span>
+                            <span style="color: #00A86B; font-size: 0.85rem;">Community Funding</span>
                         </div>
                     </div>
                     <p style="color: #94a3b8; line-height: 1.7; margin-bottom: 1rem;">Raise capital from many people via
@@ -1413,7 +2009,7 @@
                     <div
                         style="display: flex; justify-content: space-between; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
                         <span style="color: #64748b; font-size: 0.85rem;">Platform Fee</span>
-                        <span style="color: #10B981; font-weight: 600;">3% - 5%</span>
+                        <span style="color: #00A86B; font-weight: 600;">3% - 5%</span>
                     </div>
                 </div>
 
@@ -1435,7 +2031,7 @@
                     <div
                         style="display: flex; justify-content: space-between; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
                         <span style="color: #64748b; font-size: 0.85rem;">Loan Terms</span>
-                        <span style="color: #10B981; font-weight: 600;">1 - 7 Years</span>
+                        <span style="color: #00A86B; font-weight: 600;">1 - 7 Years</span>
                     </div>
                 </div>
 
@@ -1457,7 +2053,7 @@
                     <div
                         style="display: flex; justify-content: space-between; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
                         <span style="color: #64748b; font-size: 0.85rem;">Funding Speed</span>
-                        <span style="color: #10B981; font-weight: 600;">24-72 Hours</span>
+                        <span style="color: #00A86B; font-weight: 600;">24-72 Hours</span>
                     </div>
                 </div>
 
@@ -1572,7 +2168,7 @@
 
     <!-- =================== REGULATION & SECURITY =================== -->
     <section class="section regulation-section"
-        style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 80px 0;">
+        style="background: linear-gradient(135deg, #0A1F44 0%, #1e293b 100%); padding: 80px 0;">
         <div class="container">
             <div class="text-center mb-5">
                 <h2 style="color: #fff; font-weight: 700; margin-bottom: 1rem;">Regulatory Compliance & Security</h2>
@@ -1596,11 +2192,11 @@
                 <div class="col-md-4" style="flex: 1; min-width: 300px; max-width: 350px;">
                     <div class="security-card"
                         style="padding: 2rem; border-radius: 12px; background: rgba(30, 41, 59, 0.8); height: 100%; border: 1px solid #334155; text-align: center;">
-                        <div style="color: #10b981; margin-bottom: 1.5rem; font-size: 2.5rem;">🔒</div>
+                        <div style="color: #00A86B; margin-bottom: 1.5rem; font-size: 2.5rem;">🔒</div>
                         <h4 style="color: #fff; font-weight: 600; margin-bottom: 1rem;">Bank-Grade Security</h4>
                         <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6;">Funds are held in segregated
                             custodial accounts with top global banks. All data is protected by <strong
-                                style="color: #10b981;">256-bit SSL
+                                style="color: #00A86B;">256-bit SSL
                                 encryption</strong> and military-grade security protocols.</p>
                     </div>
                 </div>
@@ -1608,7 +2204,7 @@
                 <div class="col-md-4" style="flex: 1; min-width: 300px; max-width: 350px;">
                     <div class="security-card"
                         style="padding: 2rem; border-radius: 12px; background: rgba(30, 41, 59, 0.8); height: 100%; border: 1px solid #334155; text-align: center;">
-                        <div style="color: #f59e0b; margin-bottom: 1.5rem; font-size: 2.5rem;">📋</div>
+                        <div style="color: #FFD700; margin-bottom: 1.5rem; font-size: 2.5rem;">📋</div>
                         <h4 style="color: #fff; font-weight: 600; margin-bottom: 1rem;">Transparent Operations</h4>
                         <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6;">Regular independent audits ensure
                             full transparency. Detailed reports and
@@ -1625,10 +2221,10 @@
 
     <!-- =================== SECURITY & COMPLIANCE SECTION =================== -->
     <section class="partners-section"
-        style="background: #0f172a; border-top: 1px solid rgba(255,255,255,0.1); padding: 4rem 0;">
+        style="background: #0A1F44; border-top: 1px solid rgba(255,255,255,0.1); padding: 4rem 0;">
         <div class="container">
             <div class="section-header center" style="text-align: center; margin-bottom: 3rem;">
-                <span class="section-subtitle" style="color: #F59E0B; font-weight: 600; letter-spacing: 2px;">SECURITY
+                <span class="section-subtitle" style="color: #FFD700; font-weight: 600; letter-spacing: 2px;">SECURITY
                     & TRUST</span>
                 <h2 style="font-size: 2.5rem; color: white; margin: 0.5rem 0;">Platform Security Features</h2>
                 <div class="section-line" style="width: 50px; height: 3px; background: #3B82F6; margin: 1rem auto;">
@@ -1768,7 +2364,7 @@
                     style="background: white; color: #c00; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8rem;">McAfee
                     SECURE</span>
                 <span
-                    style="border: 1px solid rgba(16, 185, 129, 0.5); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; color: #10B981; display: flex; align-items: center; gap: 5px;">🔒
+                    style="border: 1px solid rgba(0, 168, 107, 0.5); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; color: #00A86B; display: flex; align-items: center; gap: 5px;">🔒
                     SSL Encrypted (256-bit)</span>
             </div>
 
@@ -1777,6 +2373,18 @@
             </div>
         </div>
     </footer>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-overlay"></div>
+        <div class="video-modal-content">
+            <button class="video-modal-close" aria-label="Close video">&times;</button>
+            <video class="video-modal-player" controls aria-label="Promotional video about Elite Wealth Capital investment opportunities">
+                <source src="" type="video/mp4">
+                <track kind="captions" src="" srclang="en" label="English">
+            </video>
+        </div>
+    </div>
 
     <!-- Scripts -->
         <script defer src="{% static 'js/main.js' %}"></script>

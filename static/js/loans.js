@@ -19,8 +19,8 @@ async function loadLoanData() {
      if (badge) {
           if (verificationStatus === 'verified') {
                badge.textContent = 'Verified';
-               badge.style.color = '#10B981';
-               badge.style.background = 'rgba(16, 185, 129, 0.1)';
+               badge.style.color = '#00A86B';
+               badge.style.background = 'rgba(0, 168, 107, 0.1)';
                document.getElementById('lockOverlay').style.display = 'none';
           } else {
                badge.textContent = 'Unverified';

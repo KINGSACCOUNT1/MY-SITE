@@ -17,7 +17,7 @@
         rel="stylesheet">
     <style>
         .loan-metric-card {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            background: linear-gradient(135deg, #1e293b 0%, #0A1F44 100%);
             border: 1px solid var(--border-color);
             padding: 1.5rem;
             border-radius: 1rem;
@@ -39,7 +39,7 @@
         .limit-display {
             font-size: 2.5rem;
             font-weight: 800;
-            color: #F59E0B;
+            color: #FFD700;
             margin: 0.5rem 0;
         }
 
@@ -58,7 +58,7 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #F59E0B;
+            background: #FFD700;
             cursor: pointer;
             border: 2px solid #1e293b;
         }
@@ -201,7 +201,7 @@
                 <div class="loan-metric-card">
                     <div style="color: var(--text-secondary); font-size: 0.9rem;">Available Credit Limit</div>
                     <div class="limit-display" id="creditLimit">$0.00</div>
-                    <div style="font-size: 0.8rem; color: #10B981;">Based on account verification level</div>
+                    <div style="font-size: 0.8rem; color: #00A86B;">Based on account verification level</div>
                 </div>
 
                 <!-- Active Loans -->
@@ -234,7 +234,7 @@
                     <div class="form-group">
                         <label class="form-label">Loan Amount ($)</label>
                         <input type="number" id="loanAmount" class="form-input"
-                            style="font-size: 1.5rem; font-weight: bold; color: #F59E0B;" value="5000"
+                            style="font-size: 1.5rem; font-weight: bold; color: #FFD700;" value="5000"
                             oninput="updateCalculator()">
                         <input type="range" class="range-slider" min="1000" max="50000" id="loanSlider"
                             style="margin-top: 1rem;" oninput="syncAmount(this.value)">
@@ -286,7 +286,7 @@
                     </div>
                     <div class="summary-row">
                         <span style="color: var(--text-secondary);">Interest Rate (APR)</span>
-                        <span style="font-weight: 600; color: #10B981;">4.5%</span>
+                        <span style="font-weight: 600; color: #00A86B;">4.5%</span>
                     </div>
                     <div class="summary-row">
                         <span style="color: var(--text-secondary);">Monthly Payment</span>
@@ -294,12 +294,12 @@
                     </div>
                     <div class="summary-row">
                         <span style="color: var(--text-secondary);">Total Repayment</span>
-                        <span style="font-weight: 600; color: #F59E0B;" id="sumTotal">$5,112.00</span>
+                        <span style="font-weight: 600; color: #FFD700;" id="sumTotal">$5,112.00</span>
                     </div>
 
                     <div
-                        style="margin-top: 2rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 0.5rem; text-align: center;">
-                        <div style="font-size: 0.8rem; color: #F59E0B; margin-bottom: 0.5rem;">Admin Status</div>
+                        style="margin-top: 2rem; padding: 1rem; background: rgba(255, 215, 0, 0.1); border-radius: 0.5rem; text-align: center;">
+                        <div style="font-size: 0.8rem; color: #FFD700; margin-bottom: 0.5rem;">Admin Status</div>
                         <div style="font-weight: bold;">Approval Required</div>
                     </div>
                 </div>

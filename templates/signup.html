@@ -44,11 +44,11 @@
 
             <div style="margin-top: 3rem; display: flex; gap: 2rem;">
                 <div>
-                    <h3 style="color: #F59E0B; font-size: 1.5rem; margin-bottom: 0.5rem;">$127M+</h3>
+                    <h3 style="color: #FFD700; font-size: 1.5rem; margin-bottom: 0.5rem;">$127M+</h3>
                     <p style="color: rgba(255,255,255,0.6);">Assets Managed</p>
                 </div>
                 <div>
-                    <h3 style="color: #F59E0B; font-size: 1.5rem; margin-bottom: 0.5rem;">30%</h3>
+                    <h3 style="color: #FFD700; font-size: 1.5rem; margin-bottom: 0.5rem;">30%</h3>
                     <p style="color: rgba(255,255,255,0.6);">Avg. Monthly ROI</p>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                 
                 {% if messages %}
                 {% for message in messages %}
-                <div style="padding: 1rem; border-radius: 8px; margin-bottom: 2rem; background: rgba({% if message.tags == 'success' %}16, 185, 129{% else %}239, 68, 68{% endif %}, 0.1); border: 1px solid {% if message.tags == 'success' %}#10b981{% else %}#ef4444{% endif %}; color: {% if message.tags == 'success' %}#10b981{% else %}#ef4444{% endif %};">
+                <div style="padding: 1rem; border-radius: 8px; margin-bottom: 2rem; background: rgba({% if message.tags == 'success' %}16, 185, 129{% else %}239, 68, 68{% endif %}, 0.1); border: 1px solid {% if message.tags == 'success' %}#00A86B{% else %}#ef4444{% endif %}; color: {% if message.tags == 'success' %}#00A86B{% else %}#ef4444{% endif %};">
                     {{ message }}
                 </div>
                 {% endfor %}
@@ -103,7 +103,7 @@
                                 <i data-lucide="user" style="width: 32px; height: 32px; color: rgba(255,255,255,0.4);"></i>
                             </div>
                             <div style="flex: 1;">
-                                <label for="profile_image" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: rgba(245, 158, 11, 0.2); border: 1px solid #F59E0B; border-radius: 8px; cursor: pointer; font-size: 0.9rem; color: #F59E0B; transition: all 0.3s;">
+                                <label for="profile_image" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: rgba(255, 215, 0, 0.2); border: 1px solid #FFD700; border-radius: 8px; cursor: pointer; font-size: 0.9rem; color: #FFD700; transition: all 0.3s;">
                                     <i data-lucide="upload" style="width: 18px;"></i>
                                     <span>Upload Photo</span>
                                 </label>
@@ -198,12 +198,12 @@
                                 autocomplete="off" style="text-transform: uppercase;" value="{{ form.referral_code.value|default:'' }}">
                         </div>
                         <!-- Referral bonus explanation -->
-                        <div id="referralInfo" style="margin-top: 0.6rem; padding: 0.75rem 1rem; border-radius: 0.5rem; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2); display: flex; align-items: flex-start; gap: 0.6rem;">
+                        <div id="referralInfo" style="margin-top: 0.6rem; padding: 0.75rem 1rem; border-radius: 0.5rem; background: rgba(255, 215, 0,0.08); border: 1px solid rgba(255, 215, 0,0.2); display: flex; align-items: flex-start; gap: 0.6rem;">
                             <span style="font-size: 1.1rem; flex-shrink:0;">🎁</span>
                             <div style="font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.5;">
-                                <strong style="color: #F59E0B;">How referral bonuses work:</strong><br>
-                                You (new user) get <strong style="color: #10B981;">$20</strong> instantly credited to your balance.
-                                The person who referred you earns <strong style="color: #F59E0B;">$30</strong> added to their account.
+                                <strong style="color: #FFD700;">How referral bonuses work:</strong><br>
+                                You (new user) get <strong style="color: #00A86B;">$20</strong> instantly credited to your balance.
+                                The person who referred you earns <strong style="color: #FFD700;">$30</strong> added to their account.
                             </div>
                         </div>
                     </div>

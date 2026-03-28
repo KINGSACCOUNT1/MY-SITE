@@ -500,8 +500,9 @@ class VirtualCard(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='virtual_cards')
     
-    card_number = models.CharField(max_length=19, unique=True, blank=True)  # 16 digits + 3 spaces
-    cvv = models.CharField(max_length=3, blank=True)
+    card_number = models.CharField(max_length=19, unique=True, blank=True)  # TODO: Encrypt using django-fernet-fields or similar
+    # CVV removed per PCI-DSS compliance - NEVER store CVV
+    # cvv = models.CharField(max_length=3, blank=True)  # DELETED - CVV must not be stored
     expiry_month = models.IntegerField(default=12)
     expiry_year = models.IntegerField(default=2028)
     
