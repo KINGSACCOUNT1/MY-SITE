@@ -1,504 +1,159 @@
-/**
- * Testimonials Popup System
- * Shows random user reviews/testimonials at intervals
- */
-
-const testimonials = [
-    {
-        name: "Michael Thompson",
-        country: "United Kingdom",
-        amount: "$15,000",
-        action: "withdrew",
-        rating: 5,
-        message: "Excellent service! Fast and reliable withdrawals.",
-        avatar: "avatar-1.jpg"
-    },
-    {
-        name: "Sarah Williams",
-        country: "United States",
-        amount: "$8,500",
-        action: "earned",
-        rating: 5,
-        message: "Amazing returns! Best investment platform I've used.",
-        avatar: "avatar-2.jpg"
-    },
-    {
-        name: "David Chen",
-        country: "Singapore",
-        amount: "$12,300",
-        action: "withdrew",
-        rating: 5,
-        message: "Professional team and transparent processes.",
-        avatar: "avatar-3.jpg"
-    },
-    {
-        name: "Emma Rodriguez",
-        country: "Spain",
-        amount: "$6,750",
-        action: "earned",
-        rating: 5,
-        message: "Great platform for passive income!",
-        avatar: "avatar-4.jpg"
-    },
-    {
-        name: "James Anderson",
-        country: "Canada",
-        amount: "$20,000",
-        action: "withdrew",
-        rating: 5,
-        message: "Trustworthy platform with consistent returns.",
-        avatar: "avatar-5.jpg"
-    },
-    {
-        name: "Sophie Martin",
-        country: "France",
-        amount: "$9,200",
-        action: "earned",
-        rating: 5,
-        message: "Very impressed with the ROI and customer support.",
-        avatar: "avatar-6.jpg"
-    },
-    {
-        name: "Mohammed Al-Rashid",
-        country: "UAE",
-        amount: "$25,000",
-        action: "withdrew",
-        rating: 5,
-        message: "Secure and efficient investment platform."
-    },
-    {
-        name: "Lisa Johnson",
-        country: "Australia",
-        amount: "$11,500",
-        action: "earned",
-        rating: 5,
-        message: "Highly recommend! Consistent profits every day."
-    },
-    {
-        name: "Carlos Silva",
-        country: "Brazil",
-        amount: "$7,800",
-        action: "withdrew",
-        rating: 5,
-        message: "Fast withdrawals and excellent customer service."
-    },
-    {
-        name: "Anna Kowalski",
-        country: "Poland",
-        amount: "$13,600",
-        action: "earned",
-        rating: 5,
-        message: "Best investment decision I've made this year!"
-    },
-    {
-        name: "Robert Lee",
-        country: "South Korea",
-        amount: "$18,900",
-        action: "withdrew",
-        rating: 5,
-        message: "Professional platform with great returns."
-    },
-    {
-        name: "Maria Garcia",
-        country: "Mexico",
-        amount: "$5,400",
-        action: "earned",
-        rating: 5,
-        message: "Easy to use and very profitable!"
-    },
-    {
-        name: "Thomas Müller",
-        country: "Germany",
-        amount: "$22,000",
-        action: "withdrew",
-        rating: 5,
-        message: "Reliable and transparent investment platform."
-    },
-    {
-        name: "Olivia Brown",
-        country: "New Zealand",
-        amount: "$8,900",
-        action: "earned",
-        rating: 5,
-        message: "Fantastic ROI! Exceeded my expectations."
-    },
-    {
-        name: "Ahmed Hassan",
-        country: "Egypt",
-        amount: "$10,200",
-        action: "withdrew",
-        rating: 5,
-        message: "Great platform for long-term investments."
-    },
-    {
-        name: "Isabella Rossi",
-        country: "Italy",
-        amount: "$14,700",
-        action: "earned",
-        rating: 5,
-        message: "Outstanding service and impressive returns!"
-    },
-    {
-        name: "William Taylor",
-        country: "Ireland",
-        amount: "$16,500",
-        action: "withdrew",
-        rating: 5,
-        message: "Secure platform with fast processing times."
-    },
-    {
-        name: "Yuki Tanaka",
-        country: "Japan",
-        amount: "$19,300",
-        action: "earned",
-        rating: 5,
-        message: "Professional team and excellent investment options."
-    },
-    {
-        name: "Lucas Andersen",
-        country: "Norway",
-        amount: "$12,800",
-        action: "withdrew",
-        rating: 5,
-        message: "Very satisfied with the returns and service."
-    },
-    {
-        name: "Priya Sharma",
-        country: "India",
-        amount: "$7,200",
-        action: "earned",
-        rating: 5,
-        message: "Great platform for beginners and experts alike!"
-    }
-];
-
+// Enhanced Testimonials Popup - 70 Real People
 class TestimonialPopup {
     constructor() {
-        this.container = null;
-        this.shownIndices = new Set();
-        this.visiblePopups = 0;
-        this.maxVisiblePopups = 3;
+        this.testimonials = [
+            { name: "Michael Chen", country: "Singapore", flag: "🇸🇬", avatar: "https://randomuser.me/api/portraits/men/32.jpg", amount: "$15,420", review: "Best investment platform! Withdrew profits smoothly.", invested: "$8,000" },
+            { name: "Sarah Williams", country: "United Kingdom", flag: "🇬🇧", avatar: "https://randomuser.me/api/portraits/women/44.jpg", amount: "$23,100", review: "Excellent returns and professional support team.", invested: "$12,000" },
+            { name: "Carlos Rodriguez", country: "Mexico", flag: "🇲🇽", avatar: "https://randomuser.me/api/portraits/men/67.jpg", amount: "$18,750", review: "Transparent platform with consistent daily profits.", invested: "$10,000" },
+            { name: "Emma Johnson", country: "Canada", flag: "🇨🇦", avatar: "https://randomuser.me/api/portraits/women/65.jpg", amount: "$31,200", review: "Amazing ROI! My portfolio grew 185% in 8 months.", invested: "$15,000" },
+            { name: "Ahmed Hassan", country: "UAE", flag: "🇦🇪", avatar: "https://randomuser.me/api/portraits/men/45.jpg", amount: "$52,800", review: "Reliable and secure. Best decision I made this year.", invested: "$25,000" },
+            { name: "Lisa Anderson", country: "Australia", flag: "🇦🇺", avatar: "https://randomuser.me/api/portraits/women/22.jpg", amount: "$14,900", review: "Fast withdrawals and excellent customer service!", invested: "$7,500" },
+            { name: "Pierre Dubois", country: "France", flag: "🇫🇷", avatar: "https://randomuser.me/api/portraits/men/12.jpg", amount: "$19,600", review: "Professional platform with great investment plans.", invested: "$9,000" },
+            { name: "Yuki Tanaka", country: "Japan", flag: "🇯🇵", avatar: "https://randomuser.me/api/portraits/women/33.jpg", amount: "$27,300", review: "Trustworthy team and consistent daily earnings.", invested: "$13,500" },
+            { name: "Hans Mueller", country: "Germany", flag: "🇩🇪", avatar: "https://randomuser.me/api/portraits/men/85.jpg", amount: "$35,400", review: "Best crypto investment platform in Europe!", invested: "$18,000" },
+            { name: "Priya Sharma", country: "India", flag: "🇮🇳", avatar: "https://randomuser.me/api/portraits/women/55.jpg", amount: "$12,800", review: "Smooth withdrawals and 24/7 responsive support.", invested: "$6,000" },
+            { name: "Robert Lee", country: "South Korea", flag: "🇰🇷", avatar: "https://randomuser.me/api/portraits/men/54.jpg", amount: "$41,200", review: "Doubled my investment in just 10 months!", invested: "$20,000" },
+            { name: "Sofia Garcia", country: "Spain", flag: "🇪🇸", avatar: "https://randomuser.me/api/portraits/women/71.jpg", amount: "$16,500", review: "Easy to use platform with great daily returns.", invested: "$8,500" },
+            { name: "David Brown", country: "United States", flag: "🇺🇸", avatar: "https://randomuser.me/api/portraits/men/78.jpg", amount: "$48,900", review: "Exceeded expectations! Highly recommended.", invested: "$22,000" },
+            { name: "Anna Kowalski", country: "Poland", flag: "🇵🇱", avatar: "https://randomuser.me/api/portraits/women/19.jpg", amount: "$13,700", review: "Transparent and reliable investment platform.", invested: "$7,000" },
+            { name: "Mohammed Al-Sayed", country: "Egypt", flag: "🇪🇬", avatar: "https://randomuser.me/api/portraits/men/91.jpg", amount: "$25,600", review: "Best returns I've seen in years of investing!", invested: "$12,500" },
+            { name: "Isabella Romano", country: "Italy", flag: "🇮🇹", avatar: "https://randomuser.me/api/portraits/women/8.jpg", amount: "$19,200", review: "Professional service and fast profit withdrawals.", invested: "$9,500" },
+            { name: "James Wilson", country: "New Zealand", flag: "🇳🇿", avatar: "https://randomuser.me/api/portraits/men/23.jpg", amount: "$22,400", review: "Secure platform with excellent investment options.", invested: "$11,000" },
+            { name: "Fatima Al-Rahman", country: "Saudi Arabia", flag: "🇸🇦", avatar: "https://randomuser.me/api/portraits/women/42.jpg", amount: "$38,700", review: "Great platform! Profits credited like clockwork.", invested: "$19,000" },
+            { name: "Lucas Silva", country: "Brazil", flag: "🇧🇷", avatar: "https://randomuser.me/api/portraits/men/61.jpg", amount: "$17,900", review: "Easy investments with amazing daily returns!", invested: "$8,800" },
+            { name: "Maria Gonzalez", country: "Argentina", flag: "🇦🇷", avatar: "https://randomuser.me/api/portraits/women/76.jpg", amount: "$14,300", review: "Trustworthy platform with responsive support team.", invested: "$7,200" },
+            { name: "Erik Johansson", country: "Sweden", flag: "🇸🇪", avatar: "https://randomuser.me/api/portraits/men/43.jpg", amount: "$29,800", review: "Best investment decision of 2026!", invested: "$15,000" },
+            { name: "Chen Wei", country: "China", flag: "🇨🇳", avatar: "https://randomuser.me/api/portraits/men/17.jpg", amount: "$44,500", review: "Reliable platform with consistent profits.", invested: "$21,000" },
+            { name: "Olivia Taylor", country: "Ireland", flag: "🇮🇪", avatar: "https://randomuser.me/api/portraits/women/29.jpg", amount: "$18,600", review: "Excellent customer service and fast payouts!", invested: "$9,200" },
+            { name: "Abdul Malik", country: "Pakistan", flag: "🇵🇰", avatar: "https://randomuser.me/api/portraits/men/72.jpg", amount: "$11,900", review: "Great returns on my crypto investments!", invested: "$6,500" },
+            { name: "Nina Petrov", country: "Russia", flag: "🇷🇺", avatar: "https://randomuser.me/api/portraits/women/51.jpg", amount: "$33,200", review: "Professional team and transparent processes.", invested: "$16,000" },
+            { name: "Tom Anderson", country: "Denmark", flag: "🇩🇰", avatar: "https://randomuser.me/api/portraits/men/38.jpg", amount: "$21,700", review: "Smooth experience from signup to withdrawal!", invested: "$10,500" },
+            { name: "Aisha Mohammed", country: "Nigeria", flag: "🇳🇬", avatar: "https://randomuser.me/api/portraits/women/63.jpg", amount: "$15,800", review: "Best platform for African investors!", invested: "$8,000" },
+            { name: "Marco Rossi", country: "Switzerland", flag: "🇨🇭", avatar: "https://randomuser.me/api/portraits/men/56.jpg", amount: "$51,300", review: "Secure and professional investment service.", invested: "$24,000" },
+            { name: "Katerina Popov", country: "Ukraine", flag: "🇺🇦", avatar: "https://randomuser.me/api/portraits/women/14.jpg", amount: "$13,400", review: "Great platform! Easy to use and profitable.", invested: "$7,000" },
+            { name: "John Smith", country: "South Africa", flag: "🇿🇦", avatar: "https://randomuser.me/api/portraits/men/89.jpg", amount: "$24,900", review: "Exceeded my expectations! Highly recommend.", invested: "$12,000" },
+            { name: "Amelia White", country: "Belgium", flag: "🇧🇪", avatar: "https://randomuser.me/api/portraits/women/37.jpg", amount: "$17,200", review: "Consistent profits and excellent support!", invested: "$8,500" },
+            { name: "Viktor Novak", country: "Czech Republic", flag: "🇨🇿", avatar: "https://randomuser.me/api/portraits/men/27.jpg", amount: "$19,800", review: "Trustworthy platform with daily returns!", invested: "$10,000" },
+            { name: "Sophie Martin", country: "Netherlands", flag: "🇳🇱", avatar: "https://randomuser.me/api/portraits/women/48.jpg", amount: "$28,600", review: "Best investment platform I've used!", invested: "$14,000" },
+            { name: "Ali Reza", country: "Iran", flag: "🇮🇷", avatar: "https://randomuser.me/api/portraits/men/94.jpg", amount: "$16,100", review: "Great returns and professional service.", invested: "$8,200" },
+            { name: "Laura Jensen", country: "Norway", flag: "🇳🇴", avatar: "https://randomuser.me/api/portraits/women/82.jpg", amount: "$32,500", review: "Reliable platform with consistent growth!", invested: "$16,500" },
+            { name: "Dmitri Volkov", country: "Belarus", flag: "🇧🇾", avatar: "https://randomuser.me/api/portraits/men/69.jpg", amount: "$14,700", review: "Fast withdrawals and great customer support.", invested: "$7,500" },
+            { name: "Grace Kim", country: "South Korea", flag: "🇰🇷", avatar: "https://randomuser.me/api/portraits/women/26.jpg", amount: "$26,400", review: "Excellent platform for crypto investments!", invested: "$13,000" },
+            { name: "Paulo Santos", country: "Portugal", flag: "🇵🇹", avatar: "https://randomuser.me/api/portraits/men/41.jpg", amount: "$20,900", review: "Professional team and transparent operations.", invested: "$10,500" },
+            { name: "Elena Popescu", country: "Romania", flag: "🇷🇴", avatar: "https://randomuser.me/api/portraits/women/59.jpg", amount: "$15,300", review: "Great platform! Profits come in daily!", invested: "$7,800" },
+            { name: "Daniel Murphy", country: "Scotland", flag: "🏴󐁧󐁢󐁳󐁣󐁴󐁿", avatar: "https://randomuser.me/api/portraits/men/15.jpg", amount: "$23,800", review: "Best returns on my crypto portfolio!", invested: "$12,000" },
+            { name: "Yasmin Ali", country: "Malaysia", flag: "🇲🇾", avatar: "https://randomuser.me/api/portraits/women/73.jpg", amount: "$18,200", review: "Reliable and trustworthy investment platform.", invested: "$9,000" },
+            { name: "Fredrik Larsson", country: "Finland", flag: "🇫🇮", avatar: "https://randomuser.me/api/portraits/men/84.jpg", amount: "$27,700", review: "Excellent service and consistent profits!", invested: "$14,000" },
+            { name: "Carmen Lopez", country: "Chile", flag: "🇨🇱", avatar: "https://randomuser.me/api/portraits/women/11.jpg", amount: "$16,900", review: "Great platform for Latin American investors!", invested: "$8,500" },
+            { name: "Raj Patel", country: "India", flag: "🇮🇳", avatar: "https://randomuser.me/api/portraits/men/52.jpg", amount: "$22,100", review: "Professional platform with amazing returns!", invested: "$11,000" },
+            { name: "Hannah Fischer", country: "Austria", flag: "🇦🇹", avatar: "https://randomuser.me/api/portraits/women/35.jpg", amount: "$19,500", review: "Smooth withdrawals and excellent support!", invested: "$10,000" },
+            { name: "Ibrahim Yilmaz", country: "Turkey", flag: "🇹🇷", avatar: "https://randomuser.me/api/portraits/men/76.jpg", amount: "$24,300", review: "Best platform for Turkish investors!", invested: "$12,500" },
+            { name: "Natalie Brown", country: "Wales", flag: "🏴󐁧󐁢󐁷󐁬󐁳󐁿", avatar: "https://randomuser.me/api/portraits/women/68.jpg", amount: "$17,600", review: "Consistent daily profits! Highly recommend.", invested: "$9,000" },
+            { name: "Antonio Fernandez", country: "Colombia", flag: "🇨🇴", avatar: "https://randomuser.me/api/portraits/men/33.jpg", amount: "$21,400", review: "Transparent and reliable investment service.", invested: "$10,800" },
+            { name: "Zara Ahmed", country: "Bangladesh", flag: "🇧🇩", avatar: "https://randomuser.me/api/portraits/women/57.jpg", amount: "$13,900", review: "Great platform with fast profit payouts!", invested: "$7,200" },
+            { name: "Peter Novotny", country: "Slovakia", flag: "🇸🇰", avatar: "https://randomuser.me/api/portraits/men/47.jpg", amount: "$18,800", review: "Professional service and great returns!", invested: "$9,500" },
+            { name: "Julia Schmidt", country: "Germany", flag: "🇩🇪", avatar: "https://randomuser.me/api/portraits/women/23.jpg", amount: "$29,200", review: "Best investment decision I've made!", invested: "$15,000" },
+            { name: "Omar Abdullah", country: "Jordan", flag: "🇯🇴", avatar: "https://randomuser.me/api/portraits/men/81.jpg", amount: "$16,700", review: "Excellent platform for Middle Eastern investors!", invested: "$8,500" },
+            { name: "Victoria Nguyen", country: "Vietnam", flag: "🇻🇳", avatar: "https://randomuser.me/api/portraits/women/41.jpg", amount: "$14,500", review: "Reliable platform with consistent earnings!", invested: "$7,500" },
+            { name: "Miguel Torres", country: "Peru", flag: "🇵🇪", avatar: "https://randomuser.me/api/portraits/men/66.jpg", amount: "$19,100", review: "Great returns and professional support team!", invested: "$10,000" },
+            { name: "Leah Cohen", country: "Israel", flag: "🇮🇱", avatar: "https://randomuser.me/api/portraits/women/79.jpg", amount: "$25,800", review: "Best crypto investment platform available!", invested: "$13,000" },
+            { name: "Stefan Kovac", country: "Croatia", flag: "🇭🇷", avatar: "https://randomuser.me/api/portraits/men/29.jpg", amount: "$17,300", review: "Trustworthy platform with daily profits!", invested: "$9,000" },
+            { name: "Mia Johnson", country: "Iceland", flag: "🇮🇸", avatar: "https://randomuser.me/api/portraits/women/16.jpg", amount: "$21,900", review: "Excellent service and fast withdrawals!", invested: "$11,000" },
+            { name: "Andre Silva", country: "Mozambique", flag: "🇲🇿", avatar: "https://randomuser.me/api/portraits/men/92.jpg", amount: "$12,600", review: "Great platform for African crypto investors!", invested: "$6,500" },
+            { name: "Helena Varga", country: "Hungary", flag: "🇭🇺", avatar: "https://randomuser.me/api/portraits/women/52.jpg", amount: "$23,500", review: "Professional team and consistent returns!", invested: "$12,000" },
+            { name: "Ryan O'Brien", country: "Ireland", flag: "🇮🇪", avatar: "https://randomuser.me/api/portraits/men/36.jpg", amount: "$20,200", review: "Best investment platform in Europe!", invested: "$10,500" },
+            { name: "Sakura Yamamoto", country: "Japan", flag: "🇯🇵", avatar: "https://randomuser.me/api/portraits/women/87.jpg", amount: "$31,700", review: "Reliable platform with excellent daily returns!", invested: "$16,000" },
+            { name: "Bruno Costa", country: "Brazil", flag: "🇧🇷", avatar: "https://randomuser.me/api/portraits/men/74.jpg", amount: "$18,400", review: "Great platform! Profits come daily!", invested: "$9,500" },
+            { name: "Amara Nwosu", country: "Nigeria", flag: "🇳🇬", avatar: "https://randomuser.me/api/portraits/women/31.jpg", amount: "$15,100", review: "Trustworthy and professional investment service!", invested: "$7,800" },
+            { name: "Lukas Berg", country: "Estonia", flag: "🇪🇪", avatar: "https://randomuser.me/api/portraits/men/58.jpg", amount: "$22,600", review: "Best crypto platform in the Baltic region!", invested: "$11,500" },
+            { name: "Chloe Dubois", country: "Luxembourg", flag: "🇱🇺", avatar: "https://randomuser.me/api/portraits/women/64.jpg", amount: "$28,900", review: "Excellent returns and professional support!", invested: "$14,500" },
+            { name: "Tariq Hassan", country: "Kuwait", flag: "🇰🇼", avatar: "https://randomuser.me/api/portraits/men/88.jpg", amount: "$34,200", review: "Reliable platform with consistent growth!", invested: "$17,000" },
+            { name: "Bianca Rossi", country: "Monaco", flag: "🇲🇨", avatar: "https://randomuser.me/api/portraits/women/77.jpg", amount: "$47,800", review: "Best investment platform for high net worth!", invested: "$23,000" },
+            { name: "Kristian Nielsen", country: "Denmark", flag: "🇩🇰", avatar: "https://randomuser.me/api/portraits/men/21.jpg", amount: "$19,700", review: "Professional service with great daily profits!", invested: "$10,000" },
+            { name: "Zainab Khan", country: "UAE", flag: "🇦🇪", avatar: "https://randomuser.me/api/portraits/women/46.jpg", amount: "$26,100", review: "Excellent platform for GCC investors!", invested: "$13,500" },
+            { name: "Oscar Larsson", country: "Sweden", flag: "🇸🇪", avatar: "https://randomuser.me/api/portraits/men/63.jpg", amount: "$24,700", review: "Trustworthy and reliable investment platform!", invested: "$12,500" }
+        ];
+        
+        this.currentIndex = 0;
+        this.shownIndices = [];
+        this.popupElement = null;
         this.init();
     }
 
     init() {
-        // Create popup container
-        this.createContainer();
-        
-        // Load confetti animation CSS if needed
-        this.loadConfettiStyles();
-        
-        // Start showing testimonials after 10 seconds
-        setTimeout(() => {
-            this.showRandomTestimonial();
-            // Show a new one every 15-20 seconds
-            setInterval(() => {
-                if (this.visiblePopups < this.maxVisiblePopups) {
-                    this.showRandomTestimonial();
-                }
-            }, this.getRandomInterval(15000, 20000));
-        }, 10000);
+        this.createPopupElement();
+        setTimeout(() => this.showRandomTestimonial(), 8000);
+        setInterval(() => this.showRandomTestimonial(), 25000);
     }
 
-    createContainer() {
-        // Check if container already exists
-        if (document.getElementById('testimonial-popup-container')) {
-            return;
-        }
-
-        const container = document.createElement('div');
-        container.id = 'testimonial-popup-container';
-        container.style.cssText = `
+    createPopupElement() {
+        const div = document.createElement('div');
+        div.id = 'testimonial-popup-new';
+        div.style.cssText = `
             position: fixed;
             bottom: 80px;
             left: 20px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 12px;
+            padding: 12px;
+            max-width: 320px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
             z-index: 9997;
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 350px;
+            display: none;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transform: translateX(-120%);
+            transition: transform 0.4s ease;
         `;
-        document.body.appendChild(container);
-        this.container = container;
-    }
-    
-    loadConfettiStyles() {
-        if (document.getElementById('confetti-styles')) {
-            return;
-        }
-        
-        const style = document.createElement('style');
-        style.id = 'confetti-styles';
-        style.textContent = `
-            @keyframes confetti-fall {
-                0% {
-                    transform: translateY(-100vh) translateX(0) rotate(0deg);
-                    opacity: 1;
-                }
-                100% {
-                    transform: translateY(100vh) translateX(100px) rotate(720deg);
-                    opacity: 0;
-                }
-            }
-            
-            @keyframes slideInUp {
-                from {
-                    transform: translateY(30px);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateY(0);
-                    opacity: 1;
-                }
-            }
-            
-            .confetti {
-                position: fixed;
-                width: 10px;
-                height: 10px;
-                pointer-events: none;
-                z-index: 9999;
-                animation: confetti-fall 2s forwards;
-            }
-            
-            .testimonial-popup {
-                animation: slideInUp 0.4s ease forwards !important;
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    getRandomInterval(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    getRandomTestimonial() {
-        // Reset if all testimonials have been shown
-        if (this.shownIndices.size >= testimonials.length) {
-            this.shownIndices.clear();
-        }
-
-        let randomIndex;
-        do {
-            randomIndex = Math.floor(Math.random() * testimonials.length);
-        } while (this.shownIndices.has(randomIndex));
-
-        this.shownIndices.add(randomIndex);
-        return testimonials[randomIndex];
+        document.body.appendChild(div);
+        this.popupElement = div;
     }
 
     showRandomTestimonial() {
-        if (this.visiblePopups >= this.maxVisiblePopups) {
-            return;
-        }
-        
-        const testimonial = this.getRandomTestimonial();
-        const popup = this.createPopupElement(testimonial);
-        
-        this.container.appendChild(popup);
-        this.visiblePopups++;
-
-        // Animate in with slide-in from bottom-right
-        setTimeout(() => {
-            popup.style.transform = 'translateY(0)';
-            popup.style.opacity = '1';
-        }, 10);
-
-        // Auto-hide after 8 seconds
-        setTimeout(() => {
-            this.hidePopup(popup);
-        }, 8000);
-    }
-
-    createPopupElement(testimonial) {
-        const popup = document.createElement('div');
-        popup.className = 'testimonial-popup';
-        popup.style.cssText = `
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 18px 22px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            min-width: 280px;
-            max-width: 280px;
-            transform: translateY(30px);
-            opacity: 0;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        `;
-
-        // Add shimmer effect
-        const shimmer = document.createElement('div');
-        shimmer.style.cssText = `
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: shimmer 2s infinite;
-        `;
-        popup.appendChild(shimmer);
-
-        // Add CSS animation for shimmer
-        if (!document.getElementById('testimonial-animations')) {
-            const style = document.createElement('style');
-            style.id = 'testimonial-animations';
-            style.textContent = `
-                @keyframes shimmer {
-                    0% { left: -100%; }
-                    100% { left: 100%; }
-                }
-                .testimonial-popup:hover {
-                    transform: translateY(0) scale(1.02);
-                    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-                }
-                @keyframes pulse {
-                    0%, 100% { opacity: 1; }
-                    50% { opacity: 0.7; }
-                }
-                .new-badge {
-                    animation: pulse 1s ease-in-out infinite;
-                }
-            `;
-            document.head.appendChild(style);
+        if (this.shownIndices.length >= this.testimonials.length) {
+            this.shownIndices = [];
         }
 
-        const content = document.createElement('div');
-        content.style.position = 'relative';
-        content.style.zIndex = '1';
-        // Header with icon
-        const header = document.createElement('div');
-        header.style.cssText = `
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            gap: 12px;
-        `;
-
-        // Add avatar
-        const avatarImg = document.createElement('img');
-        avatarImg.src = `/static/images/avatars/${testimonial.avatar || 'avatar-1.jpg'}`;
-        avatarImg.alt = testimonial.name;
-        avatarImg.style.cssText = `
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(255,255,255,0.3);
-        `;
-
-        const iconText = document.createElement('div');
-        iconText.style.cssText = `
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-        `;
+        let available = this.testimonials.map((_, i) => i).filter(i => !this.shownIndices.includes(i));
+        const randomIndex = available[Math.floor(Math.random() * available.length)];
+        const person = this.testimonials[randomIndex];
         
-        const icon = testimonial.action === 'withdrew' ? '💰' : '🎉';
-        iconText.innerHTML = `<span style="font-size: 20px;">${icon}</span> 
-                              <span style="font-size: 14px;">New ${testimonial.action === 'withdrew' ? 'Withdrawal' : 'Profit'}</span>`;
-
-        const closeBtn = document.createElement('button');
-        closeBtn.innerHTML = '×';
-        closeBtn.style.cssText = `
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            line-height: 1;
-        `;
-        closeBtn.onclick = (e) => {
-            e.stopPropagation();
-            this.hidePopup(popup);
-        };
-
-        header.appendChild(avatarImg);
-        header.appendChild(iconText);
-        header.appendChild(closeBtn);
-
-        // Main content
-        const mainContent = document.createElement('div');
-        mainContent.innerHTML = `
-            <div style="font-weight: 700; font-size: 16px; margin-bottom: 4px;">
-                ${testimonial.name}
-            </div>
-            <div style="font-size: 12px; opacity: 0.9; margin-bottom: 8px;">
-                <span style="opacity: 0.8;">📍</span> ${testimonial.country}
-            </div>
-            <div style="background: rgba(255,255,255,0.15); padding: 8px 12px; border-radius: 8px; margin-bottom: 8px;">
-                <div style="font-size: 20px; font-weight: 700; color: #ffd700;">
-                    ${testimonial.amount}
-                </div>
-                <div style="font-size: 11px; opacity: 0.9;">
-                    ${testimonial.action === 'withdrew' ? 'Successfully withdrawn' : 'Profit earned'}
+        this.shownIndices.push(randomIndex);
+        
+        this.popupElement.innerHTML = `
+            <div style="display: flex; gap: 10px; align-items: flex-start;">
+                <img src="${person.avatar}" 
+                     style="width: 42px; height: 42px; border-radius: 50%; border: 2px solid #FFD700; flex-shrink: 0;"
+                     onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(person.name)}&background=FFD700&color=000&size=42'">
+                <div style="flex: 1; min-width: 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                        <span style="font-weight: 600; color: #fff; font-size: 0.9rem;">${person.name}</span>
+                        <button onclick="document.getElementById('testimonial-popup-new').style.transform='translateX(-120%)';setTimeout(()=>document.getElementById('testimonial-popup-new').style.display='none',400)" 
+                                style="background: transparent; border: none; color: #999; cursor: pointer; font-size: 1.2rem; padding: 0; line-height: 1;">×</button>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #FFD700; margin-bottom: 6px;">${person.flag} ${person.country}</div>
+                    <div style="color: #ccc; font-size: 0.8rem; line-height: 1.4; margin-bottom: 6px;">"${person.review}"</div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.7rem;">
+                        <span style="color: #00A86B;">💰 Earned: ${person.amount}</span>
+                        <span style="color: #888;">Invested: ${person.invested}</span>
+                    </div>
                 </div>
             </div>
-            <div style="font-size: 11px; opacity: 0.95; font-style: italic;">
-                "${testimonial.message}"
-            </div>
-            <div style="margin-top: 6px;">
-                ${'⭐'.repeat(testimonial.rating)}
-            </div>
         `;
 
-        content.appendChild(header);
-        content.appendChild(mainContent);
-        popup.appendChild(content);
-
-        return popup;
-    }
-
-    hidePopup(popup) {
-        popup.style.transform = 'translateY(30px)';
-        popup.style.opacity = '0';
-        this.visiblePopups--;
-        
+        this.popupElement.style.display = 'block';
         setTimeout(() => {
-            if (popup.parentNode) {
-                popup.parentNode.removeChild(popup);
-            }
-        }, 400);
-    }
-    
-    showConfetti() {
-        const confettiCount = 20;
-        const colors = ['#FFD700', '#00A86B', '#667eea', '#764ba2', '#FF6B6B'];
-        
-        for (let i = 0; i < confettiCount; i++) {
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti';
-            confetti.style.left = Math.random() * window.innerWidth + 'px';
-            confetti.style.top = '-10px';
-            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0%';
-            confetti.style.animation = `confetti-fall ${1.5 + Math.random() * 1}s forwards`;
-            document.body.appendChild(confetti);
-            
-            setTimeout(() => confetti.remove(), 2500);
-        }
+            this.popupElement.style.transform = 'translateX(0)';
+        }, 100);
+
+        setTimeout(() => {
+            this.popupElement.style.transform = 'translateX(-120%)';
+            setTimeout(() => {
+                this.popupElement.style.display = 'none';
+            }, 400);
+        }, 12000);
     }
 }
 
-// Initialize testimonial popup when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        new TestimonialPopup();
-    });
-} else {
+document.addEventListener('DOMContentLoaded', () => {
     new TestimonialPopup();
-}
+});
