@@ -24,7 +24,10 @@ ALLOWED_HOSTS = os.getenv(
 
 CSRF_TRUSTED_ORIGINS = [
     'https://elitewealthcapital.uk',
-    'https://www.elitewealthcapital.uk'
+    'https://www.elitewealthcapital.uk',
+    'https://elitewealthcapita.uk',
+    'https://www.elitewealthcapita.uk',
+    'https://my-site-ghnp.onrender.com'
 ]
 
 # Application definition
