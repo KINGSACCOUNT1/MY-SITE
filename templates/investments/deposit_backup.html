@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Funds{% endblock %}
+
+{% block extra_css %}
+<style>
+    .deposit-container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+    
+    .deposit-card {
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+    
+    .payment-methods {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .payment-method-btn {
+        background: rgba(255,255,255,0.05);
+        border: 2px solid rgba(255,255,255,0.2);
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: #fff;
+    }
+    
+    .payment-method-btn:hover {
+        border-color: #6f42c1;
+        background: rgba(111,66,193,0.1);
+        transform: translateY(-3px);
+    }
+    
+    .payment-method-btn.active {
+        border-color: #6f42c1;
+        background: rgba(111,66,193,0.2);
+        box-shadow: 0 8px 20px rgba(111,66,193,0.3);
+    }
+    
+    .payment-icon {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+    
+    .wallet-display {
+        display: none;
+        background: rgba(255,255,255,0.05);
+        border-radius: 15px;
+        padding: 30px;
+        margin: 30px 0;
+    }
+    
+    .wallet-display.active {
+        display: block;
+    }
+    
+    .wallet-address-box {
+        background: rgba(0,0,0,0.3);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .wallet-address-text {
+        color: #fff;
+        font-family: monospace;
+        font-size: 0.95rem;
+        word-break: break-all;
+        flex: 1;
+    }
+    
+    .copy-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        color: #fff;
+        cursor: pointer;
+        margin-left: 15px;
+    }
+    
+    .form-input {
+        width: 100%;
+        padding: 15px;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 10px;
+        color: #fff;
+    }
+    
+    .submit-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 15px 50px;
+        border-radius: 10px;
+        color: #fff;
+        width: 100%;
+        border: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="deposit-container">
+    <div class="deposit-card">
+        <h2 class="text-center mb-4">Add Funds</h2>
+        
+        <form method="POST" enctype="multipart/form-data" id="depositForm">
+            {% csrf_token %}
+            
+            <h5 class="mb-3">Select Payment Method</h5>
+            <div class="payment-methods">
+                {% if wallets.BTC %}
+                <div class="payment-method-btn" onclick="selectCrypto('BTC')">
+                    <i class="fab fa-bitcoin payment-icon" style="color: #f7931a;"></i>
+                    <div>Bitcoin</div>
+                </div>
+                {% endif %}
+                
+                {% if wallets.ETH %}
+                <div class="payment-method-btn" onclick="selectCrypto('ETH')">
+                    <i class="fab fa-ethereum payment-icon" style="color: #627eea;"></i>
+                    <div>Ethereum</div>
+                </div>
+                {% endif %}
+                
+                <div class="payment-method-btn" onclick="selectBank()">
+                    <i class="fas fa-university payment-icon"></i>
+                    <div>Bank</div>
+                </div>
+            </div>
+            
+            <input type="hidden" name="crypto_type" id="cryptoType">
+            
+            {% if wallets.BTC %}
+            <div class="wallet-display" id="wallet-BTC">
+                <h5>Bitcoin (BTC) Deposit</h5>
+                <div class="wallet-address-box">
+                    <span class="wallet-address-text">{{ wallets.BTC.address }}</span>
+                    <button type="button" class="copy-btn" onclick="copyAddress('{{ wallets.BTC.address }}')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+            {% endif %}
+            
+            <div class="wallet-display" id="wallet-BANK">
+                <h5>Bank Transfer</h5>
+                <p>Contact support via chat for bank details</p>
+                <button type="button" class="btn btn-light" onclick="openTawkChat()">
+                    <i class="fas fa-comments"></i> Chat with Support
+                </button>
+            </div>
+            
+            <div id="depositFields" style="display: none;">
+                <div class="mb-3">
+                    <label>Amount (USD) *</label>
+                    <input type="number" name="amount" class="form-input" min="10" step="0.01" required>
+                </div>
+                <button type="submit" class="submit-btn">Submit Deposit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function selectCrypto(crypto) {
+    document.querySelectorAll('.wallet-display').forEach(el => el.classList.remove('active'));
+    document.getElementById('wallet-' + crypto).classList.add('active');
+    document.getElementById('cryptoType').value = crypto;
+    document.getElementById('depositFields').style.display = 'block';
+}
+
+function selectBank() {
+    document.querySelectorAll('.wallet-display').forEach(el => el.classList.remove('active'));
+    document.getElementById('wallet-BANK').classList.add('active');
+    document.getElementById('depositFields').style.display = 'none';
+}
+
+function copyAddress(address) {
+    navigator.clipboard.writeText(address);
+    alert('Address copied!');
+}
+
+function openTawkChat() {
+    if (typeof Tawk_API !== 'undefined') {
+        Tawk_API.maximize();
+    }
+}
+</script>
+{% endblock %}

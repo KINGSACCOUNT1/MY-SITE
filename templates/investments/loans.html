@@ -1,0 +1,1342 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Loans Dashboard - Elite Wealth Capital{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="glass-card p-4">
+                <h1 class="h2 mb-2 text-white">
+                    <i class="fas fa-file-contract me-2 text-gold"></i>Loans Dashboard
+                </h1>
+                <p class="text-white-50 mb-0">Flexible financing solutions for your investment goals</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="row mb-4 g-3">
+        <!-- Available Credit -->
+        <div class="col-md-3 col-sm-6">
+            <div class="glass-card h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-white-50 mb-2 small">Available Credit</p>
+                        <h5 class="mb-0 text-gold">${{ user.balance|floatformat:0|default:"50,000" }}</h5>
+                    </div>
+                    <i class="fas fa-credit-card fa-2x text-gold opacity-50"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Outstanding -->
+        <div class="col-md-3 col-sm-6">
+            <div class="glass-card h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-white-50 mb-2 small">Total Outstanding</p>
+                        <h5 class="mb-0 text-white">
+                            {% if loans %}
+                                ${{ loans|length|multiply:5000|floatformat:0 }}
+                            {% else %}
+                                $0
+                            {% endif %}
+                        </h5>
+                    </div>
+                    <i class="fas fa-chart-pie fa-2x text-white opacity-50"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Loans -->
+        <div class="col-md-3 col-sm-6">
+            <div class="glass-card h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-white-50 mb-2 small">Active Loans</p>
+                        <h5 class="mb-0 text-white">{{ loans.count|default:0 }}</h5>
+                    </div>
+                    <i class="fas fa-file-invoice-dollar fa-2x text-white opacity-50"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Credit Score -->
+        <div class="col-md-3 col-sm-6">
+            <div class="glass-card h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-white-50 mb-2 small">Credit Score</p>
+                        <h5 class="mb-0 text-gold">760</h5>
+                        <small class="text-gold"><i class="fas fa-arrow-up me-1"></i>Very Good</small>
+                    </div>
+                    <i class="fas fa-star fa-2x text-gold opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loan Calculator Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="glass-card">
+                <h5 class="text-white mb-4">
+                    <i class="fas fa-calculator me-2 text-gold"></i>Loan Calculator
+                </h5>
+                <div class="row">
+                    <div class="col-md-8">
+                        <!-- Loan Amount Slider -->
+                        <div class="mb-4">
+                            <label for="calcLoanAmount" class="form-label text-white">
+                                Loan Amount: <span id="loanAmountDisplay" class="text-gold">$10,000</span>
+                            </label>
+                            <input type="range" class="form-range slider-gold" id="calcLoanAmount" 
+                                   min="100" max="100000" step="100" value="10000">
+                            <div class="d-flex justify-content-between text-white-50 small">
+                                <span>$100</span>
+                                <span>$100,000</span>
+                            </div>
+                        </div>
+
+                        <!-- Duration Dropdown -->
+                        <div class="mb-4">
+                            <label for="calcDuration" class="form-label text-white">
+                                <i class="fas fa-calendar-alt me-2"></i>Repayment Duration
+                            </label>
+                            <select class="form-select glass-input" id="calcDuration">
+                                <option value="30">30 Days</option>
+                                <option value="60">60 Days</option>
+                                <option value="90" selected>90 Days (3 Months)</option>
+                                <option value="180">180 Days (6 Months)</option>
+                                <option value="365">365 Days (1 Year)</option>
+                            </select>
+                        </div>
+
+                        <!-- Interest Rate Display -->
+                        <div class="mb-3">
+                            <label class="form-label text-white">
+                                <i class="fas fa-percent me-2"></i>Interest Rate
+                            </label>
+                            <div class="glass-info-box">
+                                <span id="interestRateDisplay" class="text-gold fs-5">4.5%</span>
+                                <small class="text-white-50 ms-2">APR (Annual Percentage Rate)</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calculation Results -->
+                    <div class="col-md-4">
+                        <div class="glass-result-box">
+                            <h6 class="text-white mb-3">Repayment Summary</h6>
+                            
+                            <div class="mb-3">
+                                <small class="text-white-50">Monthly Payment</small>
+                                <h4 class="text-gold mb-0" id="monthlyPayment">$3,450</h4>
+                            </div>
+
+                            <hr class="border-white-50">
+
+                            <div class="mb-2">
+                                <small class="text-white-50">Principal Amount</small>
+                                <p class="text-white mb-0" id="principalAmount">$10,000</p>
+                            </div>
+
+                            <div class="mb-2">
+                                <small class="text-white-50">Total Interest</small>
+                                <p class="text-white mb-0" id="totalInterest">$113</p>
+                            </div>
+
+                            <div class="mb-2">
+                                <small class="text-white-50">Total Repayment</small>
+                                <h5 class="text-gold mb-0" id="totalRepayment">$10,113</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Apply for Loan Section -->
+    <div class="row mb-4">
+        <div class="col-lg-7">
+            <div class="glass-card">
+                <h5 class="text-white mb-4">
+                    <i class="fas fa-plus-circle me-2 text-gold"></i>Apply for a Loan
+                </h5>
+                <form id="loanApplicationForm" method="post">
+                    {% csrf_token %}
+                    <!-- Loan Amount -->
+                    <div class="mb-3">
+                        <label for="loanAmount" class="form-label text-white">
+                            <i class="fas fa-dollar-sign me-2"></i>Loan Amount
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text glass-input-text">$</span>
+                            <input type="number" class="form-control glass-input" id="loanAmount" name="amount"
+                                   placeholder="Enter amount" min="100" max="100000" step="100" required>
+                        </div>
+                        <small class="text-white-50">Minimum: $100 | Maximum: $100,000</small>
+                    </div>
+
+                    <!-- Loan Purpose -->
+                    <div class="mb-3">
+                        <label for="loanPurpose" class="form-label text-white">
+                            <i class="fas fa-pen me-2"></i>Purpose of Loan
+                        </label>
+                        <textarea class="form-control glass-input" id="loanPurpose" name="purpose" rows="3" 
+                                  placeholder="Describe how you plan to use this loan..." required></textarea>
+                        <small class="text-white-50">Minimum 20 characters required</small>
+                    </div>
+
+                    <!-- Loan Duration -->
+                    <div class="mb-3">
+                        <label for="loanDuration" class="form-label text-white">
+                            <i class="fas fa-calendar-alt me-2"></i>Repayment Duration
+                        </label>
+                        <select class="form-select glass-input" id="loanDuration" name="duration" required>
+                            <option value="">Select duration</option>
+                            <option value="30">30 Days</option>
+                            <option value="60">60 Days</option>
+                            <option value="90">90 Days (3 Months)</option>
+                            <option value="180">180 Days (6 Months)</option>
+                            <option value="365">1 Year</option>
+                        </select>
+                    </div>
+
+                    <!-- Interest Rate Info -->
+                    <div class="alert-glass alert-info-glass mb-3">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Interest Rate:</strong> Starting from 4.5% APR based on credit profile
+                    </div>
+
+                    <!-- Terms & Conditions -->
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                        <label class="form-check-label text-white" for="agreeTerms">
+                            I agree to the <a href="#" class="text-gold" data-bs-toggle="modal" data-bs-target="#termsModal">loan terms and conditions</a>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-gold w-100" id="submitLoanBtn">
+                        <i class="fas fa-paper-plane me-2"></i>
+                        <span id="submitBtnText">Submit Application</span>
+                        <span id="submitBtnLoader" class="d-none">
+                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            Processing...
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Loan Terms Quick View -->
+        <div class="col-lg-5">
+            <div class="glass-card h-100">
+                <h5 class="text-white mb-4">
+                    <i class="fas fa-file-contract me-2 text-gold"></i>Loan Terms Overview
+                </h5>
+                
+                <div class="terms-list">
+                    <div class="term-item mb-3">
+                        <h6 class="text-gold mb-2">
+                            <i class="fas fa-percent me-2"></i>Interest Rates
+                        </h6>
+                        <ul class="text-white-50 small mb-0">
+                            <li>$100 - $10,000: 4.5% APR</li>
+                            <li>$10,001 - $50,000: 4.0% APR</li>
+                            <li>$50,001 - $100,000: 3.5% APR</li>
+                        </ul>
+                    </div>
+
+                    <div class="term-item mb-3">
+                        <h6 class="text-gold mb-2">
+                            <i class="fas fa-shield-alt me-2"></i>Collateral Requirements
+                        </h6>
+                        <p class="text-white-50 small mb-0">
+                            Loans under $25,000 require no collateral. Larger amounts may require investment portfolio as security.
+                        </p>
+                    </div>
+
+                    <div class="term-item mb-3">
+                        <h6 class="text-gold mb-2">
+                            <i class="fas fa-calendar-check me-2"></i>Repayment Terms
+                        </h6>
+                        <p class="text-white-50 small mb-0">
+                            Flexible repayment schedules from 30 days to 1 year. Early repayment with no penalties.
+                        </p>
+                    </div>
+
+                    <div class="term-item mb-3">
+                        <h6 class="text-gold mb-2">
+                            <i class="fas fa-bolt me-2"></i>Quick Approval
+                        </h6>
+                        <p class="text-white-50 small mb-0">
+                            Most applications reviewed within 24 hours. Funds disbursed within 48 hours of approval.
+                        </p>
+                    </div>
+
+                    <div class="term-item">
+                        <h6 class="text-gold mb-2">
+                            <i class="fas fa-award me-2"></i>Early Payment Benefits
+                        </h6>
+                        <p class="text-white-50 small mb-0">
+                            Save on interest with early repayment. No prepayment penalties apply.
+                        </p>
+                    </div>
+                </div>
+
+                <button class="btn btn-outline-gold w-100 mt-3" data-bs-toggle="modal" data-bs-target="#termsModal">
+                    <i class="fas fa-file-alt me-2"></i>View Full Terms
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Loans Section -->
+    <div class="glass-card mb-4">
+        <h5 class="text-white mb-4">
+            <i class="fas fa-list me-2 text-gold"></i>My Active Loans
+        </h5>
+        
+        {% if loans %}
+            <div class="row g-3">
+                {% for loan in loans %}
+                <div class="col-md-6">
+                    <div class="loan-card glass-card-inner">
+                        <!-- Loan Header -->
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h6 class="text-white mb-1">Loan #{{ loan.id }}</h6>
+                                <small class="text-white-50">Started: {{ loan.created_at|date:"M d, Y" }}</small>
+                            </div>
+                            <span class="badge 
+                                {% if loan.status == 'pending' %}badge-warning
+                                {% elif loan.status == 'approved' %}badge-success
+                                {% elif loan.status == 'active' %}badge-info
+                                {% elif loan.status == 'rejected' %}badge-danger
+                                {% else %}badge-secondary
+                                {% endif %}">
+                                {{ loan.status|title }}
+                            </span>
+                        </div>
+
+                        <!-- Status-Specific Messages -->
+                        {% if loan.status == 'pending' %}
+                        <div class="alert-glass alert-warning-glass mb-3">
+                            <i class="fas fa-clock me-2"></i>
+                            <strong>Under Review</strong><br>
+                            <small>Your application is being reviewed. Estimated time: 24 hours</small>
+                        </div>
+                        {% elif loan.status == 'approved' %}
+                        <div class="alert-glass alert-success-glass mb-3">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>Congratulations!</strong><br>
+                            <small>Your loan has been approved. Funds will be disbursed within 48 hours.</small>
+                        </div>
+                        {% elif loan.status == 'rejected' %}
+                        <div class="alert-glass alert-danger-glass mb-3">
+                            <i class="fas fa-times-circle me-2"></i>
+                            <strong>Application Declined</strong><br>
+                            <small>{{ loan.rejection_reason|default:"Please contact support for details. You may reapply in 30 days." }}</small>
+                        </div>
+                        {% endif %}
+
+                        <!-- Loan Details -->
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <small class="text-white-50">Principal Amount</small>
+                                <p class="text-white mb-0 fw-bold">${{ loan.amount|floatformat:2 }}</p>
+                            </div>
+                            <div class="col-6">
+                                <small class="text-white-50">Total Repayment</small>
+                                <p class="text-gold mb-0 fw-bold">${{ loan.total_repayment|default:loan.amount|floatformat:2 }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar (for active loans) -->
+                        {% if loan.status == 'active' or loan.status == 'approved' %}
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <small class="text-white-50">Repayment Progress</small>
+                                <small class="text-gold">{{ loan.repayment_percentage|default:0 }}%</small>
+                            </div>
+                            <div class="progress-glass">
+                                <div class="progress-bar-gold" style="width: {{ loan.repayment_percentage|default:0 }}%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Info -->
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <small class="text-white-50">Next Payment</small>
+                                <p class="text-white mb-0">{{ loan.next_payment_date|default:"TBD"|date:"M d, Y" }}</p>
+                            </div>
+                            <div class="col-6">
+                                <small class="text-white-50">Days Remaining</small>
+                                <p class="text-white mb-0">{{ loan.days_remaining|default:"N/A" }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-gold btn-sm flex-fill" 
+                                    onclick="showRepaymentModal({{ loan.id }}, {{ loan.amount }}, {{ loan.total_repayment|default:loan.amount }})">
+                                <i class="fas fa-coins me-1"></i>Make Payment
+                            </button>
+                            <button class="btn btn-outline-gold btn-sm" 
+                                    onclick="showScheduleModal({{ loan.id }})">
+                                <i class="fas fa-calendar me-1"></i>Schedule
+                            </button>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <!-- No Active Loans Message -->
+            <div class="text-center py-5">
+                <i class="fas fa-file-invoice-dollar fa-4x text-gold opacity-50 mb-3"></i>
+                <h5 class="text-white mb-2">No Active Loans</h5>
+                <p class="text-white-50 mb-4">You don't have any active loans at the moment.</p>
+                <button class="btn btn-gold" onclick="document.getElementById('loanAmount').focus()">
+                    <i class="fas fa-plus-circle me-2"></i>Apply for Your First Loan
+                </button>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Loan History -->
+    {% if loans %}
+    <div class="glass-card">
+        <h5 class="text-white mb-4">
+            <i class="fas fa-history me-2 text-gold"></i>Loan History
+        </h5>
+        <div class="table-responsive">
+            <table class="table table-glass">
+                <thead>
+                    <tr>
+                        <th class="text-white-50">Loan ID</th>
+                        <th class="text-white-50">Amount</th>
+                        <th class="text-white-50">Duration</th>
+                        <th class="text-white-50">Status</th>
+                        <th class="text-white-50">Progress</th>
+                        <th class="text-white-50">Date</th>
+                        <th class="text-white-50">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for loan in loans %}
+                    <tr>
+                        <td class="text-white">#{{ loan.id }}</td>
+                        <td class="text-gold">${{ loan.amount|floatformat:2 }}</td>
+                        <td class="text-white">{{ loan.duration|default:"90" }} days</td>
+                        <td>
+                            <span class="badge 
+                                {% if loan.status == 'pending' %}badge-warning
+                                {% elif loan.status == 'approved' %}badge-success
+                                {% elif loan.status == 'active' %}badge-info
+                                {% elif loan.status == 'rejected' %}badge-danger
+                                {% else %}badge-secondary
+                                {% endif %}">
+                                {{ loan.status|title }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="progress-glass" style="width: 100px;">
+                                <div class="progress-bar-gold" style="width: {{ loan.repayment_percentage|default:0 }}%"></div>
+                            </div>
+                        </td>
+                        <td class="text-white-50">{{ loan.created_at|date:"M d, Y" }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-gold" 
+                                    onclick="viewLoanDetails({{ loan.id }})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Repayment Modal -->
+<div class="modal fade" id="repaymentModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glass-modal">
+            <div class="modal-header border-bottom border-white-50">
+                <h5 class="modal-title text-white">
+                    <i class="fas fa-credit-card me-2 text-gold"></i>Make a Payment
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Loan Info -->
+                <div class="glass-card-inner mb-3">
+                    <div class="row">
+                        <div class="col-6">
+                            <small class="text-white-50">Loan ID</small>
+                            <p class="text-white mb-0" id="repayLoanId">-</p>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-white-50">Outstanding Balance</small>
+                            <p class="text-gold mb-0 fw-bold" id="repayOutstanding">$0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Amount -->
+                <div class="mb-3">
+                    <label for="paymentAmount" class="form-label text-white">Payment Amount</label>
+                    <div class="input-group">
+                        <span class="input-group-text glass-input-text">$</span>
+                        <input type="number" class="form-control glass-input" id="paymentAmount" 
+                               placeholder="Enter amount" min="50" step="1" required>
+                    </div>
+                    <small class="text-white-50 d-block mt-2">
+                        Minimum payment: $50
+                    </small>
+                </div>
+
+                <!-- Quick Payment Options -->
+                <div class="mb-3">
+                    <label class="form-label text-white">Quick Select</label>
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-outline-gold btn-sm flex-fill" onclick="setPaymentAmount(500)">$500</button>
+                        <button type="button" class="btn btn-outline-gold btn-sm flex-fill" onclick="setPaymentAmount(1000)">$1,000</button>
+                        <button type="button" class="btn btn-outline-gold btn-sm flex-fill" onclick="setPaymentAmount('full')">Full Amount</button>
+                    </div>
+                </div>
+
+                <!-- Payment Method -->
+                <div class="mb-3">
+                    <label for="paymentMethod" class="form-label text-white">Payment Method</label>
+                    <select class="form-select glass-input" id="paymentMethod" required>
+                        <option value="">Select payment method</option>
+                        <option value="wallet">Elite Wallet Balance</option>
+                        <option value="bank">Bank Account (ACH)</option>
+                        <option value="card">Debit Card</option>
+                    </select>
+                </div>
+
+                <!-- Confirmation -->
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="confirmPayment" required>
+                    <label class="form-check-label text-white" for="confirmPayment">
+                        I confirm this payment and authorize the transaction
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer border-top border-white-50">
+                <button type="button" class="btn btn-outline-gold" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-gold" onclick="processPayment()">
+                    <i class="fas fa-check me-2"></i>Confirm Payment
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Payment Schedule Modal -->
+<div class="modal fade" id="scheduleModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content glass-modal">
+            <div class="modal-header border-bottom border-white-50">
+                <h5 class="modal-title text-white">
+                    <i class="fas fa-calendar-alt me-2 text-gold"></i>Repayment Schedule
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-glass">
+                        <thead>
+                            <tr>
+                                <th class="text-white-50">Payment #</th>
+                                <th class="text-white-50">Due Date</th>
+                                <th class="text-white-50">Amount</th>
+                                <th class="text-white-50">Principal</th>
+                                <th class="text-white-50">Interest</th>
+                                <th class="text-white-50">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scheduleTableBody">
+                            <!-- Dynamic content will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Terms & Conditions Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+        <div class="modal-content glass-modal">
+            <div class="modal-header border-bottom border-white-50">
+                <h5 class="modal-title text-white">
+                    <i class="fas fa-file-contract me-2 text-gold"></i>Loan Terms & Conditions
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="terms-content">
+                    <section class="mb-4">
+                        <h6 class="text-gold mb-3">1. Interest Rates and Fees</h6>
+                        <div class="text-white-50">
+                            <p><strong class="text-white">Tiered Interest Rates:</strong></p>
+                            <ul>
+                                <li>$100 - $10,000: 4.5% APR</li>
+                                <li>$10,001 - $50,000: 4.0% APR</li>
+                                <li>$50,001 - $100,000: 3.5% APR</li>
+                            </ul>
+                            <p>Interest is calculated on a simple interest basis. No hidden fees or origination charges apply.</p>
+                        </div>
+                    </section>
+
+                    <section class="mb-4">
+                        <h6 class="text-gold mb-3">2. Collateral Requirements</h6>
+                        <div class="text-white-50">
+                            <p><strong class="text-white">Unsecured Loans:</strong> Loans up to $25,000 require no collateral.</p>
+                            <p><strong class="text-white">Secured Loans:</strong> Loans above $25,000 may require your investment portfolio as collateral. The collateral value must be at least 120% of the loan amount.</p>
+                        </div>
+                    </section>
+
+                    <section class="mb-4">
+                        <h6 class="text-gold mb-3">3. Repayment Terms</h6>
+                        <div class="text-white-50">
+                            <ul>
+                                <li>Repayment periods: 30, 60, 90, 180, or 365 days</li>
+                                <li>Payments can be made monthly, bi-weekly, or weekly</li>
+                                <li>Automatic payments can be set up from your Elite Wallet</li>
+                                <li>Minimum payment is $50 per transaction</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section class="mb-4">
+                        <h6 class="text-gold mb-3">4. Early Repayment Benefits</h6>
+                        <div class="text-white-50">
+                            <p><strong class="text-white">No Prepayment Penalties:</strong> You can repay your loan early without any additional fees.</p>
+                            <p><strong class="text-white">Interest Savings:</strong> Early repayment reduces the total interest you pay, as interest is calculated on the outstanding balance.</p>
+                            <p><strong class="text-white">Credit Score Boost:</strong> Early loan repayment may positively impact your credit score for future applications.</p>
+                        </div>
+                    </section>
+
+                    <section class="mb-4">
+                        <h6 class="text-gold mb-3">5. Late Payment Penalties</h6>
+                        <div class="text-white-50">
+                            <ul>
+                                <li><strong class="text-white">Grace Period:</strong> 5-day grace period after due date</li>
+                                <li><strong class="text-white">Late Fee:</strong> $25 or 5% of the missed payment (whichever is greater)</li>
+                                <li><strong class="text-white">Penalty Interest:</strong> Additional 2% APR on overdue amounts</li>
+                                <li><strong class="text-white">Default:</strong> Loans unpaid for 90+ days may be sent to collections</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section class="mb-4">
+                        <h6 class="text-gold mb-3">6. Approval Process</h6>
+                        <div class="text-white-50">
+                            <p><strong class="text-white">Application Review:</strong> Most applications are reviewed within 24 hours</p>
+                            <p><strong class="text-white">Approval Criteria:</strong></p>
+                            <ul>
+                                <li>Minimum account age: 30 days</li>
+                                <li>Minimum credit score: 650 (or equivalent)</li>
+                                <li>Debt-to-income ratio below 40%</li>
+                                <li>No defaults in the past 12 months</li>
+                            </ul>
+                            <p><strong class="text-white">Fund Disbursement:</strong> Approved funds are deposited within 48 hours</p>
+                        </div>
+                    </section>
+
+                    <section class="mb-4">
+                        <h6 class="text-gold mb-3">7. Borrower Rights & Responsibilities</h6>
+                        <div class="text-white-50">
+                            <p><strong class="text-white">Your Rights:</strong></p>
+                            <ul>
+                                <li>Right to clear loan terms disclosure</li>
+                                <li>Right to prepay without penalty</li>
+                                <li>Right to dispute charges</li>
+                                <li>Right to payment plan modifications in case of hardship</li>
+                            </ul>
+                            <p><strong class="text-white">Your Responsibilities:</strong></p>
+                            <ul>
+                                <li>Provide accurate information in your application</li>
+                                <li>Make timely payments as per the schedule</li>
+                                <li>Notify us immediately of financial hardship</li>
+                                <li>Maintain collateral value (for secured loans)</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section class="mb-4">
+                        <h6 class="text-gold mb-3">8. Default and Collections</h6>
+                        <div class="text-white-50">
+                            <p>If a loan remains unpaid for 90 days or more, it may be declared in default. In such cases:</p>
+                            <ul>
+                                <li>The full outstanding balance becomes immediately due</li>
+                                <li>Your credit score will be negatively impacted</li>
+                                <li>The loan may be referred to a collections agency</li>
+                                <li>Legal action may be taken to recover the debt</li>
+                                <li>Collateral (if applicable) may be liquidated</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h6 class="text-gold mb-3">9. Agreement</h6>
+                        <div class="text-white-50">
+                            <p>By submitting a loan application, you acknowledge that you have read, understood, and agree to these terms and conditions. You also consent to Elite Wealth Capital verifying your financial information and credit history.</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="modal-footer border-top border-white-50">
+                <button type="button" class="btn btn-gold" data-bs-dismiss="modal">
+                    <i class="fas fa-check me-2"></i>I Understand
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    :root {
+        --gold: #FFD700;
+        --navy: #0A1F44;
+        --navy-light: #1a3a6b;
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    body {
+        background: linear-gradient(135deg, var(--navy) 0%, #0d2847 50%, #1a3a6b 100%);
+        min-height: 100vh;
+    }
+
+    /* Glass-morphism Cards */
+    .glass-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    .glass-card-inner {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        padding: 1rem;
+    }
+
+    .glass-modal {
+        background: rgba(10, 31, 68, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+    }
+
+    /* Text Colors */
+    .text-gold {
+        color: var(--gold) !important;
+    }
+
+    .text-white-50 {
+        color: rgba(255, 255, 255, 0.5) !important;
+    }
+
+    /* Buttons */
+    .btn-gold {
+        background: linear-gradient(135deg, var(--gold) 0%, #FFA500 100%);
+        border: none;
+        color: var(--navy);
+        font-weight: 600;
+        padding: 0.6rem 1.5rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-gold:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+        color: var(--navy);
+    }
+
+    .btn-outline-gold {
+        background: transparent;
+        border: 2px solid var(--gold);
+        color: var(--gold);
+        font-weight: 600;
+        padding: 0.5rem 1.5rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-gold:hover {
+        background: var(--gold);
+        color: var(--navy);
+        transform: translateY(-2px);
+    }
+
+    /* Form Inputs */
+    .glass-input {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--glass-border);
+        color: white;
+        border-radius: 8px;
+        padding: 0.6rem 1rem;
+    }
+
+    .glass-input:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: var(--gold);
+        color: white;
+        box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+    }
+
+    .glass-input::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+    .glass-input-text {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--glass-border);
+        color: var(--gold);
+        border-radius: 8px 0 0 8px;
+    }
+
+    /* Slider */
+    .slider-gold {
+        background: rgba(255, 255, 255, 0.1);
+        height: 8px;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    .slider-gold::-webkit-slider-thumb {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--gold);
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(255, 215, 0, 0.5);
+    }
+
+    .slider-gold::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--gold);
+        cursor: pointer;
+        border: none;
+        box-shadow: 0 2px 8px rgba(255, 215, 0, 0.5);
+    }
+
+    /* Result Box */
+    .glass-result-box {
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+        border: 2px solid var(--gold);
+        border-radius: 12px;
+        padding: 1.5rem;
+        backdrop-filter: blur(10px);
+    }
+
+    .glass-info-box {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--glass-border);
+        border-radius: 8px;
+        padding: 0.8rem;
+    }
+
+    /* Progress Bar */
+    .progress-glass {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        height: 8px;
+        overflow: hidden;
+    }
+
+    .progress-bar-gold {
+        background: linear-gradient(90deg, var(--gold) 0%, #FFA500 100%);
+        height: 100%;
+        border-radius: 10px;
+        transition: width 0.6s ease;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    /* Badges */
+    .badge-success {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+
+    .badge-warning {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+
+    .badge-info {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+
+    .badge-danger {
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+
+    .badge-secondary {
+        background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+
+    /* Alert Glass */
+    .alert-glass {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--glass-border);
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        color: white;
+    }
+
+    .alert-info-glass {
+        background: rgba(59, 130, 246, 0.1);
+        border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .alert-success-glass {
+        background: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .alert-warning-glass {
+        background: rgba(245, 158, 11, 0.1);
+        border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    .alert-danger-glass {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    /* Loan Card */
+    .loan-card {
+        transition: all 0.3s ease;
+    }
+
+    .loan-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px 0 rgba(255, 215, 0, 0.2);
+    }
+
+    /* Table Glass */
+    .table-glass {
+        margin: 0;
+    }
+
+    .table-glass thead {
+        border-bottom: 2px solid var(--glass-border);
+    }
+
+    .table-glass tbody tr {
+        border-bottom: 1px solid var(--glass-border);
+        transition: background 0.2s ease;
+    }
+
+    .table-glass tbody tr:hover {
+        background: rgba(255, 215, 0, 0.05);
+    }
+
+    .table-glass th,
+    .table-glass td {
+        padding: 1rem;
+        vertical-align: middle;
+        border: none;
+    }
+
+    /* Form Validation */
+    .was-validated .form-control:invalid,
+    .form-control.is-invalid {
+        border-color: #ef4444;
+        background-image: none;
+    }
+
+    .was-validated .form-control:valid,
+    .form-control.is-valid {
+        border-color: #10b981;
+        background-image: none;
+    }
+
+    .invalid-feedback,
+    .valid-feedback {
+        color: #ef4444;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+    }
+
+    .valid-feedback {
+        color: #10b981;
+    }
+
+    /* Loading State */
+    .btn-gold:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    /* Terms List */
+    .terms-list .term-item {
+        padding-left: 1rem;
+        border-left: 3px solid var(--gold);
+    }
+
+    .terms-content section {
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 8px;
+        border: 1px solid var(--glass-border);
+    }
+
+    .terms-content ul {
+        padding-left: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .terms-content ul li {
+        margin-bottom: 0.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .glass-card {
+            padding: 1rem;
+        }
+
+        .table-glass {
+            font-size: 0.875rem;
+        }
+
+        .btn-gold,
+        .btn-outline-gold {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        .loan-card {
+            margin-bottom: 1rem;
+        }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .glass-card {
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--gold);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #FFA500;
+    }
+</style>
+
+<script>
+    // Loan Calculator
+    const calcLoanAmount = document.getElementById('calcLoanAmount');
+    const calcDuration = document.getElementById('calcDuration');
+    const loanAmountDisplay = document.getElementById('loanAmountDisplay');
+    const monthlyPayment = document.getElementById('monthlyPayment');
+    const principalAmount = document.getElementById('principalAmount');
+    const totalInterest = document.getElementById('totalInterest');
+    const totalRepayment = document.getElementById('totalRepayment');
+    const interestRateDisplay = document.getElementById('interestRateDisplay');
+
+    function calculateLoan() {
+        const amount = parseFloat(calcLoanAmount.value);
+        const days = parseInt(calcDuration.value);
+        
+        // Tiered interest rates
+        let annualRate;
+        if (amount <= 10000) {
+            annualRate = 4.5;
+        } else if (amount <= 50000) {
+            annualRate = 4.0;
+        } else {
+            annualRate = 3.5;
+        }
+        
+        interestRateDisplay.textContent = annualRate.toFixed(1) + '%';
+        
+        // Calculate interest and repayment
+        const dailyRate = annualRate / 365 / 100;
+        const interest = amount * dailyRate * days;
+        const total = amount + interest;
+        const monthly = total / (days / 30);
+        
+        // Update displays
+        loanAmountDisplay.textContent = '$' + amount.toLocaleString();
+        principalAmount.textContent = '$' + amount.toLocaleString();
+        totalInterest.textContent = '$' + interest.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        totalRepayment.textContent = '$' + total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        monthlyPayment.textContent = '$' + monthly.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    }
+
+    if (calcLoanAmount && calcDuration) {
+        calcLoanAmount.addEventListener('input', calculateLoan);
+        calcDuration.addEventListener('change', calculateLoan);
+        calculateLoan(); // Initial calculation
+    }
+
+    // Loan Application Form Validation
+    const loanApplicationForm = document.getElementById('loanApplicationForm');
+    const loanAmount = document.getElementById('loanAmount');
+    const loanPurpose = document.getElementById('loanPurpose');
+    const loanDuration = document.getElementById('loanDuration');
+    const agreeTerms = document.getElementById('agreeTerms');
+    const submitLoanBtn = document.getElementById('submitLoanBtn');
+    const submitBtnText = document.getElementById('submitBtnText');
+    const submitBtnLoader = document.getElementById('submitBtnLoader');
+
+    if (loanApplicationForm) {
+        loanApplicationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate
+            let isValid = true;
+            
+            if (!loanAmount.value || loanAmount.value < 100 || loanAmount.value > 100000) {
+                alert('Please enter a valid loan amount between $100 and $100,000');
+                isValid = false;
+            }
+            
+            if (!loanPurpose.value || loanPurpose.value.length < 20) {
+                alert('Please provide a detailed purpose (minimum 20 characters)');
+                isValid = false;
+            }
+            
+            if (!loanDuration.value) {
+                alert('Please select a repayment duration');
+                isValid = false;
+            }
+            
+            if (!agreeTerms.checked) {
+                alert('Please agree to the terms and conditions');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // Show loading state
+            submitBtnText.classList.add('d-none');
+            submitBtnLoader.classList.remove('d-none');
+            submitLoanBtn.disabled = true;
+            
+            // Submit form (in real implementation, this would be an AJAX call)
+            setTimeout(() => {
+                // For demo purposes, we'll just show success message
+                alert('Your loan application has been submitted successfully! You will receive a response within 24 hours.');
+                
+                // Reset form
+                loanApplicationForm.reset();
+                
+                // Reset button state
+                submitBtnText.classList.remove('d-none');
+                submitBtnLoader.classList.add('d-none');
+                submitLoanBtn.disabled = false;
+            }, 2000);
+        });
+    }
+
+    // Repayment Modal Functions
+    let currentLoanId = null;
+    let currentOutstanding = 0;
+
+    function showRepaymentModal(loanId, principal, totalRepayment) {
+        currentLoanId = loanId;
+        currentOutstanding = totalRepayment;
+        
+        document.getElementById('repayLoanId').textContent = '#' + loanId;
+        document.getElementById('repayOutstanding').textContent = '$' + totalRepayment.toLocaleString(undefined, {minimumFractionDigits: 2});
+        
+        const modal = new bootstrap.Modal(document.getElementById('repaymentModal'));
+        modal.show();
+    }
+
+    function setPaymentAmount(amount) {
+        const paymentAmountInput = document.getElementById('paymentAmount');
+        if (amount === 'full') {
+            paymentAmountInput.value = currentOutstanding;
+        } else {
+            paymentAmountInput.value = amount;
+        }
+    }
+
+    function processPayment() {
+        const paymentAmount = document.getElementById('paymentAmount').value;
+        const paymentMethod = document.getElementById('paymentMethod').value;
+        const confirmPayment = document.getElementById('confirmPayment').checked;
+        
+        if (!paymentAmount || paymentAmount < 50) {
+            alert('Minimum payment is $50');
+            return;
+        }
+        
+        if (!paymentMethod) {
+            alert('Please select a payment method');
+            return;
+        }
+        
+        if (!confirmPayment) {
+            alert('Please confirm the payment');
+            return;
+        }
+        
+        // Process payment (in real implementation, this would be an API call)
+        alert(`Payment of $${parseFloat(paymentAmount).toLocaleString()} has been processed successfully!`);
+        
+        // Close modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('repaymentModal'));
+        modal.hide();
+        
+        // Reset form
+        document.getElementById('paymentAmount').value = '';
+        document.getElementById('paymentMethod').value = '';
+        document.getElementById('confirmPayment').checked = false;
+        
+        // Reload page to show updated data
+        setTimeout(() => {
+            location.reload();
+        }, 1000);
+    }
+
+    // Payment Schedule Modal
+    function showScheduleModal(loanId) {
+        // Generate sample payment schedule
+        const scheduleData = generatePaymentSchedule(loanId);
+        const tbody = document.getElementById('scheduleTableBody');
+        tbody.innerHTML = '';
+        
+        scheduleData.forEach(payment => {
+            const row = `
+                <tr>
+                    <td class="text-white">${payment.number}</td>
+                    <td class="text-white">${payment.dueDate}</td>
+                    <td class="text-gold">$${payment.amount.toLocaleString()}</td>
+                    <td class="text-white">$${payment.principal.toLocaleString()}</td>
+                    <td class="text-white">$${payment.interest.toLocaleString()}</td>
+                    <td>
+                        <span class="badge ${payment.status === 'Paid' ? 'badge-success' : payment.status === 'Due' ? 'badge-warning' : 'badge-secondary'}">
+                            ${payment.status}
+                        </span>
+                    </td>
+                </tr>
+            `;
+            tbody.innerHTML += row;
+        });
+        
+        const modal = new bootstrap.Modal(document.getElementById('scheduleModal'));
+        modal.show();
+    }
+
+    function generatePaymentSchedule(loanId) {
+        // Sample schedule generation (in real implementation, this would come from backend)
+        const schedule = [];
+        const today = new Date();
+        
+        for (let i = 1; i <= 3; i++) {
+            const dueDate = new Date(today);
+            dueDate.setMonth(today.getMonth() + i);
+            
+            schedule.push({
+                number: i,
+                dueDate: dueDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+                amount: 892.50,
+                principal: 842.50,
+                interest: 50.00,
+                status: i === 1 ? 'Due' : 'Pending'
+            });
+        }
+        
+        return schedule;
+    }
+
+    function viewLoanDetails(loanId) {
+        // In real implementation, this would navigate to a detailed loan page
+        alert('Viewing details for Loan #' + loanId);
+    }
+
+    // Auto-sync loan amount with calculator
+    if (loanAmount && calcLoanAmount) {
+        loanAmount.addEventListener('input', function() {
+            if (this.value >= 100 && this.value <= 100000) {
+                calcLoanAmount.value = this.value;
+                calculateLoan();
+            }
+        });
+    }
+
+    // Smooth scroll to form when "Apply for First Loan" is clicked
+    document.addEventListener('DOMContentLoaded', function() {
+        const applyButtons = document.querySelectorAll('[onclick*="loanAmount.focus"]');
+        applyButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                loanAmount.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+    });
+</script>
+{% endblock %}

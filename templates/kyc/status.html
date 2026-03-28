@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}KYC Status{% endblock %}
+
+{% block extra_css %}
+<style>
+    .kyc-status-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+    
+    .status-card {
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        text-align: center;
+    }
+    
+    .status-icon {
+        font-size: 5rem;
+        margin-bottom: 20px;
+    }
+    
+    .status-pending { color: #f1c40f; }
+    .status-submitted { color: #3498db; }
+    .status-verified { color: #27ae60; }
+    .status-rejected { color: #e74c3c; }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 10px 30px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 1.2rem;
+        margin: 20px 0;
+    }
+    
+    .badge-pending {
+        background: rgba(241, 196, 15, 0.2);
+        color: #f1c40f;
+        border: 2px solid #f1c40f;
+    }
+    
+    .badge-submitted {
+        background: rgba(52, 152, 219, 0.2);
+        color: #3498db;
+        border: 2px solid #3498db;
+    }
+    
+    .badge-verified {
+        background: rgba(39, 174, 96, 0.2);
+        color: #27ae60;
+        border: 2px solid #27ae60;
+    }
+    
+    .badge-rejected {
+        background: rgba(231, 76, 60, 0.2);
+        color: #e74c3c;
+        border: 2px solid #e74c3c;
+    }
+    
+    .status-message {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: rgba(255,255,255,0.9);
+        margin: 20px 0;
+    }
+    
+    .rejection-reason {
+        background: rgba(231, 76, 60, 0.1);
+        border-left: 4px solid #e74c3c;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 30px 0;
+        text-align: left;
+    }
+    
+    .action-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        padding: 15px 40px;
+        font-size: 1.1rem;
+        border-radius: 10px;
+        color: #fff;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 20px;
+        transition: transform 0.2s;
+    }
+    
+    .action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(111,66,193,0.4);
+        color: #fff;
+    }
+    
+    .document-info {
+        background: rgba(255,255,255,0.05);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        text-align: left;
+    }
+    
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .info-row:last-child {
+        border-bottom: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="kyc-status-container">
+    <div class="status-card">
+        {% if kyc_document %}
+            <!-- Status Icon -->
+            {% if kyc_document.status == 'verified' %}
+                <i class="fas fa-check-circle status-icon status-verified"></i>
+                <h2>Verification Approved!</h2>
+                <span class="status-badge badge-verified">
+                    <i class="fas fa-shield-alt me-2"></i>Verified
+                </span>
+                <p class="status-message">
+                    Congratulations! Your identity has been verified successfully. 
+                    You can now make withdrawals and access all features.
+                </p>
+                
+            {% elif kyc_document.status == 'rejected' %}
+                <i class="fas fa-times-circle status-icon status-rejected"></i>
+                <h2>Verification Rejected</h2>
+                <span class="status-badge badge-rejected">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Rejected
+                </span>
+                <p class="status-message">
+                    Unfortunately, your KYC documents were rejected.
+                </p>
+                
+                {% if kyc_document.rejection_reason %}
+                <div class="rejection-reason">
+                    <h5><i class="fas fa-info-circle me-2"></i>Reason for Rejection</h5>
+                    <p class="mb-0">{{ kyc_document.rejection_reason }}</p>
+                </div>
+                {% endif %}
+                
+                <a href="{% url 'kyc:upload' %}" class="action-btn">
+                    <i class="fas fa-redo me-2"></i>Upload Again
+                </a>
+                
+            {% elif kyc_document.status == 'submitted' %}
+                <i class="fas fa-clock status-icon status-submitted"></i>
+                <h2>Under Review</h2>
+                <span class="status-badge badge-submitted">
+                    <i class="fas fa-hourglass-half me-2"></i>In Review
+                </span>
+                <p class="status-message">
+                    Your documents are being reviewed by our team. 
+                    This process usually takes 24-48 hours. 
+                    We'll notify you once the verification is complete.
+                </p>
+                
+            {% else %}
+                <i class="fas fa-file-upload status-icon status-pending"></i>
+                <h2>No Documents Uploaded</h2>
+                <span class="status-badge badge-pending">
+                    <i class="fas fa-clock me-2"></i>Pending
+                </span>
+                <p class="status-message">
+                    You haven't submitted your KYC documents yet. 
+                    Please upload your documents to start the verification process.
+                </p>
+                <a href="{% url 'kyc:upload' %}" class="action-btn">
+                    <i class="fas fa-upload me-2"></i>Upload Documents
+                </a>
+            {% endif %}
+            
+            <!-- Document Information -->
+            {% if kyc_document.status == 'submitted' or kyc_document.status == 'verified' or kyc_document.status == 'rejected' %}
+            <div class="document-info">
+                <h5 class="mb-3"><i class="fas fa-info-circle me-2"></i>Document Information</h5>
+                <div class="info-row">
+                    <span><strong>Document Type:</strong></span>
+                    <span>{{ kyc_document.get_document_type_display }}</span>
+                </div>
+                <div class="info-row">
+                    <span><strong>Submitted On:</strong></span>
+                    <span>{{ kyc_document.submitted_at|date:"F d, Y h:i A" }}</span>
+                </div>
+                {% if kyc_document.reviewed_at %}
+                <div class="info-row">
+                    <span><strong>Reviewed On:</strong></span>
+                    <span>{{ kyc_document.reviewed_at|date:"F d, Y h:i A" }}</span>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+            
+        {% else %}
+            <!-- No KYC Document -->
+            <i class="fas fa-file-upload status-icon status-pending"></i>
+            <h2>KYC Verification Required</h2>
+            <span class="status-badge badge-pending">
+                <i class="fas fa-clock me-2"></i>Not Started
+            </span>
+            <p class="status-message">
+                To comply with regulatory requirements and secure your account, 
+                please complete the KYC verification process. 
+                This is required for withdrawals.
+            </p>
+            <a href="{% url 'kyc:upload' %}" class="action-btn">
+                <i class="fas fa-upload me-2"></i>Start Verification
+            </a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

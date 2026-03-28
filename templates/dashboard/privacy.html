@@ -1,0 +1,447 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Privacy Policy - Elite Wealth Capital{% endblock %}
+
+{% block extra_css %}
+<style>
+    .privacy-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+    
+    .privacy-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 50px 30px;
+        border-radius: 15px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    
+    .privacy-header h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    
+    .last-updated {
+        font-size: 0.95rem;
+        opacity: 0.9;
+    }
+    
+    .section {
+        margin-bottom: 40px;
+        padding: 30px;
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 15px;
+    }
+    
+    .section h2 {
+        font-size: 1.5rem;
+        color: #667eea;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .section h2 i {
+        margin-right: 12px;
+        font-size: 1.4rem;
+    }
+    
+    .section h3 {
+        font-size: 1.1rem;
+        color: #764ba2;
+        margin-top: 20px;
+        margin-bottom: 12px;
+    }
+    
+    .section p {
+        line-height: 1.8;
+        color: #333;
+        margin-bottom: 15px;
+    }
+    
+    .section ul {
+        list-style-position: inside;
+        margin-bottom: 15px;
+    }
+    
+    .section ul li {
+        line-height: 1.8;
+        color: #333;
+        margin-bottom: 8px;
+    }
+    
+    .legal-disclaimer {
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 40px;
+        margin-bottom: 30px;
+    }
+    
+    .legal-disclaimer h4 {
+        color: #856404;
+        margin-bottom: 12px;
+    }
+    
+    .legal-disclaimer p {
+        color: #856404;
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    .gdpr-highlight {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        border-left: 4px solid #667eea;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+    }
+    
+    .rights-list {
+        background: rgba(255,255,255,0.5);
+        padding: 20px;
+        border-radius: 8px;
+        margin: 15px 0;
+    }
+    
+    .rights-list li {
+        margin-bottom: 12px;
+    }
+    
+    .contact-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        margin-top: 40px;
+        text-align: center;
+    }
+    
+    .contact-box h3 {
+        color: white;
+        margin-bottom: 15px;
+    }
+    
+    .contact-box p {
+        color: rgba(255,255,255,0.9);
+        margin-bottom: 10px;
+    }
+    
+    .contact-box a {
+        color: #fff;
+        text-decoration: underline;
+        font-weight: 600;
+    }
+    
+    .toc {
+        background: rgba(255,255,255,0.5);
+        padding: 25px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+    
+    .toc h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+    
+    .toc ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .toc li {
+        margin-bottom: 8px;
+    }
+    
+    .toc a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .toc a:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="privacy-container">
+    <!-- Header -->
+    <div class="privacy-header">
+        <h1><i class="fas fa-shield-alt"></i> Privacy Policy</h1>
+        <div class="last-updated">
+            <i class="fas fa-calendar-alt"></i> Last Updated: March 2026
+        </div>
+    </div>
+    
+    <!-- Table of Contents -->
+    <div class="toc">
+        <h3><i class="fas fa-list"></i> Table of Contents</h3>
+        <ul>
+            <li><a href="#data-collection">1. Data Collection</a></li>
+            <li><a href="#data-usage">2. How We Use Your Data</a></li>
+            <li><a href="#cookies">3. Cookies & Tracking</a></li>
+            <li><a href="#gdpr">4. GDPR Compliance</a></li>
+            <li><a href="#user-rights">5. Your Rights</a></li>
+            <li><a href="#contact">6. Contact Information</a></li>
+        </ul>
+    </div>
+    
+    <!-- Legal Disclaimer -->
+    <div class="legal-disclaimer">
+        <h4><i class="fas fa-exclamation-triangle"></i> Legal Notice</h4>
+        <p>
+            This Privacy Policy is a legal document that governs how Elite Wealth Capital collects, uses, protects, and discloses information obtained from users of this website and our services. By using our services, you consent to our data practices described in this policy. If you do not agree with our policies and practices, please do not use our website or services.
+        </p>
+    </div>
+    
+    <!-- Section 1: Data Collection -->
+    <div class="section" id="data-collection">
+        <h2>
+            <i class="fas fa-database"></i> 1. Data Collection
+        </h2>
+        
+        <h3>Information We Collect</h3>
+        <p>
+            Elite Wealth Capital collects information in the following ways:
+        </p>
+        
+        <h3>A. Information You Provide Directly</h3>
+        <ul>
+            <li><strong>Account Registration:</strong> Name, email address, phone number, date of birth, password, and security questions</li>
+            <li><strong>KYC Verification:</strong> Government-issued ID, proof of address, bank details, employment information</li>
+            <li><strong>Investment Details:</strong> Investment preferences, trading strategies, financial goals</li>
+            <li><strong>Communication:</strong> Messages through contact forms, email, live chat, and support tickets</li>
+            <li><strong>Payment Information:</strong> Bank account details, cryptocurrency wallet addresses (never stored in plain text)</li>
+        </ul>
+        
+        <h3>B. Information Collected Automatically</h3>
+        <ul>
+            <li><strong>Device Information:</strong> IP address, browser type, operating system, device identifiers</li>
+            <li><strong>Usage Data:</strong> Pages visited, time spent on page, clicks, scroll depth, referral source</li>
+            <li><strong>Location Data:</strong> Approximate geographic location based on IP address (not precise location)</li>
+            <li><strong>Cookies & Tracking:</strong> Persistent identifiers stored locally on your device</li>
+            <li><strong>Performance Data:</strong> Error logs, system performance metrics, security events</li>
+        </ul>
+        
+        <h3>C. Third-Party Information</h3>
+        <ul>
+            <li>Credit bureaus and verification services for KYC/AML compliance</li>
+            <li>Payment processors for transaction verification</li>
+            <li>Analytics platforms for service improvement</li>
+            <li>Fraud detection and prevention services</li>
+        </ul>
+    </div>
+    
+    <!-- Section 2: Data Usage -->
+    <div class="section" id="data-usage">
+        <h2>
+            <i class="fas fa-cogs"></i> 2. How We Use Your Data
+        </h2>
+        
+        <h3>Primary Purposes</h3>
+        <ul>
+            <li><strong>Service Delivery:</strong> Process investments, manage accounts, execute transactions, provide customer support</li>
+            <li><strong>Compliance:</strong> Verify identity, perform KYC/AML checks, prevent fraud and money laundering</li>
+            <li><strong>Security:</strong> Protect your account, detect unauthorized access, prevent security breaches</li>
+            <li><strong>Communication:</strong> Send account alerts, transaction confirmations, security notices, and customer support responses</li>
+            <li><strong>Marketing:</strong> Send newsletters, promotional offers, and platform updates (with your consent)</li>
+        </ul>
+        
+        <h3>Secondary Purposes</h3>
+        <ul>
+            <li>Improve our services through data analysis and user experience research</li>
+            <li>Develop new features and products based on user needs</li>
+            <li>Conduct statistical research and analytics</li>
+            <li>Comply with legal and regulatory requirements</li>
+            <li>Resolve disputes and enforce our terms of service</li>
+        </ul>
+        
+        <h3>Data Retention</h3>
+        <p>
+            We retain your personal data only as long as necessary to provide services and fulfill legal obligations. Generally:
+        </p>
+        <ul>
+            <li>Account data: Retained for the duration of your account + 7 years (for regulatory compliance)</li>
+            <li>Transaction records: Retained for 7 years as required by law</li>
+            <li>KYC documents: Retained for 7 years after account closure</li>
+            <li>Marketing preferences: Updated based on your latest consent</li>
+            <li>Device cookies: Typically 12 months unless refreshed</li>
+        </ul>
+    </div>
+    
+    <!-- Section 3: Cookies & Tracking -->
+    <div class="section" id="cookies">
+        <h2>
+            <i class="fas fa-cookie-bite"></i> 3. Cookies & Tracking Technologies
+        </h2>
+        
+        <h3>What Are Cookies?</h3>
+        <p>
+            Cookies are small text files stored on your device that remember your preferences and activities. We use them to enhance your experience and security.
+        </p>
+        
+        <h3>Types of Cookies We Use</h3>
+        <ul>
+            <li><strong>Essential Cookies:</strong> Required for site functionality, login, and security (cannot be disabled)</li>
+            <li><strong>Performance Cookies:</strong> Track site performance and user behavior for improvement</li>
+            <li><strong>Preference Cookies:</strong> Remember your settings, language preferences, and display options</li>
+            <li><strong>Marketing Cookies:</strong> Used by advertising partners to show relevant ads</li>
+        </ul>
+        
+        <h3>Other Tracking Technologies</h3>
+        <ul>
+            <li><strong>Web Beacons:</strong> Small invisible pixels used to measure page traffic</li>
+            <li><strong>Analytics Tags:</strong> Google Analytics and similar services to understand user behavior</li>
+            <li><strong>Local Storage:</strong> Browser storage similar to cookies for enhanced functionality</li>
+            <li><strong>Fingerprinting:</strong> Device identification for security and fraud prevention</li>
+        </ul>
+        
+        <h3>Cookie Consent</h3>
+        <p>
+            You can control cookies through your browser settings. However, disabling essential cookies may prevent our platform from functioning properly. We honor Do Not Track (DNT) signals where technically possible.
+        </p>
+    </div>
+    
+    <!-- Section 4: GDPR Compliance -->
+    <div class="section" id="gdpr">
+        <h2>
+            <i class="fas fa-eur"></i> 4. GDPR Compliance (EU Users)
+        </h2>
+        
+        <div class="gdpr-highlight">
+            <strong>Legal Basis for Processing:</strong> We process personal data based on:
+            <ul>
+                <li>Your explicit consent (marketing, analytics)</li>
+                <li>Performance of our contract with you (account management, investments)</li>
+                <li>Compliance with legal obligations (KYC, AML, tax reporting)</li>
+                <li>Our legitimate business interests (fraud prevention, service improvement)</li>
+                <li>Protection of vital interests (security, emergency situations)</li>
+            </ul>
+        </div>
+        
+        <h3>Data Protection Officer</h3>
+        <p>
+            We have appointed a Data Protection Officer (DPO) who oversees our GDPR compliance. You can contact our DPO at: <strong>privacy@elitewealthcapital.com</strong>
+        </p>
+        
+        <h3>International Data Transfers</h3>
+        <p>
+            If you are located in the EU, your data may be transferred to countries outside the EU/EEA. We implement Standard Contractual Clauses (SCCs) and Binding Corporate Rules (BCRs) to ensure adequate protection.
+        </p>
+        
+        <h3>Data Protection Impact Assessment</h3>
+        <p>
+            For large-scale data processing, we conduct Data Protection Impact Assessments (DPIA) to identify and mitigate risks to your privacy.
+        </p>
+    </div>
+    
+    <!-- Section 5: Your Rights -->
+    <div class="section" id="user-rights">
+        <h2>
+            <i class="fas fa-user-shield"></i> 5. Your Privacy Rights
+        </h2>
+        
+        <p>
+            Depending on your location, you have the following rights regarding your personal data:
+        </p>
+        
+        <div class="rights-list">
+            <h3>GDPR Rights (EU/UK Users):</h3>
+            <ul>
+                <li><strong>Right of Access:</strong> Request a copy of your personal data we hold</li>
+                <li><strong>Right of Rectification:</strong> Correct inaccurate or incomplete data</li>
+                <li><strong>Right to Erasure:</strong> Request deletion of your data ("Right to be Forgotten")</li>
+                <li><strong>Right to Restrict Processing:</strong> Limit how we use your data</li>
+                <li><strong>Right to Data Portability:</strong> Receive your data in a machine-readable format</li>
+                <li><strong>Right to Object:</strong> Opt-out of certain types of processing</li>
+                <li><strong>Right to Lodge a Complaint:</strong> File a complaint with your data protection authority</li>
+                <li><strong>Right Against Automated Decision-Making:</strong> Request human review of automated decisions</li>
+            </ul>
+        </div>
+        
+        <div class="rights-list">
+            <h3>CCPA Rights (California Residents):</h3>
+            <ul>
+                <li><strong>Right to Know:</strong> Request what personal information we collect</li>
+                <li><strong>Right to Delete:</strong> Request deletion of collected personal information</li>
+                <li><strong>Right to Opt-Out:</strong> Opt-out of the "sale" of personal information</li>
+                <li><strong>Right to Non-Discrimination:</strong> We won't discriminate for exercising your rights</li>
+            </ul>
+        </div>
+        
+        <h3>How to Exercise Your Rights</h3>
+        <p>
+            To exercise any of these rights, please submit a written request to:
+        </p>
+        <ul>
+            <li><strong>Email:</strong> privacy@elitewealthcapital.com</li>
+            <li><strong>Mail:</strong> Elite Wealth Capital, Privacy Team, 123 Financial Street, New York, NY 10001</li>
+            <li><strong>Online Form:</strong> Visit your account settings and select "Privacy Request"</li>
+        </ul>
+        
+        <p>
+            We will respond to your request within 30 days (GDPR) or 45 days (CCPA). We may request proof of identity to verify your request.
+        </p>
+    </div>
+    
+    <!-- Section 6: Contact -->
+    <div class="section" id="contact">
+        <h2>
+            <i class="fas fa-envelope"></i> 6. Contact Information
+        </h2>
+        
+        <p>
+            If you have questions about our Privacy Policy or wish to exercise your privacy rights, please contact us:
+        </p>
+        
+        <div class="contact-box">
+            <h3>Privacy & Legal Team</h3>
+            <p>
+                <i class="fas fa-envelope-open"></i> <a href="mailto:privacy@elitewealthcapital.com">privacy@elitewealthcapital.com</a>
+            </p>
+            <p>
+                <i class="fas fa-phone"></i> +1 (555) 123-4567
+            </p>
+            <p>
+                <i class="fas fa-map-marker-alt"></i> 123 Financial Street, New York, NY 10001, USA
+            </p>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.9;">
+                Response time: Within 24-48 hours for urgent matters
+            </p>
+        </div>
+    </div>
+    
+    <!-- Final Disclaimer -->
+    <div class="legal-disclaimer">
+        <h4><i class="fas fa-gavel"></i> Policy Changes</h4>
+        <p>
+            Elite Wealth Capital reserves the right to modify this Privacy Policy at any time. Changes will be effective immediately upon posting to our website. Your continued use of our services after changes constitutes your acceptance of the revised policy. We recommend reviewing this policy regularly.
+        </p>
+    </div>
+</div>
+
+<script>
+// Smooth scroll for table of contents
+document.querySelectorAll('.toc a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,369 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Withdraw Funds{% endblock %}
+
+{% block extra_css %}
+<style>
+    .withdraw-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+    
+    .withdraw-card {
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+    
+    .balance-display {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .balance-label {
+        font-size: 1rem;
+        color: rgba(255,255,255,0.8);
+        margin-bottom: 10px;
+    }
+    
+    .balance-amount {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #fff;
+    }
+    
+    .form-group {
+        margin-bottom: 25px;
+    }
+    
+    .form-label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #fff;
+    }
+    
+    .form-input, .form-select {
+        width: 100%;
+        padding: 15px;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 10px;
+        color: #fff;
+        font-size: 1rem;
+    }
+    
+    .form-input:focus, .form-select:focus {
+        outline: none;
+        border-color: #6f42c1;
+        background: rgba(255,255,255,0.15);
+    }
+    
+    .form-select option {
+        background: #1a1a2e;
+        color: #fff;
+    }
+    
+    .withdraw-method-btn {
+        width: 100%;
+        padding: 20px;
+        background: rgba(255,255,255,0.05);
+        border: 2px solid rgba(255,255,255,0.2);
+        border-radius: 15px;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    
+    .withdraw-method-btn:hover {
+        border-color: #6f42c1;
+        background: rgba(111,66,193,0.1);
+    }
+    
+    .withdraw-method-btn.active {
+        border-color: #6f42c1;
+        background: rgba(111,66,193,0.2);
+    }
+    
+    .method-icon {
+        font-size: 2rem;
+        margin-right: 15px;
+    }
+    
+    .method-details {
+        display: none;
+        margin-top: 20px;
+        padding: 25px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 10px;
+    }
+    
+    .method-details.active {
+        display: block;
+    }
+    
+    .submit-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        padding: 15px 50px;
+        font-size: 1.1rem;
+        border-radius: 10px;
+        color: #fff;
+        cursor: pointer;
+        transition: transform 0.2s;
+        width: 100%;
+    }
+    
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(111,66,193,0.4);
+    }
+    
+    .submit-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    
+    .warning-box {
+        background: rgba(241, 196, 15, 0.1);
+        border-left: 4px solid #f1c40f;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+    }
+    
+    .info-box {
+        background: rgba(52, 152, 219, 0.1);
+        border-left: 4px solid #3498db;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+    }
+    
+    .kyc-warning {
+        background: rgba(231, 76, 60, 0.1);
+        border-left: 4px solid #e74c3c;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+    }
+    
+    .fee-info {
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.6);
+        margin-top: 8px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="withdraw-container">
+    <div class="withdraw-card">
+        <h2 class="text-center mb-4">
+            <i class="fas fa-money-bill-wave me-2"></i>
+            Withdraw Funds
+        </h2>
+        
+        <!-- Available Balance -->
+        <div class="balance-display">
+            <div class="balance-label">Available Balance</div>
+            <div class="balance-amount">${{ user.get_available_balance|floatformat:2 }}</div>
+        </div>
+        
+        <!-- KYC Warning if not verified -->
+        {% if user.kyc_status != 'verified' %}
+        <div class="kyc-warning">
+            <h5><i class="fas fa-shield-alt me-2"></i>KYC Verification Required</h5>
+            <p class="mb-2">You must complete KYC verification before making withdrawals.</p>
+            <a href="{% url 'kyc:upload' %}" class="btn btn-sm btn-light">
+                <i class="fas fa-upload me-1"></i>Complete KYC Now
+            </a>
+        </div>
+        {% endif %}
+        
+        <div class="info-box">
+            <h6><i class="fas fa-info-circle me-2"></i>Withdrawal Information</h6>
+            <ul class="mb-0">
+                <li>Minimum withdrawal: $10.00</li>
+                <li>Processing time: 24-48 hours</li>
+                <li>KYC verification required</li>
+                <li>Email verification required</li>
+            </ul>
+        </div>
+        
+        <form method="POST" id="withdrawForm">
+            {% csrf_token %}
+            
+            <!-- Amount -->
+            <div class="form-group">
+                <label class="form-label">Withdrawal Amount *</label>
+                <input 
+                    type="number" 
+                    name="amount" 
+                    class="form-input" 
+                    placeholder="Enter amount (Min: $10)" 
+                    min="10" 
+                    step="0.01"
+                    required
+                    {% if user.kyc_status != 'verified' %}disabled{% endif %}
+                >
+                <div class="fee-info">
+                    <i class="fas fa-info-circle me-1"></i>
+                    Available: ${{ user.get_available_balance|floatformat:2 }}
+                </div>
+            </div>
+            
+            <!-- Withdrawal Method -->
+            <div class="form-group">
+                <label class="form-label">Select Withdrawal Method *</label>
+                
+                <button type="button" class="withdraw-method-btn" onclick="selectMethod('crypto')">
+                    <i class="fab fa-bitcoin method-icon"></i>
+                    <strong>Cryptocurrency</strong>
+                    <p class="mb-0 mt-2" style="font-size: 0.9rem; opacity: 0.8;">
+                        BTC, ETH, USDT, USDC, LTC
+                    </p>
+                </button>
+                
+                <button type="button" class="withdraw-method-btn" onclick="selectMethod('bank')">
+                    <i class="fas fa-university method-icon"></i>
+                    <strong>Bank Transfer</strong>
+                    <p class="mb-0 mt-2" style="font-size: 0.9rem; opacity: 0.8;">
+                        Direct bank deposit
+                    </p>
+                </button>
+            </div>
+            
+            <input type="hidden" name="withdrawal_method" id="withdrawalMethod" required>
+            
+            <!-- Crypto Method Details -->
+            <div class="method-details" id="cryptoDetails">
+                <div class="form-group">
+                    <label class="form-label">Select Cryptocurrency *</label>
+                    <select name="crypto_type" class="form-select">
+                        <option value="">-- Select Crypto --</option>
+                        <option value="BTC">Bitcoin (BTC)</option>
+                        <option value="ETH">Ethereum (ETH)</option>
+                        <option value="USDT">Tether (USDT)</option>
+                        <option value="USDC">USD Coin (USDC)</option>
+                        <option value="LTC">Litecoin (LTC)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Wallet Address *</label>
+                    <input 
+                        type="text" 
+                        name="wallet_address" 
+                        class="form-input" 
+                        placeholder="Enter your wallet address"
+                    >
+                    <div class="fee-info">
+                        <i class="fas fa-exclamation-triangle me-1"></i>
+                        Double-check your wallet address. Transactions are irreversible.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bank Method Details -->
+            <div class="method-details" id="bankDetails">
+                <div class="warning-box">
+                    <h6><i class="fas fa-comments me-2"></i>Bank Transfer Process</h6>
+                    <p class="mb-0">
+                        For bank transfers, please contact our support team through the chat widget.
+                        Our agents will guide you through the process and collect your bank details securely.
+                    </p>
+                </div>
+                
+                <button type="button" class="submit-btn" onclick="openTawkChat()">
+                    <i class="fas fa-comments me-2"></i>
+                    Chat with Support
+                </button>
+            </div>
+            
+            <!-- Submit Button (only for crypto) -->
+            <div id="cryptoSubmit" style="display: none;">
+                <button 
+                    type="submit" 
+                    class="submit-btn"
+                    {% if user.kyc_status != 'verified' %}disabled{% endif %}
+                >
+                    <i class="fas fa-paper-plane me-2"></i>
+                    Submit Withdrawal Request
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function selectMethod(method) {
+    // Hide all method details
+    document.querySelectorAll('.method-details').forEach(el => {
+        el.classList.remove('active');
+    });
+    
+    // Remove active state from all buttons
+    document.querySelectorAll('.withdraw-method-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Set withdrawal method
+    document.getElementById('withdrawalMethod').value = method;
+    
+    // Show selected method details
+    if (method === 'crypto') {
+        document.getElementById('cryptoDetails').classList.add('active');
+        document.getElementById('cryptoSubmit').style.display = 'block';
+        event.target.closest('.withdraw-method-btn').classList.add('active');
+    } else if (method === 'bank') {
+        document.getElementById('bankDetails').classList.add('active');
+        document.getElementById('cryptoSubmit').style.display = 'none';
+        event.target.closest('.withdraw-method-btn').classList.add('active');
+    }
+}
+
+function openTawkChat() {
+    if (typeof Tawk_API !== 'undefined') {
+        Tawk_API.maximize();
+    } else {
+        alert('Chat widget is not available. Please refresh the page or contact support at {{ COMPANY_EMAIL }}');
+    }
+}
+
+document.getElementById('withdrawForm').addEventListener('submit', function(e) {
+    const method = document.getElementById('withdrawalMethod').value;
+    
+    if (!method) {
+        e.preventDefault();
+        alert('Please select a withdrawal method');
+        return;
+    }
+    
+    if (method === 'crypto') {
+        const cryptoType = document.querySelector('[name="crypto_type"]').value;
+        const walletAddress = document.querySelector('[name="wallet_address"]').value;
+        
+        if (!cryptoType || !walletAddress) {
+            e.preventDefault();
+            alert('Please fill in all cryptocurrency details');
+            return;
+        }
+    }
+    
+    const btn = this.querySelector('.submit-btn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+    btn.disabled = true;
+});
+</script>
+{% endblock %}

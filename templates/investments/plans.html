@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Investment Plans{% endblock %}
+
+{% block extra_css %}
+<style>
+    .plans-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 80px 20px;
+        text-align: center;
+        color: white;
+        margin-bottom: 50px;
+    }
+    
+    .plans-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .plan-card {
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 30px;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .plan-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(111,66,193,0.4);
+        border-color: #6f42c1;
+    }
+    
+    .plan-card.featured {
+        border: 2px solid #f1c40f;
+        box-shadow: 0 10px 30px rgba(241,196,15,0.3);
+    }
+    
+    .featured-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
+        color: #000;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 0.85rem;
+    }
+    
+    .plan-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .plan-name {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #fff;
+    }
+    
+    .plan-roi {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #27ae60;
+        margin: 20px 0;
+    }
+    
+    .plan-roi-label {
+        font-size: 1rem;
+        color: rgba(255,255,255,0.7);
+    }
+    
+    .plan-details {
+        background: rgba(255,255,255,0.05);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+    }
+    
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .detail-row:last-child {
+        border-bottom: none;
+    }
+    
+    .detail-label {
+        color: rgba(255,255,255,0.7);
+        font-weight: 500;
+    }
+    
+    .detail-value {
+        color: #fff;
+        font-weight: 600;
+    }
+    
+    .invest-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        padding: 15px 40px;
+        font-size: 1.1rem;
+        border-radius: 10px;
+        color: #fff;
+        width: 100%;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+    }
+    
+    .invest-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(111,66,193,0.5);
+        color: #fff;
+    }
+    
+    .plan-description {
+        color: rgba(255,255,255,0.8);
+        line-height: 1.6;
+        margin: 15px 0;
+    }
+    
+    @media (max-width: 768px) {
+        .plans-hero {
+            padding: 50px 20px;
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+        }
+        
+        .plan-roi {
+            font-size: 2rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="plans-hero">
+    <h1 class="display-4 mb-3">Investment Plans</h1>
+    <p class="lead">Choose the perfect plan for your financial goals</p>
+</div>
+
+<div class="plans-container">
+    {% if plans %}
+        <div class="row">
+            {% for plan in plans %}
+            <div class="col-lg-6 mb-4">
+                <div class="plan-card {% if plan.is_featured %}featured{% endif %}">
+                    {% if plan.is_featured %}
+                    <div class="featured-badge">
+                        <i class="fas fa-star me-1"></i>POPULAR
+                    </div>
+                    {% endif %}
+                    
+                    <div class="text-center">
+                        <i class="fas {{ plan.icon|default:'fa-chart-line' }} plan-icon"></i>
+                        <h2 class="plan-name">{{ plan.name }}</h2>
+                        <p class="plan-description">{{ plan.description }}</p>
+                        
+                        <div class="plan-roi">
+                            {{ plan.daily_roi }}%
+                            <span class="plan-roi-label">Daily ROI</span>
+                        </div>
+                    </div>
+                    
+                    <div class="plan-details">
+                        <div class="detail-row">
+                            <span class="detail-label">
+                                <i class="fas fa-dollar-sign me-2"></i>Minimum
+                            </span>
+                            <span class="detail-value">${{ plan.min_amount|floatformat:2 }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">
+                                <i class="fas fa-dollar-sign me-2"></i>Maximum
+                            </span>
+                            <span class="detail-value">${{ plan.max_amount|floatformat:2 }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">
+                                <i class="fas fa-calendar-alt me-2"></i>Duration
+                            </span>
+                            <span class="detail-value">{{ plan.duration_days }} Days</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">
+                                <i class="fas fa-chart-line me-2"></i>Total Return
+                            </span>
+                            <span class="detail-value">{{ plan.total_roi }}%</span>
+                        </div>
+                    </div>
+                    
+                    <a href="{% url 'investments:invest' plan_id=plan.id %}" class="invest-btn">
+                        <i class="fas fa-rocket me-2"></i>Invest Now
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center">
+            <i class="fas fa-info-circle me-2"></i>
+            No investment plans available at the moment.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

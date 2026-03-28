@@ -1,0 +1,531 @@
+{% extends "base.html" %}
+
+{% block title %}Client Reviews - Elite Wealth Capital{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <div class="container text-center text-white">
+        <h1 class="display-3 fw-bold mb-4">What Our Clients Say</h1>
+        <p class="lead fs-5">Join thousands of satisfied investors worldwide</p>
+    </div>
+</div>
+
+<section class="py-5">
+    <div class="container">
+        <!-- Filter Buttons -->
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-primary active" onclick="filterReviews('all')">All Reviews</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="filterReviews('5')">★★★★★ 5-Star</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="filterReviews('4')">★★★★☆ 4-Star</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews Grid -->
+        <div class="row g-4" id="reviewsContainer">
+            <!-- Review 1 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-1.jpg' %}" alt="John Smith" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">John Smith</h6>
+                                <small class="text-muted">United States</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Elite Wealth Capital completely transformed my investment journey. Within 2 years, my portfolio grew by 28%. The team's personalized approach and transparent fees made all the difference."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-2.jpg' %}" alt="Maria Garcia" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Maria Garcia</h6>
+                                <small class="text-muted">Spain</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"As a retiree, I needed trustworthy wealth management. Elite Wealth Capital delivered beyond expectations. Their 24/7 support in multiple languages is outstanding!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-3.jpg' %}" alt="Wei Liu" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Wei Liu</h6>
+                                <small class="text-muted">China</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"The platform's user interface is intuitive, and the investment options are diverse. I've achieved consistent 11% annual returns with minimal effort."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 4 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-4.jpg' %}" alt="Emma Johnson" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Emma Johnson</h6>
+                                <small class="text-muted">United Kingdom</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Starting my first investment was intimidating, but the team guided me through every step. Now I'm building serious wealth with confidence!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 5 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-5.jpg' %}" alt="Ahmed Hassan" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Ahmed Hassan</h6>
+                                <small class="text-muted">United Arab Emirates</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"The AI-powered portfolio recommendations are incredible. My returns this year beat the market average by 5%. Highly recommended!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 6 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-6.jpg' %}" alt="Sophie Martin" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Sophie Martin</h6>
+                                <small class="text-muted">France</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Security and transparency are paramount to me. Elite Wealth Capital checks all boxes. Their compliance and safety measures are world-class!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 7 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-7.jpg' %}" alt="Marcus Williams" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Marcus Williams</h6>
+                                <small class="text-muted">Canada</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Switched from traditional banking. The difference is remarkable. 9% returns vs 0.5% at my old bank. Why didn't I do this sooner?"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 8 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-8.jpg' %}" alt="Yuki Tanaka" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Yuki Tanaka</h6>
+                                <small class="text-muted">Japan</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"The robo-advisor feature is brilliant. Hands-off investing that actually works. I'm getting better returns with less stress!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 9 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-9.jpg' %}" alt="Isabella Rossi" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Isabella Rossi</h6>
+                                <small class="text-muted">Italy</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Customer service is exceptional. When I had questions, they responded within minutes. This level of support makes me feel valued!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 10 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-10.jpg' %}" alt="James Brown" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">James Brown</h6>
+                                <small class="text-muted">Australia</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★☆</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Great platform overall. My only minor gripe is the mobile app could use a few more features, but the web interface is solid!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 11 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-11.jpg' %}" alt="Lisa Chen" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Lisa Chen</h6>
+                                <small class="text-muted">Singapore</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Best investment decision I made this year. Diversified portfolio, excellent returns, and peace of mind knowing my money is secure."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 12 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-12.jpg' %}" alt="Carlos Santos" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Carlos Santos</h6>
+                                <small class="text-muted">Brazil</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Exceptional value for money. I've compared with 5 other platforms, and Elite Wealth Capital offers the best combination of features and fees!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 13 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-13.jpg' %}" alt="Nora Hansen" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Nora Hansen</h6>
+                                <small class="text-muted">Denmark</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"My retirement planning got a huge boost through their advisory services. They understood my goals and delivered a strategy that works!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 14 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-14.jpg' %}" alt="Kevin O'Brien" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Kevin O'Brien</h6>
+                                <small class="text-muted">Ireland</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★☆</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Very satisfied overall. The only reason I'm not giving 5 stars is I wish there were more educational resources for beginners."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 15 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-15.jpg' %}" alt="Priya Patel" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Priya Patel</h6>
+                                <small class="text-muted">India</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Exceeded all my expectations. Started with $500 two years ago, now managing a portfolio of $50K+ with consistent double-digit returns."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 16 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-16.jpg' %}" alt="Thomas Berg" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Thomas Berg</h6>
+                                <small class="text-muted">Sweden</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Finally, an investment platform I can trust completely. Regular portfolio updates, transparent reporting, and professional guidance!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 17 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-17.jpg' %}" alt="Fatima Al-Dosari" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Fatima Al-Dosari</h6>
+                                <small class="text-muted">Saudi Arabia</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"As a woman investor, I appreciate their inclusive approach and expert female advisors. Finally treated as an equal participant in wealth building!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 18 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-18.jpg' %}" alt="Robert Kim" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Robert Kim</h6>
+                                <small class="text-muted">South Korea</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"The international exposure through their platform allowed me to diversify across continents. Returns and stability have been outstanding!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 19 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-19.jpg' %}" alt="Anna Novak" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Anna Novak</h6>
+                                <small class="text-muted">Poland</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Incredible tax optimization strategies from their advisors saved me thousands. Professional service at reasonable pricing!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 20 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-20.jpg' %}" alt="Michael Anderson" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Michael Anderson</h6>
+                                <small class="text-muted">New Zealand</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Superb platform for long-term wealth building. The compound returns have been phenomenal. Highly recommend to anyone serious about investing!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 21 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-21.jpg' %}" alt="Olivia Müller" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Olivia Müller</h6>
+                                <small class="text-muted">Germany</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Transparent, professional, and results-oriented. My wealth has grown significantly while I sleep. This is what real investing should be!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 22 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-22.jpg' %}" alt="Diego Flores" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Diego Flores</h6>
+                                <small class="text-muted">Mexico</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Switched from my local bank to Elite Wealth Capital and never looked back. Returns are 5x higher with professional management!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 23 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-23.jpg' %}" alt="Elena Popov" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Elena Popov</h6>
+                                <small class="text-muted">Russia</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★☆</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Solid investment platform with great returns. Would give 5 stars if there were more customization options for advanced traders."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 24 -->
+            <div class="col-lg-4 col-md-6 review-card" data-rating="5">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{% static 'images/avatars/avatar-24.jpg' %}" alt="Hassan Al-Rashid" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Hassan Al-Rashid</h6>
+                                <small class="text-muted">Kuwait</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                            <span class="badge bg-success ms-2">Verified User</span>
+                        </div>
+                        <p class="card-text text-muted">"Elite Wealth Capital represents the future of investing. Professional management meets modern technology. Fantastic experience throughout!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+function filterReviews(rating) {
+    const cards = document.querySelectorAll('.review-card');
+    const buttons = document.querySelectorAll('.btn-group button');
+    
+    // Update button states
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Filter cards
+    cards.forEach(card => {
+        if (rating === 'all') {
+            card.style.display = '';
+        } else {
+            card.style.display = card.dataset.rating === rating ? '' : 'none';
+        }
+    });
+}
+</script>
+
+{% endblock %}

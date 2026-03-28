@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Analytics Dashboard - Admin{% endblock %}
+
+{% block content %}
+<style>
+    :root {
+        --navy: #001f3f;
+        --gold: #f39c12;
+        --emerald: #2ecc71;
+    }
+
+    .admin-nav {
+        background: linear-gradient(135deg, var(--navy) 0%, #003d5c 100%);
+        border-bottom: 3px solid var(--gold);
+    }
+
+    .admin-nav .nav-link {
+        color: white !important;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s ease;
+        padding: 12px 20px;
+        font-weight: 500;
+    }
+
+    .admin-nav .nav-link.active {
+        border-bottom-color: var(--gold);
+        background: rgba(243, 156, 18, 0.2);
+    }
+
+    .chart-container {
+        position: relative;
+        height: 400px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg admin-nav sticky-top">
+    <div class="container-fluid">
+        <h6 class="navbar-brand mb-0 text-white">
+            <i class="fas fa-shield-alt me-2"></i>Admin Dashboard
+        </h6>
+        <div class="navbar-collapse">
+            <ul class="nav nav-tabs ms-auto mb-0">
+                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:admin_panel' %}"><i class="fas fa-chart-pie me-1"></i>Overview</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:admin_users' %}"><i class="fas fa-users me-1"></i>Users</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:admin_content' %}"><i class="fas fa-file-alt me-1"></i>Content</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{% url 'dashboard:admin_analytics' %}"><i class="fas fa-chart-line me-1"></i>Analytics</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h4 class="fw-bold"><i class="fas fa-chart-line me-2"></i>Analytics Dashboard</h4>
+            <p class="text-muted">Platform growth, user acquisition, and investment trends</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <select class="form-select form-select-sm d-inline-block w-auto" id="daysSelect">
+                <option value="7" {% if days == 7 %}selected{% endif %}>Last 7 days</option>
+                <option value="30" {% if days == 30 %}selected{% endif %}>Last 30 days</option>
+                <option value="90" {% if days == 90 %}selected{% endif %}>Last 90 days</option>
+                <option value="365" {% if days == 365 %}selected{% endif %}>Last year</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-3 col-sm-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <p class="text-muted small mb-2">Total Users</p>
+                    <h3 class="fw-bold text-navy">{{ stats.total_users|intcomma }}</h3>
+                    <small class="text-success">
+                        <i class="fas fa-arrow-up"></i> {{ stats.new_users }} new
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <p class="text-muted small mb-2">Active Investments</p>
+                    <h3 class="fw-bold text-emerald">{{ stats.active_investments|intcomma }}</h3>
+                    <small class="text-success">
+                        <i class="fas fa-arrow-up"></i> ${{ stats.total_invested|floatformat:0|intcomma }}
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <p class="text-muted small mb-2">Pending Actions</p>
+                    <h3 class="fw-bold text-danger">{{ stats.pending_deposits|add:stats.pending_withdrawals }}</h3>
+                    <small class="text-warning">
+                        <i class="fas fa-clock"></i> Deposits & Withdrawals
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <p class="text-muted small mb-2">KYC Pending</p>
+                    <h3 class="fw-bold text-info">{{ stats.pending_kyc }}</h3>
+                    <small>Awaiting verification</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="row g-4 mb-4">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold mb-4">
+                        <i class="fas fa-users me-2"></i>User Growth
+                    </h5>
+                    <div class="chart-container">
+                        <canvas id="userChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold mb-4">
+                        <i class="fas fa-coins me-2"></i>Daily Revenue
+                    </h5>
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold mb-4">
+                        <i class="fas fa-chart-line me-2"></i>Investment Trends
+                    </h5>
+                    <div class="chart-container">
+                        <canvas id="investmentChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<script>
+    const userChartData = {{ user_data|safe }};
+    const revenueChartData = {{ revenue_data|safe }};
+    const investmentChartData = {{ investment_data|safe }};
+
+    // User Growth Chart
+    const userCtx = document.getElementById('userChart').getContext('2d');
+    const userChart = new Chart(userCtx, {
+        type: 'line',
+        data: {
+            labels: userChartData.map(d => d.date),
+            datasets: [{
+                label: 'Total Users',
+                data: userChartData.map(d => d.count),
+                borderColor: '#001f3f',
+                backgroundColor: 'rgba(0, 31, 63, 0.1)',
+                borderWidth: 2,
+                tension: 0.4,
+                fill: true,
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                pointBackgroundColor: '#001f3f',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: true, labels: { usePointStyle: true } }
+            },
+            scales: {
+                y: { beginAtZero: true, ticks: { color: '#666' } },
+                x: { ticks: { color: '#666' } }
+            }
+        }
+    });
+
+    // Revenue Chart
+    const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+    const revenueChart = new Chart(revenueCtx, {
+        type: 'bar',
+        data: {
+            labels: revenueChartData.map(d => d.date),
+            datasets: [{
+                label: 'Daily Deposits ($)',
+                data: revenueChartData.map(d => d.revenue),
+                backgroundColor: 'rgba(46, 204, 113, 0.8)',
+                borderColor: '#2ecc71',
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: true }
+            },
+            scales: {
+                y: { beginAtZero: true, ticks: { color: '#666' } },
+                x: { ticks: { color: '#666' } }
+            }
+        }
+    });
+
+    // Investment Chart
+    const investmentCtx = document.getElementById('investmentChart').getContext('2d');
+    const investmentChart = new Chart(investmentCtx, {
+        type: 'area',
+        data: {
+            labels: investmentChartData.map(d => d.date),
+            datasets: [{
+                label: 'Investment Volume ($)',
+                data: investmentChartData.map(d => d.total),
+                borderColor: '#f39c12',
+                backgroundColor: 'rgba(243, 156, 18, 0.15)',
+                borderWidth: 2,
+                tension: 0.4,
+                fill: true,
+            }, {
+                label: 'New Investments (Count)',
+                data: investmentChartData.map(d => d.count * 1000), // Scale for visibility
+                borderColor: '#3498db',
+                backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                borderWidth: 2,
+                tension: 0.4,
+                fill: false,
+                yAxisID: 'y1',
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: true }
+            },
+            scales: {
+                y: { beginAtZero: true, title: { display: true, text: 'Investment Volume ($)' } },
+                y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Count' } },
+                x: { ticks: { color: '#666' } }
+            }
+        }
+    });
+
+    // Update charts on day selection change
+    document.getElementById('daysSelect').addEventListener('change', function() {
+        window.location.href = '?days=' + this.value;
+    });
+</script>
+{% endblock %}

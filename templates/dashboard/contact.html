@@ -1,0 +1,764 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block extra_css %}
+<style>
+    .contact-container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+    
+    .section-title {
+        color: #00A86B;
+        font-weight: 700;
+        font-size: 2rem;
+        margin-bottom: 10px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .section-divider {
+        margin: 60px 0;
+        border: none;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
+    }
+    
+    .contact-card {
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+    
+    .contact-info {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 15px;
+        padding: 30px;
+        color: #fff;
+        height: 100%;
+    }
+    
+    .info-item {
+        margin-bottom: 25px;
+        display: flex;
+        align-items: start;
+    }
+    
+    .info-icon {
+        font-size: 1.5rem;
+        margin-right: 15px;
+        margin-top: 5px;
+    }
+    
+    .form-control, .form-select {
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 10px;
+        padding: 15px;
+        color: #fff;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        background: rgba(255,255,255,0.15);
+        border-color: #6f42c1;
+        color: #fff;
+    }
+    
+    .form-control::placeholder {
+        color: rgba(255,255,255,0.5);
+    }
+    
+    textarea.form-control {
+        min-height: 150px;
+    }
+    
+    .btn-submit {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        padding: 15px 40px;
+        border-radius: 10px;
+        color: #fff;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+    
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+    
+    /* File Upload Styles */
+    .file-upload-area {
+        border: 2px dashed rgba(255,255,255,0.3);
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        transition: all 0.3s;
+        cursor: pointer;
+        background: rgba(255,255,255,0.05);
+    }
+    
+    .file-upload-area:hover {
+        border-color: #667eea;
+        background: rgba(102, 126, 234, 0.1);
+    }
+    
+    .file-upload-area.dragover {
+        border-color: #00A86B;
+        background: rgba(0, 168, 107, 0.1);
+    }
+    
+    /* FAQ Styles */
+    .faq-search {
+        margin-bottom: 30px;
+    }
+    
+    .faq-search input {
+        width: 100%;
+        padding: 15px 20px;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.2);
+        background: rgba(255,255,255,0.1);
+        color: #fff;
+        font-size: 1rem;
+    }
+    
+    .faq-search input::placeholder {
+        color: rgba(255,255,255,0.5);
+    }
+    
+    .faq-item {
+        background: rgba(255,255,255,0.05);
+        border-left: 4px solid #667eea;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .faq-item:hover {
+        background: rgba(255,255,255,0.08);
+        border-left-color: #00A86B;
+    }
+    
+    .faq-question {
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        color: #fff;
+    }
+    
+    .faq-icon {
+        transition: transform 0.3s;
+        font-size: 1.2rem;
+    }
+    
+    .faq-item.active .faq-icon {
+        transform: rotate(180deg);
+    }
+    
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s;
+        padding: 0 20px;
+        color: rgba(255,255,255,0.8);
+        background: rgba(0,0,0,0.2);
+    }
+    
+    .faq-item.active .faq-answer {
+        max-height: 500px;
+        padding: 15px 20px;
+    }
+    
+    /* Support Hours */
+    .support-hours {
+        background: linear-gradient(135deg, rgba(0, 168, 107, 0.1), rgba(102, 126, 234, 0.1));
+        border: 1px solid rgba(0, 168, 107, 0.3);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 30px 0;
+    }
+    
+    .hours-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+        margin-top: 15px;
+    }
+    
+    .hour-item {
+        text-align: center;
+        padding: 15px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 10px;
+    }
+    
+    .hour-label {
+        font-weight: 600;
+        color: #00A86B;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+    }
+    
+    .hour-time {
+        color: #fff;
+        font-size: 1.1rem;
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-left: 10px;
+    }
+    
+    .status-online {
+        background: #00A86B;
+        color: #fff;
+    }
+    
+    .status-offline {
+        background: #FF6B6B;
+        color: #fff;
+    }
+    
+    /* Ticket System */
+    .ticket-section {
+        margin-top: 40px;
+    }
+    
+    .ticket-card {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s;
+    }
+    
+    .ticket-card:hover {
+        background: rgba(255,255,255,0.08);
+        border-color: rgba(255,255,255,0.2);
+    }
+    
+    .ticket-info h6 {
+        color: #fff;
+        margin-bottom: 5px;
+    }
+    
+    .ticket-status {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+    
+    .status-open {
+        background: #667eea;
+        color: #fff;
+    }
+    
+    .status-in-progress {
+        background: #FFD700;
+        color: #000;
+    }
+    
+    .status-resolved {
+        background: #00A86B;
+        color: #fff;
+    }
+    
+    .contact-methods {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+    }
+    
+    .method-card {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        transition: all 0.3s;
+    }
+    
+    .method-card:hover {
+        background: rgba(255,255,255,0.1);
+        border-color: #667eea;
+    }
+    
+    .method-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        color: #00A86B;
+    }
+    
+    .method-title {
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 5px;
+    }
+    
+    .method-desc {
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.7);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="contact-container">
+    <!-- Page Title -->
+    <div class="text-center mb-5">
+        <h1 class="section-title">
+            <i class="fas fa-headset me-3"></i>
+            Support & Contact Center
+        </h1>
+        <p class="text-white opacity-75" style="font-size: 1.1rem;">Get help when you need it - we're here 24/7</p>
+    </div>
+    
+    <!-- Contact Methods -->
+    <div class="contact-methods mb-5">
+        <div class="method-card">
+            <div class="method-icon">💬</div>
+            <div class="method-title">Live Chat</div>
+            <div class="method-desc">Instant support from our team</div>
+        </div>
+        <div class="method-card">
+            <div class="method-icon">📧</div>
+            <div class="method-title">Email Support</div>
+            <div class="method-desc">Response within 2 hours</div>
+        </div>
+        <div class="method-card">
+            <div class="method-icon">📞</div>
+            <div class="method-title">Phone Support</div>
+            <div class="method-desc">Call us anytime</div>
+        </div>
+        <div class="method-card">
+            <div class="method-icon">🎫</div>
+            <div class="method-title">Ticket System</div>
+            <div class="method-desc">Track your support requests</div>
+        </div>
+    </div>
+    
+    <hr class="section-divider">
+    
+    <!-- Main Support Form & Info -->
+    <div class="row mb-5">
+        <!-- Contact Form -->
+        <div class="col-lg-7 mb-4">
+            <div class="contact-card">
+                <h4 class="mb-4" style="color: #fff;">
+                    <i class="fas fa-envelope me-2"></i>
+                    Send us a Message
+                </h4>
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label text-white">Full Name *</label>
+                            <input 
+                                type="text" 
+                                name="name" 
+                                class="form-control" 
+                                placeholder="Your name"
+                                required
+                            >
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label text-white">Email Address *</label>
+                            <input 
+                                type="email" 
+                                name="email" 
+                                class="form-control" 
+                                placeholder="your@email.com"
+                                required
+                            >
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label text-white">Subject *</label>
+                        <select name="subject" class="form-select" required>
+                            <option value="">Select a category</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="technical">Technical Issue</option>
+                            <option value="billing">Billing Question</option>
+                            <option value="withdrawal">Withdrawal Issue</option>
+                            <option value="kyc">KYC Verification</option>
+                            <option value="investment">Investment Help</option>
+                            <option value="security">Security Concern</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label text-white">Message Details *</label>
+                        <textarea 
+                            name="message" 
+                            class="form-control" 
+                            placeholder="Please describe your issue or question in detail..."
+                            required
+                            maxlength="2000"
+                        ></textarea>
+                        <small class="text-white opacity-50">Max 2000 characters</small>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label text-white">
+                            <i class="fas fa-paperclip me-2"></i>
+                            Attach Files (Optional)
+                        </label>
+                        <div class="file-upload-area" id="fileUploadArea">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">📎</div>
+                            <p class="mb-1 text-white">Drag and drop files here or click to browse</p>
+                            <small class="text-white opacity-50">Max file size: 5MB per file (PDF, JPG, PNG)</small>
+                            <input 
+                                type="file" 
+                                name="attachment" 
+                                id="fileInput" 
+                                style="display: none;"
+                                accept=".pdf,.jpg,.jpeg,.png"
+                            >
+                        </div>
+                        <div id="fileNameDisplay" style="color: #fff; margin-top: 10px; display: none;">
+                            <i class="fas fa-check me-2" style="color: #00A86B;"></i>
+                            <span id="uploadedFileName"></span>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-submit w-100">
+                        <i class="fas fa-paper-plane me-2"></i>
+                        Submit Support Request
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Contact Info & Hours -->
+        <div class="col-lg-5 mb-4">
+            <div class="contact-info">
+                <h4 class="mb-4">
+                    <i class="fas fa-phone-alt me-2"></i>
+                    Quick Contact
+                </h4>
+                
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt info-icon"></i>
+                    <div>
+                        <h6 style="color: rgba(255,255,255,0.9);">Address</h6>
+                        <p class="mb-0" style="font-size: 0.95rem;">{{ COMPANY_ADDRESS }}</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-phone info-icon"></i>
+                    <div>
+                        <h6 style="color: rgba(255,255,255,0.9);">Phone</h6>
+                        <p class="mb-0" style="font-size: 0.95rem;">{{ COMPANY_PHONE }}</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-envelope info-icon"></i>
+                    <div>
+                        <h6 style="color: rgba(255,255,255,0.9);">Email</h6>
+                        <p class="mb-0" style="font-size: 0.95rem;">{{ COMPANY_EMAIL }}</p>
+                    </div>
+                </div>
+                
+                <hr class="my-4 opacity-25">
+                
+                <div class="text-center">
+                    <h6 class="mb-3">Need Immediate Help?</h6>
+                    <button class="btn btn-light w-100" onclick="openTawkChat()" style="margin-bottom: 10px;">
+                        <i class="fas fa-comments me-2"></i>
+                        Start Live Chat
+                    </button>
+                    <small class="text-white opacity-75">Usually responds in under 2 minutes</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <hr class="section-divider">
+    
+    <!-- Support Hours -->
+    <div class="support-hours">
+        <h5 style="color: #fff; margin-bottom: 15px;">
+            <i class="fas fa-clock me-2"></i>
+            Support Hours
+            <span class="status-badge status-online">
+                <i class="fas fa-circle me-1"></i>
+                ONLINE NOW
+            </span>
+        </h5>
+        <p style="color: rgba(255,255,255,0.7); margin: 0;">We're always here to help. Our team operates 24/7 to ensure you get support whenever you need it.</p>
+        <div class="hours-grid">
+            <div class="hour-item">
+                <div class="hour-label">Monday - Friday</div>
+                <div class="hour-time">24/7</div>
+            </div>
+            <div class="hour-item">
+                <div class="hour-label">Saturday</div>
+                <div class="hour-time">24/7</div>
+            </div>
+            <div class="hour-item">
+                <div class="hour-label">Sunday</div>
+                <div class="hour-time">24/7</div>
+            </div>
+            <div class="hour-item">
+                <div class="hour-label">Holidays</div>
+                <div class="hour-time">24/7</div>
+            </div>
+        </div>
+    </div>
+    
+    <hr class="section-divider">
+    
+    <!-- FAQ Section -->
+    <div class="mb-5">
+        <h2 class="section-title mb-4">
+            <i class="fas fa-question-circle me-2"></i>
+            Frequently Asked Questions
+        </h2>
+        
+        <div class="faq-search">
+            <input 
+                type="text" 
+                id="faqSearch" 
+                placeholder="🔍 Search FAQs... (e.g., withdrawal, deposit, KYC)"
+            >
+        </div>
+        
+        <div id="faqContainer">
+            <div class="faq-item" data-keywords="withdraw money withdrawal">
+                <div class="faq-question">
+                    <span>How do I withdraw my funds?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>You can withdraw funds anytime through your dashboard. Go to <strong>Investments > Withdraw</strong>, select your amount, and choose your payment method. Most withdrawals are processed within 24 hours. Make sure you've completed KYC verification first.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-keywords="deposit invest money">
+                <div class="faq-question">
+                    <span>What's the minimum deposit amount?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>The minimum deposit is <strong>$100</strong> for all investment plans. You can invest up to any amount that matches your chosen plan tier. We accept cryptocurrency, bank transfers, and credit cards.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-keywords="kyc verification identity know your customer">
+                <div class="faq-question">
+                    <span>How long does KYC verification take?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>KYC verification typically takes <strong>24-48 hours</strong>. We require a valid ID, proof of address, and a selfie for verification. Submit your documents through <strong>Dashboard > KYC > Upload Documents</strong>. You'll receive an email confirmation once verified.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-keywords="returns profits daily earnings">
+                <div class="faq-question">
+                    <span>When do I receive my daily returns?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Daily returns are calculated and credited to your account balance every 24 hours at <strong>23:59 UTC</strong>. Your balance updates automatically, and you can withdraw anytime. Returns depend on your investment plan tier (3.5% - 6.5% daily).</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-keywords="security password account safe">
+                <div class="faq-question">
+                    <span>How is my account secured?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We use industry-standard encryption (SSL/TLS), two-factor authentication (2FA), and secure password hashing. Your funds are stored in segregated accounts and covered by insurance. Enable 2FA immediately in your <strong>Account Settings > Security</strong>.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-keywords="plan upgrade downgrade change">
+                <div class="faq-question">
+                    <span>Can I upgrade or downgrade my investment plan?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! You can upgrade to a higher plan anytime through <strong>Investments > Plans</strong>. Only the additional amount needs to meet the new minimum. Downgrades take effect at the end of your investment period. Contact support if you need assistance.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-keywords="referral bonus commission earn">
+                <div class="faq-question">
+                    <span>How does the referral program work?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Share your referral link and earn <strong>5% commission</strong> on each friend's first deposit. Unlimited earning potential! Find your link at <strong>Account > Referrals</strong>. You'll receive notifications when your referrals earn returns.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-keywords="tax payment reporting">
+                <div class="faq-question">
+                    <span>Do I need to report my earnings for taxes?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, investment returns may be subject to tax depending on your country of residence. We provide detailed transaction statements for your records. Consult with a tax professional about your obligations. Download reports from <strong>Dashboard > Reports</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <hr class="section-divider">
+    
+    <!-- Recent Support Tickets -->
+    <div class="ticket-section">
+        <h2 class="section-title mb-4">
+            <i class="fas fa-ticket-alt me-2"></i>
+            Recent Support Tickets
+        </h2>
+        
+        <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; border: 1px solid rgba(255,255,255,0.1);">
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">
+                <i class="fas fa-info-circle me-2"></i>
+                View and manage all your support tickets here
+            </p>
+            
+            <div class="ticket-card">
+                <div class="ticket-info">
+                    <h6>#TKT-2024-0156</h6>
+                    <small style="color: rgba(255,255,255,0.6);">Withdrawal Status Inquiry • 2 hours ago</small>
+                </div>
+                <span class="ticket-status status-resolved">
+                    <i class="fas fa-check me-1"></i>
+                    Resolved
+                </span>
+            </div>
+            
+            <div class="ticket-card">
+                <div class="ticket-info">
+                    <h6>#TKT-2024-0155</h6>
+                    <small style="color: rgba(255,255,255,0.6);">KYC Verification Question • 1 day ago</small>
+                </div>
+                <span class="ticket-status status-in-progress">
+                    <i class="fas fa-hourglass-half me-1"></i>
+                    In Progress
+                </span>
+            </div>
+            
+            <div class="ticket-card">
+                <div class="ticket-info">
+                    <h6>#TKT-2024-0154</h6>
+                    <small style="color: rgba(255,255,255,0.6);">Technical Issue with Dashboard • 3 days ago</small>
+                </div>
+                <span class="ticket-status status-resolved">
+                    <i class="fas fa-check me-1"></i>
+                    Resolved
+                </span>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-submit">View All Tickets</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// File Upload Functionality
+const fileUploadArea = document.getElementById('fileUploadArea');
+const fileInput = document.getElementById('fileInput');
+const fileNameDisplay = document.getElementById('fileNameDisplay');
+const uploadedFileName = document.getElementById('uploadedFileName');
+
+fileUploadArea.addEventListener('click', () => fileInput.click());
+
+fileUploadArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    fileUploadArea.classList.add('dragover');
+});
+
+fileUploadArea.addEventListener('dragleave', () => {
+    fileUploadArea.classList.remove('dragover');
+});
+
+fileUploadArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    fileUploadArea.classList.remove('dragover');
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+        fileInput.files = files;
+        updateFileDisplay(files[0]);
+    }
+});
+
+fileInput.addEventListener('change', (e) => {
+    if (e.target.files.length > 0) {
+        updateFileDisplay(e.target.files[0]);
+    }
+});
+
+function updateFileDisplay(file) {
+    uploadedFileName.textContent = `${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+    fileNameDisplay.style.display = 'block';
+}
+
+// FAQ Search and Toggle Functionality
+const faqSearch = document.getElementById('faqSearch');
+const faqItems = document.querySelectorAll('.faq-item');
+
+faqItems.forEach(item => {
+    item.addEventListener('click', () => {
+        item.classList.toggle('active');
+    });
+});
+
+faqSearch.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    faqItems.forEach(item => {
+        const keywords = item.getAttribute('data-keywords').toLowerCase();
+        const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+        const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+        
+        if (searchTerm === '' || keywords.includes(searchTerm) || question.includes(searchTerm) || answer.includes(searchTerm)) {
+            item.style.display = '';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+});
+
+// Open Tawk Chat
+function openTawkChat() {
+    if (typeof Tawk_API !== 'undefined') {
+        Tawk_API.maximize();
+    } else {
+        alert('Chat widget is loading. Please try again in a moment.');
+    }
+}
+</script>
+{% endblock %}

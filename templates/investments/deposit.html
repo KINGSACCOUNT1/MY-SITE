@@ -1,0 +1,986 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Funds - Elite Wealth Capital{% endblock %}
+
+{% block extra_css %}
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    :root {
+        --gold: #FFD700;
+        --white: #ffffff;
+        --navy: #0A1F44;
+        --dark-bg: #050B1A;
+        --card-bg: rgba(255, 255, 255, 0.05);
+        --card-border: rgba(255, 215, 0, 0.2);
+    }
+
+    .deposit-page {
+        background: linear-gradient(135deg, #050B1A 0%, #0A1F44 100%);
+        min-height: 100vh;
+        padding: 40px 20px;
+    }
+
+    .deposit-container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 30px 20px;
+        background: var(--card-bg);
+        border-radius: 20px;
+        border: 1px solid var(--card-border);
+        backdrop-filter: blur(10px);
+    }
+
+    .page-header h1 {
+        color: var(--gold);
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+
+    .page-header p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1.1rem;
+    }
+
+    .main-content {
+        display: grid;
+        grid-template-columns: 60% 38%;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+
+    .card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 30px;
+        border: 1px solid var(--card-border);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-title {
+        color: var(--gold);
+        font-size: 1.5rem;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .card-title i {
+        font-size: 1.3rem;
+    }
+
+    /* Payment Methods */
+    .payment-methods {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .payment-method {
+        background: rgba(255, 255, 255, 0.03);
+        border: 2px solid transparent;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .payment-method:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.08);
+        border-color: var(--gold);
+    }
+
+    .payment-method.active {
+        border-color: var(--gold);
+        background: rgba(255, 215, 0, 0.1);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+
+    .payment-method i {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .payment-method .method-name {
+        font-weight: 600;
+        color: var(--white);
+        font-size: 0.95rem;
+    }
+
+    .payment-method .method-symbol {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 5px;
+    }
+
+    /* Wallet Details */
+    .wallet-details {
+        display: none;
+        background: rgba(255, 215, 0, 0.05);
+        border: 1px solid var(--gold);
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 25px;
+        animation: slideDown 0.3s ease;
+    }
+
+    .wallet-details.active {
+        display: block;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .wallet-address-section {
+        margin-bottom: 20px;
+    }
+
+    .wallet-address-section h3 {
+        color: var(--gold);
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    .address-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .address-text {
+        flex: 1;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+        color: var(--white);
+        word-break: break-all;
+    }
+
+    .copy-btn {
+        background: var(--gold);
+        color: var(--navy);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .copy-btn:hover {
+        background: #FFC700;
+        transform: scale(1.05);
+    }
+
+    .copy-btn.copied {
+        background: #26a17b;
+        color: white;
+    }
+
+    .qr-code {
+        text-align: center;
+        margin-top: 20px;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        display: inline-block;
+    }
+
+    .qr-placeholder {
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .bank-instructions {
+        background: rgba(255, 215, 0, 0.05);
+        border-left: 4px solid var(--gold);
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 15px;
+    }
+
+    .bank-instructions h4 {
+        color: var(--gold);
+        margin-bottom: 15px;
+    }
+
+    .bank-info {
+        display: grid;
+        gap: 10px;
+    }
+
+    .bank-info-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+    }
+
+    .bank-info-label {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .bank-info-value {
+        color: var(--white);
+        font-weight: 600;
+    }
+
+    /* Deposit Form */
+    .deposit-form {
+        margin-top: 30px;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-group label {
+        display: block;
+        color: var(--gold);
+        margin-bottom: 10px;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        border-radius: 10px;
+        color: var(--white);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: var(--gold);
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    }
+
+    .form-group input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    .file-upload-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .file-upload-btn {
+        background: rgba(255, 215, 0, 0.1);
+        border: 2px dashed var(--gold);
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .file-upload-btn:hover {
+        background: rgba(255, 215, 0, 0.2);
+    }
+
+    .file-upload-wrapper input[type="file"] {
+        position: absolute;
+        left: -9999px;
+    }
+
+    .file-upload-btn i {
+        font-size: 2rem;
+        color: var(--gold);
+        margin-bottom: 10px;
+    }
+
+    .file-name {
+        margin-top: 10px;
+        color: var(--gold);
+        font-size: 0.9rem;
+    }
+
+    .minimum-warning {
+        background: rgba(255, 193, 7, 0.1);
+        border-left: 4px solid #FFC107;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        color: #FFC107;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .minimum-warning i {
+        font-size: 1.5rem;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 18px;
+        background: var(--gold);
+        color: var(--navy);
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .submit-btn:hover {
+        background: #FFC700;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+    }
+
+    .submit-btn:disabled {
+        background: rgba(255, 215, 0, 0.3);
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    /* Deposits Lists */
+    .deposits-list {
+        margin-top: 20px;
+    }
+
+    .deposit-item {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
+    }
+
+    .deposit-item:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--gold);
+    }
+
+    .deposit-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .deposit-amount {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--gold);
+    }
+
+    .status-badge {
+        padding: 6px 15px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .status-pending {
+        background: rgba(255, 193, 7, 0.2);
+        color: #FFC107;
+        border: 1px solid #FFC107;
+    }
+
+    .status-confirmed {
+        background: rgba(76, 175, 80, 0.2);
+        color: #4CAF50;
+        border: 1px solid #4CAF50;
+    }
+
+    .status-rejected {
+        background: rgba(244, 67, 54, 0.2);
+        color: #f44336;
+        border: 1px solid #f44336;
+    }
+
+    .deposit-details {
+        display: grid;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .deposit-detail {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+    }
+
+    .deposit-detail-label {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .deposit-detail-value {
+        color: var(--white);
+        font-weight: 500;
+    }
+
+    .transaction-hash {
+        font-family: 'Courier New', monospace;
+        font-size: 0.85rem;
+        color: var(--gold);
+        word-break: break-all;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .empty-state i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        opacity: 0.5;
+    }
+
+    .view-all-link {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 12px 30px;
+        background: rgba(255, 215, 0, 0.1);
+        color: var(--gold);
+        border: 1px solid var(--gold);
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .view-all-link:hover {
+        background: rgba(255, 215, 0, 0.2);
+        transform: translateY(-2px);
+    }
+
+    /* Support Button */
+    .support-button {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: var(--gold);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .support-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6);
+    }
+
+    .support-button i {
+        font-size: 1.5rem;
+        color: var(--navy);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .main-content {
+            grid-template-columns: 1fr;
+        }
+
+        .payment-methods {
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        }
+    }
+
+    @media (max-width: 768px) {
+        .page-header h1 {
+            font-size: 1.8rem;
+        }
+
+        .card {
+            padding: 20px;
+        }
+
+        .payment-methods {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .deposit-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .deposit-page {
+            padding: 10px;
+        }
+
+        .payment-methods {
+            grid-template-columns: 1fr;
+        }
+
+        .support-button {
+            width: 50px;
+            height: 50px;
+            bottom: 20px;
+            right: 20px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="deposit-page">
+    <div class="deposit-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1><i class="fas fa-wallet"></i> Add Funds to Your Account</h1>
+            <p>Choose your preferred payment method and make a secure deposit</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Left Column: Payment Methods & Form -->
+            <div>
+                <div class="card">
+                    <h2 class="card-title">
+                        <i class="fas fa-credit-card"></i>
+                        Select Payment Method
+                    </h2>
+
+                    <!-- Minimum Deposit Warning -->
+                    <div class="minimum-warning">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <strong>Minimum Deposit:</strong> $10 USD
+                        </div>
+                    </div>
+
+                    <!-- Payment Methods Grid -->
+                    <div class="payment-methods">
+                        {% if wallets.BTC %}
+                        <div class="payment-method" data-method="BTC" data-wallet="{{ wallets.BTC.address }}">
+                            <i class="fab fa-bitcoin" style="color: #f7931a;"></i>
+                            <div class="method-name">Bitcoin</div>
+                            <div class="method-symbol">BTC</div>
+                        </div>
+                        {% endif %}
+
+                        {% if wallets.ETH %}
+                        <div class="payment-method" data-method="ETH" data-wallet="{{ wallets.ETH.address }}">
+                            <i class="fab fa-ethereum" style="color: #627eea;"></i>
+                            <div class="method-name">Ethereum</div>
+                            <div class="method-symbol">ETH</div>
+                        </div>
+                        {% endif %}
+
+                        {% if wallets.USDT %}
+                        <div class="payment-method" data-method="USDT" data-wallet="{{ wallets.USDT.address }}">
+                            <i class="fas fa-dollar-sign" style="color: #26a17b;"></i>
+                            <div class="method-name">Tether</div>
+                            <div class="method-symbol">USDT</div>
+                        </div>
+                        {% endif %}
+
+                        {% if wallets.USDC %}
+                        <div class="payment-method" data-method="USDC" data-wallet="{{ wallets.USDC.address }}">
+                            <i class="fas fa-circle" style="color: #2775ca;"></i>
+                            <div class="method-name">USD Coin</div>
+                            <div class="method-symbol">USDC</div>
+                        </div>
+                        {% endif %}
+
+                        {% if wallets.LTC %}
+                        <div class="payment-method" data-method="LTC" data-wallet="{{ wallets.LTC.address }}">
+                            <i class="fab fa-litecoin" style="color: #345d9d;"></i>
+                            <div class="method-name">Litecoin</div>
+                            <div class="method-symbol">LTC</div>
+                        </div>
+                        {% endif %}
+
+                        {% if wallets.BNB %}
+                        <div class="payment-method" data-method="BNB" data-wallet="{{ wallets.BNB.address }}">
+                            <i class="fas fa-coins" style="color: #f3ba2f;"></i>
+                            <div class="method-name">Binance Coin</div>
+                            <div class="method-symbol">BNB</div>
+                        </div>
+                        {% endif %}
+
+                        {% if wallets.BANK %}
+                        <div class="payment-method" data-method="BANK" data-wallet="bank">
+                            <i class="fas fa-university" style="color: #FFD700;"></i>
+                            <div class="method-name">Bank Transfer</div>
+                            <div class="method-symbol">USD</div>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Wallet Details (Hidden by default) -->
+                    <div id="walletDetails" class="wallet-details">
+                        <div class="wallet-address-section">
+                            <h3><i class="fas fa-wallet"></i> Wallet Address</h3>
+                            <div class="address-box">
+                                <div class="address-text" id="walletAddress"></div>
+                                <button class="copy-btn" onclick="copyAddress()">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="qr-code">
+                            <div class="qr-placeholder">
+                                <i class="fas fa-qrcode" style="font-size: 3rem; color: #999;"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bank Transfer Instructions -->
+                    <div id="bankDetails" class="wallet-details">
+                        <div class="bank-instructions">
+                            <h4><i class="fas fa-university"></i> Bank Transfer Instructions</h4>
+                            <div class="bank-info">
+                                <div class="bank-info-item">
+                                    <span class="bank-info-label">Bank Name:</span>
+                                    <span class="bank-info-value">Elite Wealth Capital Bank</span>
+                                </div>
+                                <div class="bank-info-item">
+                                    <span class="bank-info-label">Account Name:</span>
+                                    <span class="bank-info-value">Elite Wealth Capital Ltd.</span>
+                                </div>
+                                <div class="bank-info-item">
+                                    <span class="bank-info-label">Account Number:</span>
+                                    <span class="bank-info-value">1234567890</span>
+                                </div>
+                                <div class="bank-info-item">
+                                    <span class="bank-info-label">Routing Number:</span>
+                                    <span class="bank-info-value">987654321</span>
+                                </div>
+                                <div class="bank-info-item">
+                                    <span class="bank-info-label">SWIFT Code:</span>
+                                    <span class="bank-info-value">EWCBUS33</span>
+                                </div>
+                            </div>
+                            <p style="margin-top: 15px; color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">
+                                <i class="fas fa-info-circle"></i> Please include your account email in the transfer reference.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Deposit Form -->
+                    <form method="POST" enctype="multipart/form-data" class="deposit-form" id="depositForm">
+                        {% csrf_token %}
+                        
+                        <input type="hidden" name="payment_method" id="paymentMethod" required>
+
+                        <div class="form-group">
+                            <label for="amount">
+                                <i class="fas fa-dollar-sign"></i> Deposit Amount (USD)
+                            </label>
+                            <input 
+                                type="number" 
+                                id="amount" 
+                                name="amount" 
+                                placeholder="Enter amount (minimum $10)" 
+                                min="10" 
+                                step="0.01" 
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group" id="transactionHashGroup" style="display: none;">
+                            <label for="transaction_hash">
+                                <i class="fas fa-hashtag"></i> Transaction Hash
+                            </label>
+                            <input 
+                                type="text" 
+                                id="transaction_hash" 
+                                name="transaction_hash" 
+                                placeholder="Enter transaction hash from your wallet"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <i class="fas fa-file-upload"></i> Proof of Payment
+                            </label>
+                            <div class="file-upload-wrapper">
+                                <label for="proof" class="file-upload-btn">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <div>Click to upload payment screenshot</div>
+                                    <div style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.5); margin-top: 10px;">
+                                        Supported: JPG, PNG, PDF (Max 5MB)
+                                    </div>
+                                </label>
+                                <input 
+                                    type="file" 
+                                    id="proof" 
+                                    name="proof" 
+                                    accept="image/*,.pdf"
+                                    onchange="displayFileName()"
+                                >
+                            </div>
+                            <div class="file-name" id="fileName"></div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn" disabled>
+                            <i class="fas fa-paper-plane"></i> Submit Deposit Request
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Column: Deposits Status -->
+            <div>
+                <!-- Pending Deposits -->
+                <div class="card">
+                    <h2 class="card-title">
+                        <i class="fas fa-clock"></i>
+                        Pending Deposits
+                    </h2>
+                    <div class="deposits-list">
+                        {% if pending_deposits %}
+                            {% for deposit in pending_deposits %}
+                            <div class="deposit-item">
+                                <div class="deposit-header">
+                                    <div class="deposit-amount">${{ deposit.amount|floatformat:2 }}</div>
+                                    <span class="status-badge status-{{ deposit.status }}">
+                                        {{ deposit.status }}
+                                    </span>
+                                </div>
+                                <div class="deposit-details">
+                                    <div class="deposit-detail">
+                                        <span class="deposit-detail-label">Method:</span>
+                                        <span class="deposit-detail-value">{{ deposit.crypto_type }}</span>
+                                    </div>
+                                    <div class="deposit-detail">
+                                        <span class="deposit-detail-label">Date:</span>
+                                        <span class="deposit-detail-value">{{ deposit.created_at|date:"M d, Y H:i" }}</span>
+                                    </div>
+                                    {% if deposit.transaction_hash %}
+                                    <div class="deposit-detail">
+                                        <span class="deposit-detail-label">TX Hash:</span>
+                                        <span class="transaction-hash">{{ deposit.transaction_hash|truncatechars:20 }}</span>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="empty-state">
+                                <i class="fas fa-inbox"></i>
+                                <p>No pending deposits</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Recent Deposits History -->
+                <div class="card" style="margin-top: 30px;">
+                    <h2 class="card-title">
+                        <i class="fas fa-history"></i>
+                        Recent History
+                    </h2>
+                    <div class="deposits-list">
+                        {% if recent_deposits %}
+                            {% for deposit in recent_deposits|slice:":5" %}
+                            <div class="deposit-item">
+                                <div class="deposit-header">
+                                    <div class="deposit-amount">${{ deposit.amount|floatformat:2 }}</div>
+                                    <span class="status-badge status-{{ deposit.status }}">
+                                        {{ deposit.status }}
+                                    </span>
+                                </div>
+                                <div class="deposit-details">
+                                    <div class="deposit-detail">
+                                        <span class="deposit-detail-label">Method:</span>
+                                        <span class="deposit-detail-value">{{ deposit.crypto_type }}</span>
+                                    </div>
+                                    <div class="deposit-detail">
+                                        <span class="deposit-detail-label">Date:</span>
+                                        <span class="deposit-detail-value">{{ deposit.created_at|date:"M d, Y" }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <div style="text-align: center;">
+                                <a href="{% url 'transaction_history' %}" class="view-all-link">
+                                    <i class="fas fa-list"></i> View All Transactions
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="empty-state">
+                                <i class="fas fa-history"></i>
+                                <p>No transaction history yet</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Support Button -->
+    <div class="support-button" onclick="openSupport()">
+        <i class="fas fa-headset"></i>
+    </div>
+</div>
+
+<script>
+    let selectedMethod = null;
+
+    // Payment method selection
+    document.querySelectorAll('.payment-method').forEach(method => {
+        method.addEventListener('click', function() {
+            // Remove active class from all methods
+            document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+            
+            // Add active class to selected method
+            this.classList.add('active');
+            
+            // Get selected method details
+            selectedMethod = this.dataset.method;
+            const walletAddress = this.dataset.wallet;
+            
+            // Update hidden input
+            document.getElementById('paymentMethod').value = selectedMethod;
+            
+            // Show/hide wallet details
+            document.getElementById('walletDetails').classList.remove('active');
+            document.getElementById('bankDetails').classList.remove('active');
+            
+            if (selectedMethod === 'BANK') {
+                document.getElementById('bankDetails').classList.add('active');
+                document.getElementById('transactionHashGroup').style.display = 'none';
+            } else {
+                document.getElementById('walletAddress').textContent = walletAddress;
+                document.getElementById('walletDetails').classList.add('active');
+                document.getElementById('transactionHashGroup').style.display = 'block';
+            }
+            
+            // Enable submit button
+            updateSubmitButton();
+        });
+    });
+
+    // Copy wallet address
+    function copyAddress() {
+        const address = document.getElementById('walletAddress').textContent;
+        navigator.clipboard.writeText(address).then(() => {
+            const btn = document.querySelector('.copy-btn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('copied');
+            }, 2000);
+        });
+    }
+
+    // Display selected file name
+    function displayFileName() {
+        const input = document.getElementById('proof');
+        const fileName = document.getElementById('fileName');
+        if (input.files.length > 0) {
+            fileName.textContent = '✓ ' + input.files[0].name;
+        }
+    }
+
+    // Update submit button state
+    function updateSubmitButton() {
+        const amount = document.getElementById('amount').value;
+        const method = document.getElementById('paymentMethod').value;
+        const submitBtn = document.getElementById('submitBtn');
+        
+        if (method && amount >= 10) {
+            submitBtn.disabled = false;
+        } else {
+            submitBtn.disabled = true;
+        }
+    }
+
+    // Amount input validation
+    document.getElementById('amount').addEventListener('input', updateSubmitButton);
+
+    // Form submission
+    document.getElementById('depositForm').addEventListener('submit', function(e) {
+        const amount = document.getElementById('amount').value;
+        if (amount < 10) {
+            e.preventDefault();
+            alert('Minimum deposit amount is $10');
+            return false;
+        }
+        
+        if (!selectedMethod) {
+            e.preventDefault();
+            alert('Please select a payment method');
+            return false;
+        }
+    });
+
+    // Support button
+    function openSupport() {
+        // Integration with Tawk.to or other chat systems
+        if (typeof Tawk_API !== 'undefined') {
+            Tawk_API.toggle();
+        } else {
+            alert('Support chat will be available soon. Please contact us at support@elitewealthcapital.com');
+        }
+    }
+
+    // Auto-select first payment method if only one is available
+    window.addEventListener('DOMContentLoaded', function() {
+        const methods = document.querySelectorAll('.payment-method');
+        if (methods.length === 1) {
+            methods[0].click();
+        }
+    });
+</script>
+{% endblock %}

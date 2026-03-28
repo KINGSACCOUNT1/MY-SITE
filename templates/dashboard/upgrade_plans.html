@@ -1,0 +1,584 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Upgrade Your Plan - Elite Wealth Capital{% endblock %}
+
+{% block extra_css %}
+<style>
+    .upgrade-header {
+        background: linear-gradient(135deg, #0A1F44 0%, #00A86B 100%);
+        color: white;
+        padding: 50px 30px;
+        border-radius: 10px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .upgrade-header h2 {
+        font-weight: 700;
+        margin-bottom: 15px;
+        font-size: 2.5rem;
+    }
+
+    .upgrade-header p {
+        font-size: 1.1rem;
+        opacity: 0.95;
+    }
+
+    .current-plan-section {
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 10px;
+        margin-bottom: 40px;
+        border-left: 4px solid #00A86B;
+    }
+
+    .current-plan-section h3 {
+        color: #0A1F44;
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
+
+    .current-plan-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .plan-info-item {
+        background: white;
+        padding: 15px;
+        border-radius: 5px;
+        border-left: 3px solid #00A86B;
+    }
+
+    .plan-info-label {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+    }
+
+    .plan-info-value {
+        color: #0A1F44;
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+
+    .plans-comparison {
+        margin-bottom: 40px;
+    }
+
+    .plans-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+
+    .plan-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .plan-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .plan-card.featured {
+        border: 3px solid #00A86B;
+        transform: scale(1.05);
+    }
+
+    .plan-card.featured:hover {
+        transform: scale(1.05) translateY(-8px);
+    }
+
+    .plan-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 25px;
+        text-align: center;
+    }
+
+    .plan-card.featured .plan-header {
+        background: linear-gradient(135deg, #00A86B 0%, #006B44 100%);
+    }
+
+    .plan-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .plan-price {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .plan-price-period {
+        font-size: 0.95rem;
+        opacity: 0.9;
+    }
+
+    .featured-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: #FFD700;
+        color: #000;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+
+    .plan-features {
+        padding: 25px;
+    }
+
+    .plan-feature {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+        font-size: 0.95rem;
+        color: #555;
+    }
+
+    .plan-feature:last-child {
+        border-bottom: none;
+    }
+
+    .plan-feature i {
+        color: #00A86B;
+        margin-right: 12px;
+        width: 20px;
+    }
+
+    .plan-footer {
+        padding: 0 25px 25px;
+        text-align: center;
+    }
+
+    .plan-footer button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-upgrade {
+        background: #00A86B;
+        color: white;
+    }
+
+    .btn-upgrade:hover {
+        background: #006B44;
+    }
+
+    .btn-current {
+        background: #e0e0e0;
+        color: #333;
+        cursor: default;
+    }
+
+    .comparison-table {
+        margin: 40px 0;
+        overflow-x: auto;
+    }
+
+    .comparison-table table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .comparison-table th {
+        background: #0A1F44;
+        color: white;
+        padding: 15px;
+        text-align: left;
+        font-weight: 700;
+    }
+
+    .comparison-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .comparison-table tr:hover {
+        background: #f8f9fa;
+    }
+
+    .comparison-table .feature-name {
+        font-weight: 600;
+        color: #0A1F44;
+        width: 200px;
+    }
+
+    .comparison-table .check {
+        color: #00A86B;
+        font-size: 1.2rem;
+    }
+
+    .comparison-table .cross {
+        color: #dc3545;
+    }
+
+    .faq-section {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 10px;
+        margin-top: 40px;
+    }
+
+    .faq-section h3 {
+        color: #0A1F44;
+        margin-bottom: 25px;
+        font-weight: 700;
+    }
+
+    .faq-item {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .faq-question {
+        font-weight: 600;
+        color: #0A1F44;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .faq-answer {
+        color: #666;
+        margin-top: 12px;
+        line-height: 1.6;
+        display: none;
+    }
+
+    .faq-answer.active {
+        display: block;
+    }
+
+    @media (max-width: 768px) {
+        .plans-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .plan-card.featured {
+            transform: scale(1);
+        }
+
+        .plan-card.featured:hover {
+            transform: translateY(-8px);
+        }
+
+        .upgrade-header {
+            padding: 30px 20px;
+        }
+
+        .upgrade-header h2 {
+            font-size: 1.8rem;
+        }
+
+        .comparison-table {
+            margin: 20px 0;
+        }
+
+        .comparison-table .feature-name {
+            width: auto;
+        }
+
+        .comparison-table table {
+            font-size: 0.9rem;
+        }
+
+        .current-plan-info {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="upgrade-header">
+        <h2><i class="fas fa-star me-2"></i>Upgrade Your Plan</h2>
+        <p>Choose the perfect plan for your investment goals</p>
+    </div>
+
+    <!-- Current Plan Section -->
+    <div class="current-plan-section">
+        <h3>Your Current Plan</h3>
+        <div class="current-plan-info">
+            <div class="plan-info-item">
+                <div class="plan-info-label">Plan Name</div>
+                <div class="plan-info-value">{{ current_plan.name|default:"Standard" }}</div>
+            </div>
+            <div class="plan-info-item">
+                <div class="plan-info-label">Min Investment</div>
+                <div class="plan-info-value">${{ current_plan.min_amount|default:"500"|intcomma }}</div>
+            </div>
+            <div class="plan-info-item">
+                <div class="plan-info-label">Daily ROI</div>
+                <div class="plan-info-value">{{ current_plan.daily_roi|default:"5" }}%</div>
+            </div>
+            <div class="plan-info-item">
+                <div class="plan-info-label">Duration</div>
+                <div class="plan-info-value">{{ current_plan.duration_days|default:"30" }} days</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Available Plans -->
+    <div class="plans-comparison">
+        <h3 class="mb-4">Available Plans</h3>
+        <div class="plans-grid">
+            <!-- Plan 1 -->
+            <div class="plan-card">
+                <div class="plan-header">
+                    <div class="plan-name">Starter</div>
+                    <div class="plan-price">$500</div>
+                    <div class="plan-price-period">Minimum Investment</div>
+                </div>
+                <div class="plan-features">
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>5% Daily ROI</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>30 Days Duration</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Basic Support</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Weekly Reports</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-times" style="color: #ccc;"></i>
+                        <span style="color: #999;">Premium Features</span>
+                    </div>
+                </div>
+                <div class="plan-footer">
+                    <button class="btn-upgrade" onclick="window.location.href='/investments/plans/'">
+                        Choose Plan
+                    </button>
+                </div>
+            </div>
+
+            <!-- Plan 2 -->
+            <div class="plan-card">
+                <div class="featured-badge"><i class="fas fa-crown me-1"></i>Popular</div>
+                <div class="plan-header">
+                    <div class="plan-name">Professional</div>
+                    <div class="plan-price">$5,000</div>
+                    <div class="plan-price-period">Minimum Investment</div>
+                </div>
+                <div class="plan-features">
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>7% Daily ROI</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>60 Days Duration</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>24/7 Priority Support</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Daily Reports</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Premium Features</span>
+                    </div>
+                </div>
+                <div class="plan-footer">
+                    <button class="btn-upgrade" onclick="window.location.href='/investments/plans/'">
+                        Upgrade to Professional
+                    </button>
+                </div>
+            </div>
+
+            <!-- Plan 3 -->
+            <div class="plan-card">
+                <div class="plan-header">
+                    <div class="plan-name">Elite</div>
+                    <div class="plan-price">$25,000</div>
+                    <div class="plan-price-period">Minimum Investment</div>
+                </div>
+                <div class="plan-features">
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>10% Daily ROI</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>90 Days Duration</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Dedicated Account Manager</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Real-time Reports</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>VIP Benefits</span>
+                    </div>
+                </div>
+                <div class="plan-footer">
+                    <button class="btn-upgrade" onclick="window.location.href='/investments/plans/'">
+                        Upgrade to Elite
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="comparison-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Starter</th>
+                    <th>Professional</th>
+                    <th>Elite</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="feature-name">Minimum Investment</td>
+                    <td>$500</td>
+                    <td>$5,000</td>
+                    <td>$25,000</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">Daily ROI</td>
+                    <td>5%</td>
+                    <td>7%</td>
+                    <td>10%</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">Duration</td>
+                    <td>30 Days</td>
+                    <td>60 Days</td>
+                    <td>90 Days</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">Total Potential Return</td>
+                    <td class="check">$575 - $1,500</td>
+                    <td class="check">$8,400 - $30,000</td>
+                    <td class="check">$70,000 - $225,000</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">Customer Support</td>
+                    <td>Business Hours</td>
+                    <td class="check">24/7 Priority</td>
+                    <td class="check">Dedicated Manager</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">Reports</td>
+                    <td>Weekly</td>
+                    <td>Daily</td>
+                    <td class="check">Real-time</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">Referral Bonus</td>
+                    <td>5%</td>
+                    <td>7%</td>
+                    <td class="check">10%</td>
+                </tr>
+                <tr>
+                    <td class="feature-name">Loan Eligibility</td>
+                    <td class="cross">No</td>
+                    <td class="check">Yes</td>
+                    <td class="check">Yes (Higher Limit)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+        <h3>Frequently Asked Questions</h3>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Can I upgrade my plan anytime?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                Yes! You can upgrade to a higher plan at any time. The upgrade will be applied to your next investment cycle, and you'll retain any active investments on your current plan.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>What happens to my current investments if I upgrade?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                Your current investments will continue with their original terms and ROI percentage. The upgraded plan will apply only to new investments you make after the upgrade.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Is there a downgrade option?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                You can switch to a lower plan after completing your current investment cycle. Please contact our support team for assistance with downgrades.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Do I get any bonus for upgrading?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                Yes! We offer special bonus credits when you upgrade to Professional or Elite plans. Bonuses vary based on your upgrade amount and tenure with us.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleFAQ(element) {
+        const answer = element.nextElementSibling;
+        answer.classList.toggle('active');
+        
+        const icon = element.querySelector('i');
+        if (answer.classList.contains('active')) {
+            icon.style.transform = 'rotate(180deg)';
+        } else {
+            icon.style.transform = 'rotate(0deg)';
+        }
+    }
+</script>
+{% endblock %}

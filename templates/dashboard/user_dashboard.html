@@ -1,0 +1,796 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Elite Wealth Capital</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <style>
+        :root {
+            --navy: #0A1F44;
+            --emerald: #00A86B;
+            --gold: #FFD700;
+            --dark-navy: #051125;
+            --light-bg: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light-bg);
+            padding-top: 92px;
+            color: #333;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--emerald) 100%);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-title h1 {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--emerald);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #999;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .stat-change {
+            font-size: 0.85rem;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .stat-change.positive {
+            color: #28a745;
+        }
+
+        .stat-change.negative {
+            color: #dc3545;
+        }
+
+        .portfolio-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .portfolio-header h3 {
+            margin: 0;
+            color: var(--navy);
+            font-weight: 700;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+
+        .transaction-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .transaction-icon.deposit {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+        }
+
+        .transaction-icon.withdrawal {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+
+        .transaction-details {
+            flex-grow: 1;
+        }
+
+        .transaction-type {
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 3px;
+        }
+
+        .transaction-date {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .transaction-amount {
+            text-align: right;
+        }
+
+        .transaction-amount.positive {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .transaction-amount.negative {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--emerald) 100%);
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 168, 107, 0.3);
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--navy);
+        }
+
+        .action-btn:hover {
+            border-color: var(--emerald);
+            background: rgba(0, 168, 107, 0.05);
+            transform: translateY(-3px);
+        }
+
+        .action-btn i {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--emerald);
+        }
+
+        .action-btn span {
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            color: var(--emerald);
+        }
+
+        .notification-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--emerald);
+        }
+
+        .notification-item.warning {
+            border-left-color: #ffc107;
+            background: rgba(255, 193, 7, 0.05);
+        }
+
+        .notification-item.danger {
+            border-left-color: #dc3545;
+            background: rgba(220, 53, 69, 0.05);
+        }
+
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--navy);
+        }
+
+        .notification-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .notification-time {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .carousel-container {
+            position: relative;
+        }
+
+        .investment-plan-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .investment-plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .investment-plan-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--emerald) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .investment-plan-name {
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .investment-plan-roi {
+            font-size: 1.5rem;
+            color: var(--emerald);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .investment-plan-duration {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--emerald);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .carousel-button.prev {
+            left: -40px;
+        }
+
+        .carousel-button.next {
+            right: -40px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--emerald) 100%);
+            top: 42px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header {
+                padding: 20px 0;
+            }
+
+            .stat-card {
+                margin-bottom: 15px;
+            }
+
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .carousel-button {
+                position: static;
+                transform: none;
+                margin-top: 20px;
+                width: 100%;
+            }
+
+            .carousel-button.prev {
+                left: auto;
+                margin-right: 10px;
+            }
+
+            .chart-container {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-lg">
+            <a class="navbar-brand" href="{% url 'dashboard:dashboard' %}">
+                <i class="fas fa-crown"></i> Elite Wealth Capital
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'dashboard:user_dashboard' %}">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:transactions' %}">Transactions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'accounts:referrals' %}">Referrals</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>{{ user.full_name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' %}"><i class="fas fa-edit me-2"></i>Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' %}?tab=security"><i class="fas fa-lock me-2"></i>Security</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'accounts:logout' %}"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div class="container-lg">
+            <div class="dashboard-title">
+                <h1>Welcome, {{ user.full_name }}! 👋</h1>
+                <p class="mb-0" style="opacity: 0.9;">Here's your investment overview</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container-lg mb-5">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Portfolio Overview Cards -->
+        <div class="row mb-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(10, 31, 68, 0.1); color: var(--navy);">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="stat-label">Total Balance</div>
+                    <div class="stat-value">${{ total_balance|floatformat:2 }}</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(0, 168, 107, 0.1); color: var(--emerald);">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-label">Total Invested</div>
+                    <div class="stat-value">${{ total_invested|floatformat:2 }}</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up me-1"></i>{{ active_count }} active
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(255, 215, 0, 0.1); color: var(--gold);">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="stat-label">Total Earnings</div>
+                    <div class="stat-value">${{ total_earnings|floatformat:2 }}</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-check-circle me-1"></i>ROI: {{ roi_percentage }}%
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(220, 53, 69, 0.1); color: #dc3545;">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div class="stat-label">Pending Withdrawal</div>
+                    <div class="stat-value">${{ pending_withdrawals|floatformat:2 }}</div>
+                    <div class="stat-change">
+                        <i class="fas fa-clock me-1"></i>In progress
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <!-- Asset Breakdown Chart -->
+                <div class="portfolio-card">
+                    <div class="portfolio-header">
+                        <h3><i class="fas fa-pie-chart me-2" style="color: var(--emerald);"></i>Asset Breakdown</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="assetChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="portfolio-card">
+                    <div class="portfolio-header">
+                        <h3><i class="fas fa-exchange-alt me-2" style="color: var(--emerald);"></i>Recent Transactions</h3>
+                        <a href="{% url 'dashboard:transactions' %}" class="btn btn-sm btn-outline-primary">View All</a>
+                    </div>
+                    
+                    {% if recent_deposits or recent_withdrawals %}
+                        {% for deposit in recent_deposits|slice:":5" %}
+                            <div class="transaction-item">
+                                <div style="display: flex; align-items: center;">
+                                    <div class="transaction-icon deposit">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <div class="transaction-type">Deposit</div>
+                                        <div class="transaction-date">{{ deposit.created_at|date:"M d, Y H:i" }}</div>
+                                    </div>
+                                </div>
+                                <div class="transaction-amount positive">
+                                    +${{ deposit.amount|floatformat:2 }}
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        {% for withdrawal in recent_withdrawals|slice:":5" %}
+                            <div class="transaction-item">
+                                <div style="display: flex; align-items: center;">
+                                    <div class="transaction-icon withdrawal">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <div class="transaction-type">Withdrawal</div>
+                                        <div class="transaction-date">{{ withdrawal.created_at|date:"M d, Y H:i" }}</div>
+                                    </div>
+                                </div>
+                                <div class="transaction-amount negative">
+                                    -${{ withdrawal.amount|floatformat:2 }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="text-align: center; color: #999; padding: 20px;">No transactions yet</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Quick Stats & Notifications Sidebar -->
+            <div class="col-lg-4">
+                <!-- Referral Earnings -->
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(255, 215, 0, 0.1); color: var(--gold);">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <div class="stat-label">Referral Earnings</div>
+                    <div class="stat-value">${{ referral_earnings|floatformat:2 }}</div>
+                    <a href="{% url 'accounts:referrals' %}" class="btn btn-sm btn-primary mt-3 w-100">
+                        <i class="fas fa-share-alt me-2"></i>Share & Earn
+                    </a>
+                </div>
+
+                <!-- Notifications -->
+                <div class="portfolio-card">
+                    <h5 class="mb-3"><i class="fas fa-bell me-2" style="color: var(--emerald);"></i>Recent Alerts</h5>
+                    {% if notifications %}
+                        {% for notif in notifications|slice:":5" %}
+                            <div class="notification-item {% if notif.type == 'warning' %}warning{% elif notif.type == 'danger' %}danger{% endif %}">
+                                <div class="notification-title">{{ notif.title }}</div>
+                                <div class="notification-text">{{ notif.message|truncatewords:10 }}</div>
+                                <div class="notification-time">{{ notif.created_at|timesince }} ago</div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #999; text-align: center;">No new notifications</p>
+                    {% endif %}
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="portfolio-card">
+                    <h5 class="mb-3"><i class="fas fa-bolt me-2" style="color: var(--gold);"></i>Quick Actions</h5>
+                    <div class="quick-actions">
+                        <a href="/investments/deposit/" class="action-btn">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Add Funds</span>
+                        </a>
+                        <a href="/investments/withdraw/" class="action-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Withdraw</span>
+                        </a>
+                        <a href="/investments/plans/" class="action-btn">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Invest</span>
+                        </a>
+                        <a href="/investments/cards/" class="action-btn">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Cards</span>
+                        </a>
+                        <a href="/investments/loans/" class="action-btn">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <span>Loans</span>
+                        </a>
+                        <a href="/investments/agent/" class="action-btn">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Agent</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Investment Opportunities Carousel -->
+        <div class="portfolio-card">
+            <div class="portfolio-header">
+                <h3><i class="fas fa-star me-2" style="color: var(--emerald);"></i>Featured Investment Plans</h3>
+            </div>
+            
+            <div class="carousel-container">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    {% for plan in featured_plans %}
+                        <div class="investment-plan-card">
+                            <div class="investment-plan-icon">
+                                <i class="fas fa-{{ plan.icon }}"></i>
+                            </div>
+                            <div class="investment-plan-name">{{ plan.name }}</div>
+                            <div class="investment-plan-roi">{{ plan.daily_roi }}%</div>
+                            <div class="investment-plan-duration">
+                                <i class="fas fa-clock me-1"></i>Daily for {{ plan.duration_days }} days
+                            </div>
+                            <div style="margin-top: 15px;">
+                                <small style="color: #999;">Min: ${{ plan.min_amount|floatformat:0 }} - Max: ${{ plan.max_amount|floatformat:0 }}</small>
+                            </div>
+                            <button class="btn btn-primary btn-sm mt-3 w-100">Invest Now</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Investments -->
+        {% if active_investments %}
+            <div class="portfolio-card">
+                <div class="portfolio-header">
+                    <h3><i class="fas fa-briefcase me-2" style="color: var(--emerald);"></i>Active Investments</h3>
+                    <span class="status-badge status-active">{{ active_count }} Active</span>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="table table-hover mb-0">
+                        <thead style="background: #f8f9fa;">
+                            <tr>
+                                <th>Plan</th>
+                                <th>Amount</th>
+                                <th>Expected Profit</th>
+                                <th>Status</th>
+                                <th>End Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for investment in active_investments %}
+                                <tr>
+                                    <td>
+                                        <strong>{{ investment.plan.name }}</strong>
+                                    </td>
+                                    <td>${{ investment.amount|floatformat:2 }}</td>
+                                    <td>
+                                        <span style="color: #28a745; font-weight: 600;">
+                                            +${{ investment.expected_profit|floatformat:2 }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge status-active">
+                                            <i class="fas fa-check-circle me-1"></i>Active
+                                        </span>
+                                    </td>
+                                    <td>{{ investment.end_date|date:"M d, Y" }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: var(--dark-navy); color: white; padding: 30px 0; margin-top: 60px;">
+        <div class="container-lg">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5><i class="fas fa-crown me-2"></i>Elite Wealth Capital</h5>
+                    <p style="opacity: 0.8;">Your trusted investment platform for secure wealth growth.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="{% url 'dashboard:about' %}" style="color: rgba(255, 255, 255, 0.8);">About Us</a></li>
+                        <li><a href="{% url 'dashboard:faq' %}" style="color: rgba(255, 255, 255, 0.8);">FAQ</a></li>
+                        <li><a href="{% url 'dashboard:contact' %}" style="color: rgba(255, 255, 255, 0.8);">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Security</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="{% url 'dashboard:privacy_policy' %}" style="color: rgba(255, 255, 255, 0.8);">Privacy Policy</a></li>
+                        <li><a href="{% url 'dashboard:terms' %}" style="color: rgba(255, 255, 255, 0.8);">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr style="opacity: 0.2;">
+            <p style="text-align: center; opacity: 0.7; margin: 0;">© 2024 Elite Wealth Capital. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Asset Breakdown Chart
+        const ctx = document.getElementById('assetChart');
+        if (ctx) {
+            const assetData = {
+                labels: [
+                    {% for item in investments_by_type %}'{{ item.plan__name }}'{% if not forloop.last %}, {% endif %}{% endfor %}
+                ],
+                datasets: [{
+                    data: [
+                        {% for item in investments_by_type %}{{ item.total|floatformat:2 }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                    ],
+                    backgroundColor: [
+                        'rgba(10, 31, 68, 0.8)',
+                        'rgba(0, 168, 107, 0.8)',
+                        'rgba(255, 215, 0, 0.8)',
+                        'rgba(220, 53, 69, 0.8)',
+                        'rgba(33, 150, 243, 0.8)',
+                        'rgba(156, 39, 176, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(10, 31, 68, 1)',
+                        'rgba(0, 168, 107, 1)',
+                        'rgba(255, 215, 0, 1)',
+                        'rgba(220, 53, 69, 1)',
+                        'rgba(33, 150, 243, 1)',
+                        'rgba(156, 39, 176, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            };
+
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: assetData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { family: "'Inter', sans-serif" },
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

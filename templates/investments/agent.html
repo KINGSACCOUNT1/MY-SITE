@@ -1,0 +1,1047 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Become an Agent - Elite Wealth Capital{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --elite-gold: #FFD700;
+        --elite-white: #ffffff;
+        --elite-navy: #0A1F44;
+        --elite-dark: #050B1A;
+        --elite-gray: #8892A6;
+    }
+
+    body {
+        background: linear-gradient(135deg, var(--elite-dark) 0%, var(--elite-navy) 100%);
+        min-height: 100vh;
+        color: var(--elite-white);
+    }
+
+    /* Hero Section */
+    .agent-hero {
+        position: relative;
+        padding: 100px 0 80px;
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(10, 31, 68, 0.3) 100%);
+        overflow: hidden;
+    }
+
+    .agent-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFD700' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        opacity: 0.3;
+    }
+
+    .agent-hero h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--elite-gold) 0%, #FFF 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+    }
+
+    .agent-hero .subtitle {
+        font-size: 1.5rem;
+        color: var(--elite-gray);
+        margin-bottom: 3rem;
+    }
+
+    .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .stat-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        border-radius: 15px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 215, 0, 0.1);
+        border-color: var(--elite-gold);
+        box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--elite-gold);
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        color: var(--elite-gray);
+        font-size: 1rem;
+    }
+
+    /* Glass Card */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        border-radius: 20px;
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+        transition: all 0.3s ease;
+    }
+
+    .glass-card:hover {
+        border-color: var(--elite-gold);
+        box-shadow: 0 10px 40px rgba(255, 215, 0, 0.2);
+    }
+
+    /* Benefits Section */
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+    }
+
+    .benefit-card {
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(10, 31, 68, 0.3) 100%);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        border-radius: 20px;
+        padding: 2.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .benefit-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+        transition: all 0.5s ease;
+        opacity: 0;
+    }
+
+    .benefit-card:hover::before {
+        opacity: 1;
+        animation: rotate 3s linear infinite;
+    }
+
+    .benefit-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--elite-gold);
+        box-shadow: 0 15px 50px rgba(255, 215, 0, 0.3);
+    }
+
+    .benefit-icon {
+        font-size: 3.5rem;
+        color: var(--elite-gold);
+        margin-bottom: 1.5rem;
+        display: block;
+    }
+
+    .benefit-card h3 {
+        color: var(--elite-white);
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .benefit-card p {
+        color: var(--elite-gray);
+        line-height: 1.6;
+    }
+
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    /* Form Styles */
+    .agent-form {
+        background: rgba(10, 31, 68, 0.5);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        border-radius: 20px;
+        padding: 3rem;
+        margin: 3rem 0;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        color: var(--elite-white);
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+
+    .form-group label .required {
+        color: #ff4444;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        border-radius: 10px;
+        color: var(--elite-white);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: var(--elite-gold);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    }
+
+    .form-control::placeholder {
+        color: var(--elite-gray);
+    }
+
+    textarea.form-control {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    /* Button Styles */
+    .btn-elite {
+        background: linear-gradient(135deg, var(--elite-gold) 0%, #FFE55C 100%);
+        color: var(--elite-navy);
+        padding: 1.2rem 3rem;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .btn-elite:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+    }
+
+    /* Status Badge */
+    .status-badge {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        margin: 1rem 0;
+    }
+
+    .status-pending {
+        background: rgba(255, 193, 7, 0.2);
+        color: #FFC107;
+        border: 1px solid #FFC107;
+    }
+
+    .status-approved {
+        background: rgba(76, 175, 80, 0.2);
+        color: #4CAF50;
+        border: 1px solid #4CAF50;
+    }
+
+    .status-rejected {
+        background: rgba(244, 67, 54, 0.2);
+        color: #F44336;
+        border: 1px solid #F44336;
+    }
+
+    /* Referral Dashboard */
+    .referral-code-box {
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(10, 31, 68, 0.5) 100%);
+        border: 2px solid var(--elite-gold);
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 2rem 0;
+        text-align: center;
+    }
+
+    .referral-code {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--elite-gold);
+        font-family: 'Courier New', monospace;
+        letter-spacing: 3px;
+        margin: 1rem 0;
+        user-select: all;
+    }
+
+    .btn-copy {
+        background: rgba(255, 215, 0, 0.2);
+        color: var(--elite-gold);
+        border: 1px solid var(--elite-gold);
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+    }
+
+    .btn-copy:hover {
+        background: var(--elite-gold);
+        color: var(--elite-navy);
+    }
+
+    .dashboard-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+    }
+
+    /* Commission Table */
+    .commission-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin: 2rem 0;
+        overflow: hidden;
+        border-radius: 15px;
+    }
+
+    .commission-table thead {
+        background: linear-gradient(135deg, var(--elite-gold) 0%, #FFE55C 100%);
+    }
+
+    .commission-table th {
+        padding: 1.5rem;
+        text-align: left;
+        color: var(--elite-navy);
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+    }
+
+    .commission-table td {
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        color: var(--elite-white);
+    }
+
+    .commission-table tr:hover td {
+        background: rgba(255, 215, 0, 0.1);
+    }
+
+    .commission-rate {
+        color: var(--elite-gold);
+        font-weight: 800;
+        font-size: 1.2rem;
+    }
+
+    /* How It Works */
+    .steps-container {
+        display: grid;
+        gap: 2rem;
+        margin: 3rem 0;
+    }
+
+    .step-item {
+        display: flex;
+        gap: 2rem;
+        align-items: start;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-left: 4px solid var(--elite-gold);
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .step-item:hover {
+        background: rgba(255, 215, 0, 0.08);
+        transform: translateX(10px);
+    }
+
+    .step-number {
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--elite-gold);
+        line-height: 1;
+        min-width: 60px;
+    }
+
+    .step-content h3 {
+        color: var(--elite-white);
+        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+    }
+
+    .step-content p {
+        color: var(--elite-gray);
+        line-height: 1.6;
+    }
+
+    /* Materials Section */
+    .materials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .material-item {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        border-radius: 10px;
+        padding: 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .material-item:hover {
+        background: rgba(255, 215, 0, 0.1);
+        border-color: var(--elite-gold);
+        transform: translateY(-5px);
+    }
+
+    .material-item i {
+        font-size: 2.5rem;
+        color: var(--elite-gold);
+        margin-bottom: 1rem;
+    }
+
+    /* Referred Users Table */
+    .referred-users-table {
+        width: 100%;
+        margin: 2rem 0;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .referred-users-table thead {
+        background: rgba(255, 215, 0, 0.1);
+    }
+
+    .referred-users-table th {
+        padding: 1rem;
+        text-align: left;
+        color: var(--elite-gold);
+        font-weight: 700;
+    }
+
+    .referred-users-table td {
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid rgba(255, 215, 0, 0.05);
+    }
+
+    /* Section Headers */
+    .section-header {
+        text-align: center;
+        margin: 5rem 0 3rem;
+    }
+
+    .section-header h2 {
+        font-size: 3rem;
+        font-weight: 800;
+        color: var(--elite-white);
+        margin-bottom: 1rem;
+    }
+
+    .section-header .subtitle {
+        color: var(--elite-gray);
+        font-size: 1.2rem;
+    }
+
+    .section-divider {
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(90deg, transparent, var(--elite-gold), transparent);
+        margin: 2rem auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .agent-hero h1 {
+            font-size: 2.5rem;
+        }
+
+        .agent-hero .subtitle {
+            font-size: 1.2rem;
+        }
+
+        .hero-stats {
+            grid-template-columns: 1fr;
+        }
+
+        .benefits-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .referral-code {
+            font-size: 1.8rem;
+        }
+
+        .step-item {
+            flex-direction: column;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+        }
+    }
+
+    /* File Upload */
+    .file-upload-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .file-upload-label {
+        display: block;
+        padding: 1rem;
+        background: rgba(255, 215, 0, 0.1);
+        border: 2px dashed var(--elite-gold);
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .file-upload-label:hover {
+        background: rgba(255, 215, 0, 0.2);
+        border-color: var(--elite-white);
+    }
+
+    .file-upload-input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .alert {
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        margin-bottom: 1.5rem;
+    }
+
+    .alert-info {
+        background: rgba(3, 169, 244, 0.2);
+        border: 1px solid #03A9F4;
+        color: #03A9F4;
+    }
+
+    .alert-success {
+        background: rgba(76, 175, 80, 0.2);
+        border: 1px solid #4CAF50;
+        color: #4CAF50;
+    }
+
+    .alert-danger {
+        background: rgba(244, 67, 54, 0.2);
+        border: 1px solid #F44336;
+        color: #F44336;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="agent-hero">
+    <div class="container">
+        <div class="text-center">
+            <h1>Become an Elite Wealth Capital Agent</h1>
+            <p class="subtitle">Join our global network and earn commission on every referral</p>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat-card">
+                <span class="stat-number">2,500+</span>
+                <span class="stat-label">Active Agents Worldwide</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">$8,750</span>
+                <span class="stat-label">Average Monthly Earnings</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">5-15%</span>
+                <span class="stat-label">Commission Rate</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container" style="margin-top: 4rem; margin-bottom: 4rem;">
+    
+    <!-- Benefits Section -->
+    <div class="section-header">
+        <h2>Why Become an Agent?</h2>
+        <div class="section-divider"></div>
+        <p class="subtitle">Join the elite network and unlock unlimited earning potential</p>
+    </div>
+
+    <div class="benefits-grid">
+        <div class="benefit-card">
+            <span class="benefit-icon">💰</span>
+            <h3>High Commission Rates</h3>
+            <p>Earn 5-15% commission on every investment your referrals make. The more they invest, the more you earn.</p>
+        </div>
+        <div class="benefit-card">
+            <span class="benefit-icon">📊</span>
+            <h3>Real-time Dashboard</h3>
+            <p>Track your referrals, earnings, and performance with our advanced analytics dashboard.</p>
+        </div>
+        <div class="benefit-card">
+            <span class="benefit-icon">🎨</span>
+            <h3>Marketing Support</h3>
+            <p>Get access to professional marketing materials, banners, templates, and promotional content.</p>
+        </div>
+        <div class="benefit-card">
+            <span class="benefit-icon">🌍</span>
+            <h3>Global Payments</h3>
+            <p>Receive your commissions through multiple payment methods available worldwide.</p>
+        </div>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Application Status Section -->
+    {% if agent_application %}
+        <div class="glass-card">
+            <h2 style="color: var(--elite-gold); margin-bottom: 1.5rem;">
+                <i class="fas fa-user-check"></i> Your Agent Application
+            </h2>
+            
+            <div style="display: grid; gap: 1rem;">
+                <div>
+                    <strong style="color: var(--elite-gray);">Status:</strong>
+                    <span class="status-badge status-{{ agent_application.status }}">
+                        {{ agent_application.get_status_display }}
+                    </span>
+                </div>
+                
+                <div>
+                    <strong style="color: var(--elite-gray);">Submitted:</strong>
+                    <span style="color: var(--elite-white);">{{ agent_application.created_at|date:"F d, Y" }}</span>
+                </div>
+
+                {% if agent_application.status == 'approved' %}
+                    <div>
+                        <strong style="color: var(--elite-gray);">Commission Rate:</strong>
+                        <span class="commission-rate">{{ agent_application.commission_rate }}%</span>
+                    </div>
+                    <div>
+                        <strong style="color: var(--elite-gray);">Approved:</strong>
+                        <span style="color: var(--elite-white);">{{ agent_application.approved_at|date:"F d, Y" }}</span>
+                    </div>
+                {% endif %}
+
+                {% if agent_application.admin_notes %}
+                    <div>
+                        <strong style="color: var(--elite-gray);">Feedback:</strong>
+                        <p style="color: var(--elite-white); margin-top: 0.5rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 10px;">
+                            {{ agent_application.admin_notes }}
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        <!-- Application Form -->
+        <div class="section-header">
+            <h2>Apply to Become an Agent</h2>
+            <div class="section-divider"></div>
+            <p class="subtitle">Fill out the form below and join our elite network</p>
+        </div>
+
+        <div class="agent-form">
+            <form method="POST" enctype="multipart/form-data" id="agentApplicationForm">
+                {% csrf_token %}
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="full_name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="full_name" name="full_name" class="form-control" 
+                               value="{{ request.user.get_full_name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" class="form-control" 
+                               placeholder="+1234567890" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="country">Country <span class="required">*</span></label>
+                        <input type="text" id="country" name="country" class="form-control" 
+                               placeholder="United States" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City <span class="required">*</span></label>
+                        <input type="text" id="city" name="city" class="form-control" 
+                               placeholder="New York" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="experience">Experience in Financial Services <span class="required">*</span></label>
+                    <textarea id="experience" name="experience" class="form-control" 
+                              placeholder="Describe your experience in financial services, sales, or marketing..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="marketing_plan">Your Marketing Plan <span class="required">*</span></label>
+                    <textarea id="marketing_plan" name="marketing_plan" class="form-control" 
+                              placeholder="How do you plan to promote Elite Wealth Capital and attract investors?" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="expected_referrals">Expected Monthly Referrals <span class="required">*</span></label>
+                    <input type="number" id="expected_referrals" name="expected_referrals" 
+                           class="form-control" min="1" placeholder="10" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="social_media">Social Media Links</label>
+                    <textarea id="social_media" name="social_media" class="form-control" 
+                              placeholder="LinkedIn: https://linkedin.com/in/yourprofile&#10;Facebook: https://facebook.com/yourprofile&#10;Instagram: @yourusername"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="website">Website (Optional)</label>
+                    <input type="url" id="website" name="website" class="form-control" 
+                           placeholder="https://yourwebsite.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="id_document">ID Document Upload <span class="required">*</span></label>
+                    <div class="file-upload-wrapper">
+                        <label for="id_document" class="file-upload-label">
+                            <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: var(--elite-gold); display: block; margin-bottom: 0.5rem;"></i>
+                            <span id="file-name">Click to upload your ID document (Passport, Driver's License, or National ID)</span>
+                            <br><small style="color: var(--elite-gray);">Accepted formats: PDF, JPG, PNG (Max 5MB)</small>
+                        </label>
+                        <input type="file" id="id_document" name="id_document" class="file-upload-input" 
+                               accept=".pdf,.jpg,.jpeg,.png" required>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <button type="submit" class="btn-elite">
+                        <i class="fas fa-paper-plane"></i> Submit Application
+                    </button>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+
+    <!-- Referral Dashboard (Show if approved OR for demonstration) -->
+    {% if agent_application.status == 'approved' or not agent_application %}
+        <div class="section-header">
+            <h2>Your Referral Dashboard</h2>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="referral-code-box">
+            <p style="color: var(--elite-gray); margin: 0;">Your Unique Referral Code</p>
+            <div class="referral-code" id="referralCode">{{ referral_code|default:"EWC2024XXX" }}</div>
+            <button class="btn-copy" onclick="copyReferralCode()">
+                <i class="fas fa-copy"></i> Copy Code
+            </button>
+            <p style="color: var(--elite-gray); margin-top: 1rem; font-size: 0.9rem;">
+                Share this code with potential investors or use the link below
+            </p>
+            <div style="margin-top: 1rem; padding: 1rem; background: rgba(0, 0, 0, 0.3); border-radius: 10px;">
+                <input type="text" readonly class="form-control" 
+                       value="{{ request.scheme }}://{{ request.get_host }}/register/?ref={{ referral_code|default:'EWC2024XXX' }}"
+                       id="referralLink"
+                       style="background: rgba(255, 255, 255, 0.1); text-align: center; cursor: pointer;"
+                       onclick="this.select()">
+            </div>
+        </div>
+
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <span class="stat-number">{{ referral_count|default:0 }}</span>
+                <span class="stat-label">Total Referrals</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">${{ total_referral_earnings|default:0|floatformat:2 }}</span>
+                <span class="stat-label">Total Earnings</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">${{ referred_users_total|default:0|floatformat:2 }}</span>
+                <span class="stat-label">Referred Users Invested</span>
+            </div>
+        </div>
+
+        {% if agent_application.status == 'approved' %}
+            <!-- Referred Users List -->
+            {% if referral_count > 0 %}
+                <div class="glass-card">
+                    <h3 style="color: var(--elite-gold); margin-bottom: 1.5rem;">
+                        <i class="fas fa-users"></i> Your Referred Users
+                    </h3>
+                    <div style="overflow-x: auto;">
+                        <table class="referred-users-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Joined Date</th>
+                                    <th>Total Invested</th>
+                                    <th>Your Earnings</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for referral in referred_users %}
+                                <tr>
+                                    <td>{{ referral.username }}</td>
+                                    <td>{{ referral.date_joined|date:"M d, Y" }}</td>
+                                    <td style="color: var(--elite-gold);">${{ referral.total_invested|default:0|floatformat:2 }}</td>
+                                    <td style="color: #4CAF50; font-weight: 700;">${{ referral.commission_earned|default:0|floatformat:2 }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" style="text-align: center; color: var(--elite-gray);">
+                                        No referrals yet. Start sharing your referral link!
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+
+    <!-- How It Works Section -->
+    <div class="section-header">
+        <h2>How It Works</h2>
+        <div class="section-divider"></div>
+        <p class="subtitle">Start earning in 5 simple steps</p>
+    </div>
+
+    <div class="steps-container">
+        <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h3>Apply to Become an Agent</h3>
+                <p>Fill out our simple application form with your details and upload your ID document. Our team reviews applications within 24-48 hours.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h3>Get Approved & Receive Materials</h3>
+                <p>Once approved, you'll receive your unique referral code, marketing materials, and access to our agent dashboard.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h3>Share Your Referral Link</h3>
+                <p>Use your unique referral code or link to invite investors. Share on social media, email, or your network.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-content">
+                <h3>Earn Commission on Investments</h3>
+                <p>When your referrals invest, you automatically earn 5-15% commission based on their investment amount.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-number">5</div>
+            <div class="step-content">
+                <h3>Withdraw Earnings Instantly</h3>
+                <p>Request withdrawals anytime through your dashboard. Receive payments via multiple global payment methods.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Marketing Materials (Show only for approved agents) -->
+    {% if agent_application.status == 'approved' %}
+        <div class="section-header">
+            <h2>Marketing Materials</h2>
+            <div class="section-divider"></div>
+            <p class="subtitle">Professional materials to help you succeed</p>
+        </div>
+
+        <div class="materials-grid">
+            <div class="material-item">
+                <i class="fas fa-image"></i>
+                <h4 style="color: var(--elite-white); margin-top: 1rem;">Social Banners</h4>
+                <p style="color: var(--elite-gray); font-size: 0.9rem;">Download</p>
+            </div>
+            <div class="material-item">
+                <i class="fas fa-envelope"></i>
+                <h4 style="color: var(--elite-white); margin-top: 1rem;">Email Templates</h4>
+                <p style="color: var(--elite-gray); font-size: 0.9rem;">Download</p>
+            </div>
+            <div class="material-item">
+                <i class="fas fa-file-powerpoint"></i>
+                <h4 style="color: var(--elite-white); margin-top: 1rem;">Presentations</h4>
+                <p style="color: var(--elite-gray); font-size: 0.9rem;">Download</p>
+            </div>
+            <div class="material-item">
+                <i class="fas fa-video"></i>
+                <h4 style="color: var(--elite-white); margin-top: 1rem;">Video Assets</h4>
+                <p style="color: var(--elite-gray); font-size: 0.9rem;">Download</p>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Commission Structure -->
+    <div class="section-header">
+        <h2>Commission Structure</h2>
+        <div class="section-divider"></div>
+        <p class="subtitle">Earn more as your referrals invest more</p>
+    </div>
+
+    <div class="glass-card">
+        <div style="overflow-x: auto;">
+            <table class="commission-table">
+                <thead>
+                    <tr>
+                        <th>Investment Amount</th>
+                        <th>Commission Rate</th>
+                        <th>Example Earnings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$100 - $999</td>
+                        <td><span class="commission-rate">5%</span></td>
+                        <td>$5 - $50</td>
+                    </tr>
+                    <tr>
+                        <td>$1,000 - $4,999</td>
+                        <td><span class="commission-rate">7%</span></td>
+                        <td>$70 - $350</td>
+                    </tr>
+                    <tr>
+                        <td>$5,000 - $24,999</td>
+                        <td><span class="commission-rate">10%</span></td>
+                        <td>$500 - $2,500</td>
+                    </tr>
+                    <tr>
+                        <td>$25,000+</td>
+                        <td><span class="commission-rate">15%</span></td>
+                        <td>$3,750+</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255, 215, 0, 0.1); border-radius: 10px; border-left: 4px solid var(--elite-gold);">
+            <h4 style="color: var(--elite-gold); margin-bottom: 0.5rem;">💡 Pro Tip</h4>
+            <p style="color: var(--elite-white); margin: 0;">Focus on quality referrals who invest larger amounts. A single $25,000 investment earns you $3,750 in commission!</p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // File upload preview
+    document.getElementById('id_document')?.addEventListener('change', function(e) {
+        const fileName = e.target.files[0]?.name || 'Click to upload your ID document';
+        document.getElementById('file-name').textContent = fileName;
+    });
+
+    // Copy referral code
+    function copyReferralCode() {
+        const code = document.getElementById('referralCode').textContent;
+        navigator.clipboard.writeText(code).then(function() {
+            const btn = event.target.closest('.btn-copy');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            btn.style.background = 'var(--elite-gold)';
+            btn.style.color = 'var(--elite-navy)';
+            
+            setTimeout(function() {
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+                btn.style.color = '';
+            }, 2000);
+        }, function(err) {
+            alert('Failed to copy code. Please select and copy manually.');
+        });
+    }
+
+    // Form validation
+    document.getElementById('agentApplicationForm')?.addEventListener('submit', function(e) {
+        const fileInput = document.getElementById('id_document');
+        if (fileInput && fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            const maxSize = 5 * 1024 * 1024; // 5MB
+            
+            if (file.size > maxSize) {
+                e.preventDefault();
+                alert('File size exceeds 5MB. Please upload a smaller file.');
+                return false;
+            }
+        }
+    });
+
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+{% endblock %}

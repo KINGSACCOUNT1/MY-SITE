@@ -1,0 +1,567 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Referral Leaderboard - Elite Wealth Capital{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h1 class="h2 mb-0">
+                <i class="fas fa-trophy me-2 text-warning"></i>Referral Leaderboard
+            </h1>
+            <p class="text-muted mt-2">Top 50 Elite Wealth Capital referrers this month</p>
+        </div>
+    </div>
+
+    <!-- Top 3 Podium Section -->
+    <div class="row mb-4">
+        <!-- 2nd Place -->
+        <div class="col-md-4 order-md-1 mb-4">
+            <div class="card shadow-lg border-0 h-100">
+                <div class="card-body text-center position-relative podium-card">
+                    <div class="podium-badge badge-2">
+                        <i class="fas fa-medal fa-2x text-silver"></i>
+                        <span class="rank-badge">2nd</span>
+                    </div>
+                    <div class="mt-4">
+                        <img src="{% static 'images/avatar-placeholder.png' %}" alt="Avatar" class="rounded-circle mb-3" width="80">
+                        <h5 class="mb-1">User****125</h5>
+                        <p class="text-muted small mb-3">San Francisco, CA</p>
+                    </div>
+                    <hr>
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <p class="text-muted small mb-1">Referrals</p>
+                            <h6 class="mb-0">487</h6>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-muted small mb-1">Earnings</p>
+                            <h6 class="mb-0 text-success">$18,920</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1st Place (Center) -->
+        <div class="col-md-4 order-md-0 mb-4">
+            <div class="card shadow-xl border-0 h-100 position-relative">
+                <div class="card-body text-center">
+                    <div class="podium-badge badge-1">
+                        <i class="fas fa-crown fa-2x text-gold"></i>
+                        <span class="rank-badge">1st</span>
+                    </div>
+                    <div class="mt-4">
+                        <img src="{% static 'images/avatar-placeholder.png' %}" alt="Avatar" class="rounded-circle mb-3" width="90">
+                        <h5 class="mb-1 fw-700">User****089</h5>
+                        <p class="text-muted small mb-3">New York, NY</p>
+                    </div>
+                    <hr>
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <p class="text-muted small mb-1">Referrals</p>
+                            <h4 class="mb-0 text-warning">562</h4>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-muted small mb-1">Earnings</p>
+                            <h4 class="mb-0 text-success">$24,580</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="badge bg-warning position-absolute" style="top: 10px; right: 10px;">
+                    <i class="fas fa-star me-1"></i>LEADER
+                </div>
+            </div>
+        </div>
+
+        <!-- 3rd Place -->
+        <div class="col-md-4 order-md-2 mb-4">
+            <div class="card shadow-lg border-0 h-100">
+                <div class="card-body text-center position-relative podium-card">
+                    <div class="podium-badge badge-3">
+                        <i class="fas fa-medal fa-2x text-bronze"></i>
+                        <span class="rank-badge">3rd</span>
+                    </div>
+                    <div class="mt-4">
+                        <img src="{% static 'images/avatar-placeholder.png' %}" alt="Avatar" class="rounded-circle mb-3" width="80">
+                        <h5 class="mb-1">User****342</h5>
+                        <p class="text-muted small mb-3">Austin, TX</p>
+                    </div>
+                    <hr>
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <p class="text-muted small mb-1">Referrals</p>
+                            <h6 class="mb-0">421</h6>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-muted small mb-1">Earnings</p>
+                            <h6 class="mb-0 text-success">$15,240</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Your Rank Section (if not in top 3) -->
+    <div class="card shadow-sm border-primary border-2 mb-4" id="yourRankCard" style="display: none;">
+        <div class="card-header bg-primary text-white">
+            <h6 class="mb-0">
+                <i class="fas fa-you me-2"></i>Your Current Rank
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center">
+                    <h3 class="mb-0 text-primary">#12</h3>
+                    <small class="text-muted">Your Rank</small>
+                </div>
+                <div class="col-md-3">
+                    <img src="{% static 'images/avatar-placeholder.png' %}" alt="Avatar" class="rounded-circle me-3" width="60">
+                    <strong>John Smith</strong>
+                </div>
+                <div class="col-md-2 text-center">
+                    <p class="mb-0 fw-600">178</p>
+                    <small class="text-muted">Referrals</small>
+                </div>
+                <div class="col-md-2 text-center">
+                    <p class="mb-0 fw-600 text-success">$6,580</p>
+                    <small class="text-muted">Earnings</small>
+                </div>
+                <div class="col-md-3 text-end">
+                    <p class="mb-0 text-warning">
+                        <i class="fas fa-arrow-up me-1"></i>+3 positions
+                    </p>
+                    <small class="text-muted">This month</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter & Search -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="input-group">
+                <span class="input-group-text bg-white">
+                    <i class="fas fa-search"></i>
+                </span>
+                <input type="text" class="form-control" id="searchLeaderboard" placeholder="Search by username...">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <select class="form-select" id="timeFilter">
+                <option value="month">This Month</option>
+                <option value="quarter">This Quarter</option>
+                <option value="year">This Year</option>
+                <option value="alltime">All Time</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Leaderboard Table -->
+    <div class="card shadow-sm">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col" style="width: 60px;">Rank</th>
+                        <th scope="col">Name</th>
+                        <th scope="col" style="width: 150px;">Referrals</th>
+                        <th scope="col" style="width: 150px;">Earnings</th>
+                        <th scope="col" style="width: 100px;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rank 4 -->
+                    <tr>
+                        <td>
+                            <h6 class="mb-0">
+                                <span class="badge bg-secondary">4</span>
+                            </h6>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="{% static 'images/avatar-placeholder.png' %}" alt="Avatar" class="rounded-circle me-2" width="36">
+                                <div>
+                                    <p class="mb-0 fw-600">User****567</p>
+                                    <small class="text-muted">Boston, MA</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <strong>389</strong>
+                        </td>
+                        <td>
+                            <strong class="text-success">$14,250</strong>
+                        </td>
+                        <td>
+                            <span class="badge bg-success">Active</span>
+                        </td>
+                    </tr>
+
+                    <!-- Rank 5 -->
+                    <tr>
+                        <td>
+                            <h6 class="mb-0">
+                                <span class="badge bg-secondary">5</span>
+                            </h6>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="{% static 'images/avatar-placeholder.png' %}" alt="Avatar" class="rounded-circle me-2" width="36">
+                                <div>
+                                    <p class="mb-0 fw-600">User****234</p>
+                                    <small class="text-muted">Seattle, WA</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <strong>356</strong>
+                        </td>
+                        <td>
+                            <strong class="text-success">$12,890</strong>
+                        </td>
+                        <td>
+                            <span class="badge bg-success">Active</span>
+                        </td>
+                    </tr>
+
+                    <!-- Rank 6 -->
+                    <tr>
+                        <td>
+                            <h6 class="mb-0">
+                                <span class="badge bg-secondary">6</span>
+                            </h6>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="{% static 'images/avatar-placeholder.png' %}" alt="Avatar" class="rounded-circle me-2" width="36">
+                                <div>
+                                    <p class="mb-0 fw-600">User****891</p>
+                                    <small class="text-muted">Denver, CO</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <strong>334</strong>
+                        </td>
+                        <td>
+                            <strong class="text-success">$11,560</strong>
+                        </td>
+                        <td>
+                            <span class="badge bg-success">Active</span>
+                        </td>
+                    </tr>
+
+                    <!-- Rank 7 -->
+                    <tr>
+                        <td>
+                            <h6 class="mb-0">
+                                <span class="badge bg-secondary">7</span>
+                            </h6>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="{% static 'images/avatar-placeholder.png' %}" alt="Avatar" class="rounded-circle me-2" width="36">
+                                <div>
+                                    <p class="mb-0 fw-600">User****456</p>
+                                    <small class="text-muted">Miami, FL</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <strong>312</strong>
+                        </td>
+                        <td>
+                            <strong class="text-success">$10,240</strong>
+                        </td>
+                        <td>
+                            <span class="badge bg-success">Active</span>
+                        </td>
+                    </tr>
+
+                    <!-- Rank 8 -->
+                    <tr>
+                        <td>
+                            <h6 class="mb-0">
+                                <span class="badge bg-secondary">8</span>
+                            </h6>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="{% static 'images/avatar-placeholder.png' %}" alt="Avatar" class="rounded-circle me-2" width="36">
+                                <div>
+                                    <p class="mb-0 fw-600">User****789</p>
+                                    <small class="text-muted">Chicago, IL</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <strong>298</strong>
+                        </td>
+                        <td>
+                            <strong class="text-success">$9,850</strong>
+                        </td>
+                        <td>
+                            <span class="badge bg-success">Active</span>
+                        </td>
+                    </tr>
+
+                    <!-- Rank 9 -->
+                    <tr>
+                        <td>
+                            <h6 class="mb-0">
+                                <span class="badge bg-secondary">9</span>
+                            </h6>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="{% static 'images/avatar-placeholder.png' %}" alt="Avatar" class="rounded-circle me-2" width="36">
+                                <div>
+                                    <p class="mb-0 fw-600">User****123</p>
+                                    <small class="text-muted">Los Angeles, CA</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <strong>267</strong>
+                        </td>
+                        <td>
+                            <strong class="text-success">$8,490</strong>
+                        </td>
+                        <td>
+                            <span class="badge bg-success">Active</span>
+                        </td>
+                    </tr>
+
+                    <!-- Rank 10 -->
+                    <tr>
+                        <td>
+                            <h6 class="mb-0">
+                                <span class="badge bg-secondary">10</span>
+                            </h6>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="{% static 'images/avatar-placeholder.png' %}" alt="Avatar" class="rounded-circle me-2" width="36">
+                                <div>
+                                    <p class="mb-0 fw-600">User****654</p>
+                                    <small class="text-muted">Philadelphia, PA</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <strong>245</strong>
+                        </td>
+                        <td>
+                            <strong class="text-success">$7,920</strong>
+                        </td>
+                        <td>
+                            <span class="badge bg-success">Active</span>
+                        </td>
+                    </tr>
+
+                    <!-- Your Rank (12th) -->
+                    <tr class="table-primary fw-600">
+                        <td>
+                            <h6 class="mb-0">
+                                <span class="badge bg-primary">12</span>
+                            </h6>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="{% static 'images/avatar-placeholder.png' %}" alt="Avatar" class="rounded-circle me-2" width="36">
+                                <div>
+                                    <p class="mb-0 fw-700">John Smith <span class="badge bg-info ms-2">YOU</span></p>
+                                    <small class="text-muted">New York, NY</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <strong>178</strong>
+                        </td>
+                        <td>
+                            <strong class="text-success">$6,580</strong>
+                        </td>
+                        <td>
+                            <span class="badge bg-success">Active</span>
+                        </td>
+                    </tr>
+
+                    <!-- Rank 13+ (more entries) -->
+                    <tr>
+                        <td>
+                            <h6 class="mb-0">
+                                <span class="badge bg-secondary">13</span>
+                            </h6>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="{% static 'images/avatar-placeholder.png' %}" alt="Avatar" class="rounded-circle me-2" width="36">
+                                <div>
+                                    <p class="mb-0 fw-600">User****321</p>
+                                    <small class="text-muted">Atlanta, GA</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <strong>156</strong>
+                        </td>
+                        <td>
+                            <strong class="text-success">$5,240</strong>
+                        </td>
+                        <td>
+                            <span class="badge bg-success">Active</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer bg-light">
+            <nav aria-label="Leaderboard pagination">
+                <ul class="pagination mb-0">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Rewards Info -->
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-medal fa-2x text-warning mb-3"></i>
+                    <h6>Monthly Rewards</h6>
+                    <p class="text-muted small">Top 10 get exclusive bonuses</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-crown fa-2x text-danger mb-3"></i>
+                    <h6>Elite Status</h6>
+                    <p class="text-muted small">Join exclusive Elite Rewards</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-gift fa-2x text-success mb-3"></i>
+                    <h6>Special Prizes</h6>
+                    <p class="text-muted small">Win luxury rewards at the end</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .podium-badge {
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .rank-badge {
+        font-size: 0.75rem;
+        font-weight: bold;
+        background: rgba(255, 255, 255, 0.9);
+        color: #333;
+        padding: 2px 6px;
+        border-radius: 0.25rem;
+    }
+
+    .badge-1 {
+        color: #ffc107;
+    }
+
+    .badge-2 {
+        color: #c0c0c0;
+    }
+
+    .badge-3 {
+        color: #cd7f32;
+    }
+
+    .text-silver {
+        color: #c0c0c0;
+    }
+
+    .text-gold {
+        color: #ffc107;
+    }
+
+    .text-bronze {
+        color: #cd7f32;
+    }
+
+    .fw-700 {
+        font-weight: 700;
+    }
+
+    .podium-card {
+        margin-top: 30px;
+    }
+
+    .shadow-xl {
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    @media (max-width: 768px) {
+        .table {
+            font-size: 0.9rem;
+        }
+
+        .podium-badge {
+            top: -20px;
+        }
+
+        .podium-card {
+            margin-top: 20px;
+        }
+    }
+</style>
+
+<script>
+    // Highlight your rank card on page load
+    window.addEventListener('load', function() {
+        // You can show/hide the yourRankCard based on ranking
+        // document.getElementById('yourRankCard').style.display = 'block';
+    });
+
+    // Search functionality
+    document.getElementById('searchLeaderboard').addEventListener('keyup', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const rows = document.querySelectorAll('table tbody tr');
+        
+        rows.forEach(row => {
+            const username = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+            row.style.display = username.includes(searchTerm) ? '' : 'none';
+        });
+    });
+
+    // Time filter functionality
+    document.getElementById('timeFilter').addEventListener('change', function(e) {
+        // Implement API call to fetch leaderboard data for selected period
+        console.log('Filter changed to:', e.target.value);
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Investment{% endblock %}
+
+{% block extra_css %}
+<style>
+    .invest-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+    
+    .invest-card {
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+    
+    .plan-summary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        margin-bottom: 30px;
+        color: #fff;
+    }
+    
+    .plan-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+    }
+    
+    .plan-name {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    
+    .plan-roi {
+        font-size: 1.5rem;
+        opacity: 0.9;
+    }
+    
+    .form-group {
+        margin-bottom: 25px;
+    }
+    
+    .form-label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #fff;
+    }
+    
+    .form-input {
+        width: 100%;
+        padding: 15px;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 10px;
+        color: #fff;
+        font-size: 1rem;
+    }
+    
+    .form-input:focus {
+        outline: none;
+        border-color: #6f42c1;
+        background: rgba(255,255,255,0.15);
+    }
+    
+    .info-box {
+        background: rgba(52, 152, 219, 0.1);
+        border-left: 4px solid #3498db;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+    }
+    
+    .calculation-box {
+        background: rgba(255,255,255,0.05);
+        padding: 25px;
+        border-radius: 15px;
+        margin: 25px 0;
+    }
+    
+    .calc-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .calc-row:last-child {
+        border-bottom: none;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #27ae60;
+    }
+    
+    .submit-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        padding: 15px 50px;
+        font-size: 1.1rem;
+        border-radius: 10px;
+        color: #fff;
+        cursor: pointer;
+        transition: transform 0.2s;
+        width: 100%;
+    }
+    
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(111,66,193,0.4);
+    }
+    
+    .submit-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="invest-container">
+    <div class="invest-card">
+        <h2 class="text-center mb-4">
+            <i class="fas fa-plus-circle me-2"></i>
+            Create Investment
+        </h2>
+        
+        <!-- Plan Summary -->
+        <div class="plan-summary">
+            <i class="fas {{ plan.icon|default:'fa-chart-line' }} plan-icon"></i>
+            <div class="plan-name">{{ plan.name }}</div>
+            <div class="plan-roi">{{ plan.daily_roi }}% Daily ROI for {{ plan.duration_days }} Days</div>
+        </div>
+        
+        <div class="info-box">
+            <h6><i class="fas fa-info-circle me-2"></i>Investment Range</h6>
+            <p class="mb-0">
+                Minimum: ${{ plan.min_amount|floatformat:2 }} &nbsp;|&nbsp;
+                Maximum: ${{ plan.max_amount|floatformat:2 }}
+            </p>
+        </div>
+        
+        <form method="POST" id="investForm">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label class="form-label">Investment Amount (USD) *</label>
+                <input 
+                    type="number" 
+                    name="amount" 
+                    id="investAmount"
+                    class="form-input" 
+                    placeholder="Enter amount" 
+                    min="{{ plan.min_amount }}" 
+                    max="{{ plan.max_amount }}"
+                    step="0.01"
+                    required
+                    oninput="calculateProfit()"
+                >
+                <div class="text-white-50 mt-2">
+                    <i class="fas fa-wallet me-1"></i>
+                    Available Balance: ${{ user.balance|floatformat:2 }}
+                </div>
+            </div>
+            
+            <!-- Profit Calculation -->
+            <div class="calculation-box">
+                <h6 class="mb-3">Projected Returns</h6>
+                <div class="calc-row">
+                    <span>Investment Amount:</span>
+                    <span id="calcAmount">$0.00</span>
+                </div>
+                <div class="calc-row">
+                    <span>Daily ROI ({{ plan.daily_roi }}%):</span>
+                    <span id="calcDaily">$0.00</span>
+                </div>
+                <div class="calc-row">
+                    <span>Duration:</span>
+                    <span>{{ plan.duration_days }} Days</span>
+                </div>
+                <div class="calc-row">
+                    <span>Total Profit:</span>
+                    <span id="calcProfit">$0.00</span>
+                </div>
+                <div class="calc-row">
+                    <span>Final Amount:</span>
+                    <span id="calcTotal">$0.00</span>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-check me-2"></i>
+                Confirm Investment
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+const planDailyRoi = {{ plan.daily_roi }};
+const planDuration = {{ plan.duration_days }};
+
+function calculateProfit() {
+    const amount = parseFloat(document.getElementById('investAmount').value) || 0;
+    const dailyProfit = (amount * planDailyRoi) / 100;
+    const totalProfit = dailyProfit * planDuration;
+    const finalAmount = amount + totalProfit;
+    
+    document.getElementById('calcAmount').textContent = '$' + amount.toFixed(2);
+    document.getElementById('calcDaily').textContent = '$' + dailyProfit.toFixed(2);
+    document.getElementById('calcProfit').textContent = '$' + totalProfit.toFixed(2);
+    document.getElementById('calcTotal').textContent = '$' + finalAmount.toFixed(2);
+}
+
+document.getElementById('investForm').addEventListener('submit', function(e) {
+    const amount = parseFloat(document.getElementById('investAmount').value);
+    const balance = {{ user.balance }};
+    
+    if (amount > balance) {
+        e.preventDefault();
+        alert('Insufficient balance. Please add funds to your account.');
+        return;
+    }
+    
+    const btn = this.querySelector('.submit-btn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+    btn.disabled = true;
+});
+</script>
+{% endblock %}

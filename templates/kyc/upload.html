@@ -1,0 +1,255 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}KYC Verification - Upload Documents{% endblock %}
+
+{% block extra_css %}
+<style>
+    .kyc-upload-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+    
+    .kyc-card {
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+    
+    .upload-section {
+        margin-bottom: 30px;
+        padding: 25px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 15px;
+        border: 2px dashed rgba(255,255,255,0.2);
+        transition: all 0.3s;
+    }
+    
+    .upload-section:hover {
+        border-color: #6f42c1;
+        background: rgba(111,66,193,0.1);
+    }
+    
+    .upload-label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #fff;
+    }
+    
+    .upload-input {
+        width: 100%;
+        padding: 12px;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 8px;
+        color: #fff;
+    }
+    
+    .upload-input::-webkit-file-upload-button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        margin-right: 15px;
+    }
+    
+    .file-requirements {
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.6);
+        margin-top: 8px;
+    }
+    
+    .preview-container {
+        margin-top: 15px;
+        display: none;
+    }
+    
+    .preview-image {
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 8px;
+        border: 2px solid rgba(255,255,255,0.2);
+    }
+    
+    .submit-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        padding: 15px 50px;
+        font-size: 1.1rem;
+        border-radius: 10px;
+        color: #fff;
+        cursor: pointer;
+        transition: transform 0.2s;
+        width: 100%;
+    }
+    
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(111,66,193,0.4);
+    }
+    
+    .info-box {
+        background: rgba(52, 152, 219, 0.1);
+        border-left: 4px solid #3498db;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+    }
+    
+    .warning-box {
+        background: rgba(241, 196, 15, 0.1);
+        border-left: 4px solid #f1c40f;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="kyc-upload-container">
+    <div class="kyc-card">
+        <h2 class="text-center mb-4">
+            <i class="fas fa-id-card me-2"></i>
+            KYC Verification
+        </h2>
+        
+        <div class="info-box">
+            <h5><i class="fas fa-info-circle me-2"></i>Why KYC is Required</h5>
+            <p class="mb-0">
+                To comply with international regulations and ensure the security of your account, 
+                we require identity verification before processing withdrawals.
+            </p>
+        </div>
+        
+        <div class="warning-box">
+            <h6><i class="fas fa-exclamation-triangle me-2"></i>Important Guidelines</h6>
+            <ul class="mb-0">
+                <li>Upload clear, high-quality images</li>
+                <li>All document details must be visible</li>
+                <li>Accepted formats: JPG, PNG (Max 5MB each)</li>
+                <li>Documents must be valid and not expired</li>
+                <li>Selfie must show your face clearly</li>
+            </ul>
+        </div>
+        
+        <form method="POST" enctype="multipart/form-data" id="kycForm">
+            {% csrf_token %}
+            
+            <!-- Document Type Selection -->
+            <div class="upload-section">
+                <label class="upload-label">Document Type *</label>
+                <select name="document_type" class="upload-input" required>
+                    <option value="">-- Select Document Type --</option>
+                    <option value="passport">Passport</option>
+                    <option value="drivers_license">Driver's License</option>
+                    <option value="national_id">National ID Card</option>
+                    <option value="residence_permit">Residence Permit</option>
+                </select>
+            </div>
+            
+            <!-- Front Image -->
+            <div class="upload-section">
+                <label class="upload-label">
+                    <i class="fas fa-image me-2"></i>Document Front *
+                </label>
+                <input 
+                    type="file" 
+                    name="front_image" 
+                    class="upload-input" 
+                    accept="image/jpeg,image/png,image/jpg"
+                    required
+                    onchange="previewImage(this, 'frontPreview')"
+                >
+                <p class="file-requirements">
+                    <i class="fas fa-check-circle me-1"></i>
+                    Clear photo of the front side of your document
+                </p>
+                <div class="preview-container" id="frontPreview">
+                    <img src="" alt="Front Preview" class="preview-image">
+                </div>
+            </div>
+            
+            <!-- Back Image -->
+            <div class="upload-section">
+                <label class="upload-label">
+                    <i class="fas fa-image me-2"></i>Document Back *
+                </label>
+                <input 
+                    type="file" 
+                    name="back_image" 
+                    class="upload-input" 
+                    accept="image/jpeg,image/png,image/jpg"
+                    required
+                    onchange="previewImage(this, 'backPreview')"
+                >
+                <p class="file-requirements">
+                    <i class="fas fa-check-circle me-1"></i>
+                    Clear photo of the back side of your document
+                </p>
+                <div class="preview-container" id="backPreview">
+                    <img src="" alt="Back Preview" class="preview-image">
+                </div>
+            </div>
+            
+            <!-- Selfie Image -->
+            <div class="upload-section">
+                <label class="upload-label">
+                    <i class="fas fa-user-circle me-2"></i>Selfie with Document *
+                </label>
+                <input 
+                    type="file" 
+                    name="selfie_image" 
+                    class="upload-input" 
+                    accept="image/jpeg,image/png,image/jpg"
+                    required
+                    onchange="previewImage(this, 'selfiePreview')"
+                >
+                <p class="file-requirements">
+                    <i class="fas fa-check-circle me-1"></i>
+                    Hold your document next to your face
+                </p>
+                <div class="preview-container" id="selfiePreview">
+                    <img src="" alt="Selfie Preview" class="preview-image">
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-upload me-2"></i>
+                Submit for Verification
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+function previewImage(input, previewId) {
+    const preview = document.getElementById(previewId);
+    const img = preview.querySelector('img');
+    
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            img.src = e.target.result;
+            preview.style.display = 'block';
+        };
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+document.getElementById('kycForm').addEventListener('submit', function(e) {
+    const btn = this.querySelector('.submit-btn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Uploading...';
+    btn.disabled = true;
+});
+</script>
+{% endblock %}

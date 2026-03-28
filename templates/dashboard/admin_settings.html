@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Settings - Elite Wealth Capital{% endblock %}
+
+{% block content %}
+<style>
+    :root {
+        --navy: #001f3f;
+        --gold: #f39c12;
+    }
+
+    .settings-section {
+        background: #f8f9fa;
+        border-left: 4px solid var(--gold);
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .settings-section h6 {
+        color: var(--navy);
+        font-weight: 700;
+        margin-bottom: 16px;
+    }
+
+    .toggle-switch {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+</style>
+
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h4 class="fw-bold">
+                <i class="fas fa-cog me-2"></i>Admin Settings
+            </h4>
+            <p class="text-muted">Configure platform-wide settings and security options</p>
+        </div>
+    </div>
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-4">
+        <i class="fas fa-check-circle me-2"></i>{{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="row">
+        <div class="col-lg-8">
+            <form method="post">
+                {% csrf_token %}
+
+                <!-- Platform Status -->
+                <div class="settings-section">
+                    <h6><i class="fas fa-cogs me-2"></i>Platform Status</h6>
+
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="maintenance_mode" id="maintenanceMode"
+                                   {% if settings.maintenance_mode %}checked{% endif %}>
+                            <label class="form-check-label" for="maintenanceMode">
+                                <strong>Maintenance Mode</strong>
+                                <small class="d-block text-muted">Site will only be accessible to staff members</small>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="enable_registrations" id="enableRegistrations"
+                                   {% if settings.enable_registrations %}checked{% endif %}>
+                            <label class="form-check-label" for="enableRegistrations">
+                                <strong>Allow New Registrations</strong>
+                                <small class="d-block text-muted">Users can create new accounts</small>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="enable_deposits" id="enableDeposits"
+                                   {% if settings.enable_deposits %}checked{% endif %}>
+                            <label class="form-check-label" for="enableDeposits">
+                                <strong>Enable Deposits</strong>
+                                <small class="d-block text-muted">Users can deposit funds</small>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="enable_withdrawals" id="enableWithdrawals"
+                                   {% if settings.enable_withdrawals %}checked{% endif %}>
+                            <label class="form-check-label" for="enableWithdrawals">
+                                <strong>Enable Withdrawals</strong>
+                                <small class="d-block text-muted">Users can withdraw funds</small>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="settings-section">
+                    <h6><i class="fas fa-lock me-2"></i>Security Settings</h6>
+
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="enable_two_factor" id="enable2FA"
+                                   {% if settings.enable_two_factor %}checked{% endif %}>
+                            <label class="form-check-label" for="enable2FA">
+                                <strong>Require 2FA for Admins</strong>
+                                <small class="d-block text-muted">All admin accounts must use two-factor authentication</small>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Admin Session Timeout (minutes)</label>
+                        <input type="number" class="form-control" name="session_timeout_minutes" min="5" max="1440"
+                               value="{{ settings.session_timeout_minutes }}">
+                        <small class="text-muted">Admin sessions will automatically timeout after this period of inactivity</small>
+                    </div>
+                </div>
+
+                <!-- Compliance Settings -->
+                <div class="settings-section">
+                    <h6><i class="fas fa-balance-scale me-2"></i>Compliance Settings</h6>
+
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="kyc_required" id="kycRequired"
+                                   {% if settings.kyc_required %}checked{% endif %}>
+                            <label class="form-check-label" for="kycRequired">
+                                <strong>Require KYC Verification</strong>
+                                <small class="d-block text-muted">Users must complete KYC before trading</small>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Minimum Deposit ($)</label>
+                            <input type="number" class="form-control" name="minimum_deposit" min="0" step="0.01"
+                                   value="{{ settings.minimum_deposit }}">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Maximum Daily Withdrawal ($)</label>
+                            <input type="number" class="form-control" name="maximum_withdrawal" min="0" step="0.01"
+                                   value="{{ settings.maximum_withdrawal }}">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Gateways -->
+                <div class="settings-section">
+                    <h6><i class="fas fa-credit-card me-2"></i>Payment Gateways</h6>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Stripe API Key</label>
+                        <input type="password" class="form-control" name="stripe_api_key" 
+                               value="{{ settings.stripe_api_key }}" placeholder="sk_live_...">
+                        <small class="text-muted">Production API key for Stripe payments</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Stripe Publishable Key</label>
+                        <input type="text" class="form-control" name="stripe_publishable_key" 
+                               value="{{ settings.stripe_publishable_key }}" placeholder="pk_live_...">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">PayPal Client ID</label>
+                        <input type="text" class="form-control" name="paypal_client_id" 
+                               value="{{ settings.paypal_client_id }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">PayPal Client Secret</label>
+                        <input type="password" class="form-control" name="paypal_client_secret" 
+                               value="{{ settings.paypal_client_secret }}">
+                    </div>
+                </div>
+
+                <!-- Email Configuration -->
+                <div class="settings-section">
+                    <h6><i class="fas fa-envelope me-2"></i>Email Configuration</h6>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">SMTP Host</label>
+                        <input type="text" class="form-control" name="smtp_host" 
+                               value="{{ settings.smtp_host }}" placeholder="smtp.gmail.com">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">SMTP Port</label>
+                            <input type="number" class="form-control" name="smtp_port" 
+                                   value="{{ settings.smtp_port }}" placeholder="587">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">From Email</label>
+                            <input type="email" class="form-control" name="from_email" 
+                                   value="{{ settings.from_email }}" placeholder="noreply@elitewealth.com">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">SMTP Username</label>
+                        <input type="text" class="form-control" name="smtp_username" 
+                               value="{{ settings.smtp_username }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">SMTP Password</label>
+                        <input type="password" class="form-control" name="smtp_password" 
+                               value="{{ settings.smtp_password }}">
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-save me-2"></i>Save All Settings
+                    </button>
+                    <a href="{% url 'dashboard:admin_panel' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-times me-2"></i>Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h6 class="card-title fw-bold mb-3"><i class="fas fa-info-circle me-2"></i>Information</h6>
+                    <p class="small mb-0">
+                        These settings control how the platform operates. Changes take effect immediately.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="card-title fw-bold mb-3"><i class="fas fa-shield-alt me-2"></i>Security Tips</h6>
+                    <ul class="small">
+                        <li class="mb-2">Keep API keys secure and confidential</li>
+                        <li class="mb-2">Regularly rotate payment gateway credentials</li>
+                        <li class="mb-2">Enable 2FA for all admin accounts</li>
+                        <li class="mb-2">Monitor session timeouts regularly</li>
+                        <li class="mb-2">Update email settings if servers change</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

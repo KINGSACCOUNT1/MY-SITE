@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}User Management - Admin Dashboard{% endblock %}
+
+{% block content %}
+<style>
+    :root {
+        --navy: #001f3f;
+        --emerald: #2ecc71;
+        --gold: #f39c12;
+    }
+
+    .admin-nav {
+        background: linear-gradient(135deg, var(--navy) 0%, #003d5c 100%);
+        border-bottom: 3px solid var(--gold);
+    }
+
+    .admin-nav .nav-link {
+        color: white !important;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s ease;
+        padding: 12px 20px;
+        font-weight: 500;
+    }
+
+    .admin-nav .nav-link.active {
+        border-bottom-color: var(--gold);
+        background: rgba(243, 156, 18, 0.2);
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg admin-nav sticky-top">
+    <div class="container-fluid">
+        <h6 class="navbar-brand mb-0 text-white">
+            <i class="fas fa-shield-alt me-2"></i>Admin Dashboard
+        </h6>
+        <div class="navbar-collapse">
+            <ul class="nav nav-tabs ms-auto mb-0">
+                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:admin_panel' %}"><i class="fas fa-chart-pie me-1"></i>Overview</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{% url 'dashboard:admin_users' %}"><i class="fas fa-users me-1"></i>Users</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:admin_content' %}"><i class="fas fa-file-alt me-1"></i>Content</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:admin_analytics' %}"><i class="fas fa-chart-line me-1"></i>Analytics</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:admin_certificates' %}"><i class="fas fa-certificate me-1"></i>Certificates</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h4 class="fw-bold"><i class="fas fa-users me-2"></i>User Management</h4>
+            <p class="text-muted">Manage users, edit roles, and control access</p>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="{% url 'dashboard:admin_panel' %}" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+            </a>
+        </div>
+    </div>
+
+    <!-- Search and Filters -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="q" placeholder="Search by email or name..." value="{{ query }}">
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" name="status">
+                        <option value="all">All Status</option>
+                        <option value="active" {% if status_filter == 'active' %}selected{% endif %}>Active</option>
+                        <option value="inactive" {% if status_filter == 'inactive' %}selected{% endif %}>Inactive</option>
+                        <option value="staff" {% if status_filter == 'staff' %}selected{% endif %}>Staff</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" name="kyc">
+                        <option value="all">All KYC Status</option>
+                        <option value="pending" {% if kyc_filter == 'pending' %}selected{% endif %}>Pending</option>
+                        <option value="verified" {% if kyc_filter == 'verified' %}selected{% endif %}>Verified</option>
+                        <option value="rejected" {% if kyc_filter == 'rejected' %}selected{% endif %}>Rejected</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search me-2"></i>Filter
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Users Table -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Email</th>
+                            <th>Full Name</th>
+                            <th>Status</th>
+                            <th>KYC Status</th>
+                            <th>Joined</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>
+                                <strong>{{ user.email }}</strong>
+                            </td>
+                            <td>
+                                {{ user.full_name|default:"N/A" }}
+                            </td>
+                            <td>
+                                {% if user.is_active %}
+                                <span class="badge bg-success">Active</span>
+                                {% else %}
+                                <span class="badge bg-danger">Inactive</span>
+                                {% endif %}
+                                {% if user.is_staff %}
+                                <span class="badge bg-warning">Staff</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="badge bg-{% if user.kyc_status == 'verified' %}success{% elif user.kyc_status == 'rejected' %}danger{% else %}warning{% endif %}">
+                                    {{ user.get_kyc_status_display }}
+                                </span>
+                            </td>
+                            <td>
+                                <small class="text-muted">{{ user.date_joined|date:"M d, Y" }}</small>
+                            </td>
+                            <td>
+                                <a href="{% url 'dashboard:admin_user_detail' user.id %}" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-edit"></i> View
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center py-4 text-muted">
+                                <i class="fas fa-users fa-2x opacity-25"></i>
+                                <p class="mt-2">No users found</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            {% if users.has_other_pages %}
+            <nav class="mt-4">
+                <ul class="pagination justify-content-center">
+                    {% if users.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1{% if query %}&q={{ query }}{% endif %}">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ users.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">Previous</a>
+                    </li>
+                    {% endif %}
+
+                    <li class="page-item active">
+                        <span class="page-link">Page {{ users.number }} of {{ users.paginator.num_pages }}</span>
+                    </li>
+
+                    {% if users.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ users.next_page_number }}{% if query %}&q={{ query }}{% endif %}">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ users.paginator.num_pages }}{% if query %}&q={{ query }}{% endif %}">Last</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <p class="text-muted">
+                <strong>Total Users:</strong> {{ total_users|intcomma }}
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

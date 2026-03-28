@@ -1,0 +1,40 @@
+# robots.txt for Elite Wealth Capital
+User-agent: *
+Allow: /
+
+# Public pages to crawl
+Allow: /about/
+Allow: /team/
+Allow: /reviews/
+Allow: /contact/
+Allow: /faq/
+Allow: /investment-plans/
+Allow: /certificate/
+Allow: /partners/
+Allow: /terms/
+Allow: /privacy-policy/
+Allow: /news/
+Allow: /us-services/
+Allow: /signup/
+Allow: /login/
+
+# Disallow admin and private pages
+Disallow: /admin/
+Disallow: /admin-panel/
+Disallow: /dashboard/
+Disallow: /account-settings/
+Disallow: /transactions/
+Disallow: /invest/
+Disallow: /withdraw/
+Disallow: /add-funds/
+Disallow: /loans/
+Disallow: /cards/
+Disallow: /upgrade/
+Disallow: /deposit-status/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://www.elitewealthcapital.uk/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1

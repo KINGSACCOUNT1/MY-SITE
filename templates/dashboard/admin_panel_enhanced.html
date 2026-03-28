@@ -1,0 +1,490 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Admin Dashboard - Elite Wealth Capital{% endblock %}
+
+{% block content %}
+<style>
+    :root {
+        --navy: #001f3f;
+        --emerald: #2ecc71;
+        --gold: #f39c12;
+        --light-gray: #f8f9fa;
+        --dark-gray: #34495e;
+    }
+
+    .admin-nav {
+        background: linear-gradient(135deg, var(--navy) 0%, #003d5c 100%);
+        border-bottom: 3px solid var(--gold);
+    }
+
+    .admin-nav .nav-link {
+        color: white !important;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s ease;
+        padding: 12px 20px;
+        font-weight: 500;
+    }
+
+    .admin-nav .nav-link:hover {
+        background: rgba(243, 156, 18, 0.1);
+        border-bottom-color: var(--gold);
+    }
+
+    .admin-nav .nav-link.active {
+        background: rgba(243, 156, 18, 0.2);
+        border-bottom-color: var(--gold);
+    }
+
+    .stat-card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 31, 63, 0.08);
+        transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 16px rgba(0, 31, 63, 0.12);
+    }
+
+    .stat-card.stat-navy { border-top: 4px solid var(--navy); }
+    .stat-card.stat-emerald { border-top: 4px solid var(--emerald); }
+    .stat-card.stat-gold { border-top: 4px solid var(--gold); }
+    .stat-card.stat-info { border-top: 4px solid #3498db; }
+
+    .stat-value {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--navy);
+    }
+
+    .stat-label {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #7f8c8d;
+        font-weight: 600;
+    }
+
+    .stat-icon {
+        font-size: 32px;
+        opacity: 0.15;
+    }
+
+    .pending-badge {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        color: white;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .pending-badge.warning {
+        background: linear-gradient(135deg, var(--gold) 0%, #e67e22 100%);
+    }
+
+    .pending-badge.info {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    }
+
+    .action-btn {
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        border: none;
+        transition: all 0.2s ease;
+    }
+
+    .action-btn-approve {
+        background: var(--emerald);
+        color: white;
+    }
+
+    .action-btn-approve:hover {
+        background: #27ae60;
+    }
+
+    .action-btn-reject {
+        background: #e74c3c;
+        color: white;
+    }
+
+    .action-btn-reject:hover {
+        background: #c0392b;
+    }
+
+    .action-btn-edit {
+        background: var(--navy);
+        color: white;
+    }
+
+    .action-btn-edit:hover {
+        background: #00152b;
+    }
+
+    .table-responsive-custom {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 31, 63, 0.08);
+    }
+
+    .table-striped tbody tr:hover {
+        background: var(--light-gray);
+    }
+
+    .activity-log-item {
+        padding: 12px;
+        border-left: 4px solid var(--emerald);
+        background: var(--light-gray);
+        border-radius: 6px;
+        margin-bottom: 8px;
+    }
+
+    .activity-log-item.success { border-left-color: var(--emerald); }
+    .activity-log-item.warning { border-left-color: var(--gold); }
+    .activity-log-item.error { border-left-color: #e74c3c; }
+
+    .section-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 2px solid var(--light-gray);
+    }
+
+    .section-header h5 {
+        color: var(--navy);
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #7f8c8d;
+    }
+
+    .empty-state-icon {
+        font-size: 48px;
+        opacity: 0.3;
+        margin-bottom: 12px;
+    }
+</style>
+
+<div class="admin-dashboard">
+    <!-- Admin Navigation Tabs -->
+    <nav class="navbar navbar-expand-lg admin-nav sticky-top">
+        <div class="container-fluid">
+            <h6 class="navbar-brand mb-0 text-white">
+                <i class="fas fa-shield-alt me-2"></i>Admin Dashboard
+            </h6>
+            <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#adminNav">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="adminNav">
+                <ul class="nav nav-tabs ms-auto mb-0">
+                    <li class="nav-item">
+                        <a class="nav-link {% if active_tab == 'overview' %}active{% endif %}" href="{% url 'dashboard:admin_panel' %}">
+                            <i class="fas fa-chart-pie me-1"></i>Overview
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if active_tab == 'users' %}active{% endif %}" href="{% url 'dashboard:admin_users' %}">
+                            <i class="fas fa-users me-1"></i>Users
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if active_tab == 'content' %}active{% endif %}" href="{% url 'dashboard:admin_content' %}">
+                            <i class="fas fa-file-alt me-1"></i>Content
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if active_tab == 'analytics' %}active{% endif %}" href="{% url 'dashboard:admin_analytics' %}">
+                            <i class="fas fa-chart-line me-1"></i>Analytics
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if active_tab == 'certificates' %}active{% endif %}" href="{% url 'dashboard:admin_certificates' %}">
+                            <i class="fas fa-certificate me-1"></i>Certificates
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if active_tab == 'settings' %}active{% endif %}" href="{% url 'dashboard:admin_settings' %}">
+                            <i class="fas fa-cog me-1"></i>Settings
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-4">
+        <!-- Messages -->
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <i class="fas fa-{% if message.tags == 'error' %}exclamation-circle{% else %}check-circle{% endif %} me-2"></i>
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <!-- Overview Tab -->
+        {% if active_tab == 'overview' %}
+        <div class="tab-content">
+            <h4 class="mb-4 fw-bold"><i class="fas fa-chart-pie me-2"></i>Dashboard Overview</h4>
+
+            <!-- Statistics Cards -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-3 col-sm-6">
+                    <div class="card stat-card stat-navy">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <p class="stat-label">Total Users</p>
+                                    <div class="stat-value">{{ stats.total_users|intcomma }}</div>
+                                    <small class="text-success">{{ stats.active_users }} active</small>
+                                </div>
+                                <i class="fas fa-users stat-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="card stat-card stat-emerald">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <p class="stat-label">Total Deposits</p>
+                                    <div class="stat-value">${{ stats.total_deposits|floatformat:0|intcomma }}</div>
+                                    <small class="text-warning">
+                                        {% if pending_counts.deposits > 0 %}
+                                        <span class="pending-badge">{{ pending_counts.deposits }} pending</span>
+                                        {% else %}
+                                        All cleared
+                                        {% endif %}
+                                    </small>
+                                </div>
+                                <i class="fas fa-arrow-down stat-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="card stat-card stat-gold">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <p class="stat-label">Total Withdrawals</p>
+                                    <div class="stat-value">${{ stats.total_withdrawals|floatformat:0|intcomma }}</div>
+                                    <small class="text-warning">
+                                        {% if pending_counts.withdrawals > 0 %}
+                                        <span class="pending-badge warning">{{ pending_counts.withdrawals }} pending</span>
+                                        {% else %}
+                                        All cleared
+                                        {% endif %}
+                                    </small>
+                                </div>
+                                <i class="fas fa-arrow-up stat-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="card stat-card stat-info">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <p class="stat-label">Active Investments</p>
+                                    <div class="stat-value">{{ stats.active_investments|intcomma }}</div>
+                                    <small>${{ stats.total_invested|floatformat:0|intcomma }} total</small>
+                                </div>
+                                <i class="fas fa-chart-line stat-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7-Day Revenue -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-title fw-bold mb-3"><i class="fas fa-coins me-2"></i>7-Day Revenue</h6>
+                            <div class="d-flex justify-content-between align-items-end">
+                                <div>
+                                    <small class="text-muted">Total Deposits</small>
+                                    <h4 class="fw-bold text-success">${{ stats.revenue_7d|floatformat:2|intcomma }}</h4>
+                                </div>
+                                <i class="fas fa-arrow-up text-success fa-2x opacity-25"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-title fw-bold mb-3"><i class="fas fa-coins me-2"></i>7-Day Withdrawals</h6>
+                            <div class="d-flex justify-content-between align-items-end">
+                                <div>
+                                    <small class="text-muted">Approved Withdrawals</small>
+                                    <h4 class="fw-bold text-danger">${{ stats.withdrawals_7d|floatformat:2|intcomma }}</h4>
+                                </div>
+                                <i class="fas fa-arrow-down text-danger fa-2x opacity-25"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Items -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold mb-4"><i class="fas fa-tasks me-2"></i>Pending Actions</h5>
+                            <div class="row g-3">
+                                <div class="col-md-3 col-6">
+                                    <a href="#pending-deposits" class="btn btn-outline-warning w-100 position-relative">
+                                        <i class="fas fa-money-bill-wave me-2"></i>Deposits
+                                        {% if pending_counts.deposits > 0 %}
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{ pending_counts.deposits }}
+                                        </span>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <a href="#pending-withdrawals" class="btn btn-outline-info w-100 position-relative">
+                                        <i class="fas fa-cash me-2"></i>Withdrawals
+                                        {% if pending_counts.withdrawals > 0 %}
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{ pending_counts.withdrawals }}
+                                        </span>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <a href="#pending-kyc" class="btn btn-outline-primary w-100 position-relative">
+                                        <i class="fas fa-id-card me-2"></i>KYC
+                                        {% if pending_counts.kyc > 0 %}
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{ pending_counts.kyc }}
+                                        </span>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <a href="#pending-loans" class="btn btn-outline-success w-100 position-relative">
+                                        <i class="fas fa-credit-card me-2"></i>Loans
+                                        {% if pending_counts.loans > 0 %}
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{ pending_counts.loans }}
+                                        </span>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Deposits -->
+            {% if pending_deposits %}
+            <div class="row mb-4" id="pending-deposits">
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="section-header">
+                                <h5><i class="fas fa-money-bill-wave me-2"></i>Pending Deposits</h5>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+                            </div>
+                            <div class="table-responsive-custom">
+                                <table class="table table-hover mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Amount</th>
+                                            <th>Date</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for deposit in pending_deposits %}
+                                        <tr>
+                                            <td>
+                                                <strong>{{ deposit.user.email }}</strong><br>
+                                                <small class="text-muted">{{ deposit.user.full_name }}</small>
+                                            </td>
+                                            <td><strong class="text-success">${{ deposit.amount|floatformat:2 }}</strong></td>
+                                            <td><small class="text-muted">{{ deposit.created_at|date:"M d, Y" }}</small></td>
+                                            <td>
+                                                <a href="{% url 'dashboard:confirm_deposit' deposit.pk %}" class="action-btn action-btn-approve">Approve</a>
+                                                <a href="{% url 'dashboard:reject_deposit' deposit.pk %}" class="action-btn action-btn-reject">Reject</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Recent Activity Log -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="section-header">
+                                <h5><i class="fas fa-history me-2"></i>Recent Admin Activity</h5>
+                            </div>
+                            <div class="activity-log">
+                                {% if recent_activity %}
+                                    {% for activity in recent_activity %}
+                                    <div class="activity-log-item">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <strong>{{ activity.get_action_type_display }}</strong><br>
+                                                <small class="text-muted">{{ activity.description }}</small>
+                                            </div>
+                                            <small class="text-muted">{{ activity.created_at|timesince }} ago</small>
+                                        </div>
+                                        <div class="mt-2">
+                                            <small><i class="fas fa-user me-1"></i>{{ activity.admin_user.email }}</small>
+                                            <small class="ms-3"><i class="fas fa-globe me-1"></i>{{ activity.ip_address }}</small>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                {% else %}
+                                <div class="empty-state">
+                                    <div class="empty-state-icon"><i class="fas fa-history"></i></div>
+                                    <p>No recent activity</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+{% endblock %}

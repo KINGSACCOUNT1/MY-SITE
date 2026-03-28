@@ -1,0 +1,319 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ sector_info.title }} - Elite Wealth Capital{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+<style>
+    /* Sector Hero */
+    .sector-hero {
+        position: relative;
+        height: 60vh;
+        min-height: 400px;
+        background: url('{% static "images/" %}{{ sector_info.bg_image }}') center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 60px;
+    }
+    
+    .sector-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+    }
+    
+    .sector-hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: white;
+        max-width: 800px;
+        padding: 0 20px;
+    }
+    
+    .sector-icon {
+        font-size: 5rem;
+        color: #FFD700;
+        margin-bottom: 20px;
+    }
+    
+    .sector-title {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 15px;
+    }
+    
+    .sector-subtitle {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        opacity: 0.9;
+    }
+    
+    .sector-description {
+        font-size: 1.1rem;
+        opacity: 0.85;
+        line-height: 1.6;
+    }
+    
+    /* Plans Section */
+    .plans-section {
+        padding: 60px 20px 100px;
+        background: #0A1F44;
+    }
+    
+    .plans-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+    }
+    
+    .plan-card {
+        background: rgba(255, 255, 255, 0.12);
+        border: 2px solid rgba(255, 255, 255, 0.25);
+        border-radius: 20px;
+        padding: 35px;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .plan-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('{% static "images/" %}{{ sector_info.bg_image }}') center/cover;
+        opacity: 0.05;
+        z-index: 0;
+    }
+    
+    .plan-card > * {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .plan-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 60px rgba(255, 215, 0, 0.4);
+        border-color: rgba(255, 215, 0, 0.6);
+        background: rgba(255, 255, 255, 0.18);
+    }
+    
+    .plan-featured {
+        border-color: rgba(255, 215, 0, 0.6);
+        background: rgba(255, 215, 0, 0.12);
+        box-shadow: 0 8px 30px rgba(255, 215, 0, 0.2);
+    }
+    
+    .featured-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: #FFD700;
+        color: #000;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        z-index: 2;
+    }
+    
+    .plan-icon {
+        font-size: 3rem;
+        color: #FFD700;
+        margin-bottom: 20px;
+    }
+    
+    .plan-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 15px;
+    }
+    
+    .plan-description {
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 25px;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+    
+    .plan-details {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 20px;
+        margin-bottom: 25px;
+    }
+    
+    .plan-detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .detail-label {
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .detail-value {
+        font-weight: 700;
+        color: #FFD700;
+    }
+    
+    .plan-btn {
+        width: 100%;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.9);
+        color: #000;
+        border: none;
+        border-radius: 30px;
+        font-weight: 700;
+        font-size: 1.05rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+    }
+    
+    .plan-btn:hover {
+        background: #FFD700;
+        color: #000;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+    }
+    
+    .no-plans {
+        text-align: center;
+        padding: 60px 20px;
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .back-link {
+        display: inline-block;
+        margin-bottom: 30px;
+        color: #FFD700;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+    
+    .back-link:hover {
+        color: #fff;
+        transform: translateX(-5px);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Sector Hero -->
+<div class="sector-hero">
+    <div class="sector-hero-content" data-aos="fade-up">
+        <i class="{{ sector_info.icon }} sector-icon"></i>
+        <h1 class="sector-title">{{ sector_info.title }}</h1>
+        <p class="sector-subtitle">{{ sector_info.subtitle }}</p>
+        <p class="sector-description">{{ sector_info.description }}</p>
+    </div>
+</div>
+
+<!-- Investment Plans -->
+<div class="plans-section">
+    <div class="container">
+        <a href="{% url 'home' %}#services" class="back-link">
+            <i class="fas fa-arrow-left me-2"></i>Back to All Sectors
+        </a>
+        
+        <h2 class="text-white text-center mb-2" style="font-size: 2.5rem; font-weight: 700;">
+            Available Investment Plans
+        </h2>
+        <p class="text-center mb-5" style="color: rgba(255,255,255,0.7); font-size: 1.1rem;">
+            {{ plans.count }} investment opportunit{{ plans.count|pluralize:"y,ies" }} in {{ sector_info.title }}
+        </p>
+        
+        {% if plans %}
+        <div class="plans-grid">
+            {% for plan in plans %}
+            <div class="plan-card {% if plan.is_featured %}plan-featured{% endif %}" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:0 }}00">
+                {% if plan.is_featured %}
+                <span class="featured-badge">⭐ FEATURED</span>
+                {% endif %}
+                
+                <i class="{{ plan.icon }} plan-icon"></i>
+                <h3 class="plan-name">{{ plan.name }}</h3>
+                <p class="plan-description">{{ plan.description }}</p>
+                
+                <div class="plan-details">
+                    <div class="plan-detail-row">
+                        <span class="detail-label">Investment Range:</span>
+                        <span class="detail-value">${{ plan.min_amount|floatformat:0 }} - ${{ plan.max_amount|floatformat:0 }}</span>
+                    </div>
+                    <div class="plan-detail-row">
+                        <span class="detail-label">Daily Returns:</span>
+                        <span class="detail-value">{{ plan.daily_roi }}%</span>
+                    </div>
+                    <div class="plan-detail-row">
+                        <span class="detail-label">Duration:</span>
+                        <span class="detail-value">{{ plan.duration_days }} days</span>
+                    </div>
+                    <div class="plan-detail-row">
+                        <span class="detail-label">Total ROI:</span>
+                        <span class="detail-value">{{ plan.total_roi }}%</span>
+                    </div>
+                </div>
+                
+                {% if user.is_authenticated %}
+                    <a href="{% url 'investments:invest' plan.id %}" class="plan-btn">
+                        <i class="fas fa-check-circle me-2"></i>Invest Now
+                    </a>
+                {% else %}
+                    <a href="{% url 'accounts:login' %}?next={{ request.path }}" class="plan-btn">
+                        <i class="fas fa-sign-in-alt me-2"></i>Login to Invest
+                    </a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-plans">
+            <i class="fas fa-info-circle fa-3x mb-3"></i>
+            <h3>No plans available in this sector yet</h3>
+            <p>Check back soon for new investment opportunities!</p>
+        </div>
+        {% endif %}
+        
+        <!-- CTA Section -->
+        <div class="text-center mt-5 pt-5">
+            <h3 class="text-white mb-3" style="font-size: 2rem;">Ready to Start Investing?</h3>
+            <p class="text-white-50 mb-4">Join thousands of investors building wealth with Elite Wealth Capital</p>
+            {% if not user.is_authenticated %}
+            <a href="{% url 'accounts:signup' %}" class="btn btn-lg px-5 py-3" style="background: rgba(255,255,255,0.9); color: #000; border-radius: 50px; font-weight: 700;">
+                <i class="fas fa-user-plus me-2"></i>Create Free Account
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100,
+    });
+</script>
+{% endblock %}

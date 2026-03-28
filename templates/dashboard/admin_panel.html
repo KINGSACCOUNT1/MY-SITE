@@ -1,0 +1,384 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Admin Panel - Elite Wealth Capital{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="fw-bold"><i class="fas fa-shield-alt me-2"></i>Admin Dashboard</h2>
+            <p class="text-muted">Manage users, transactions, and platform operations</p>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-3 col-sm-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-1 small">Total Users</p>
+                            <h3 class="mb-0 fw-bold">{{ stats.total_users|intcomma }}</h3>
+                            <small class="text-success">{{ stats.active_users }} active</small>
+                        </div>
+                        <div class="text-primary"><i class="fas fa-users fa-3x opacity-50"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-1 small">Total Deposits</p>
+                            <h3 class="mb-0 fw-bold">${{ stats.total_deposits|floatformat:2|intcomma }}</h3>
+                            {% if pending_counts.deposits > 0 %}
+                            <small class="text-warning"><i class="fas fa-clock me-1"></i>{{ pending_counts.deposits }} pending</small>
+                            {% endif %}
+                        </div>
+                        <div class="text-success"><i class="fas fa-arrow-down fa-3x opacity-50"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-1 small">Total Withdrawals</p>
+                            <h3 class="mb-0 fw-bold">${{ stats.total_withdrawals|floatformat:2|intcomma }}</h3>
+                            {% if pending_counts.withdrawals > 0 %}
+                            <small class="text-warning"><i class="fas fa-clock me-1"></i>{{ pending_counts.withdrawals }} pending</small>
+                            {% endif %}
+                        </div>
+                        <div class="text-danger"><i class="fas fa-arrow-up fa-3x opacity-50"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-1 small">Active Investments</p>
+                            <h3 class="mb-0 fw-bold">{{ stats.active_investments|intcomma }}</h3>
+                            <small class="text-info">${{ stats.total_invested|floatformat:0|intcomma }}</small>
+                        </div>
+                        <div class="text-warning"><i class="fas fa-chart-line fa-3x opacity-50"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Items Overview -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-3"><i class="fas fa-bell me-2"></i>Pending Actions</h5>
+                    <div class="row g-3">
+                        <div class="col-md-3 col-6">
+                            <div class="d-grid">
+                                <a href="#pending-deposits" class="btn btn-outline-warning position-relative">
+                                    <i class="fas fa-money-bill-wave me-2"></i>Deposits
+                                    {% if pending_counts.deposits > 0 %}
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ pending_counts.deposits }}
+                                    </span>
+                                    {% endif %}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="d-grid">
+                                <a href="#pending-withdrawals" class="btn btn-outline-danger position-relative">
+                                    <i class="fas fa-hand-holding-usd me-2"></i>Withdrawals
+                                    {% if pending_counts.withdrawals > 0 %}
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ pending_counts.withdrawals }}
+                                    </span>
+                                    {% endif %}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="d-grid">
+                                <a href="#pending-kyc" class="btn btn-outline-primary position-relative">
+                                    <i class="fas fa-id-card me-2"></i>KYC
+                                    {% if pending_counts.kyc > 0 %}
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ pending_counts.kyc }}
+                                    </span>
+                                    {% endif %}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="d-grid">
+                                <a href="#pending-loans" class="btn btn-outline-info position-relative">
+                                    <i class="fas fa-piggy-bank me-2"></i>Loans
+                                    {% if pending_counts.loans > 0 %}
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ pending_counts.loans }}
+                                    </span>
+                                    {% endif %}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Deposits -->
+    <div class="row mb-4" id="pending-deposits">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-warning bg-opacity-10">
+                    <h5 class="mb-0"><i class="fas fa-money-bill-wave me-2"></i>Pending Deposits ({{ pending_counts.deposits }})</h5>
+                </div>
+                <div class="card-body p-0">
+                    {% if pending_deposits %}
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>User</th>
+                                    <th>Amount</th>
+                                    <th>Crypto</th>
+                                    <th>TX Hash</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for deposit in pending_deposits %}
+                                <tr>
+                                    <td>{{ deposit.created_at|date:"M d, Y H:i" }}</td>
+                                    <td>
+                                        <strong>{{ deposit.user.full_name|default:deposit.user.email }}</strong><br>
+                                        <small class="text-muted">{{ deposit.user.email }}</small>
+                                    </td>
+                                    <td><strong class="text-success">${{ deposit.amount|floatformat:2|intcomma }}</strong></td>
+                                    <td><span class="badge bg-primary">{{ deposit.crypto_type|upper }}</span></td>
+                                    <td>
+                                        {% if deposit.tx_hash %}
+                                        <code class="small">{{ deposit.tx_hash|truncatechars:20 }}</code>
+                                        {% else %}
+                                        <span class="text-muted">N/A</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="{% url 'dashboard:confirm_deposit' deposit.pk %}" class="btn btn-success">
+                                                <i class="fas fa-check"></i> Confirm
+                                            </a>
+                                            <a href="{% url 'dashboard:reject_deposit' deposit.pk %}" class="btn btn-danger">
+                                                <i class="fas fa-times"></i> Reject
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                        <p class="text-muted">No pending deposits</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Withdrawals -->
+    <div class="row mb-4" id="pending-withdrawals">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-danger bg-opacity-10">
+                    <h5 class="mb-0"><i class="fas fa-hand-holding-usd me-2"></i>Pending Withdrawals ({{ pending_counts.withdrawals }})</h5>
+                </div>
+                <div class="card-body p-0">
+                    {% if pending_withdrawals %}
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>User</th>
+                                    <th>Amount</th>
+                                    <th>Crypto</th>
+                                    <th>Wallet</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for withdrawal in pending_withdrawals %}
+                                <tr>
+                                    <td>{{ withdrawal.created_at|date:"M d, Y H:i" }}</td>
+                                    <td>
+                                        <strong>{{ withdrawal.user.full_name|default:withdrawal.user.email }}</strong><br>
+                                        <small class="text-muted">{{ withdrawal.user.email }}</small>
+                                    </td>
+                                    <td><strong class="text-danger">${{ withdrawal.amount|floatformat:2|intcomma }}</strong></td>
+                                    <td><span class="badge bg-primary">{{ withdrawal.crypto_type|upper }}</span></td>
+                                    <td><code class="small">{{ withdrawal.wallet_address|truncatechars:20 }}</code></td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="{% url 'dashboard:approve_withdrawal' withdrawal.pk %}" class="btn btn-success">
+                                                <i class="fas fa-check"></i> Approve
+                                            </a>
+                                            <a href="{% url 'dashboard:reject_withdrawal' withdrawal.pk %}" class="btn btn-danger">
+                                                <i class="fas fa-times"></i> Reject
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                        <p class="text-muted">No pending withdrawals</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending KYC -->
+    <div class="row mb-4" id="pending-kyc">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-primary bg-opacity-10">
+                    <h5 class="mb-0"><i class="fas fa-id-card me-2"></i>Pending KYC Verifications ({{ pending_counts.kyc }})</h5>
+                </div>
+                <div class="card-body p-0">
+                    {% if pending_kyc %}
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Submitted</th>
+                                    <th>User</th>
+                                    <th>Document Type</th>
+                                    <th>Country</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for kyc in pending_kyc %}
+                                <tr>
+                                    <td>{{ kyc.submitted_at|date:"M d, Y H:i" }}</td>
+                                    <td>
+                                        <strong>{{ kyc.user.full_name|default:kyc.user.email }}</strong><br>
+                                        <small class="text-muted">{{ kyc.user.email }}</small>
+                                    </td>
+                                    <td>{{ kyc.get_document_type_display }}</td>
+                                    <td>{{ kyc.country }}</td>
+                                    <td><span class="badge bg-warning">{{ kyc.get_status_display }}</span></td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="{% url 'dashboard:approve_kyc' kyc.pk %}" class="btn btn-success">
+                                                <i class="fas fa-check"></i> Approve
+                                            </a>
+                                            <a href="{% url 'dashboard:reject_kyc' kyc.pk %}" class="btn btn-danger">
+                                                <i class="fas fa-times"></i> Reject
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                        <p class="text-muted">No pending KYC verifications</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Loans -->
+    <div class="row mb-4" id="pending-loans">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-info bg-opacity-10">
+                    <h5 class="mb-0"><i class="fas fa-piggy-bank me-2"></i>Pending Loan Applications ({{ pending_counts.loans }})</h5>
+                </div>
+                <div class="card-body p-0">
+                    {% if pending_loans %}
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>User</th>
+                                    <th>Amount</th>
+                                    <th>Duration</th>
+                                    <th>Interest Rate</th>
+                                    <th>Purpose</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for loan in pending_loans %}
+                                <tr>
+                                    <td>{{ loan.created_at|date:"M d, Y" }}</td>
+                                    <td>
+                                        <strong>{{ loan.user.full_name|default:loan.user.email }}</strong><br>
+                                        <small class="text-muted">{{ loan.user.email }}</small>
+                                    </td>
+                                    <td><strong class="text-info">${{ loan.amount|floatformat:2|intcomma }}</strong></td>
+                                    <td>{{ loan.duration_months }} months</td>
+                                    <td>{{ loan.interest_rate }}%</td>
+                                    <td>{{ loan.purpose|truncatechars:30 }}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="{% url 'dashboard:approve_loan' loan.pk %}" class="btn btn-success">
+                                                <i class="fas fa-check"></i> Approve
+                                            </a>
+                                            <a href="{% url 'dashboard:reject_loan' loan.pk %}" class="btn btn-danger">
+                                                <i class="fas fa-times"></i> Reject
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                        <p class="text-muted">No pending loan applications</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

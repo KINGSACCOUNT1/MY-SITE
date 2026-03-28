@@ -1,0 +1,478 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ article.title }} - Elite Wealth Capital{% endblock %}
+
+{% block extra_css %}
+<style>
+    .article-container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+    
+    .article-hero {
+        width: 100%;
+        height: 450px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 40px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+    
+    .article-hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .article-header {
+        margin-bottom: 30px;
+    }
+    
+    .article-category {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+    
+    .article-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 15px;
+        line-height: 1.3;
+    }
+    
+    .article-meta {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 20px;
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .meta-item i {
+        color: #667eea;
+        font-size: 1.2rem;
+    }
+    
+    .meta-item .label {
+        font-size: 0.85rem;
+        color: #666;
+    }
+    
+    .meta-item .value {
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .article-content {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 40px;
+        margin-bottom: 40px;
+    }
+    
+    .article-body {
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 15px;
+        padding: 40px;
+        line-height: 1.8;
+        color: #333;
+    }
+    
+    .article-body p {
+        margin-bottom: 20px;
+        font-size: 1.05rem;
+    }
+    
+    .article-body h3 {
+        color: #667eea;
+        font-size: 1.5rem;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
+    
+    .article-body ul {
+        margin-bottom: 20px;
+        padding-left: 20px;
+    }
+    
+    .article-body ul li {
+        margin-bottom: 10px;
+    }
+    
+    .article-body strong {
+        color: #667eea;
+        font-weight: 700;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .sidebar-section {
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 15px;
+        padding: 25px;
+    }
+    
+    .sidebar-section h3 {
+        color: #667eea;
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+    
+    /* Share Buttons */
+    .share-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .share-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 15px;
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 8px;
+        background: rgba(255,255,255,0.5);
+        color: #333;
+        text-decoration: none;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .share-btn:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-decoration: none;
+        transform: translateX(5px);
+    }
+    
+    .share-btn i {
+        font-size: 1.2rem;
+    }
+    
+    /* Related Articles */
+    .related-article {
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    .related-article:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+    
+    .related-article-title {
+        font-weight: 600;
+        color: #667eea;
+        text-decoration: none;
+        line-height: 1.4;
+        margin-bottom: 8px;
+        display: block;
+    }
+    
+    .related-article-title:hover {
+        text-decoration: underline;
+        color: #764ba2;
+    }
+    
+    .related-article-date {
+        font-size: 0.8rem;
+        color: #999;
+    }
+    
+    /* Footer Navigation */
+    .article-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 25px;
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 15px;
+        margin-top: 40px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .back-link {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .back-link:hover {
+        text-decoration: underline;
+        gap: 12px;
+    }
+    
+    .article-tags {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .tag {
+        background: rgba(102, 126, 234, 0.2);
+        color: #667eea;
+        padding: 5px 12px;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .tag:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    
+    @media (max-width: 768px) {
+        .article-hero {
+            height: 300px;
+        }
+        
+        .article-title {
+            font-size: 1.8rem;
+        }
+        
+        .article-content {
+            grid-template-columns: 1fr;
+        }
+        
+        .article-body {
+            padding: 20px;
+        }
+        
+        .article-meta {
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .article-footer {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="article-container">
+    <!-- Back Button -->
+    <div style="margin-bottom: 20px;">
+        <a href="{% url 'dashboard:news' %}" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to News
+        </a>
+    </div>
+    
+    <!-- Article Header -->
+    <div class="article-header">
+        <span class="article-category">{{ article.get_category_display }}</span>
+        <h1 class="article-title">{{ article.title }}</h1>
+        
+        <div class="article-meta">
+            <div class="meta-item">
+                <i class="fas fa-calendar-alt"></i>
+                <div>
+                    <div class="label">Published</div>
+                    <div class="value">
+                        {% if article.published_at %}
+                            {{ article.published_at|date:"F d, Y" }}
+                        {% else %}
+                            {{ article.created_at|date:"F d, Y" }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="meta-item">
+                <i class="fas fa-user"></i>
+                <div>
+                    <div class="label">Author</div>
+                    <div class="value">Elite Team</div>
+                </div>
+            </div>
+            
+            <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <div class="label">Reading Time</div>
+                    <div class="value">5 min read</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hero Image -->
+    <div class="article-hero">
+        {% if article.image_url %}
+            <img src="{{ article.image_url }}" alt="{{ article.title }}">
+        {% else %}
+            <img src="{% static 'images/news-bitcoin.jpg' %}" alt="{{ article.title }}">
+        {% endif %}
+    </div>
+    
+    <!-- Article Content -->
+    <div class="article-content">
+        <!-- Main Content -->
+        <div class="article-body">
+            {{ article.content|safe }}
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Share Buttons -->
+            <div class="sidebar-section">
+                <h3>
+                    <i class="fas fa-share-alt"></i> Share
+                </h3>
+                <div class="share-buttons">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={% request.build_absolute_uri %}" target="_blank" class="share-btn">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url={% request.build_absolute_uri %}" target="_blank" class="share-btn">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={% request.build_absolute_uri %}" target="_blank" class="share-btn">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="mailto:?subject={{ article.title }}&body=Check out this article: {% request.build_absolute_uri %}" class="share-btn">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Related Articles -->
+            {% if related_articles %}
+                <div class="sidebar-section">
+                    <h3>
+                        <i class="fas fa-newspaper"></i> Related Articles
+                    </h3>
+                    <div>
+                        {% for related in related_articles %}
+                            <div class="related-article">
+                                <a href="{% url 'dashboard:news_detail' related.slug %}" class="related-article-title">
+                                    {{ related.title }}
+                                </a>
+                                <div class="related-article-date">
+                                    {% if related.published_at %}
+                                        {{ related.published_at|date:"M d, Y" }}
+                                    {% else %}
+                                        {{ related.created_at|date:"M d, Y" }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            
+            <!-- Newsletter CTA -->
+            <div class="sidebar-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center;">
+                <h3 style="color: white; margin-bottom: 15px;">
+                    <i class="fas fa-envelope"></i> Subscribe
+                </h3>
+                <p style="color: rgba(255,255,255,0.9); font-size: 0.95rem; margin-bottom: 15px;">
+                    Get the latest news and updates delivered to your inbox.
+                </p>
+                <form method="POST" style="display: flex; flex-direction: column; gap: 10px;">
+                    {% csrf_token %}
+                    <input type="email" placeholder="Your email" required style="
+                        padding: 10px 15px;
+                        border: none;
+                        border-radius: 8px;
+                        background: rgba(255,255,255,0.2);
+                        color: white;
+                        font-size: 0.9rem;
+                    ">
+                    <input type="email" placeholder="Your email" style="
+                        padding: 10px 15px;
+                        border: none;
+                        border-radius: 8px;
+                        background: rgba(255,255,255,0.3);
+                        color: white;
+                    " onfocus="this.placeholder=''" onblur="this.placeholder='Your email'">
+                    <button type="button" style="
+                        padding: 10px 15px;
+                        border: none;
+                        border-radius: 8px;
+                        background: rgba(255,255,255,0.25);
+                        color: white;
+                        cursor: pointer;
+                        font-weight: 600;
+                        transition: all 0.3s ease;
+                    " onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.25)'">
+                        Subscribe Now
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Article Footer -->
+    <div class="article-footer">
+        <a href="{% url 'dashboard:news' %}" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to All Articles
+        </a>
+        <div class="article-tags">
+            <a href="#" class="tag">#cryptocurrency</a>
+            <a href="#" class="tag">#investment</a>
+            <a href="#" class="tag">#market</a>
+            <a href="#" class="tag">#wealth</a>
+        </div>
+    </div>
+</div>
+
+<script>
+// Track article views
+console.log('Article viewed: {{ article.title }}');
+
+// Add read more animation
+document.addEventListener('DOMContentLoaded', function() {
+    const articleBody = document.querySelector('.article-body');
+    if (articleBody) {
+        articleBody.style.animation = 'fadeInUp 0.6s ease';
+    }
+});
+</script>
+{% endblock %}
