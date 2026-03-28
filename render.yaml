@@ -59,8 +59,3 @@ services:
         sync: false  # Set in dashboard
       - key: BYBIT_API_SECRET
         sync: false  # Set in dashboard
-      # Redis for Celery task queue
-      - key: CELERY_BROKER_URL
-        sync: false
-      - key: CELERY_RESULT_BACKEND
-        sync: false

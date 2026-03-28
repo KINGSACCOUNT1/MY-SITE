@@ -421,36 +421,21 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
-# Celery Configuration
-CELERY_BROKER_URL = os.getenv(
-    'CELERY_BROKER_URL',
-    'redis://:changeme@localhost:6379/0'  # Default with password placeholder
-)
-CELERY_RESULT_BACKEND = os.getenv(
-    'CELERY_RESULT_BACKEND', 
-    'redis://:changeme@localhost:6379/0'
-)
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = TIME_ZONE
+# Celery Configuration - Commented out (not currently used)
+# Uncomment when you need background tasks like daily profit calculation
+# CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0')
+# CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://localhost:6379/0')
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_TIMEZONE = TIME_ZONE
 
 
-# Cache Configuration (Redis)
+# Cache Configuration - Local Memory Cache (simple and fast for single instance)
 CACHES = {
     'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': os.getenv('REDIS_URL', 'redis://127.0.0.1:6379/1'),
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            'PARSER_CLASS': 'redis.connection.HiredisParser',
-            'CONNECTION_POOL_CLASS_KWARGS': {
-                'max_connections': 50,
-            },
-            'SOCKET_CONNECT_TIMEOUT': 5,
-            'SOCKET_TIMEOUT': 5,
-        },
-        'KEY_PREFIX': 'ewc',
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'elite-wealth-cache',
         'TIMEOUT': 300,  # 5 minutes default
     }
 }
