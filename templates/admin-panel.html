@@ -939,15 +939,13 @@
             { s: 'LINK',n: 'Chainlink', b: 'LINKUSDT',  fp: 13.5,   fc: 2.3  },
         ];
         let map = {};
-        try {
-            const r = await fetch('https://api.bybit.com/v5/market/tickers?category=spot');
-            if (r.ok) {
-                const j = await r.json();
-                if (j.retCode === 0) j.result.list.forEach(t => {
-                    map[t.symbol] = { price: parseFloat(t.lastPrice), change: parseFloat(t.price24hPcnt) * 100 };
-                });
+        // Use static fallback prices only
+        coins.forEach(coin => {
+            if (coin.b) {
+                map[coin.b] = { price: coin.fp, change: coin.fc };
             }
-        } catch(_) {}
+        });
+
         let html = '';
         coins.forEach(c => {
             const d = c.b ? (map[c.b] || { price: c.fp, change: c.fc }) : { price: c.fp, change: c.fc };
@@ -962,3 +960,4 @@
 
 </body>
 </html>
+

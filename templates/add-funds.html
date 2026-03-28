@@ -481,17 +481,12 @@
         const API_BASE = '/investments';
 
         // ---- Live prices from Bybit public API ----
+        // Use static fallback prices only
         async function fetchLivePrices() {
-            try {
-                const r = await fetch('https://api.bybit.com/v5/market/tickers?category=spot');
-                if (!r.ok) return;
-                const j = await r.json();
-                if (j.retCode === 0 && j.result && j.result.list) {
-                    j.result.list.forEach(t => {
-                        livePrices[t.symbol] = parseFloat(t.lastPrice);
-                    });
-                }
-            } catch(_) {}
+            // Prices are now only from FALLBACK_PRICES
+            Object.keys(FALLBACK_PRICES).forEach(key => {
+                livePrices[key] = FALLBACK_PRICES[key];
+            });
         }
 
         const PRICE_SYMBOLS = { BTC: 'BTCUSDT', ETH: 'ETHUSDT', USDT: null, USDC: null, LTC: 'LTCUSDT' };
@@ -548,7 +543,7 @@
                             address: wallet.address,
                             network: wallet.network,
                             qr: wallet.qr_code_url || `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${wallet.address}`,
-                            source: wallet.source || 'db'
+                            source: wallet.source || 'admin'  // Changed from 'db' to 'admin'
                         };
 
                         const div = document.createElement('div');
@@ -557,7 +552,7 @@
 
                         const icons = { BTC: '&#8383;', ETH: '&#926;', USDT: '&#8366;', USDC: '&#128680;', LTC: '&#321;' };
                         const icon = icons[wallet.symbol] || '&#128176;';
-                        const isLive = wallet.source === 'bybit';
+                        const isLive = wallet.source === 'admin';  // Changed from 'bybit' to 'admin'
 
                         div.innerHTML = `
                             <div class="payment-icon">${icon}</div>
@@ -581,10 +576,10 @@
 
         function useDefaultWallets() {
             wallets = {
-                'BTC': { name: 'Bitcoin',   address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', network: 'Bitcoin', qr: '', source: 'fallback' },
-                'ETH': { name: 'Ethereum',  address: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F', network: 'ERC20',   qr: '', source: 'fallback' },
-                'USDT':{ name: 'USDT',      address: 'T9yD14Nj9j7xAB4dbGeiX9h8unkkhxnWd',         network: 'TRC20',   qr: '', source: 'fallback' },
-                'LTC': { name: 'Litecoin',  address: 'LKsJzLmx4dSLmBCJiVrLtGxKXQh3yCyLQ1',       network: 'Litecoin',qr: '', source: 'fallback' },
+                'BTC': { name: 'Bitcoin',   address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', network: 'Bitcoin', qr: '', source: 'admin' },
+                'ETH': { name: 'Ethereum',  address: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F', network: 'ERC20',   qr: '', source: 'admin' },
+                'USDT':{ name: 'USDT',      address: 'T9yD14Nj9j7xAB4dbGeiX9h8unkkhxnWd',         network: 'TRC20',   qr: '', source: 'admin' },
+                'LTC': { name: 'Litecoin',  address: 'LKsJzLmx4dSLmBCJiVrLtGxKXQh3yCyLQ1',       network: 'Litecoin',qr: '', source: 'admin' },
             };
             // Add QR codes dynamically
             Object.keys(wallets).forEach(sym => {

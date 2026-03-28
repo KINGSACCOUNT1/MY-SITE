@@ -60,98 +60,43 @@
         });
     }
 
-    // Crypto Ticker — powered by Bybit public API
+    // Crypto Ticker — Static display (admin manages wallet addresses separately)
     async function initCryptoTicker() {
         const tickerTrack = document.querySelector('.ticker-track');
         if (!tickerTrack) return;
 
         const cryptos = [
-            { symbol: 'BTC',   name: 'Bitcoin',    bybit: 'BTCUSDT'  },
-            { symbol: 'ETH',   name: 'Ethereum',   bybit: 'ETHUSDT'  },
-            { symbol: 'USDT',  name: 'Tether',     bybit: null        }, // stable
-            { symbol: 'BNB',   name: 'BNB',        bybit: 'BNBUSDT'  },
-            { symbol: 'SOL',   name: 'Solana',     bybit: 'SOLUSDT'  },
-            { symbol: 'XRP',   name: 'XRP',        bybit: 'XRPUSDT'  },
-            { symbol: 'USDC',  name: 'USD Coin',   bybit: null        }, // stable
-            { symbol: 'ADA',   name: 'Cardano',    bybit: 'ADAUSDT'  },
-            { symbol: 'AVAX',  name: 'Avalanche',  bybit: 'AVAXUSDT' },
-            { symbol: 'DOGE',  name: 'Dogecoin',   bybit: 'DOGEUSDT' },
-            { symbol: 'TRX',   name: 'TRON',       bybit: 'TRXUSDT'  },
-            { symbol: 'DOT',   name: 'Polkadot',   bybit: 'DOTUSDT'  },
-            { symbol: 'LINK',  name: 'Chainlink',  bybit: 'LINKUSDT' },
-            { symbol: 'MATIC', name: 'Polygon',    bybit: 'MATICUSDT'},
-            { symbol: 'LTC',   name: 'Litecoin',   bybit: 'LTCUSDT'  },
-            { symbol: 'UNI',   name: 'Uniswap',    bybit: 'UNIUSDT'  },
-            { symbol: 'SHIB',  name: 'Shiba Inu',  bybit: 'SHIBUSDT' },
-            { symbol: 'ATOM',  name: 'Cosmos',     bybit: 'ATOMUSDT' },
-            { symbol: 'XLM',   name: 'Stellar',    bybit: 'XLMUSDT'  },
-            { symbol: 'XMR',   name: 'Monero',     bybit: 'XMRUSDT'  }
+            { symbol: 'BTC',   name: 'Bitcoin',    price: 84000,    change: 1.25  },
+            { symbol: 'ETH',   name: 'Ethereum',   price: 2000,     change: -0.85 },
+            { symbol: 'USDT',  name: 'Tether',     price: 1.00,     change: 0.00  },
+            { symbol: 'BNB',   name: 'BNB',        price: 580,      change: 0.92  },
+            { symbol: 'SOL',   name: 'Solana',     price: 135,      change: 2.15  },
+            { symbol: 'XRP',   name: 'XRP',        price: 2.20,     change: 1.35  },
+            { symbol: 'USDC',  name: 'USD Coin',   price: 1.00,     change: 0.00  },
+            { symbol: 'ADA',   name: 'Cardano',    price: 0.72,     change: -0.45 },
+            { symbol: 'AVAX',  name: 'Avalanche',  price: 22,       change: 1.80  },
+            { symbol: 'DOGE',  name: 'Dogecoin',   price: 0.18,     change: 3.20  },
+            { symbol: 'TRX',   name: 'TRON',       price: 0.24,     change: 0.50  },
+            { symbol: 'DOT',   name: 'Polkadot',   price: 5.20,     change: -1.20 },
+            { symbol: 'LINK',  name: 'Chainlink',  price: 13.50,    change: 2.30  },
+            { symbol: 'MATIC', name: 'Polygon',    price: 0.45,     change: -0.80 },
+            { symbol: 'LTC',   name: 'Litecoin',   price: 92,       change: 0.60  },
+            { symbol: 'UNI',   name: 'Uniswap',    price: 7.80,     change: 1.10  },
+            { symbol: 'SHIB',  name: 'Shiba Inu',  price: 0.0000135,change: 4.50  },
+            { symbol: 'ATOM',  name: 'Cosmos',     price: 4.80,     change: -0.70 },
+            { symbol: 'XLM',   name: 'Stellar',    price: 0.28,     change: 1.90  },
+            { symbol: 'XMR',   name: 'Monero',     price: 215,      change: 0.40  }
         ];
-
-        // Fallback prices if API fails
-        const fallbackData = {
-            'BTCUSDT':   { price: 84000,    change: 1.25  },
-            'ETHUSDT':   { price: 2000,     change: -0.85 },
-            'BNBUSDT':   { price: 580,      change: 0.92  },
-            'SOLUSDT':   { price: 135,      change: 2.15  },
-            'XRPUSDT':   { price: 2.20,     change: 1.35  },
-            'ADAUSDT':   { price: 0.72,     change: -0.45 },
-            'AVAXUSDT':  { price: 22,       change: 1.80  },
-            'DOGEUSDT':  { price: 0.18,     change: 3.20  },
-            'TRXUSDT':   { price: 0.24,     change: 0.50  },
-            'DOTUSDT':   { price: 5.20,     change: -1.20 },
-            'LINKUSDT':  { price: 13.50,    change: 2.30  },
-            'MATICUSDT': { price: 0.45,     change: -0.80 },
-            'LTCUSDT':   { price: 92,       change: 0.60  },
-            'UNIUSDT':   { price: 7.80,     change: 1.10  },
-            'SHIBUSDT':  { price: 0.0000135,change: 4.50  },
-            'ATOMUSDT':  { price: 4.80,     change: -0.70 },
-            'XLMUSDT':   { price: 0.28,     change: 1.90  },
-            'XMRUSDT':   { price: 215,      change: 0.40  }
-        };
-
-        // Map Bybit ticker results by symbol for quick lookup
-        let bybitMap = {};
-
-        try {
-            const response = await fetch('https://api.bybit.com/v5/market/tickers?category=spot');
-            if (response.ok) {
-                const json = await response.json();
-                if (json.retCode === 0 && json.result && json.result.list) {
-                    json.result.list.forEach(t => {
-                        bybitMap[t.symbol] = {
-                            price: parseFloat(t.lastPrice),
-                            change: parseFloat(t.price24hPcnt) * 100
-                        };
-                    });
-                }
-            }
-        } catch (error) {
-            // [Production] Console output disabled
-        }
 
         let tickerHTML = '';
         cryptos.forEach(crypto => {
-            let price, change;
-
-            if (crypto.bybit === null) {
-                // Stablecoins — always $1.00
-                price = 1.00;
-                change = 0.00;
-            } else {
-                const d = bybitMap[crypto.bybit] || fallbackData[crypto.bybit] || null;
-                if (!d) return;
-                price = d.price;
-                change = d.change;
-            }
-
-            const changeFixed = change.toFixed(2);
-            const changeClass = change >= 0 ? 'positive' : 'negative';
-            const changeSymbol = change >= 0 ? '+' : '';
+            const changeFixed = crypto.change.toFixed(2);
+            const changeClass = crypto.change >= 0 ? 'positive' : 'negative';
+            const changeSymbol = crypto.change >= 0 ? '+' : '';
             tickerHTML += `
                 <div class="ticker-item">
                     <span class="crypto-symbol">${crypto.symbol}</span>
-                    <span class="crypto-price">$${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: price < 0.01 ? 8 : 2 })}</span>
+                    <span class="crypto-price">$${crypto.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: crypto.price < 0.01 ? 8 : 2 })}</span>
                     <span class="crypto-change ${changeClass}">${changeSymbol}${changeFixed}%</span>
                 </div>
             `;
@@ -160,25 +105,22 @@
         tickerTrack.innerHTML = tickerHTML + tickerHTML; // Duplicate for seamless loop
 
         // Update price cards if they exist
-        updatePriceCards(bybitMap);
+        updatePriceCards(cryptos);
     }
 
     // Update static price cards with live Bybit data
-    function updatePriceCards(bybitMap) {
-        const priceMapping = {
-            'BTC': 'BTCUSDT',
-            'ETH': 'ETHUSDT',
-            'BNB': 'BNBUSDT',
-            'SOL': 'SOLUSDT'
-        };
+    function updatePriceCards(cryptos) {
+        const priceMap = {};
+        cryptos.forEach(crypto => {
+            priceMap[crypto.symbol] = crypto;
+        });
 
         document.querySelectorAll('.price-card').forEach(card => {
             const symbolEl = card.querySelector('.price-symbol');
             if (!symbolEl) return;
 
             const symbol = symbolEl.textContent.trim();
-            const bybitSymbol = priceMapping[symbol];
-            const coinData = bybitMap[bybitSymbol];
+            const coinData = priceMap[symbol];
 
             if (coinData) {
                 const priceEl = card.querySelector('.price-value');

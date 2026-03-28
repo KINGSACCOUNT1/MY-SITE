@@ -54,8 +54,3 @@ services:
         value: noreply@elitewealthcapita.uk
       - key: ADMIN_NOTIFICATION_EMAIL
         value: admin@elitewealthcapita.uk
-      # Bybit API
-      - key: BYBIT_API_KEY
-        sync: false  # Set in dashboard
-      - key: BYBIT_API_SECRET
-        sync: false  # Set in dashboard

@@ -39,7 +39,7 @@ class SecurityHeadersMiddleware:
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://embed.tawk.to; "
             "img-src 'self' data: https: blob:; "
             "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; "
-            "connect-src 'self' https://api.bybit.com https://www.google-analytics.com https://va.tawk.to wss://va.tawk.to; "
+            "connect-src 'self' https://www.google-analytics.com https://va.tawk.to wss://va.tawk.to; "
             "frame-src 'self' https://embed.tawk.to; "
             "worker-src blob: 'self'; "
             "object-src 'none'; "

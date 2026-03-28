@@ -50,7 +50,6 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://unpkg.com">
     <!-- DNS Prefetch for non-critical resources -->
-    <link rel="dns-prefetch" href="https://api.bybit.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap"
         rel="stylesheet">
@@ -756,19 +755,11 @@
                 { s: 'LINK', n: 'Chainlink',  b: 'LINKUSDT',  fp: 13.5,     fc: 2.3  },
                 { s: 'DOT',  n: 'Polkadot',   b: 'DOTUSDT',   fp: 5.2,      fc: -1.2 },
             ];
-            let map = {};
-            try {
-                const r = await fetch('https://api.bybit.com/v5/market/tickers?category=spot');
-                if (r.ok) {
-                    const j = await r.json();
-                    if (j.retCode === 0 && j.result && j.result.list)
-                        j.result.list.forEach(t => { map[t.symbol] = { price: parseFloat(t.lastPrice), change: parseFloat(t.price24hPcnt) * 100 }; });
-                }
-            } catch(_) {}
-
+            
+            // Use static fallback prices (admin manages wallet addresses separately)
             grid.innerHTML = '';
             coins.forEach(c => {
-                const d = c.bybitPair ? (map[c.bybitPair] || { price: c.fallbackPrice, change: c.fallbackChange }) : { price: c.fallbackPrice, change: c.fallbackChange };
+                const d = { price: c.fallbackPrice, change: c.fallbackChange };
                 const ch = d.change.toFixed(2);
                 const up = d.change >= 0;
                 const priceStr = d.price >= 1000 ? '$' + d.price.toLocaleString(undefined,{maximumFractionDigits:2})

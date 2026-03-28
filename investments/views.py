@@ -28,101 +28,42 @@ from core.utils import get_client_ip
 logger = logging.getLogger(__name__)
 
 
-# Bybit coin → chain type mapping for deposit addresses
-_BYBIT_CHAIN_MAP = {
-    'BTC':  ('BTC',  'BTC'),
-    'ETH':  ('ETH',  'ERC20'),
-    'USDT': ('USDT', 'TRC20'),
-    'USDC': ('USDC', 'ERC20'),
-    'LTC':  ('LTC',  'LTC'),
-}
-
-
-def _bybit_get_deposit_address(coin: str, chain_type: str) -> dict | None:
-    """
-    Fetch a deposit address from Bybit v5 API (authenticated).
-    Returns the address dict or None if unavailable / not configured.
-    """
-    api_key = getattr(settings, 'BYBIT_API_KEY', '')
-    api_secret = getattr(settings, 'BYBIT_API_SECRET', '')
-    if not api_key or not api_secret:
-        logger.debug('Bybit API credentials not configured — skipping deposit address fetch for %s/%s', coin, chain_type)
-        return None
-
-    recv_window = '5000'
-    timestamp = str(int(time.time() * 1000))
-    params = {'coin': coin, 'chainType': chain_type}
-    query_string = urllib.parse.urlencode(params)
-
-    # Signature: timestamp + api_key + recv_window + queryString
-    sign_payload = f'{timestamp}{api_key}{recv_window}{query_string}'
-    signature = hmac.new(
-        api_secret.encode('utf-8'),
-        sign_payload.encode('utf-8'),
-        hashlib.sha256,
-    ).hexdigest()
-
-    url = f'https://api.bybit.com/v5/asset/deposit/query-address?{query_string}'
-    bybit_request = urllib.request.Request(url)
-    bybit_request.add_header('X-BAPI-API-KEY', api_key)
-    bybit_request.add_header('X-BAPI-SIGN', signature)
-    bybit_request.add_header('X-BAPI-TIMESTAMP', timestamp)
-    bybit_request.add_header('X-BAPI-RECV-WINDOW', recv_window)
-    bybit_request.add_header('Content-Type', 'application/json')
-
-    try:
-        with urllib.request.urlopen(bybit_request, timeout=10) as http_response:
-            response_json = json.loads(http_response.read().decode('utf-8'))
-        if response_json.get('retCode') == 0:
-            return response_json.get('result', {})
-    except Exception as exc:
-        logger.warning('Bybit deposit address fetch failed for %s/%s: %s', coin, chain_type, exc)
-    return None
+# Wallet addresses are managed by admin in Django admin panel
+# No external API integration - all addresses are stored in WalletAddress model
 
 
 @login_required
 def wallet_addresses_api(request):
     """
     JSON endpoint that returns active deposit wallet addresses.
-    Prefers live addresses fetched from Bybit; falls back to the
-    WalletAddress records managed in the Django admin.
+    Wallet addresses are managed by admin in Django admin panel.
     """
     wallet_addresses = []
-    for crypto_type, (coin, chain) in _BYBIT_CHAIN_MAP.items():
-        bybit_data = _bybit_get_deposit_address(coin, chain)
-        if bybit_data:
-            # Try top-level 'address' first; fall back to depositAddressList
-            address = bybit_data.get('address', '')
-            if not address:
-                deposit_list = bybit_data.get('depositAddressList', [])
-                address = deposit_list[0].get('address', '') if deposit_list else ''
-            if address:
-                wallet_addresses.append({
-                    'symbol': crypto_type,
-                    'name': {'BTC': 'Bitcoin', 'ETH': 'Ethereum',
-                              'USDT': 'Tether USDT', 'USDC': 'USD Coin',
-                              'LTC': 'Litecoin'}.get(crypto_type, crypto_type),
-                    'address': address,
-                    'network': chain,
-                    'qr_code_url': f'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={address}',
-                    'source': 'bybit',
-                })
-                continue
-
-        # Fallback: use the admin-managed WalletAddress records
-        wallet = WalletAddress.objects.filter(crypto_type=crypto_type, is_active=True).first()
-        if wallet:
-            wallet_addresses.append({
-                'symbol': crypto_type,
-                'name': wallet.get_crypto_type_display(),
-                'address': wallet.address,
-                'network': chain,
-                'qr_code_url': (
-                    wallet.qr_code.url if wallet.qr_code
-                    else f'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={wallet.address}'
-                ),
-                'source': 'db',
-            })
+    
+    # Get all active wallet addresses from database (admin-managed)
+    wallets = WalletAddress.objects.filter(is_active=True).order_by('crypto_type')
+    
+    for wallet in wallets:
+        # Determine network/chain based on crypto type
+        chain_map = {
+            'BTC': 'BTC',
+            'ETH': 'ERC20',
+            'USDT': 'TRC20',
+            'USDC': 'ERC20',
+            'LTC': 'LTC',
+        }
+        
+        wallet_addresses.append({
+            'symbol': wallet.crypto_type,
+            'name': wallet.get_crypto_type_display(),
+            'address': wallet.address,
+            'network': chain_map.get(wallet.crypto_type, wallet.crypto_type),
+            'qr_code_url': (
+                wallet.qr_code.url if wallet.qr_code
+                else f'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={wallet.address}'
+            ),
+            'source': 'admin',
+        })
 
     return JsonResponse({'success': True, 'wallets': wallet_addresses})
 
