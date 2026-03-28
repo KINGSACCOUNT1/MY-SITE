@@ -5,7 +5,8 @@ FROM python:3.11-slim
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    DJANGO_SETTINGS_MODULE=elite_wealth_capital.settings
 
 # Set work directory
 WORKDIR /app
@@ -27,13 +28,21 @@ RUN pip install --upgrade pip && \
 # Copy project files
 COPY . /app/
 
-# Create media directory
+# Create directories
 RUN mkdir -p /app/media /app/staticfiles
 
 # Expose port
 EXPOSE 10000
 
-# Run migrations and start server
-CMD python manage.py collectstatic --noinput --clear && \
-    python manage.py migrate --noinput && \
-    gunicorn elite_wealth_capital.wsgi:application --bind 0.0.0.0:10000 --workers 3 --timeout 120 --log-level info
+# Startup script
+RUN echo '#!/bin/bash\n\
+set -e\n\
+echo "Running migrations..."\n\
+python manage.py migrate --noinput\n\
+echo "Collecting static files..."\n\
+python manage.py collectstatic --noinput --clear\n\
+echo "Starting Gunicorn..."\n\
+exec gunicorn elite_wealth_capital.wsgi:application --bind 0.0.0.0:10000 --workers 3 --timeout 120 --log-level info\n\
+' > /app/start.sh && chmod +x /app/start.sh
+
+CMD ["/app/start.sh"]
