@@ -55,22 +55,6 @@
             background-color: #FFD700 !important;
             color: #000 !important;
         }
-        .theme-toggle {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            z-index: 9996;
-            background: rgba(10, 31, 68, 0.9);
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid rgba(0, 168, 107, 0.3);
-            transition: all 0.3s ease;
-        }
-        .theme-toggle:hover {
-            background: rgba(0, 168, 107, 0.3);
-            border-color: rgba(255, 215, 0, 0.6);
-        }
     </style>
 </head>
 <body>
@@ -222,7 +206,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'js/crypto-ticker.js' %}"></script>
     <script src="{% static 'js/testimonials-popup.js' %}"></script>
-    <script src="{% static 'js/theme-switcher.js' %}"></script>
     <script src="{% static 'js/language-switcher.js' %}"></script>
     
     {% block extra_js %}{% endblock %}
