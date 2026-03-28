@@ -669,73 +669,78 @@
     <!-- Bybit API Crypto Charts -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Bybit API configuration
-        const BYBIT_API = 'https://api.bybit.com/v5/market/kline';
-        
-        // Fetch kline data from Bybit
-        async function fetchKlineData(symbol, interval = '60', limit = 50) {
+        // CoinGecko public API — no API key required
+        const CG_PRICE_URL = 'https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&include_24hr_change=true&ids=';
+        const CG_CHART_URL = 'https://api.coingecko.com/api/v3/coins/{id}/market_chart?vs_currency=usd&days=2&interval=hourly';
+        const CG_MARKETS_URL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=6&page=1&sparkline=false&ids=';
+
+        // Map dashboard symbol keys to CoinGecko ids
+        const SYMBOL_MAP = {
+            'BTCUSDT': { cgId: 'bitcoin',      name: 'Bitcoin',  icon: '₿' },
+            'ETHUSDT': { cgId: 'ethereum',     name: 'Ethereum', icon: 'Ξ' },
+        };
+
+        // Fetch 48h hourly price chart from CoinGecko
+        async function fetchChartData(cgId) {
             try {
-                const response = await fetch(`${BYBIT_API}?category=spot&symbol=${symbol}&interval=${interval}&limit=${limit}`);
+                const url = CG_CHART_URL.replace('{id}', cgId);
+                const response = await fetch(url);
                 const data = await response.json();
-                if (data.retCode === 0) {
-                    return data.result.list.reverse(); // Oldest first
-                }
+                if (data && data.prices) return data.prices; // [[timestamp, price], …]
             } catch (error) {
-                console.log('Using fallback data');
+                console.log('Chart data fetch error:', error);
             }
             return null;
         }
-        
-        // Fetch ticker for current price
-        async function fetchTicker(symbol) {
+
+        // Fetch current price + 24h change from CoinGecko
+        async function fetchPrice(cgId) {
             try {
-                const response = await fetch(`https://api.bybit.com/v5/market/tickers?category=spot&symbol=${symbol}`);
+                const response = await fetch(CG_PRICE_URL + cgId);
                 const data = await response.json();
-                if (data.retCode === 0 && data.result.list.length > 0) {
-                    return data.result.list[0];
-                }
+                if (data && data[cgId]) return data[cgId];
             } catch (error) {
-                console.log('Ticker fetch error');
+                console.log('Price fetch error:', error);
             }
             return null;
         }
-        
+
         // Create chart with Chart.js
         async function createCryptoChart(canvasId, priceId, symbol, color) {
             const canvas = document.getElementById(canvasId);
             const priceDiv = document.getElementById(priceId);
             if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const klineData = await fetchKlineData(symbol);
-            const ticker = await fetchTicker(symbol);
-            
+
+            const meta   = SYMBOL_MAP[symbol] || { cgId: 'bitcoin', name: symbol };
+            const cgId   = meta.cgId;
+            const ctx    = canvas.getContext('2d');
+            const [chartData, priceData] = await Promise.all([fetchChartData(cgId), fetchPrice(cgId)]);
+
             // Update price display
-            if (ticker && priceDiv) {
-                const price = parseFloat(ticker.lastPrice).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                const change = parseFloat(ticker.price24hPcnt) * 100;
+            if (priceData && priceDiv) {
+                const price  = parseFloat(priceData.usd).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                const change = parseFloat(priceData.usd_24h_change || 0);
                 const changeColor = change >= 0 ? '#10B981' : '#EF4444';
-                const changeSign = change >= 0 ? '+' : '';
+                const changeSign  = change >= 0 ? '+' : '';
                 priceDiv.innerHTML = `$${price} <span style="color: ${changeColor}; font-size: 0.85rem;">${changeSign}${change.toFixed(2)}%</span>`;
             }
-            
-            // Prepare chart data
+
             let labels = [];
             let prices = [];
-            
-            if (klineData) {
-                klineData.forEach(k => {
-                    labels.push(new Date(parseInt(k[0])));
-                    prices.push(parseFloat(k[4])); // Close price
+
+            if (chartData) {
+                chartData.forEach(point => {
+                    labels.push(new Date(point[0]));
+                    prices.push(parseFloat(point[1]));
                 });
             } else {
-                // Fallback data
-                for (let i = 0; i < 50; i++) {
-                    labels.push(new Date(Date.now() - (50-i) * 3600000));
+                // Fallback placeholder data
+                for (let i = 0; i < 48; i++) {
+                    labels.push(new Date(Date.now() - (48 - i) * 3600000));
                     prices.push(symbol === 'BTCUSDT' ? 97000 + Math.random() * 2000 : 2600 + Math.random() * 100);
                 }
             }
-            
+
             new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -753,9 +758,7 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
+                    plugins: { legend: { display: false } },
                     scales: {
                         x: { display: false },
                         y: {
@@ -764,60 +767,54 @@
                             ticks: { color: '#94a3b8', callback: v => '$' + v.toLocaleString() }
                         }
                     },
-                    interaction: {
-                        intersect: false,
-                        mode: 'index'
-                    }
+                    interaction: { intersect: false, mode: 'index' }
                 }
             });
         }
-        
-        // Market overview
+
+        // Market overview — top 6 coins by market cap
         async function loadMarketOverview() {
             const container = document.getElementById('marketOverview');
             if (!container) return;
-            
-            const symbols = [
-                { symbol: 'BTCUSDT', name: 'Bitcoin', icon: '₿' },
-                { symbol: 'ETHUSDT', name: 'Ethereum', icon: 'Ξ' },
-                { symbol: 'BNBUSDT', name: 'BNB', icon: '🔶' },
-                { symbol: 'SOLUSDT', name: 'Solana', icon: '◎' },
-                { symbol: 'XRPUSDT', name: 'XRP', icon: '✕' },
-                { symbol: 'ADAUSDT', name: 'Cardano', icon: '₳' }
-            ];
-            
-            let html = '';
-            for (const s of symbols) {
-                const ticker = await fetchTicker(s.symbol);
-                if (ticker) {
-                    const price = parseFloat(ticker.lastPrice).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                    const change = (parseFloat(ticker.price24hPcnt) * 100).toFixed(2);
+
+            const overviewCoins = 'bitcoin,ethereum,binancecoin,solana,ripple,cardano';
+            const icons = {
+                bitcoin: '₿', ethereum: 'Ξ', binancecoin: '🔶',
+                solana: '◎', ripple: '✕', cardano: '₳'
+            };
+
+            try {
+                const response = await fetch(CG_MARKETS_URL + overviewCoins);
+                const list = await response.json();
+                let html = '';
+                list.forEach(coin => {
+                    const price  = parseFloat(coin.current_price).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                    const change = parseFloat(coin.price_change_percentage_24h || 0).toFixed(2);
                     const changeColor = parseFloat(change) >= 0 ? '#10B981' : '#EF4444';
-                    const changeSign = parseFloat(change) >= 0 ? '+' : '';
-                    
+                    const changeSign  = parseFloat(change) >= 0 ? '+' : '';
                     html += `
                     <div style="background: rgba(30, 41, 59, 0.5); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
                         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                            <span style="font-size: 1.5rem;">${s.icon}</span>
-                            <span style="color: #fff; font-weight: 600;">${s.name}</span>
+                            <span style="font-size: 1.5rem;">${icons[coin.id] || '🪙'}</span>
+                            <span style="color: #fff; font-weight: 600;">${coin.name}</span>
                         </div>
                         <div style="color: #F59E0B; font-size: 1.1rem; font-weight: 600;">$${price}</div>
                         <div style="color: ${changeColor}; font-size: 0.85rem;">${changeSign}${change}%</div>
                     </div>`;
-                }
+                });
+                container.innerHTML = html || '<p style="color: #94a3b8;">Market data unavailable.</p>';
+            } catch (err) {
+                container.innerHTML = '<p style="color: #94a3b8;">Market data unavailable.</p>';
             }
-            container.innerHTML = html || '<p style="color: #94a3b8;">Loading market data...</p>';
         }
-        
+
         // Initialize charts
         createCryptoChart('btcChart', 'btcPrice', 'BTCUSDT', '#F7931A');
         createCryptoChart('ethChart', 'ethPrice', 'ETHUSDT', '#627EEA');
         loadMarketOverview();
-        
-        // Refresh every 60 seconds
-        setInterval(() => {
-            loadMarketOverview();
-        }, 60000);
+
+        // Refresh market overview every 60 seconds
+        setInterval(loadMarketOverview, 60000);
     });
     </script>
 

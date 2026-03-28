@@ -482,6 +482,3 @@ MIN_DEPOSIT = 30
 MIN_WITHDRAWAL = 50
 REFERRAL_BONUS_PERCENT = 5
 
-# Bybit API credentials for deposit address retrieval (set in environment)
-BYBIT_API_KEY = os.getenv('BYBIT_API_KEY', '')
-BYBIT_API_SECRET = os.getenv('BYBIT_API_SECRET', '')

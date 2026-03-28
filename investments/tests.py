@@ -4,7 +4,6 @@ import urllib.error
 
 from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
-from django.core.management import call_command
 from django.urls import reverse
 from django.utils import timezone
 from datetime import timedelta
@@ -200,99 +199,132 @@ class DepositCryptoTypeValidationTests(TestCase):
 
 
 # ---------------------------------------------------------------------------
-# check_api_config management command tests
+# wallet_addresses_api — admin-managed addresses only (no Bybit)
 # ---------------------------------------------------------------------------
 
-class CheckApiConfigCommandTests(TestCase):
-    """Tests for the check_api_config management command."""
+class WalletAddressApiTests(TestCase):
+    """The wallet API must return only admin-managed WalletAddress records."""
 
-    def _run_command(self, **kwargs):
-        """Helper: run command and capture stdout."""
-        from io import StringIO
-        out = StringIO()
-        call_command('check_api_config', stdout=out, **kwargs)
-        return out.getvalue()
+    def setUp(self):
+        from investments.models import WalletAddress
+        self.user = User.objects.create_user(
+            email='wallet@example.com',
+            password='TestPass123!',
+        )
+        self.client = Client()
+        self.client.login(username='wallet@example.com', password='TestPass123!')
+        WalletAddress.objects.create(
+            crypto_type='BTC',
+            address='1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2',
+            label='Main BTC wallet',
+            is_active=True,
+        )
+        WalletAddress.objects.create(
+            crypto_type='ETH',
+            address='0xAbCd1234AbCd1234AbCd1234AbCd1234AbCd1234',
+            label='',
+            is_active=False,  # inactive — should not appear
+        )
 
-    @patch('django.conf.settings.BYBIT_API_KEY', '', create=True)
-    @patch('django.conf.settings.BYBIT_API_SECRET', '', create=True)
-    def test_missing_credentials_reported(self):
-        """Command reports an error when credentials are not set."""
-        with self.settings(BYBIT_API_KEY='', BYBIT_API_SECRET=''):
-            output = self._run_command()
-        self.assertIn('NOT SET', output)
-        self.assertIn('missing', output.lower())
+    def test_returns_only_active_wallets(self):
+        response = self.client.get(reverse('investments:wallet_addresses_api'))
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertTrue(data['success'])
+        symbols = [w['symbol'] for w in data['wallets']]
+        self.assertIn('BTC', symbols)
+        self.assertNotIn('ETH', symbols)  # inactive
 
-    def test_masked_key_hides_value(self):
-        """_mask helper never returns the full secret."""
-        from investments.management.commands.check_api_config import _mask
-        secret = 'ABCDEF1234567890'
-        result = _mask(secret)
-        # Only the first 4 chars visible; the rest must be asterisks
-        self.assertTrue(result.startswith('ABCD'))
-        self.assertNotIn('EF1234567890', result)
+    def test_wallet_address_fields_present(self):
+        response = self.client.get(reverse('investments:wallet_addresses_api'))
+        wallet = response.json()['wallets'][0]
+        for field in ('symbol', 'name', 'address', 'network', 'qr_code_url'):
+            self.assertIn(field, wallet)
 
-    def test_mask_empty_string(self):
-        """_mask on an empty string returns a descriptive placeholder."""
-        from investments.management.commands.check_api_config import _mask
-        self.assertEqual(_mask(''), '<not set>')
+    def test_unauthenticated_redirects(self):
+        anon = Client()
+        response = anon.get(reverse('investments:wallet_addresses_api'))
+        self.assertIn(response.status_code, [302, 403])
 
-    def test_mask_short_string(self):
-        """_mask on a short string (≤ 4 chars) still works without error."""
-        from investments.management.commands.check_api_config import _mask
-        result = _mask('AB')
-        self.assertTrue(result.startswith('AB'))
 
-    @patch('urllib.request.urlopen')
-    def test_valid_credentials_success(self, mock_urlopen):
-        """Command reports success when Bybit returns retCode=0."""
-        mock_response = MagicMock()
-        mock_response.read.return_value = json.dumps(
-            {'retCode': 0, 'retMsg': 'OK', 'result': {'address': '1A2B3C'}}
-        ).encode('utf-8')
-        mock_urlopen.return_value.__enter__ = lambda s: mock_response
-        mock_urlopen.return_value.__exit__ = MagicMock(return_value=False)
+# ---------------------------------------------------------------------------
+# crypto_ticker_api — CoinGecko-backed live price endpoint
+# ---------------------------------------------------------------------------
 
-        with self.settings(BYBIT_API_KEY='test-key-1234', BYBIT_API_SECRET='test-secret-5678'):
-            output = self._run_command()
-        self.assertIn('VALID', output)
+class CryptoTickerApiTests(TestCase):
+    """Tests for the public crypto ticker API view."""
 
-    @patch('urllib.request.urlopen')
-    def test_invalid_credentials_failure(self, mock_urlopen):
-        """Command reports failure when Bybit returns a non-zero retCode."""
-        mock_response = MagicMock()
-        mock_response.read.return_value = json.dumps(
-            {'retCode': 10003, 'retMsg': 'Invalid api_key'}
-        ).encode('utf-8')
-        mock_urlopen.return_value.__enter__ = lambda s: mock_response
-        mock_urlopen.return_value.__exit__ = MagicMock(return_value=False)
-
-        with self.settings(BYBIT_API_KEY='bad-key-1234', BYBIT_API_SECRET='bad-secret-5678'):
-            output = self._run_command()
-        self.assertIn('FAILED', output)
-        self.assertIn('10003', output)
-
-    @patch('urllib.request.urlopen', side_effect=urllib.error.URLError('timed out'))
-    def test_network_error_reported(self, _mock):
-        """Command reports a network error when the Bybit endpoint is unreachable."""
-        with self.settings(BYBIT_API_KEY='any-key-1234', BYBIT_API_SECRET='any-secret-5678'):
-            output = self._run_command()
-        self.assertIn('FAILED', output)
-        self.assertIn('Network error', output)
+    def setUp(self):
+        from investments.models import CryptoTicker
+        CryptoTicker.objects.create(
+            symbol='BTC', name='Bitcoin', coingecko_id='bitcoin',
+            is_active=True, display_order=0,
+        )
+        CryptoTicker.objects.create(
+            symbol='ETH', name='Ethereum', coingecko_id='ethereum',
+            is_active=True, display_order=1,
+        )
+        CryptoTicker.objects.create(
+            symbol='XRP', name='XRP', coingecko_id='ripple',
+            is_active=False,  # inactive — should not be fetched
+        )
+        self.client = Client()
 
     @patch('urllib.request.urlopen')
-    def test_actual_key_value_never_printed(self, mock_urlopen):
-        """Command output must never contain the raw API key or secret."""
-        mock_response = MagicMock()
-        mock_response.read.return_value = json.dumps(
-            {'retCode': 0, 'retMsg': 'OK', 'result': {}}
-        ).encode('utf-8')
-        mock_urlopen.return_value.__enter__ = lambda s: mock_response
+    def test_returns_active_tickers_with_prices(self, mock_urlopen):
+        mock_resp = MagicMock()
+        mock_resp.read.return_value = json.dumps({
+            'bitcoin':  {'usd': 84000.0, 'usd_24h_change': 1.25},
+            'ethereum': {'usd': 2000.0,  'usd_24h_change': -0.85},
+        }).encode('utf-8')
+        mock_urlopen.return_value.__enter__ = lambda s: mock_resp
         mock_urlopen.return_value.__exit__ = MagicMock(return_value=False)
 
-        key = 'UNIQUEKEY99887766'
-        secret = 'UNIQUESECRET11223344'
-        with self.settings(BYBIT_API_KEY=key, BYBIT_API_SECRET=secret):
-            output = self._run_command()
-        # The raw values must not appear in stdout
-        self.assertNotIn(key[4:], output)
-        self.assertNotIn(secret[4:], output)
+        response = self.client.get(reverse('investments:crypto_ticker_api'))
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertTrue(data['success'])
+        symbols = [t['symbol'] for t in data['tickers']]
+        self.assertIn('BTC', symbols)
+        self.assertIn('ETH', symbols)
+        self.assertNotIn('XRP', symbols)  # inactive
+
+    @patch('urllib.request.urlopen')
+    def test_ticker_fields_present(self, mock_urlopen):
+        mock_resp = MagicMock()
+        mock_resp.read.return_value = json.dumps({
+            'bitcoin':  {'usd': 84000.0, 'usd_24h_change': 1.25},
+            'ethereum': {'usd': 2000.0,  'usd_24h_change': -0.85},
+        }).encode('utf-8')
+        mock_urlopen.return_value.__enter__ = lambda s: mock_resp
+        mock_urlopen.return_value.__exit__ = MagicMock(return_value=False)
+
+        response = self.client.get(reverse('investments:crypto_ticker_api'))
+        ticker = response.json()['tickers'][0]
+        for field in ('symbol', 'name', 'price_usd', 'change_24h'):
+            self.assertIn(field, ticker)
+
+    @patch('urllib.request.urlopen', side_effect=urllib.error.URLError('timeout'))
+    def test_graceful_when_coingecko_unreachable(self, _mock):
+        """On network failure the endpoint must still return 200 with null prices."""
+        response = self.client.get(reverse('investments:crypto_ticker_api'))
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertTrue(data['success'])
+        # prices will be None when API is unreachable
+        for t in data['tickers']:
+            self.assertIsNone(t['price_usd'])
+
+    def test_empty_when_no_active_tickers(self):
+        from investments.models import CryptoTicker
+        CryptoTicker.objects.all().update(is_active=False)
+        response = self.client.get(reverse('investments:crypto_ticker_api'))
+        data = response.json()
+        self.assertTrue(data['success'])
+        self.assertEqual(data['tickers'], [])
+
+    def test_ticker_accessible_without_login(self):
+        """Ticker is a public endpoint — no login required."""
+        anon = Client()
+        response = anon.get(reverse('investments:crypto_ticker_api'))
+        self.assertEqual(response.status_code, 200)

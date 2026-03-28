@@ -39,7 +39,7 @@ class SecurityHeadersMiddleware:
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; "
             "img-src 'self' data: https: blob:; "
             "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; "
-            "connect-src 'self' https://api.bybit.com https://www.google-analytics.com; "
+            "connect-src 'self' https://api.coingecko.com https://www.google-analytics.com; "
             "frame-src 'self'; "
             "worker-src blob: 'self'; "
             "object-src 'none'; "
