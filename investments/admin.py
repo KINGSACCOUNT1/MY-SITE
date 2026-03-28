@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from django.http import HttpResponse
+from django.utils import timezone
 import csv
 from .models import (InvestmentPlan, Investment, Deposit, Withdrawal, WalletAddress,
                      Loan, LoanRepayment, VirtualCard, Coupon, CouponUsage, 
@@ -161,13 +162,35 @@ class WithdrawalAdmin(admin.ModelAdmin):
 
 @admin.register(WalletAddress)
 class WalletAddressAdmin(admin.ModelAdmin):
-    list_display = ['crypto_type', 'address_short', 'label', 'is_active', 'created_at']
+    list_display = ['crypto_type', 'address_short', 'qr_preview', 'label', 'is_active', 'created_at']
     list_filter = ['crypto_type', 'is_active']
     list_editable = ['is_active']
+    search_fields = ['address', 'label']
+    
+    fieldsets = (
+        ('💰 Wallet Configuration', {
+            'fields': ('crypto_type', 'address', 'label', 'network'),
+            'description': '<strong style="color: blue;">⚠️ ADD WALLET ADDRESSES HERE - Users will see these on the deposit page</strong>'
+        }),
+        ('QR Code (Optional)', {
+            'fields': ('qr_code_image',),
+            'description': 'Upload QR code image for this wallet address (optional)'
+        }),
+        ('Status', {
+            'fields': ('is_active',),
+            'description': 'Only active wallets are shown to users'
+        }),
+    )
     
     def address_short(self, obj):
-        return f'{obj.address[:20]}...'
-    address_short.short_description = 'Address'
+        return format_html('<code>{}</code>', f'{obj.address[:20]}...' if len(obj.address) > 20 else obj.address)
+    address_short.short_description = 'Wallet Address'
+    
+    def qr_preview(self, obj):
+        if obj.qr_code_image:
+            return format_html('<img src="{}" style="width: 50px; height: 50px;" />', obj.qr_code_image.url)
+        return '❌'
+    qr_preview.short_description = 'QR Code'
 
 
 @admin.register(Loan)
@@ -216,9 +239,93 @@ class AgentApplicationAdmin(admin.ModelAdmin):
 
 @admin.register(AccountUpgrade)
 class AccountUpgradeAdmin(admin.ModelAdmin):
-    list_display = ['user', 'requested_tier', 'amount', 'status', 'created_at']
+    list_display = ['user', 'current_tier_display', 'requested_tier', 'amount', 'status_badge', 'created_at', 'actions_display']
     list_filter = ['status', 'requested_tier']
     search_fields = ['user__email']
+    actions = ['approve_upgrades', 'reject_upgrades']
+    
+    fieldsets = (
+        ('User & Request', {
+            'fields': ('user', 'requested_tier', 'amount')
+        }),
+        ('✅ APPROVAL', {
+            'fields': ('status', 'rejection_reason', 'processed_by', 'processed_at'),
+            'description': '<strong style="color: green;">Change status to "Approved" to upgrade user account</strong>'
+        }),
+    )
+    
+    readonly_fields = ['user', 'created_at']
+    
+    def current_tier_display(self, obj):
+        return obj.user.get_account_type_display()
+    current_tier_display.short_description = 'Current Tier'
+    
+    def status_badge(self, obj):
+        colors = {
+            'pending': 'orange',
+            'approved': 'green',
+            'rejected': 'red'
+        }
+        color = colors.get(obj.status, 'gray')
+        return format_html(
+            '<span style="background-color: {}; color: white; padding: 3px 8px; border-radius: 3px;">{}</span>',
+            color, obj.get_status_display()
+        )
+    status_badge.short_description = 'Status'
+    
+    def actions_display(self, obj):
+        if obj.status == 'pending':
+            return format_html('<span style="color: orange;">⏳ Waiting for approval</span>')
+        return '-'
+    actions_display.short_description = 'Quick Action'
+    
+    def approve_upgrades(self, request, queryset):
+        """Approve account upgrades and update user tier"""
+        count = 0
+        for upgrade in queryset.filter(status='pending'):
+            # Update user account type
+            user = upgrade.user
+            user.account_type = upgrade.requested_tier
+            user.save()
+            
+            # Mark upgrade as approved
+            upgrade.status = 'approved'
+            upgrade.processed_by = request.user
+            upgrade.processed_at = timezone.now()
+            upgrade.save()
+            count += 1
+        
+        self.message_user(request, f'{count} account upgrades approved!')
+    approve_upgrades.short_description = '✅ Approve selected upgrades'
+    
+    def reject_upgrades(self, request, queryset):
+        """Reject account upgrades"""
+        count = 0
+        for upgrade in queryset.filter(status='pending'):
+            upgrade.status = 'rejected'
+            upgrade.processed_by = request.user
+            upgrade.processed_at = timezone.now()
+            upgrade.rejection_reason = 'Rejected by admin'
+            upgrade.save()
+            count += 1
+        
+        self.message_user(request, f'{count} account upgrades rejected.')
+    reject_upgrades.short_description = '❌ Reject selected upgrades'
+    
+    def save_model(self, request, obj, form, change):
+        """Auto-upgrade user account when admin approves"""
+        if change:
+            old_status = AccountUpgrade.objects.get(pk=obj.pk).status
+            if old_status != obj.status and obj.status == 'approved':
+                # Upgrade the user's account
+                user = obj.user
+                user.account_type = obj.requested_tier
+                user.save()
+                
+                obj.processed_by = request.user
+                obj.processed_at = timezone.now()
+        
+        super().save_model(request, obj, form, change)
 
 
 admin.site.register(LoanRepayment)

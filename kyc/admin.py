@@ -1,15 +1,17 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from django.utils import timezone
 from .models import KYCDocument
 
 
 @admin.register(KYCDocument)
 class KYCDocumentAdmin(admin.ModelAdmin):
     list_display = ['user', 'document_type', 'document_number', 'status_badge', 
-                    'submitted_at', 'reviewed_at']
+                    'submitted_at', 'reviewed_at', 'quick_verify']
     list_filter = ['status', 'document_type', 'submitted_at']
     search_fields = ['user__email', 'document_number']
-    readonly_fields = ['user', 'submitted_at', 'front_image', 'back_image', 'selfie_image']
+    readonly_fields = ['user', 'submitted_at', 'front_image_preview', 'back_image_preview', 'selfie_image_preview']
+    actions = ['verify_kyc', 'reject_kyc']
     
     fieldsets = (
         ('User', {'fields': ('user',)}),
@@ -18,11 +20,12 @@ class KYCDocumentAdmin(admin.ModelAdmin):
                       'issuing_authority', 'date_of_birth', 'nationality',
                       'issue_date', 'expires_at')
         }),
-        ('Uploaded Images', {
-            'fields': ('front_image', 'back_image', 'selfie_image')
+        ('📷 Uploaded Images', {
+            'fields': ('front_image_preview', 'back_image_preview', 'selfie_image_preview')
         }),
-        ('Review', {
-            'fields': ('status', 'rejection_reason', 'reviewed_by', 'reviewed_at')
+        ('✅ REVIEW & VERIFY', {
+            'fields': ('status', 'rejection_reason', 'reviewed_by', 'reviewed_at'),
+            'description': '<strong style="color: blue;">Change status to "Verified" to approve KYC</strong>'
         }),
     )
     
@@ -39,3 +42,83 @@ class KYCDocumentAdmin(admin.ModelAdmin):
             color, obj.get_status_display()
         )
     status_badge.short_description = 'Status'
+    
+    def quick_verify(self, obj):
+        if obj.status == 'pending' or obj.status == 'submitted':
+            return format_html(
+                '<a class="button" style="background-color: green; color: white;" href="#" onclick="return false;">Click "Verify KYC" action above</a>'
+            )
+        return '-'
+    quick_verify.short_description = 'Quick Action'
+    
+    def front_image_preview(self, obj):
+        if obj.front_image:
+            return format_html('<img src="{}" style="max-width: 300px; max-height: 300px;" />', obj.front_image.url)
+        return 'No image'
+    front_image_preview.short_description = 'Front Image'
+    
+    def back_image_preview(self, obj):
+        if obj.back_image:
+            return format_html('<img src="{}" style="max-width: 300px; max-height: 300px;" />', obj.back_image.url)
+        return 'No image'
+    back_image_preview.short_description = 'Back Image'
+    
+    def selfie_image_preview(self, obj):
+        if obj.selfie_image:
+            return format_html('<img src="{}" style="max-width: 300px; max-height: 300px;" />', obj.selfie_image.url)
+        return 'No image'
+    selfie_image_preview.short_description = 'Selfie'
+    
+    def verify_kyc(self, request, queryset):
+        """Bulk verify KYC documents"""
+        count = 0
+        for kyc in queryset:
+            if kyc.status != 'verified':
+                kyc.status = 'verified'
+                kyc.reviewed_by = request.user
+                kyc.reviewed_at = timezone.now()
+                kyc.save()
+                
+                # Update user KYC status
+                user = kyc.user
+                user.kyc_status = 'verified'
+                user.save()
+                count += 1
+        
+        self.message_user(request, f'{count} KYC documents verified successfully!')
+    verify_kyc.short_description = '✅ Verify selected KYC documents'
+    
+    def reject_kyc(self, request, queryset):
+        """Bulk reject KYC documents"""
+        count = 0
+        for kyc in queryset:
+            if kyc.status != 'rejected':
+                kyc.status = 'rejected'
+                kyc.reviewed_by = request.user
+                kyc.reviewed_at = timezone.now()
+                kyc.rejection_reason = 'Rejected by admin'
+                kyc.save()
+                
+                # Update user KYC status
+                user = kyc.user
+                user.kyc_status = 'rejected'
+                user.save()
+                count += 1
+        
+        self.message_user(request, f'{count} KYC documents rejected.')
+    reject_kyc.short_description = '❌ Reject selected KYC documents'
+    
+    def save_model(self, request, obj, form, change):
+        """Auto-update user KYC status when admin changes KYC document status"""
+        if change:
+            old_status = KYCDocument.objects.get(pk=obj.pk).status
+            if old_status != obj.status:
+                obj.reviewed_by = request.user
+                obj.reviewed_at = timezone.now()
+                
+                # Update user's KYC status
+                user = obj.user
+                user.kyc_status = obj.status
+                user.save()
+        
+        super().save_model(request, obj, form, change)

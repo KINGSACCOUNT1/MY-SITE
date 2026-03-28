@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
+from django.urls import reverse
+from django.utils.safestring import mark_safe
 from .models import CustomUser, ActivityLog, Referral
 
 
@@ -8,7 +10,7 @@ from .models import CustomUser, ActivityLog, Referral
 class CustomUserAdmin(UserAdmin):
     list_display = ['email', 'full_name', 'balance_display', 'invested_display', 
                     'profit_display', 'account_badge', 'kyc_badge', 'status_badge', 
-                    'referral_code', 'joined_date']
+                    'referral_code', 'joined_date', 'quick_actions']
     list_filter = ['is_active', 'is_staff', 'account_type', 'kyc_status', 
                    'email_verified', 'two_fa_enabled', 'date_joined']
     search_fields = ['email', 'full_name', 'phone', 'referral_code', 'country']
@@ -21,18 +23,19 @@ class CustomUserAdmin(UserAdmin):
         ('Personal Information', {
             'fields': ('full_name', 'phone', 'country', 'profile_image')
         }),
-        ('Financial Management', {
+        ('💰 FINANCIAL MANAGEMENT (EDIT HERE)', {
             'fields': ('balance', 'invested_amount', 'total_profit', 'total_withdrawn', 'referral_bonus'),
-            'description': 'Edit these fields to manually adjust user balances'
+            'description': '<strong style="color: red;">⚠️ ADMIN CONTROLS: Manually adjust user balances, profits, and investments here</strong>'
         }),
         ('Referral System', {
             'fields': ('referral_code', 'referred_by')
         }),
-        ('Account Status', {
-            'fields': ('account_type', 'kyc_status')
+        ('🔐 ACCOUNT STATUS & UPGRADES', {
+            'fields': ('account_type', 'kyc_status', 'email_verified'),
+            'description': '<strong style="color: blue;">✅ Change account type (Beginner → VIP) and verify KYC here</strong>'
         }),
         ('Security Settings', {
-            'fields': ('two_fa_enabled', 'two_fa_secret', 'email_verified', 
+            'fields': ('two_fa_enabled', 'two_fa_secret', 
                       'failed_login_attempts', 'locked_until'),
             'classes': ('collapse',)
         }),
@@ -107,6 +110,13 @@ class CustomUserAdmin(UserAdmin):
     def joined_date(self, obj):
         return obj.date_joined.strftime('%Y-%m-%d')
     joined_date.short_description = 'Joined'
+    
+    def quick_actions(self, obj):
+        return format_html(
+            '<a class="button" href="{}">Edit User</a>',
+            reverse('admin:accounts_customuser_change', args=[obj.pk])
+        )
+    quick_actions.short_description = 'Actions'
 
 
 @admin.register(ActivityLog)
