@@ -50,7 +50,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://unpkg.com">
     <!-- DNS Prefetch for non-critical resources -->
-    <link rel="dns-prefetch" href="https://api.bybit.com">
+    <link rel="dns-prefetch" href="https://api.coingecko.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap"
         rel="stylesheet">
@@ -559,7 +559,7 @@
     <section id="crypto-market" style="background: #070d1a; padding: 60px 0; overflow: hidden;">
         <div class="container">
             <div style="text-align: center; margin-bottom: 2.5rem;">
-                <p style="color: #F59E0B; font-size: 0.82rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 0.5rem;">Powered by Bybit</p>
+                <p style="color: #F59E0B; font-size: 0.82rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 0.5rem;">Live Market Data</p>
                 <h2 style="color: #fff; font-size: 1.8rem; font-weight: 800; margin: 0 0 0.5rem;">&#128200; Live Crypto Market</h2>
                 <p style="color: #64748b; font-size: 0.92rem;">Real-time prices updated automatically</p>
             </div>
@@ -608,42 +608,51 @@
             const grid = document.getElementById('cryptoPriceGrid');
             if (!grid) return;
             const coins = [
-                { s: 'BTC',  n: 'Bitcoin',    b: 'BTCUSDT',   fp: 84000,    fc: 1.2  },
-                { s: 'ETH',  n: 'Ethereum',   b: 'ETHUSDT',   fp: 2000,     fc: -0.8 },
-                { s: 'BNB',  n: 'BNB',        b: 'BNBUSDT',   fp: 580,      fc: 0.9  },
-                { s: 'SOL',  n: 'Solana',     b: 'SOLUSDT',   fp: 135,      fc: 2.1  },
-                { s: 'XRP',  n: 'XRP',        b: 'XRPUSDT',   fp: 2.20,     fc: 1.3  },
-                { s: 'USDT', n: 'Tether',     b: null,        fp: 1,        fc: 0    },
-                { s: 'ADA',  n: 'Cardano',    b: 'ADAUSDT',   fp: 0.72,     fc: -0.4 },
-                { s: 'DOGE', n: 'Dogecoin',   b: 'DOGEUSDT',  fp: 0.18,     fc: 3.2  },
-                { s: 'AVAX', n: 'Avalanche',  b: 'AVAXUSDT',  fp: 22,       fc: 1.8  },
-                { s: 'LTC',  n: 'Litecoin',   b: 'LTCUSDT',   fp: 92,       fc: 0.6  },
-                { s: 'LINK', n: 'Chainlink',  b: 'LINKUSDT',  fp: 13.5,     fc: 2.3  },
-                { s: 'DOT',  n: 'Polkadot',   b: 'DOTUSDT',   fp: 5.2,      fc: -1.2 },
+                { s: 'BTC',  n: 'Bitcoin',    cg: 'bitcoin',     fp: 84000,  fc: 1.2  },
+                { s: 'ETH',  n: 'Ethereum',   cg: 'ethereum',    fp: 2000,   fc: -0.8 },
+                { s: 'BNB',  n: 'BNB',        cg: 'binancecoin', fp: 580,    fc: 0.9  },
+                { s: 'SOL',  n: 'Solana',     cg: 'solana',      fp: 135,    fc: 2.1  },
+                { s: 'XRP',  n: 'XRP',        cg: 'ripple',      fp: 2.20,   fc: 1.3  },
+                { s: 'USDT', n: 'Tether',     cg: null,          fp: 1,      fc: 0    },
+                { s: 'ADA',  n: 'Cardano',    cg: 'cardano',     fp: 0.72,   fc: -0.4 },
+                { s: 'DOGE', n: 'Dogecoin',   cg: 'dogecoin',    fp: 0.18,   fc: 3.2  },
+                { s: 'AVAX', n: 'Avalanche',  cg: 'avalanche-2', fp: 22,     fc: 1.8  },
+                { s: 'LTC',  n: 'Litecoin',   cg: 'litecoin',    fp: 92,     fc: 0.6  },
+                { s: 'LINK', n: 'Chainlink',  cg: 'chainlink',   fp: 13.5,   fc: 2.3  },
+                { s: 'DOT',  n: 'Polkadot',   cg: 'polkadot',    fp: 5.2,    fc: -1.2 },
             ];
-            let map = {};
+
+            // Build live prices map from CoinGecko public API
+            let priceMap = {};
             try {
-                const r = await fetch('https://api.bybit.com/v5/market/tickers?category=spot');
+                const ids = coins.filter(c => c.cg).map(c => c.cg).join(',');
+                const r = await fetch(
+                    `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`,
+                    { headers: { 'User-Agent': 'EliteWealthCapital/1.0' } }
+                );
                 if (r.ok) {
                     const j = await r.json();
-                    if (j.retCode === 0 && j.result && j.result.list)
-                        j.result.list.forEach(t => { map[t.symbol] = { price: parseFloat(t.lastPrice), change: parseFloat(t.price24hPcnt) * 100 }; });
+                    Object.entries(j).forEach(([id, v]) => {
+                        priceMap[id] = { price: v.usd, change: v.usd_24h_change || 0 };
+                    });
                 }
             } catch(_) {}
 
             grid.innerHTML = '';
             coins.forEach(c => {
-                const d = c.bybitPair ? (map[c.bybitPair] || { price: c.fallbackPrice, change: c.fallbackChange }) : { price: c.fallbackPrice, change: c.fallbackChange };
-                const ch = d.change.toFixed(2);
-                const up = d.change >= 0;
-                const priceStr = d.price >= 1000 ? '$' + d.price.toLocaleString(undefined,{maximumFractionDigits:2})
-                               : d.price >= 1 ? '$' + d.price.toFixed(2)
-                               : '$' + d.price.toFixed(6);
+                const live = c.cg ? priceMap[c.cg] : null;
+                const price  = live ? live.price  : c.fp;
+                const change = live ? live.change : c.fc;
+                const ch  = parseFloat(change).toFixed(2);
+                const up  = parseFloat(change) >= 0;
+                const priceStr = price >= 1000 ? '$' + parseFloat(price).toLocaleString('en-US',{maximumFractionDigits:2})
+                               : price >= 1    ? '$' + parseFloat(price).toFixed(2)
+                               : '$' + parseFloat(price).toFixed(6);
                 const card = document.createElement('div');
                 card.className = 'cp-card';
                 card.innerHTML = `
-                    <div class="cp-symbol">${c.symbol}</div>
-                    <div class="cp-name">${c.name}</div>
+                    <div class="cp-symbol">${c.s}</div>
+                    <div class="cp-name">${c.n}</div>
                     <div class="cp-price">${priceStr}</div>
                     <div class="cp-change ${up ? 'up' : 'dn'}">${up ? '&#9650;' : '&#9660;'} ${up ? '+' : ''}${ch}%</div>
                 `;
@@ -653,84 +662,98 @@
     </script>
 
     <!-- =================== PARTNERS & PLATFORMS SECTION =================== -->
-    <section class="section partners-section" style="background: #0f1926; padding: 60px 0;">
+    <style>
+        @keyframes ewcMarquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+        .ewc-marquee-track { display: flex; animation: ewcMarquee 28s linear infinite; width: max-content; }
+        .ewc-marquee-track:hover { animation-play-state: paused; }
+        .ewc-partner-pill {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 12px 24px; margin: 0 10px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 50px;
+            transition: background 0.3s, border-color 0.3s, transform 0.3s;
+            text-decoration: none; white-space: nowrap; cursor: pointer;
+        }
+        .ewc-partner-pill:hover {
+            background: rgba(212,175,55,0.12);
+            border-color: rgba(212,175,55,0.5);
+            transform: translateY(-2px);
+        }
+        .ewc-partner-pill img { height: 28px; filter: brightness(0) invert(1); opacity: 0.8; transition: opacity 0.3s; }
+        .ewc-partner-pill:hover img { opacity: 1; filter: none; }
+        .ewc-partner-pill span { color: #e2e8f0; font-size: 0.9rem; font-weight: 600; }
+        .ewc-trust-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            color: #94a3b8; font-size: 0.82rem; font-weight: 500;
+        }
+    </style>
+
+    <section style="background: #0a0f1e; padding: 70px 0; overflow: hidden;">
         <div class="container">
-            <div class="text-center mb-4">
-                <p
-                    style="color: #64748b; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem;">
-                    Partnered With World-Class Organizations</p>
-                <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 2rem;">Trusted by Global Industry Leaders</h3>
+            <!-- Header -->
+            <div style="text-align:center; margin-bottom:48px;">
+                <span style="display:inline-block; color:#d4af37; font-size:0.82rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px;">Ecosystem &amp; Partners</span>
+                <h2 style="color:#fff; font-size:2rem; font-weight:800; margin:0 0 12px;">Trusted by Global Industry Leaders</h2>
+                <p style="color:#64748b; font-size:0.95rem; max-width:520px; margin:0 auto;">Integrated with the world's leading cryptocurrency exchanges, wallets, and financial platforms.</p>
             </div>
 
-            <div class="partners-grid"
-                style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: center;">
-                <!-- Binance -->
-                <a href="https://www.binance.com" target="_blank" title="Binance"
-                    style="opacity: 0.8; transition: all 0.3s;">
-                    <img src="{% static 'images/logo-binance.png' %}" alt="Binance" width="120" height="35"
-                        style="height: 35px; filter: grayscale(100%) brightness(200%); transition: all 0.3s;">
-                </a>
-                <!-- Coinbase -->
-                <a href="https://www.coinbase.com" target="_blank" title="Coinbase"
-                    style="opacity: 0.8; transition: all 0.3s;">
-                    <img src="{% static 'images/logo-coinbase.png' %}" alt="Coinbase" width="120" height="30"
-                        style="height: 30px; filter: grayscale(100%) brightness(200%); transition: all 0.3s;">
-                </a>
-                <!-- Bybit -->
-                <a href="https://www.bybit.com" target="_blank" title="Bybit"
-                    style="opacity: 0.8; transition: all 0.3s;">
-                    <img src="{% static 'images/logo-bybit.png' %}" alt="Bybit" width="120" height="30"
-                        style="height: 30px; filter: grayscale(100%) brightness(200%); transition: all 0.3s;">
-                </a>
-                <!-- KuCoin -->
-                <a href="https://www.kucoin.com" target="_blank" title="KuCoin"
-                    style="opacity: 0.8; transition: all 0.3s;">
-                    <img src="{% static 'images/logo-kucoin.png' %}" alt="KuCoin" width="120" height="30"
-                        style="height: 30px; filter: grayscale(100%) brightness(200%); transition: all 0.3s;">
-                </a>
-                <!-- OKX -->
-                <a href="https://www.okx.com" target="_blank" title="OKX"
-                    style="opacity: 0.8; transition: all 0.3s;">
-                    <img src="{% static 'images/logo-okx.png' %}" alt="OKX" width="120" height="30"
-                        style="height: 30px; filter: grayscale(100%) brightness(200%); transition: all 0.3s;">
-                </a>
-                <!-- Metamask -->
-                <a href="https://metamask.io" target="_blank" title="Metamask"
-                    style="opacity: 0.8; transition: all 0.3s;">
-                    <img src="{% static 'images/logo-metamask.png' %}" alt="Metamask" width="120" height="40"
-                        style="height: 40px; filter: grayscale(100%); transition: all 0.3s;">
-                </a>
-                <!-- Trust Wallet -->
-                <a href="https://trustwallet.com" target="_blank" title="Trust Wallet"
-                    style="opacity: 0.8; transition: all 0.3s;">
-                    <img src="{% static 'images/logo-trustwallet.png' %}" alt="Trust Wallet" width="120" height="40"
-                        style="height: 40px; filter: grayscale(100%); transition: all 0.3s;">
-                </a>
+            <!-- Auto-scrolling partner marquee -->
+            <div style="overflow:hidden; mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent); -webkit-mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent);">
+                <div class="ewc-marquee-track">
+                    <!-- Set 1 -->
+                    <a href="https://www.binance.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-label="Binance">
+                        <img src="{% static 'images/logo-binance.png' %}" alt="Binance" loading="lazy" height="26"><span>Binance</span>
+                    </a>
+                    <a href="https://www.coinbase.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-label="Coinbase">
+                        <img src="{% static 'images/logo-coinbase.png' %}" alt="Coinbase" loading="lazy" height="26"><span>Coinbase</span>
+                    </a>
+                    <a href="https://www.kucoin.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-label="KuCoin">
+                        <img src="{% static 'images/logo-kucoin.png' %}" alt="KuCoin" loading="lazy" height="26"><span>KuCoin</span>
+                    </a>
+                    <a href="https://www.okx.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-label="OKX">
+                        <img src="{% static 'images/logo-okx.png' %}" alt="OKX" loading="lazy" height="26"><span>OKX</span>
+                    </a>
+                    <a href="https://metamask.io" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-label="MetaMask">
+                        <img src="{% static 'images/logo-metamask.png' %}" alt="MetaMask" loading="lazy" height="26"><span>MetaMask</span>
+                    </a>
+                    <a href="https://trustwallet.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-label="Trust Wallet">
+                        <img src="{% static 'images/logo-trustwallet.png' %}" alt="Trust Wallet" loading="lazy" height="26"><span>Trust Wallet</span>
+                    </a>
+                    <!-- Set 2 — duplicate for seamless infinite loop -->
+                    <a href="https://www.binance.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-label="Binance" aria-hidden="true">
+                        <img src="{% static 'images/logo-binance.png' %}" alt="" loading="lazy" height="26"><span>Binance</span>
+                    </a>
+                    <a href="https://www.coinbase.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-hidden="true">
+                        <img src="{% static 'images/logo-coinbase.png' %}" alt="" loading="lazy" height="26"><span>Coinbase</span>
+                    </a>
+                    <a href="https://www.kucoin.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-hidden="true">
+                        <img src="{% static 'images/logo-kucoin.png' %}" alt="" loading="lazy" height="26"><span>KuCoin</span>
+                    </a>
+                    <a href="https://www.okx.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-hidden="true">
+                        <img src="{% static 'images/logo-okx.png' %}" alt="" loading="lazy" height="26"><span>OKX</span>
+                    </a>
+                    <a href="https://metamask.io" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-hidden="true">
+                        <img src="{% static 'images/logo-metamask.png' %}" alt="" loading="lazy" height="26"><span>MetaMask</span>
+                    </a>
+                    <a href="https://trustwallet.com" target="_blank" rel="noopener noreferrer" class="ewc-partner-pill" aria-hidden="true">
+                        <img src="{% static 'images/logo-trustwallet.png' %}" alt="" loading="lazy" height="26"><span>Trust Wallet</span>
+                    </a>
+                </div>
             </div>
 
-            <!-- Certification Badges -->
-            <div
-                style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
-                <div style="display: flex; align-items: center; gap: 10px; color: #94a3b8;">
-                    <span style="font-size: 1.5rem;">🔒</span>
-                    <span style="font-size: 0.85rem;">256-bit SSL Secured</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 10px; color: #94a3b8;">
-                    <span style="font-size: 1.5rem;">✓</span>
-                    <span style="font-size: 0.85rem;">Compliance Focused</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 10px; color: #94a3b8;">
-                    <span style="font-size: 1.5rem;">🛡️</span>
-                    <span style="font-size: 0.85rem;">Secure Platform</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 10px; color: #94a3b8;">
-                    <span style="font-size: 1.5rem;">⭐</span>
-                    <span style="font-size: 0.85rem;">Trusted by 50,000+</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 10px; color: #94a3b8;">
-                    <span style="font-size: 1.5rem;">🌐</span>
-                    <span style="font-size: 0.85rem;">Global Operations</span>
-                </div>
+            <!-- Trust badges row -->
+            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:48px; padding-top:40px; border-top:1px solid rgba(255,255,255,0.07);">
+                <div class="ewc-trust-badge"><span>🔒</span> 256-bit SSL Encryption</div>
+                <div class="ewc-trust-badge"><span>✅</span> KYC / AML Verified</div>
+                <div class="ewc-trust-badge"><span>🛡️</span> Segregated Client Funds</div>
+                <div class="ewc-trust-badge"><span>⭐</span> Trusted by 50,000+ Investors</div>
+                <div class="ewc-trust-badge"><span>🌐</span> Operations in 85+ Countries</div>
+                <div class="ewc-trust-badge"><span>📋</span> Quarterly Audited</div>
             </div>
         </div>
     </section>

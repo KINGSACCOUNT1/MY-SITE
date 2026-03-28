@@ -83,12 +83,21 @@
             'backdrop-filter:blur(8px)',
         ].join(';');
 
+        // Inject the @keyframes definition once so the ticker animation always
+        // works — even when style.css is still lazy-loading.
+        if (!document.getElementById('ewc-ticker-kf')) {
+            var kfStyle = document.createElement('style');
+            kfStyle.id = 'ewc-ticker-kf';
+            kfStyle.textContent = '@keyframes ewcTicker{from{transform:translateX(0)}to{transform:translateX(-50%)}}';
+            document.head.appendChild(kfStyle);
+        }
+
         const tickerTrack = tickerContainer.querySelector('.ticker-track');
         if (!tickerTrack) return;
 
         tickerTrack.style.cssText = [
             'display:flex', 'align-items:center', 'gap:0', 'white-space:nowrap',
-            'animation:ticker 45s linear infinite',
+            'animation:ewcTicker 45s linear infinite',
         ].join(';');
 
         // Static fallback data shown while live prices load or if the API is
