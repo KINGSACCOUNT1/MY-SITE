@@ -200,14 +200,13 @@
                     </div>
 
                     <div class="form-group" style="margin-bottom:2rem;">
-                        <label style="display:block; margin-bottom:0.5rem; font-weight:600; color:#e2e8f0;">ID Document <span style="color:#94a3b8; font-weight:400;">(optional — passport, ID card, or driver's licence)</span></label>
+                        <label style="display:block; margin-bottom:0.5rem; font-weight:600; color:#e2e8f0;">ID Document <span style="color:#94a3b8; font-weight:400;">(optional — passport, ID card, or driver's license)</span></label>
                         <label style="display:flex; align-items:center; gap:0.75rem; padding:0.75rem; background:rgba(15,23,42,0.8); border:1px solid #334155; border-radius:0.5rem; cursor:pointer;">
                             <span style="font-size:1.5rem;">📎</span>
                             <span id="docLabel" style="color:#64748b; font-size:0.9rem;">Click to upload ID document (PDF, JPG, PNG — max 10MB)</span>
                             <input type="file" name="id_document" id="idDocument" style="display:none;"
                                 accept=".pdf,.jpg,.jpeg,.png"
-                                onchange="document.getElementById('docLabel').textContent=this.files[0]?this.files[0].name:'Click to upload ID document'; document.getElementById('docLabel').style.color=this.files[0]?'#FFD700':'#64748b';">
-                        </label>
+                                onchange="document.getElementById('docLabel').textContent=this.files[0]?this.files[0].name:'Click to upload ID document'; document.getElementById('docLabel').style.color=this.files[0]?'#FFD700':'#64748b';">                        </label>
                     </div>
 
                     <div style="display:flex; gap:1rem; flex-wrap:wrap;">

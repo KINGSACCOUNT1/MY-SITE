@@ -299,14 +299,22 @@ def invest(request, plan_id):
 @login_required
 def my_investments(request):
     """Display user's investments."""
-    investments = Investment.objects.filter(user=request.user).order_by('-start_date')
+    from django.db.models import Sum
+    from decimal import Decimal
+
+    investments = Investment.objects.filter(user=request.user).select_related('plan').order_by('-start_date')
     active_investments = investments.filter(status='active')
     completed_investments = investments.filter(status='completed')
-    
+
+    total_invested = active_investments.aggregate(total=Sum('amount'))['total'] or Decimal('0')
+    total_expected_profit = active_investments.aggregate(total=Sum('expected_profit'))['total'] or Decimal('0')
+
     context = {
         'investments': investments,
         'active_investments': active_investments,
         'completed_investments': completed_investments,
+        'total_invested': total_invested,
+        'total_expected_profit': total_expected_profit,
     }
     return render(request, 'investments/my_investments.html', context)
 

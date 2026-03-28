@@ -93,6 +93,7 @@
                                 <i class="fas fa-paper-plane me-2"></i>Send Message
                             </button>
                         </div>
+                        <div id="formError" role="alert" aria-live="polite" style="display:none; color:#f87171; font-size:0.85rem; margin-top:0.5rem; padding:0.5rem 0.75rem; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); border-radius:8px;"></div>
                     </form>
                 </div>
             </div>
@@ -176,7 +177,10 @@ document.getElementById('composeForm').addEventListener('submit', function(e) {
     const recipientId = document.getElementById('recipientId');
     if (recipientId && !recipientId.value) {
         e.preventDefault();
-        alert('Please select a recipient.');
+        const errorEl = document.getElementById('formError');
+        errorEl.textContent = 'Please select a recipient before sending.';
+        errorEl.style.display = 'block';
+        document.getElementById('recipientSearch').focus();
     }
 });
 </script>

@@ -113,21 +113,15 @@
                 </div>
                 <div class="inv-stat-card">
                     <div class="inv-stat-label">Total Invested</div>
-                    <div class="inv-stat-value" style="color:#FFD700;">
-                        ${% with total=active_investments|length %}
-                        {% if active_investments %}
-                            {{ active_investments.0.amount|floatformat:0 }}
-                        {% else %}0{% endif %}
-                        {% endwith %}
-                    </div>
+                    <div class="inv-stat-value" style="color:#FFD700;">${{ total_invested|floatformat:2 }}</div>
+                </div>
+                <div class="inv-stat-card">
+                    <div class="inv-stat-label">Expected Profit</div>
+                    <div class="inv-stat-value" style="color:#34d399;">${{ total_expected_profit|floatformat:2 }}</div>
                 </div>
                 <div class="inv-stat-card">
                     <div class="inv-stat-label">Completed</div>
-                    <div class="inv-stat-value" style="color:#34d399;">{{ completed_investments.count }}</div>
-                </div>
-                <div class="inv-stat-card">
-                    <div class="inv-stat-label">Total Investments</div>
-                    <div class="inv-stat-value" style="color:#e2e8f0;">{{ investments.count }}</div>
+                    <div class="inv-stat-value" style="color:#e2e8f0;">{{ completed_investments.count }}</div>
                 </div>
             </div>
 
