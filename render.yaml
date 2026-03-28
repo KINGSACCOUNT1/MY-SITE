@@ -1,15 +1,17 @@
-# Render Blueprint for Elite Wealth Capital
+# Render Blueprint for MY-SITE
 # Auto-deploy enabled with instant rollover
+# NOTE: This service (my-site) is completely separate from the elite-wealthcapita
+# repository and its Render service. Do NOT connect them to the same service.
 
 databases:
-  - name: elite-wealth-db
-    databaseName: elite_wealth
-    user: elite_admin
+  - name: my-site-db
+    databaseName: my_site
+    user: my_site_admin
     plan: free
 
 services:
   - type: web
-    name: elite-wealth-capita
+    name: my-site
     runtime: docker
     plan: starter
     region: oregon
@@ -29,7 +31,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: elite-wealth-db
+          name: my-site-db
           property: connectionString
       - key: DJANGO_SETTINGS_MODULE
         value: elite_wealth.settings
@@ -38,19 +40,19 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: ALLOWED_HOSTS
-        value: ".onrender.com,elite-wealth-capita.onrender.com,.elitewealthcapita.uk,elitewealthcapita.uk,www.elitewealthcapita.uk"
+        value: ".onrender.com,my-site.onrender.com"
       - key: PYTHON_VERSION
         value: "3.12.0"
-      # Email settings (Zoho)
+      # Email settings - set these in the Render dashboard
       - key: EMAIL_HOST
-        value: smtp.zoho.com
+        value: smtp.gmail.com
       - key: EMAIL_PORT
         value: "587"
       - key: EMAIL_HOST_USER
-        value: admin@elitewealthcapita.uk
+        sync: false  # Set in dashboard - your email address
       - key: EMAIL_HOST_PASSWORD
-        sync: false  # Set in dashboard - your Zoho app password
+        sync: false  # Set in dashboard - your email app password
       - key: DEFAULT_FROM_EMAIL
-        value: noreply@elitewealthcapita.uk
+        sync: false  # Set in dashboard - your from email address
       - key: ADMIN_NOTIFICATION_EMAIL
-        value: admin@elitewealthcapita.uk
+        sync: false  # Set in dashboard - admin notification email
