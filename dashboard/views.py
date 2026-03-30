@@ -145,6 +145,30 @@ def contact(request):
     return render(request, 'dashboard/contact.html')
 
 
+@login_required
+def dispute(request):
+    """Dispute and support page"""
+    if request.method == 'POST':
+        from .models import ContactMessage
+        
+        subject = request.POST.get('subject', 'Support Request')
+        message = request.POST.get('message')
+        dispute_type = request.POST.get('dispute_type', 'general')
+        
+        # Create support ticket
+        ContactMessage.objects.create(
+            name=request.user.full_name or request.user.email,
+            email=request.user.email,
+            subject=f"[{dispute_type.upper()}] {subject}",
+            message=message
+        )
+        
+        messages.success(request, 'Your support request has been submitted. We will respond within 24 hours.')
+        return redirect('dashboard:dispute')
+    
+    return render(request, 'dashboard/dispute.html')
+
+
 def about(request):
     """About page view"""
     return render(request, 'dashboard/about.html')
