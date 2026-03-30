@@ -281,12 +281,16 @@ class WalletAddress(models.Model):
         ('USDT', 'Tether (USDT)'),
         ('USDC', 'USD Coin'),
         ('LTC', 'Litecoin'),
+        ('BNB', 'Binance Coin'),
+        ('BANK', 'Bank Transfer'),
     ]
     
     crypto_type = models.CharField(max_length=10, choices=CRYPTO_CHOICES, unique=True)
     address = models.CharField(max_length=255)
     label = models.CharField(max_length=100, blank=True)
+    network = models.CharField(max_length=50, blank=True, help_text='e.g., ERC-20, TRC-20, BEP-20')
     qr_code = models.ImageField(upload_to='wallets/qr/', blank=True, null=True)
+    qr_code_image = models.ImageField(upload_to='wallets/qr/', blank=True, null=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
