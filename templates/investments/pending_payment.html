@@ -1,36 +1,24 @@
-{% extends 'base.html' %}
+{% extends 'dashboard/base_dashboard.html' %}
 {% load static %}
 
 {% block title %}Payment Pending{% endblock %}
 
 {% block extra_css %}
 <style>
-    :root {
-        --dark-bg: #050B1A;
-        --navy: #0A1F44;
-        --gold: #FFD700;
-    }
-    
-    body {
-        background: var(--dark-bg);
-        min-height: 100vh;
-    }
-    
-    .pending-container {
-        max-width: 600px;
-        margin: 80px auto;
-        padding: 40px;
-        background: var(--navy);
+    .pending-box {
+        max-width: 500px;
+        margin: 50px auto;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
         border-radius: 20px;
+        padding: 40px;
         text-align: center;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        border: 1px solid rgba(255, 215, 0, 0.2);
     }
     
     .spinner {
         width: 80px;
         height: 80px;
-        border: 4px solid rgba(255,215,0,0.2);
+        border: 4px solid rgba(255, 215, 0, 0.2);
         border-top: 4px solid var(--gold);
         border-radius: 50%;
         animation: spin 1s linear infinite;
@@ -43,10 +31,10 @@
     }
     
     .status-icon {
-        width: 100px;
-        height: 100px;
+        width: 90px;
+        height: 90px;
         border-radius: 50%;
-        background-color: rgba(255, 215, 0, 0.1);
+        background: rgba(255, 215, 0, 0.1);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -55,7 +43,7 @@
     }
 
     .status-icon i {
-        font-size: 50px;
+        font-size: 45px;
         color: var(--gold);
     }
 
@@ -66,206 +54,106 @@
     
     .pending-title {
         color: var(--gold);
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         font-weight: 700;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
     
     .pending-message {
-        color: rgba(255,255,255,0.8);
-        font-size: 1.1rem;
-        margin-bottom: 30px;
+        color: var(--text-secondary);
+        margin-bottom: 25px;
         line-height: 1.6;
-    }
-    
-    .waiting-message {
-        background-color: rgba(255, 215, 0, 0.05);
-        border-left: 4px solid var(--gold);
-        padding: 15px 20px;
-        border-radius: 6px;
-        margin: 25px 0 30px;
-        font-size: 0.95rem;
-        color: #cbd5e0;
-        line-height: 1.6;
-    }
-
-    .waiting-message i {
-        color: var(--gold);
-        margin-right: 10px;
     }
     
     .amount-display {
-        background: rgba(255,215,0,0.1);
-        padding: 15px 25px;
+        background: rgba(255, 215, 0, 0.1);
+        padding: 15px 30px;
         border-radius: 10px;
         color: var(--gold);
         font-size: 1.5rem;
         font-weight: 700;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
         display: inline-block;
         border: 1px solid rgba(255, 215, 0, 0.3);
-    }
-    
-    .btn-group {
-        display: flex;
-        gap: 15px;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-    
-    .btn-dashboard {
-        padding: 12px 30px;
-        border-radius: 8px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        border: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        min-width: 150px;
-        justify-content: center;
-    }
-    
-    .btn-primary-gold {
-        background: var(--gold);
-        color: var(--dark-bg);
-    }
-    
-    .btn-primary-gold:hover {
-        background: #e6c200;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
-    }
-    
-    .btn-outline-gold {
-        background: transparent;
-        color: var(--gold);
-        border: 2px solid var(--gold) !important;
-    }
-    
-    .btn-outline-gold:hover {
-        background: rgba(255,215,0,0.1);
-        transform: translateY(-2px);
     }
     
     .status-badge {
         display: inline-block;
         padding: 8px 20px;
-        background: rgba(255,193,7,0.2);
+        background: rgba(255, 193, 7, 0.2);
         color: #ffc107;
         border-radius: 20px;
         font-size: 0.9rem;
         margin-bottom: 20px;
     }
     
-    .status-confirmed {
-        background: rgba(40,167,69,0.2);
-        color: #28a745;
+    .status-badge.status-confirmed {
+        background: rgba(0, 212, 170, 0.2);
+        color: var(--success);
     }
     
-    .status-rejected {
-        background: rgba(220,53,69,0.2);
-        color: #dc3545;
+    .status-badge.status-rejected {
+        background: rgba(255, 71, 87, 0.2);
+        color: var(--error);
     }
     
     .info-text {
-        color: rgba(255,255,255,0.6);
-        font-size: 0.9rem;
+        color: var(--text-muted);
+        font-size: 0.85rem;
         margin-top: 20px;
-    }
-
-    .loading-text {
-        color: var(--gold);
-        font-weight: 500;
-        margin: 20px 0;
-        animation: fadeInOut 1.5s ease-in-out infinite;
-    }
-
-    @keyframes fadeInOut {
-        0%, 100% { opacity: 0.8; }
-        50% { opacity: 1; }
-    }
-
-    @media (max-width: 600px) {
-        .pending-container {
-            padding: 30px 20px;
-            margin: 40px auto;
-        }
-
-        .btn-group {
-            flex-direction: column;
-        }
-
-        .btn-dashboard {
-            width: 100%;
-            min-width: unset;
-        }
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="pending-container">
-    <!-- Status Icon with Animation -->
+<div class="topbar">
+    <div class="topbar-title">
+        <h1><i class="fas fa-clock me-2"></i>Payment Status</h1>
+        <p>Checking your deposit status</p>
+    </div>
+</div>
+
+<div class="pending-box">
     <div class="status-icon">
         <i class="fas fa-hourglass-half"></i>
     </div>
 
-    <!-- Status Badge -->
     <span class="status-badge" id="statusBadge">
         <i class="fas fa-clock"></i> Pending Verification
     </span>
     
-    <!-- Title -->
-    <h1 class="pending-title" id="statusTitle">Payment Submitted</h1>
+    <h2 class="pending-title" id="statusTitle">Payment Submitted</h2>
     
-    <!-- Message -->
     <p class="pending-message" id="statusMessage">
-        Your payment is being reviewed by our team. This typically takes 5-30 minutes during business hours.
+        Your payment is being reviewed by our team. This typically takes 5-30 minutes.
     </p>
     
-    <!-- Spinner -->
     <div class="spinner" id="loadingSpinner"></div>
-
-    <!-- Waiting Message -->
-    <div class="waiting-message">
-        <i class="fas fa-info-circle"></i>
-        <span>Please wait while we verify your payment. This usually takes a few seconds.</span>
-    </div>
-
-    <!-- Loading Text -->
-    <p class="loading-text">
-        <i class="fas fa-sync-alt fa-spin"></i> Checking status...
-    </p>
     
-    <!-- Amount Display -->
     {% if deposit %}
     <div class="amount-display">
         ${{ deposit.amount|floatformat:2 }}
     </div>
     {% endif %}
     
-    <!-- Buttons -->
-    <div class="btn-group">
-        <a href="{% url 'dashboard:user_dashboard' %}" class="btn-dashboard btn-outline-gold">
-            <i class="fas fa-home"></i> Go to Dashboard
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a href="{% url 'dashboard:dashboard' %}" class="btn-outline">
+            <i class="fas fa-home me-2"></i>Dashboard
         </a>
-        <button onclick="continueWaiting()" class="btn-dashboard btn-primary-gold" id="keepWaitingBtn">
-            <i class="fas fa-clock"></i> Keep Waiting
-        </button>
+        <a href="{% url 'investments:deposit' %}" class="btn-gold">
+            <i class="fas fa-plus me-2"></i>New Deposit
+        </a>
     </div>
     
     <p class="info-text">
-        <i class="fas fa-info-circle"></i> Page auto-checks every 5 seconds
+        <i class="fas fa-sync-alt fa-spin me-1"></i>Page auto-checks every 5 seconds
     </p>
 </div>
 
 <script>
     const depositId = "{{ deposit.id|default:'' }}";
     let pollAttempts = 0;
-    const maxPollAttempts = 120; // 10 minutes with 5-second intervals
+    const maxPollAttempts = 120;
     
     function checkStatus() {
         if (!depositId || pollAttempts >= maxPollAttempts) return;
@@ -285,7 +173,6 @@
         })
         .catch(error => {
             console.error('Error:', error);
-            // Continue polling on error
             scheduleNextCheck();
         });
     }
@@ -295,28 +182,24 @@
         const badge = document.getElementById('statusBadge');
         const title = document.getElementById('statusTitle');
         const message = document.getElementById('statusMessage');
-        const loadingText = document.querySelector('.loading-text');
         
         if (data.status === 'CONFIRMED') {
             spinner.style.display = 'none';
             badge.className = 'status-badge status-confirmed';
             badge.innerHTML = '<i class="fas fa-check-circle"></i> Payment Confirmed';
             title.textContent = 'Payment Successful!';
-            message.textContent = 'Your funds have been added to your account. Redirecting to dashboard...';
-            loadingText.innerHTML = '<i class="fas fa-check-circle" style="color: #28a745;"></i> Payment confirmed!';
+            message.textContent = 'Your funds have been added to your account.';
             
             setTimeout(() => {
-                window.location.href = "{% url 'dashboard:user_dashboard' %}";
+                window.location.href = "{% url 'dashboard:dashboard' %}";
             }, 2000);
         } else if (data.status === 'REJECTED') {
             spinner.style.display = 'none';
             badge.className = 'status-badge status-rejected';
             badge.innerHTML = '<i class="fas fa-times-circle"></i> Payment Rejected';
             title.textContent = 'Payment Not Approved';
-            message.textContent = 'There was an issue with your payment. Please contact support or try again.';
-            loadingText.innerHTML = '<i class="fas fa-exclamation-circle" style="color: #dc3545;"></i> Payment rejected';
+            message.textContent = 'There was an issue with your payment. Please contact support.';
         } else {
-            // Continue polling
             scheduleNextCheck();
         }
     }
@@ -324,14 +207,7 @@
     function scheduleNextCheck() {
         setTimeout(checkStatus, 5000);
     }
-
-    function continueWaiting() {
-        // Reset poll attempts to continue waiting
-        pollAttempts = 0;
-        checkStatus();
-    }
     
-    // Start polling on page load
     document.addEventListener('DOMContentLoaded', function() {
         checkStatus();
     });
