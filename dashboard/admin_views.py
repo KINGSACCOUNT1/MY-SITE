@@ -167,6 +167,29 @@ def admin_user_detail(request, user_id):
             user.save()
             messages.success(request, 'KYC status updated.')
         
+        elif action_type == 'update_balance':
+            from decimal import Decimal
+            new_balance = Decimal(request.POST.get('new_balance', '0'))
+            old_balance = user.balance
+            user.balance = new_balance
+            user.save()
+            messages.success(request, f'Balance updated from ${old_balance} to ${new_balance}')
+            
+            # Log balance change
+            AdminActivityLog.objects.create(
+                admin_user=request.user,
+                action_type='balance_edit',
+                description=f'Changed balance for {user.email}: ${old_balance} → ${new_balance}',
+                target_user=user,
+                target_id=str(user.id),
+                target_type='User',
+                ip_address=request.META.get('REMOTE_ADDR', ''),
+                user_agent=request.META.get('HTTP_USER_AGENT', ''),
+                changes_before={'balance': str(old_balance)},
+                changes_after={'balance': str(new_balance)},
+            )
+            return redirect('dashboard:admin_user_detail', user_id=user.id)
+        
         # Log the admin action
         changes_after = {
             'is_active': user.is_active,
