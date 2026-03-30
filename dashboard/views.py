@@ -310,9 +310,16 @@ def transaction_history(request):
     user = request.user
     filter_type = request.GET.get('type', 'all')
     
-    deposits = Deposit.objects.filter(user=user).order_by('-created_at')
-    withdrawals = Withdrawal.objects.filter(user=user).order_by('-created_at')
-    investments = Investment.objects.filter(user=user).order_by('-start_date')
+    deposits = []
+    withdrawals = []
+    investments = []
+    
+    if filter_type in ['all', 'deposits']:
+        deposits = Deposit.objects.filter(user=user).order_by('-created_at')
+    if filter_type in ['all', 'withdrawals']:
+        withdrawals = Withdrawal.objects.filter(user=user).order_by('-created_at')
+    if filter_type in ['all', 'investments']:
+        investments = Investment.objects.filter(user=user).order_by('-start_date')
     
     context = {
         'deposits': deposits,
@@ -497,23 +504,24 @@ def settings_page(request):
     user = request.user
     
     if request.method == 'POST':
-        # Handle settings update
         action = request.POST.get('action')
         
-        if action == 'update_notifications':
-            # Update notification preferences
-            user.email_notifications = request.POST.get('email_notifications') == 'on'
-            user.sms_notifications = request.POST.get('sms_notifications') == 'on'
+        if action == 'update_profile':
+            # Update profile info
+            user.full_name = request.POST.get('full_name', user.full_name)
+            user.phone = request.POST.get('phone', user.phone)
+            user.country = request.POST.get('country', user.country)
             user.save()
-            messages.success(request, 'Notification preferences updated.')
+            messages.success(request, 'Profile updated successfully.')
         
         elif action == 'update_security':
             # Handle 2FA toggle
             enable_2fa = request.POST.get('enable_2fa') == 'on'
-            if enable_2fa and not user.two_factor_enabled:
-                return redirect('accounts:enable_2fa')
-            elif not enable_2fa:
-                user.two_factor_enabled = False
+            if enable_2fa and not user.two_fa_enabled:
+                # Would redirect to enable 2FA setup
+                messages.info(request, '2FA setup is coming soon.')
+            elif not enable_2fa and user.two_fa_enabled:
+                user.two_fa_enabled = False
                 user.save()
                 messages.success(request, '2FA has been disabled.')
         

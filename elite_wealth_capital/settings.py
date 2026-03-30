@@ -182,6 +182,15 @@ TAWK_PROPERTY_ID = os.getenv('TAWK_PROPERTY_ID', '69c1f2a729e9681c3d64de5d')
 TAWK_WIDGET_ID = os.getenv('TAWK_WIDGET_ID', '1jkepnodo')
 TAWK_API_KEY = os.getenv('TAWK_API_KEY', '75b4b0e9a4e6de42cd75e44db37824ae55f3fe00')
 
+# Cache Configuration (improves performance)
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+        'TIMEOUT': 300,  # 5 minutes
+    }
+}
+
 # Celery Configuration
 CELERY_BROKER_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
 CELERY_RESULT_BACKEND = 'django-db'
@@ -191,6 +200,9 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+# Database connection optimization
+CONN_MAX_AGE = 60  # Keep connections alive for 60 seconds
 
 # Security Settings (Production)
 if not DEBUG:

@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views, admin_views
+from . import views
 
 app_name = 'dashboard'
 
@@ -35,50 +35,4 @@ urlpatterns = [
     path('certificates-public/', views.certificates, name='certificates'),
     path('news/', views.news_list, name='news'),
     path('news/<slug:slug>/', views.news_detail, name='news_detail'),
-    
-    # Admin panel - Dashboard
-    path('admin-panel/', admin_views.admin_dashboard, name='admin_panel'),
-    
-    # Admin panel - User Management
-    path('admin-panel/users/', admin_views.admin_users, name='admin_users'),
-    path('admin-panel/users/<user_id>/', admin_views.admin_user_detail, name='admin_user_detail'),
-    
-    # Admin panel - Content Management
-    path('admin-panel/content/', admin_views.admin_content, name='admin_content'),
-    path('admin-panel/content/edit/<int:article_id>/', admin_views.admin_content_edit, name='admin_content_edit'),
-    path('admin-panel/content/new/', admin_views.admin_content_edit, name='admin_content_new'),
-    
-    # Admin panel - Analytics
-    path('admin-panel/analytics/', admin_views.admin_analytics, name='admin_analytics'),
-    path('admin-panel/analytics/data/', admin_views.analytics_data_json, name='analytics_data'),
-    
-    # Admin panel - Certificates
-    path('admin-panel/certificates/', admin_views.admin_certificates, name='admin_certificates'),
-    path('admin-panel/certificates/add/', admin_views.admin_certificate_add, name='admin_certificate_add'),
-    path('admin-panel/certificates/<int:cert_id>/edit/', admin_views.admin_certificate_edit, name='admin_certificate_edit'),
-    
-    # Admin panel - Settings
-    path('admin-panel/settings/', admin_views.admin_settings, name='admin_settings'),
-    
-    # Admin panel - Wallet Management
-    path('admin-panel/wallets/', admin_views.admin_wallets, name='admin_wallets'),
-    path('admin-panel/wallets/add/', admin_views.admin_wallet_add, name='admin_wallet_add'),
-    path('admin-panel/wallets/<int:wallet_id>/edit/', admin_views.admin_wallet_edit, name='admin_wallet_edit'),
-    path('admin-panel/wallets/<int:wallet_id>/delete/', admin_views.admin_wallet_delete, name='admin_wallet_delete'),
-    
-    # Deposit management
-    path('admin-panel/deposits/<int:pk>/confirm/', admin_views.confirm_deposit, name='confirm_deposit'),
-    path('admin-panel/deposits/<int:pk>/reject/', admin_views.reject_deposit, name='reject_deposit'),
-    
-    # Withdrawal management
-    path('admin-panel/withdrawals/<int:pk>/approve/', admin_views.approve_withdrawal, name='approve_withdrawal'),
-    path('admin-panel/withdrawals/<int:pk>/reject/', admin_views.reject_withdrawal, name='reject_withdrawal'),
-    
-    # KYC management
-    path('admin-panel/kyc/<int:pk>/approve/', admin_views.approve_kyc, name='approve_kyc'),
-    path('admin-panel/kyc/<int:pk>/reject/', admin_views.reject_kyc, name='reject_kyc'),
-    
-    # Loan management
-    path('admin-panel/loans/<int:pk>/approve/', admin_views.approve_loan, name='approve_loan'),
-    path('admin-panel/loans/<int:pk>/reject/', admin_views.reject_loan, name='reject_loan'),
 ]

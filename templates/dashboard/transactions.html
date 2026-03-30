@@ -1,345 +1,406 @@
-{% extends "base.html" %}
+{% extends 'dashboard/base_dashboard.html' %}
 {% load static %}
+{% load humanize %}
 
-{% block title %}Transaction History - Elite Wealth Capital{% endblock %}
+{% block title %}Transactions{% endblock %}
 
-{% block content %}
-<div class="container-fluid py-4">
-    <!-- Page Header -->
-    <div class="row mb-4">
-        <div class="col-md-8">
-            <h1 class="h2 mb-0">
-                <i class="fas fa-history me-2 text-primary"></i>Transaction History
-            </h1>
-        </div>
-        <div class="col-md-4 text-md-end">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportModal">
-                <i class="fas fa-download me-2"></i>Export CSV
-            </button>
-        </div>
-    </div>
-
-    <!-- Filters Card -->
-    <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-            <form class="row g-3" id="filterForm">
-                <div class="col-md-4">
-                    <label for="typeFilter" class="form-label">Transaction Type</label>
-                    <select class="form-select" id="typeFilter">
-                        <option value="">All Transactions</option>
-                        <option value="deposit">Deposits</option>
-                        <option value="withdrawal">Withdrawals</option>
-                        <option value="transfer">Transfers</option>
-                        <option value="investment">Investments</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <label for="statusFilter" class="form-label">Status</label>
-                    <select class="form-select" id="statusFilter">
-                        <option value="">All Status</option>
-                        <option value="completed">Completed</option>
-                        <option value="pending">Pending</option>
-                        <option value="failed">Failed</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <label for="dateRange" class="form-label">Date Range</label>
-                    <input type="date" class="form-control" id="dateRange">
-                </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-filter me-2"></i>Apply Filters
-                    </button>
-                    <button type="reset" class="btn btn-outline-secondary ms-2">
-                        <i class="fas fa-redo me-2"></i>Reset
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Transactions Table -->
-    <div class="card shadow-sm">
-        <div class="table-responsive">
-            <table class="table table-hover mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th scope="col">
-                            <i class="fas fa-calendar-alt me-2"></i>Date
-                        </th>
-                        <th scope="col">
-                            <i class="fas fa-exchange-alt me-2"></i>Type
-                        </th>
-                        <th scope="col">
-                            <i class="fas fa-dollar-sign me-2"></i>Amount
-                        </th>
-                        <th scope="col">
-                            <i class="fas fa-info-circle me-2"></i>Status
-                        </th>
-                        <th scope="col" class="text-center">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Sample Transaction 1 -->
-                    <tr>
-                        <td>
-                            <span class="fw-500">Dec 15, 2024</span>
-                            <br>
-                            <small class="text-muted">02:30 PM</small>
-                        </td>
-                        <td>
-                            <i class="fas fa-arrow-down text-success me-2"></i>
-                            <span class="badge bg-success">Deposit</span>
-                        </td>
-                        <td>
-                            <strong class="text-success">+$5,000.00</strong>
-                        </td>
-                        <td>
-                            <span class="badge bg-success">Completed</span>
-                        </td>
-                        <td class="text-center">
-                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewTransaction">
-                                <i class="fas fa-eye"></i> View
-                            </button>
-                        </td>
-                    </tr>
-
-                    <!-- Sample Transaction 2 -->
-                    <tr>
-                        <td>
-                            <span class="fw-500">Dec 14, 2024</span>
-                            <br>
-                            <small class="text-muted">11:15 AM</small>
-                        </td>
-                        <td>
-                            <i class="fas fa-arrow-up text-danger me-2"></i>
-                            <span class="badge bg-danger">Withdrawal</span>
-                        </td>
-                        <td>
-                            <strong class="text-danger">-$1,200.00</strong>
-                        </td>
-                        <td>
-                            <span class="badge bg-warning">Pending</span>
-                        </td>
-                        <td class="text-center">
-                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewTransaction">
-                                <i class="fas fa-eye"></i> View
-                            </button>
-                        </td>
-                    </tr>
-
-                    <!-- Sample Transaction 3 -->
-                    <tr>
-                        <td>
-                            <span class="fw-500">Dec 13, 2024</span>
-                            <br>
-                            <small class="text-muted">09:45 AM</small>
-                        </td>
-                        <td>
-                            <i class="fas fa-exchange-alt text-info me-2"></i>
-                            <span class="badge bg-info">Transfer</span>
-                        </td>
-                        <td>
-                            <strong class="text-info">$2,500.00</strong>
-                        </td>
-                        <td>
-                            <span class="badge bg-success">Completed</span>
-                        </td>
-                        <td class="text-center">
-                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewTransaction">
-                                <i class="fas fa-eye"></i> View
-                            </button>
-                        </td>
-                    </tr>
-
-                    <!-- Sample Transaction 4 -->
-                    <tr>
-                        <td>
-                            <span class="fw-500">Dec 12, 2024</span>
-                            <br>
-                            <small class="text-muted">03:20 PM</small>
-                        </td>
-                        <td>
-                            <i class="fas fa-chart-line text-primary me-2"></i>
-                            <span class="badge bg-primary">Investment</span>
-                        </td>
-                        <td>
-                            <strong class="text-primary">-$3,000.00</strong>
-                        </td>
-                        <td>
-                            <span class="badge bg-danger">Failed</span>
-                        </td>
-                        <td class="text-center">
-                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewTransaction">
-                                <i class="fas fa-eye"></i> View
-                            </button>
-                        </td>
-                    </tr>
-
-                    <!-- Sample Transaction 5 -->
-                    <tr>
-                        <td>
-                            <span class="fw-500">Dec 11, 2024</span>
-                            <br>
-                            <small class="text-muted">01:00 PM</small>
-                        </td>
-                        <td>
-                            <i class="fas fa-arrow-down text-success me-2"></i>
-                            <span class="badge bg-success">Deposit</span>
-                        </td>
-                        <td>
-                            <strong class="text-success">+$7,500.00</strong>
-                        </td>
-                        <td>
-                            <span class="badge bg-success">Completed</span>
-                        </td>
-                        <td class="text-center">
-                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewTransaction">
-                                <i class="fas fa-eye"></i> View
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="card-footer bg-light">
-            <nav aria-label="Page navigation" class="d-flex align-items-center justify-content-between">
-                <small class="text-muted">Showing 1-5 of 247 transactions</small>
-                <ul class="pagination mb-0">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-</div>
-
-<!-- View Transaction Modal -->
-<div class="modal fade" id="viewTransaction" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header border-bottom">
-                <h5 class="modal-title">
-                    <i class="fas fa-receipt me-2"></i>Transaction Details
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row mb-3">
-                    <div class="col-6">
-                        <label class="form-label text-muted small">Transaction ID</label>
-                        <p class="mb-0 fw-500">TXN-2024-12345</p>
-                    </div>
-                    <div class="col-6">
-                        <label class="form-label text-muted small">Date & Time</label>
-                        <p class="mb-0 fw-500">Dec 15, 2024 02:30 PM</p>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-6">
-                        <label class="form-label text-muted small">Type</label>
-                        <p class="mb-0 fw-500"><span class="badge bg-success">Deposit</span></p>
-                    </div>
-                    <div class="col-6">
-                        <label class="form-label text-muted small">Status</label>
-                        <p class="mb-0 fw-500"><span class="badge bg-success">Completed</span></p>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label text-muted small">Amount</label>
-                    <p class="mb-0 fw-500 fs-5 text-success">+$5,000.00</p>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label text-muted small">Reference</label>
-                    <p class="mb-0 fw-500">ACH Transfer - Wells Fargo</p>
-                </div>
-            </div>
-            <div class="modal-footer border-top">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">
-                    <i class="fas fa-download me-2"></i>Download Receipt
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Export Modal -->
-<div class="modal fade" id="exportModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header border-bottom">
-                <h5 class="modal-title">
-                    <i class="fas fa-download me-2"></i>Export Transactions
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Select Format</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exportFormat" id="csvFormat" value="csv" checked>
-                        <label class="form-check-label" for="csvFormat">
-                            CSV Format
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exportFormat" id="pdfFormat" value="pdf">
-                        <label class="form-check-label" for="pdfFormat">
-                            PDF Format
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exportFormat" id="excelFormat" value="xlsx">
-                        <label class="form-check-label" for="excelFormat">
-                            Excel Format
-                        </label>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="exportDate" class="form-label">Date Range</label>
-                    <input type="date" class="form-control" id="exportDate">
-                </div>
-                <div class="alert alert-info small" role="alert">
-                    <i class="fas fa-info-circle me-2"></i>
-                    Your export will include all transactions matching current filters.
-                </div>
-            </div>
-            <div class="modal-footer border-top">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-success">
-                    <i class="fas fa-download me-2"></i>Export
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
+{% block extra_css %}
 <style>
-    .table-hover tbody tr:hover {
-        background-color: #f8f9fa;
+    /* Filter Tabs */
+    .filter-tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
     }
     
-    .fw-500 {
+    .filter-tab {
+        padding: 10px 20px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+    
+    .filter-tab:hover, .filter-tab.active {
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        color: var(--bg-darkest);
+        border-color: var(--gold);
+    }
+    
+    /* Transaction Table */
+    .tx-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .tx-table th {
+        text-align: left;
+        padding: 15px;
+        color: var(--text-muted);
+        font-weight: 500;
+        font-size: 0.85rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .tx-table td {
+        padding: 18px 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        vertical-align: middle;
+    }
+    
+    .tx-table tr:hover {
+        background: rgba(255, 255, 255, 0.02);
+    }
+    
+    .tx-type {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .tx-type-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .tx-type-icon.deposit {
+        background: rgba(0, 212, 170, 0.2);
+        color: var(--success);
+    }
+    
+    .tx-type-icon.withdraw {
+        background: rgba(255, 71, 87, 0.2);
+        color: var(--error);
+    }
+    
+    .tx-type-icon.investment {
+        background: rgba(255, 215, 0, 0.2);
+        color: var(--gold);
+    }
+    
+    .tx-type-label {
         font-weight: 500;
     }
-
+    
+    .tx-type-label small {
+        display: block;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        font-weight: 400;
+    }
+    
+    .tx-amount {
+        font-weight: 600;
+    }
+    
+    .tx-amount.positive { color: var(--success); }
+    .tx-amount.negative { color: var(--error); }
+    
+    .tx-status {
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    
+    .tx-status.pending {
+        background: rgba(255, 165, 2, 0.2);
+        color: var(--warning);
+    }
+    
+    .tx-status.confirmed, .tx-status.completed, .tx-status.approved {
+        background: rgba(0, 212, 170, 0.2);
+        color: var(--success);
+    }
+    
+    .tx-status.rejected, .tx-status.cancelled {
+        background: rgba(255, 71, 87, 0.2);
+        color: var(--error);
+    }
+    
+    /* Mobile Card View */
+    .tx-card-mobile {
+        display: none;
+    }
+    
     @media (max-width: 768px) {
-        .table {
-            font-size: 0.9rem;
+        .tx-table-container {
+            display: none;
         }
         
-        .btn-sm {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.75rem;
+        .tx-card-mobile {
+            display: block;
+        }
+        
+        .tx-mobile-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .tx-mobile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .tx-mobile-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .tx-mobile-detail small {
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 3px;
         }
     }
+    
+    /* Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-muted);
+    }
+    
+    .empty-state i {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        opacity: 0.5;
+    }
+    
+    .empty-state p {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+    }
 </style>
+{% endblock %}
+
+{% block content %}
+<!-- Top Bar -->
+<div class="topbar">
+    <div class="topbar-title">
+        <h1><i class="fas fa-exchange-alt me-2"></i>Transaction History</h1>
+        <p>View all your deposits, withdrawals, and investments</p>
+    </div>
+    <a href="{% url 'dashboard:export_transactions' %}" class="btn-gold">
+        <i class="fas fa-download me-2"></i>Export CSV
+    </a>
+</div>
+
+<!-- Filter Tabs -->
+<div class="filter-tabs">
+    <a href="?type=all" class="filter-tab {% if not request.GET.type or request.GET.type == 'all' %}active{% endif %}">
+        All Transactions
+    </a>
+    <a href="?type=deposits" class="filter-tab {% if request.GET.type == 'deposits' %}active{% endif %}">
+        <i class="fas fa-arrow-down me-1"></i>Deposits
+    </a>
+    <a href="?type=withdrawals" class="filter-tab {% if request.GET.type == 'withdrawals' %}active{% endif %}">
+        <i class="fas fa-arrow-up me-1"></i>Withdrawals
+    </a>
+    <a href="?type=investments" class="filter-tab {% if request.GET.type == 'investments' %}active{% endif %}">
+        <i class="fas fa-chart-line me-1"></i>Investments
+    </a>
+</div>
+
+<!-- Transaction Table -->
+<div class="card-dark">
+    {% if deposits or withdrawals or investments %}
+    
+    <!-- Desktop Table -->
+    <div class="tx-table-container">
+        <table class="tx-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for deposit in deposits %}
+                <tr>
+                    <td>
+                        <div class="tx-type">
+                            <div class="tx-type-icon deposit">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="tx-type-label">
+                                Deposit
+                                <small>{{ deposit.crypto_type }}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="tx-amount positive">+${{ deposit.amount|floatformat:2|intcomma }}</td>
+                    <td>
+                        <span class="tx-status {{ deposit.status }}">
+                            {{ deposit.status|title }}
+                        </span>
+                    </td>
+                    <td>{{ deposit.created_at|date:"M d, Y H:i" }}</td>
+                    <td>
+                        {% if deposit.tx_hash %}
+                            <small style="color: var(--text-muted);">{{ deposit.tx_hash|truncatechars:15 }}</small>
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+                
+                {% for withdrawal in withdrawals %}
+                <tr>
+                    <td>
+                        <div class="tx-type">
+                            <div class="tx-type-icon withdraw">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="tx-type-label">
+                                Withdrawal
+                                <small>{{ withdrawal.crypto_type|default:"Crypto" }}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="tx-amount negative">-${{ withdrawal.amount|floatformat:2|intcomma }}</td>
+                    <td>
+                        <span class="tx-status {{ withdrawal.status }}">
+                            {{ withdrawal.status|title }}
+                        </span>
+                    </td>
+                    <td>{{ withdrawal.created_at|date:"M d, Y H:i" }}</td>
+                    <td>
+                        <small style="color: var(--text-muted);">{{ withdrawal.wallet_address|truncatechars:15|default:"-" }}</small>
+                    </td>
+                </tr>
+                {% endfor %}
+                
+                {% for inv in investments %}
+                <tr>
+                    <td>
+                        <div class="tx-type">
+                            <div class="tx-type-icon investment">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="tx-type-label">
+                                Investment
+                                <small>{{ inv.plan.name }}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="tx-amount negative">-${{ inv.amount|floatformat:2|intcomma }}</td>
+                    <td>
+                        <span class="tx-status {{ inv.status }}">
+                            {{ inv.status|title }}
+                        </span>
+                    </td>
+                    <td>{{ inv.start_date|date:"M d, Y H:i" }}</td>
+                    <td>
+                        <small style="color: var(--success);">Profit: ${{ inv.actual_profit|floatformat:2 }}</small>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Mobile Cards -->
+    <div class="tx-card-mobile">
+        {% for deposit in deposits %}
+        <div class="tx-mobile-item">
+            <div class="tx-mobile-header">
+                <div class="tx-type">
+                    <div class="tx-type-icon deposit">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <span>Deposit</span>
+                </div>
+                <span class="tx-status {{ deposit.status }}">{{ deposit.status|title }}</span>
+            </div>
+            <div class="tx-mobile-details">
+                <div class="tx-mobile-detail">
+                    <small>Amount</small>
+                    <span class="tx-amount positive">+${{ deposit.amount|floatformat:2 }}</span>
+                </div>
+                <div class="tx-mobile-detail">
+                    <small>Date</small>
+                    <span>{{ deposit.created_at|date:"M d, Y" }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        
+        {% for withdrawal in withdrawals %}
+        <div class="tx-mobile-item">
+            <div class="tx-mobile-header">
+                <div class="tx-type">
+                    <div class="tx-type-icon withdraw">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                    <span>Withdrawal</span>
+                </div>
+                <span class="tx-status {{ withdrawal.status }}">{{ withdrawal.status|title }}</span>
+            </div>
+            <div class="tx-mobile-details">
+                <div class="tx-mobile-detail">
+                    <small>Amount</small>
+                    <span class="tx-amount negative">-${{ withdrawal.amount|floatformat:2 }}</span>
+                </div>
+                <div class="tx-mobile-detail">
+                    <small>Date</small>
+                    <span>{{ withdrawal.created_at|date:"M d, Y" }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        
+        {% for inv in investments %}
+        <div class="tx-mobile-item">
+            <div class="tx-mobile-header">
+                <div class="tx-type">
+                    <div class="tx-type-icon investment">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <span>{{ inv.plan.name }}</span>
+                </div>
+                <span class="tx-status {{ inv.status }}">{{ inv.status|title }}</span>
+            </div>
+            <div class="tx-mobile-details">
+                <div class="tx-mobile-detail">
+                    <small>Amount</small>
+                    <span class="tx-amount negative">-${{ inv.amount|floatformat:2 }}</span>
+                </div>
+                <div class="tx-mobile-detail">
+                    <small>Profit</small>
+                    <span style="color: var(--success);">+${{ inv.actual_profit|floatformat:2 }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    {% else %}
+    <div class="empty-state">
+        <i class="fas fa-receipt"></i>
+        <p>No transactions found</p>
+        <a href="{% url 'investments:deposit' %}" class="btn-gold">
+            <i class="fas fa-plus me-2"></i>Make Your First Deposit
+        </a>
+    </div>
+    {% endif %}
+</div>
 {% endblock %}

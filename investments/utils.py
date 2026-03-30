@@ -3,17 +3,26 @@ Investment management utilities
 Handles automatic investment status updates and profit calculations
 """
 from django.utils import timezone
+from django.core.cache import cache
 from decimal import Decimal
 
 
 def check_and_update_investments(user):
     """
     Check and update user's investments when they access the dashboard
-    This runs automatically without needing Celery/Redis
+    Uses caching to prevent excessive database writes
     
     Returns: dict with update statistics
     """
     from investments.models import Investment
+    
+    # Cache key to prevent too frequent updates
+    cache_key = f'investment_update_{user.id}'
+    last_update = cache.get(cache_key)
+    
+    # Only run full update once per minute
+    if last_update:
+        return {'cached': True, 'completed': 0, 'profits_added': Decimal('0')}
     
     stats = {
         'completed': 0,
@@ -22,7 +31,7 @@ def check_and_update_investments(user):
     }
     
     # Get all active investments for this user
-    active_investments = Investment.objects.filter(user=user, status='active')
+    active_investments = Investment.objects.filter(user=user, status='active').select_related('plan')
     
     for investment in active_investments:
         # Check if investment has matured
@@ -82,6 +91,9 @@ def check_and_update_investments(user):
     if stats['completed'] > 0 or stats['profits_added'] > 0:
         user.save()
     
+    # Set cache for 60 seconds
+    cache.set(cache_key, True, 60)
+    
     return stats
 
 
@@ -92,7 +104,7 @@ def calculate_daily_profits_for_user(user):
     """
     from investments.models import Investment
     
-    active_investments = Investment.objects.filter(user=user, status='active')
+    active_investments = Investment.objects.filter(user=user, status='active').select_related('plan')
     total_profit_added = Decimal('0')
     
     for investment in active_investments:

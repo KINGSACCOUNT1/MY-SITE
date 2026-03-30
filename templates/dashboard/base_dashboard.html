@@ -1,0 +1,529 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard{% endblock %} - Elite Wealth Capital</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-darkest: #050B1A;
+            --bg-dark: #0A1F44;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --gold: #FFD700;
+            --gold-dark: #FFA500;
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
+            --success: #00D4AA;
+            --error: #FF4757;
+            --warning: #FFA502;
+            --border-color: rgba(255, 215, 0, 0.2);
+            --sidebar-width: 280px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-darkest);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-darkest) 100%);
+            border-right: 1px solid var(--border-color);
+            z-index: 1000;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar-header {
+            padding: 25px 20px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .sidebar-logo {
+            height: 45px;
+            margin-bottom: 10px;
+        }
+        
+        .sidebar-brand {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .sidebar-user {
+            padding: 20px;
+            background: var(--bg-card);
+            margin: 15px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 1.5rem;
+            color: var(--bg-darkest);
+            font-weight: 700;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .user-balance {
+            color: var(--success);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        
+        .sidebar-nav {
+            padding: 15px 0;
+        }
+        
+        .nav-section {
+            padding: 10px 20px 5px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        .nav-item {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background: var(--bg-card);
+            color: var(--gold);
+            border-left-color: var(--gold);
+        }
+        
+        .nav-item i {
+            width: 24px;
+            margin-right: 12px;
+            text-align: center;
+        }
+        
+        .nav-item .badge {
+            background: var(--error);
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        /* Top Bar */
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: var(--bg-card);
+            border-radius: 15px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+        }
+        
+        .topbar-title h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .topbar-title p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .topbar-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .btn-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn-icon:hover {
+            background: var(--gold);
+            color: var(--bg-darkest);
+            border-color: var(--gold);
+        }
+        
+        /* Cards */
+        .card-dark {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .card-dark:hover {
+            border-color: rgba(255, 215, 0, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        /* Buttons */
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--bg-darkest);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            color: var(--bg-darkest);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--bg-darkest);
+            border: none;
+            font-size: 1.5rem;
+            z-index: 1100;
+            cursor: pointer;
+            box-shadow: 0 5px 25px rgba(255, 215, 0, 0.4);
+        }
+        
+        .sidebar-close {
+            display: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        
+        /* Responsive */
+        @media (max-width: 991px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .sidebar-close {
+                display: block;
+            }
+            
+            .sidebar-overlay.active {
+                display: block;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .main-content {
+                padding: 15px;
+            }
+            
+            .topbar {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .card-dark {
+                padding: 20px;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-darkest);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold);
+        }
+        
+        /* Alerts */
+        .alert-success {
+            background: rgba(0, 212, 170, 0.15);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+        
+        .alert-danger {
+            background: rgba(255, 71, 87, 0.15);
+            border: 1px solid var(--error);
+            color: var(--error);
+        }
+        
+        .alert-warning {
+            background: rgba(255, 165, 2, 0.15);
+            border: 1px solid var(--warning);
+            color: var(--warning);
+        }
+        
+        {% block extra_css %}{% endblock %}
+    </style>
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <button class="sidebar-close" onclick="toggleSidebar()">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="sidebar-header">
+            <img src="{% static 'images/logo.png' %}" alt="Elite Wealth" class="sidebar-logo" onerror="this.style.display='none'">
+            <div class="sidebar-brand">Elite Wealth Capital</div>
+        </div>
+        
+        <div class="sidebar-user">
+            <div class="user-avatar">
+                {{ user.full_name|slice:":1"|upper }}
+            </div>
+            <div class="user-name">{{ user.full_name|default:user.email }}</div>
+            <div class="user-balance">${{ user.balance|floatformat:2 }}</div>
+            <small style="color: var(--text-muted);">Available Balance</small>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div class="nav-section">Main</div>
+            <a href="{% url 'dashboard:dashboard' %}" class="nav-item {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+            
+            <div class="nav-section">Finance</div>
+            <a href="{% url 'investments:deposit' %}" class="nav-item {% if request.resolver_match.url_name == 'deposit' %}active{% endif %}">
+                <i class="fas fa-plus-circle"></i> Add Funds
+            </a>
+            <a href="{% url 'investments:withdraw' %}" class="nav-item {% if request.resolver_match.url_name == 'withdraw' %}active{% endif %}">
+                <i class="fas fa-minus-circle"></i> Withdraw
+            </a>
+            <a href="{% url 'dashboard:transactions' %}" class="nav-item {% if request.resolver_match.url_name == 'transactions' %}active{% endif %}">
+                <i class="fas fa-exchange-alt"></i> Transactions
+            </a>
+            
+            <div class="nav-section">Investments</div>
+            <a href="{% url 'investments:plans' %}" class="nav-item {% if request.resolver_match.url_name == 'plans' %}active{% endif %}">
+                <i class="fas fa-chart-pie"></i> Investment Plans
+            </a>
+            <a href="{% url 'investments:my_investments' %}" class="nav-item {% if request.resolver_match.url_name == 'my_investments' %}active{% endif %}">
+                <i class="fas fa-briefcase"></i> My Investments
+            </a>
+            
+            <div class="nav-section">Services</div>
+            <a href="{% url 'investments:loans' %}" class="nav-item {% if request.resolver_match.url_name == 'loans' %}active{% endif %}">
+                <i class="fas fa-hand-holding-usd"></i> Loans
+            </a>
+            <a href="{% url 'investments:cards' %}" class="nav-item {% if request.resolver_match.url_name == 'cards' %}active{% endif %}">
+                <i class="fas fa-credit-card"></i> Virtual Cards
+            </a>
+            <a href="{% url 'investments:agent' %}" class="nav-item {% if request.resolver_match.url_name == 'agent' %}active{% endif %}">
+                <i class="fas fa-users"></i> Agent Program
+            </a>
+            
+            <div class="nav-section">Account</div>
+            <a href="{% url 'kyc:status' %}" class="nav-item {% if 'kyc' in request.path %}active{% endif %}">
+                <i class="fas fa-id-card"></i> KYC Verification
+            </a>
+            <a href="{% url 'dashboard:settings' %}" class="nav-item {% if request.resolver_match.url_name == 'settings' %}active{% endif %}">
+                <i class="fas fa-cog"></i> Settings
+            </a>
+            
+            {% if user.is_staff %}
+            <div class="nav-section">Admin</div>
+            <a href="/admin/" class="nav-item" style="color: var(--gold);">
+                <i class="fas fa-shield-alt"></i> Admin Panel
+            </a>
+            {% endif %}
+            
+            <div class="nav-section"></div>
+            <a href="{% url 'accounts:logout' %}" class="nav-item" style="color: var(--error);">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </nav>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Messages -->
+        {% if messages %}
+        <div class="mb-3">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('sidebarOverlay').classList.toggle('active');
+        }
+        
+        document.getElementById('sidebarOverlay').addEventListener('click', toggleSidebar);
+        
+        // Close sidebar when clicking a nav item on mobile
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth < 992) {
+                    toggleSidebar();
+                }
+            });
+        });
+    </script>
+    
+    <!-- Tawk.to Chat Widget -->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/{{ TAWK_PROPERTY_ID|default:"683b5c2ec873e91904870c54" }}/{{ TAWK_WIDGET_ID|default:"1jkepnodo" }}';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
