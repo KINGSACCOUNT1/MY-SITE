@@ -4,24 +4,52 @@
 {% block title %}Withdraw Funds{% endblock %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard-theme.css' %}">
 <style>
+    .withdraw-page {
+        background: url('{% static "images/offices/office-investors.jpg" %}') center/cover no-repeat fixed;
+        min-height: 100vh;
+        position: relative;
+    }
+    
+    .withdraw-page::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(5, 11, 26, 0.94) 0%, rgba(10, 31, 68, 0.92) 100%);
+        z-index: 0;
+    }
+    
+    .withdraw-page > * {
+        position: relative;
+        z-index: 1;
+    }
+    
     .withdraw-container {
         max-width: 900px;
-        margin: 40px auto;
-        padding: 20px;
+        margin: 0 auto;
+        padding: 40px 20px;
     }
     
     .withdraw-card {
-        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255,255,255,0.18);
+        background: rgba(10, 31, 68, 0.6);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 215, 0, 0.2);
         border-radius: 20px;
         padding: 40px;
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+    
+    .withdraw-card h2 {
+        color: #FFD700;
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
     }
     
     .balance-display {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 165, 0, 0.1) 100%);
+        border: 1px solid rgba(255, 215, 0, 0.3);
         padding: 30px;
         border-radius: 15px;
         text-align: center;
@@ -30,14 +58,14 @@
     
     .balance-label {
         font-size: 1rem;
-        color: rgba(255,255,255,0.8);
+        color: rgba(255,255,255,0.7);
         margin-bottom: 10px;
     }
     
     .balance-amount {
         font-size: 3rem;
         font-weight: 700;
-        color: #fff;
+        color: #FFD700;
     }
     
     .form-group {
@@ -48,6 +76,162 @@
         display: block;
         font-weight: 600;
         margin-bottom: 10px;
+        color: #fff;
+    }
+    
+    .form-input, .form-select {
+        width: 100%;
+        padding: 15px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        border-radius: 12px;
+        color: #fff;
+        font-size: 1rem;
+    }
+    
+    .form-input:focus, .form-select:focus {
+        outline: none;
+        border-color: #FFD700;
+        background: rgba(255,255,255,0.08);
+        box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.15);
+    }
+    
+    .form-select option {
+        background: #0A1F44;
+        color: #fff;
+    }
+    
+    .withdraw-method-btn {
+        width: 100%;
+        padding: 20px;
+        background: rgba(255,255,255,0.03);
+        border: 2px solid rgba(255, 215, 0, 0.2);
+        border-radius: 15px;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    
+    .withdraw-method-btn:hover {
+        border-color: #FFD700;
+        background: rgba(255, 215, 0, 0.08);
+    }
+    
+    .withdraw-method-btn.active {
+        border-color: #FFD700;
+        background: rgba(255, 215, 0, 0.15);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    }
+    
+    .method-icon {
+        font-size: 2rem;
+        margin-right: 15px;
+        color: #FFD700;
+    }
+    
+    .method-details {
+        display: none;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 25px;
+    }
+    
+    .method-details.active {
+        display: block;
+        animation: slideDown 0.3s ease;
+    }
+    
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .submit-btn {
+        width: 100%;
+        padding: 18px;
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        color: #000;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+    }
+    
+    .submit-btn:disabled {
+        background: rgba(255, 215, 0, 0.3);
+        cursor: not-allowed;
+        transform: none;
+    }
+    
+    .info-box {
+        background: rgba(34, 211, 238, 0.1);
+        border: 1px solid rgba(34, 211, 238, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 30px;
+        color: #fff;
+    }
+    
+    .info-box h6 {
+        color: #22d3ee;
+    }
+    
+    .info-box ul {
+        color: rgba(255, 255, 255, 0.8);
+        padding-left: 20px;
+    }
+    
+    .warning-box {
+        background: rgba(255, 193, 7, 0.1);
+        border: 1px solid rgba(255, 193, 7, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        color: #fff;
+    }
+    
+    .warning-box h6 {
+        color: #FFC107;
+    }
+    
+    .kyc-warning {
+        background: rgba(244, 67, 54, 0.1);
+        border: 1px solid rgba(244, 67, 54, 0.4);
+        border-left: 4px solid #f44336;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        color: #fff;
+    }
+    
+    .kyc-warning h5 {
+        color: #f44336;
+    }
+    
+    .kyc-warning .btn-light {
+        background: rgba(255, 255, 255, 0.9);
+        color: #f44336;
+        font-weight: 600;
+    }
+    
+    .fee-info {
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.5);
+        margin-top: 8px;
+    }
+</style>
+{% endblock %}
         color: #fff;
     }
     
@@ -167,12 +351,13 @@
 {% endblock %}
 
 {% block content %}
-<div class="withdraw-container">
-    <div class="withdraw-card">
-        <h2 class="text-center mb-4">
-            <i class="fas fa-money-bill-wave me-2"></i>
-            Withdraw Funds
-        </h2>
+<div class="withdraw-page">
+    <div class="withdraw-container">
+        <div class="withdraw-card">
+            <h2 class="text-center mb-4">
+                <i class="fas fa-money-bill-wave me-2"></i>
+                Withdraw Funds
+            </h2>
         
         <!-- Available Balance -->
         <div class="balance-display">
@@ -304,6 +489,7 @@
             </div>
         </form>
     </div>
+</div>
 </div>
 
 <script>

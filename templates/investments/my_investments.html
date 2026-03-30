@@ -4,11 +4,39 @@
 {% block title %}My Investments{% endblock %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard-theme.css' %}">
 <style>
+    .investments-page {
+        background: url('{% static "images/offices/office-investors.jpg" %}') center/cover no-repeat fixed;
+        min-height: 100vh;
+        position: relative;
+    }
+    
+    .investments-page::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(5, 11, 26, 0.94) 0%, rgba(10, 31, 68, 0.92) 100%);
+        z-index: 0;
+    }
+    
+    .investments-page > * {
+        position: relative;
+        z-index: 1;
+    }
+    
     .investments-container {
         max-width: 1200px;
-        margin: 40px auto;
-        padding: 20px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    
+    .investments-container > h2 {
+        color: #FFD700;
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
     }
     
     .stats-cards {
@@ -19,24 +47,28 @@
     }
     
     .stat-card {
-        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255,255,255,0.18);
+        background: rgba(10, 31, 68, 0.6);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 215, 0, 0.2);
         border-radius: 15px;
         padding: 25px;
         text-align: center;
+        transition: all 0.3s ease;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(255, 215, 0, 0.5);
     }
     
     .stat-icon {
         font-size: 2.5rem;
         margin-bottom: 15px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: #FFD700;
     }
     
     .stat-label {
-        color: rgba(255,255,255,0.7);
+        color: rgba(255,255,255,0.6);
         font-size: 0.9rem;
         margin-bottom: 10px;
     }
@@ -48,12 +80,17 @@
     }
     
     .investment-card {
-        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255,255,255,0.18);
+        background: rgba(10, 31, 68, 0.6);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 215, 0, 0.2);
         border-radius: 20px;
         padding: 30px;
         margin-bottom: 20px;
+        transition: all 0.3s ease;
+    }
+    
+    .investment-card:hover {
+        border-color: rgba(255, 215, 0, 0.4);
     }
     
     .investment-header {
@@ -61,12 +98,18 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 10px;
     }
     
     .investment-name {
         font-size: 1.5rem;
         font-weight: 700;
         color: #fff;
+    }
+    
+    .investment-name i {
+        color: #FFD700;
     }
     
     .investment-status {
@@ -77,31 +120,35 @@
     }
     
     .status-active {
-        background: rgba(39, 174, 96, 0.2);
-        color: #27ae60;
+        background: rgba(0, 212, 170, 0.2);
+        color: #00D4AA;
+        border: 1px solid #00D4AA;
     }
     
     .status-completed {
-        background: rgba(52, 152, 219, 0.2);
-        color: #3498db;
+        background: rgba(34, 211, 238, 0.2);
+        color: #22d3ee;
+        border: 1px solid #22d3ee;
     }
     
     .investment-details {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
+        gap: 15px;
         margin: 20px 0;
     }
     
     .detail-item {
         display: flex;
         justify-content: space-between;
-        padding: 10px 0;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding: 12px 15px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
     }
     
     .detail-label {
-        color: rgba(255,255,255,0.7);
+        color: rgba(255,255,255,0.6);
     }
     
     .detail-value {
@@ -110,7 +157,7 @@
     }
     
     .progress-bar-container {
-        background: rgba(0,0,0,0.3);
+        background: rgba(255, 255, 255, 0.1);
         border-radius: 10px;
         height: 20px;
         margin: 20px 0;
@@ -118,117 +165,144 @@
     }
     
     .progress-bar {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(90deg, #FFD700 0%, #00D4AA 100%);
         height: 100%;
         transition: width 0.3s;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #fff;
+        color: #000;
         font-size: 0.8rem;
+        font-weight: 700;
+    }
+    
+    .no-investments {
+        text-align: center;
+        padding: 60px 30px;
+        background: rgba(10, 31, 68, 0.6);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        border-radius: 20px;
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .no-investments i {
+        font-size: 4rem;
+        color: rgba(255, 215, 0, 0.3);
+        margin-bottom: 20px;
+    }
+    
+    .no-investments a {
+        color: #FFD700;
+        text-decoration: none;
         font-weight: 600;
+    }
+    
+    .no-investments a:hover {
+        text-decoration: underline;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="investments-container">
-    <h2 class="mb-4">
-        <i class="fas fa-chart-line me-2"></i>
-        My Investments
-    </h2>
-    
-    <!-- Stats Cards -->
-    <div class="stats-cards">
-        <div class="stat-card">
-            <i class="fas fa-wallet stat-icon"></i>
-            <div class="stat-label">Total Invested</div>
-            <div class="stat-value">${{ user.invested_amount|floatformat:2 }}</div>
+<div class="investments-page">
+    <div class="investments-container">
+        <h2 class="mb-4">
+            <i class="fas fa-chart-line me-2"></i>
+            My Investments
+        </h2>
+        
+        <!-- Stats Cards -->
+        <div class="stats-cards">
+            <div class="stat-card">
+                <i class="fas fa-wallet stat-icon"></i>
+                <div class="stat-label">Total Invested</div>
+                <div class="stat-value">${{ user.invested_amount|floatformat:2 }}</div>
+            </div>
+            
+            <div class="stat-card">
+                <i class="fas fa-chart-pie stat-icon"></i>
+                <div class="stat-label">Active Investments</div>
+                <div class="stat-value">{{ active_count }}</div>
+            </div>
+            
+            <div class="stat-card">
+                <i class="fas fa-dollar-sign stat-icon"></i>
+                <div class="stat-label">Total Profit</div>
+                <div class="stat-value" style="color: #00D4AA;">${{ user.total_profit|floatformat:2 }}</div>
+            </div>
+            
+            <div class="stat-card">
+                <i class="fas fa-check-circle stat-icon"></i>
+                <div class="stat-label">Completed</div>
+                <div class="stat-value">{{ completed_count }}</div>
+            </div>
         </div>
         
-        <div class="stat-card">
-            <i class="fas fa-chart-pie stat-icon"></i>
-            <div class="stat-label">Active Investments</div>
-            <div class="stat-value">{{ active_count }}</div>
-        </div>
-        
-        <div class="stat-card">
-            <i class="fas fa-dollar-sign stat-icon"></i>
-            <div class="stat-label">Total Profit</div>
-            <div class="stat-value">${{ user.total_profit|floatformat:2 }}</div>
-        </div>
-        
-        <div class="stat-card">
-            <i class="fas fa-check-circle stat-icon"></i>
-            <div class="stat-label">Completed</div>
-            <div class="stat-value">{{ completed_count }}</div>
-        </div>
+        <!-- Investments List -->
+        {% if investments %}
+            {% for investment in investments %}
+            <div class="investment-card">
+                <div class="investment-header">
+                    <div class="investment-name">
+                        <i class="fas {{ investment.plan.icon|default:'fa-chart-line' }} me-2"></i>
+                        {{ investment.plan.name }}
+                    </div>
+                    <span class="investment-status {% if investment.status == 'active' %}status-active{% else %}status-completed{% endif %}">
+                        {% if investment.status == 'active' %}
+                            <i class="fas fa-sync-alt me-1"></i>Active
+                        {% else %}
+                            <i class="fas fa-check me-1"></i>Completed
+                        {% endif %}
+                    </span>
+                </div>
+                
+                <div class="investment-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Amount</span>
+                        <span class="detail-value">${{ investment.amount|floatformat:2 }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Daily ROI</span>
+                        <span class="detail-value" style="color: #00D4AA;">{{ investment.plan.daily_roi }}%</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Expected Profit</span>
+                        <span class="detail-value">${{ investment.expected_profit|floatformat:2 }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Current Profit</span>
+                        <span class="detail-value" style="color: #00D4AA;">${{ investment.actual_profit|floatformat:2 }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Start Date</span>
+                        <span class="detail-value">{{ investment.start_date|date:"M d, Y" }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">End Date</span>
+                        <span class="detail-value">{{ investment.end_date|date:"M d, Y" }}</span>
+                    </div>
+                </div>
+                
+                {% if investment.status == 'active' %}
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: {{ investment.progress_percentage }}%">
+                        {{ investment.progress_percentage }}%
+                    </div>
+                </div>
+                <p class="text-center mb-0" style="color: rgba(255,255,255,0.6);">
+                    <i class="fas fa-clock me-1"></i>
+                    {{ investment.days_remaining }} days remaining
+                </p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-investments">
+                <i class="fas fa-chart-line"></i>
+                <p>You don't have any investments yet.</p>
+                <a href="{% url 'investments:plans' %}"><i class="fas fa-rocket me-1"></i>Browse investment plans</a>
+            </div>
+        {% endif %}
     </div>
-    
-    <!-- Investments List -->
-    {% if investments %}
-        {% for investment in investments %}
-        <div class="investment-card">
-            <div class="investment-header">
-                <div class="investment-name">
-                    <i class="fas {{ investment.plan.icon|default:'fa-chart-line' }} me-2"></i>
-                    {{ investment.plan.name }}
-                </div>
-                <span class="investment-status {% if investment.status == 'active' %}status-active{% else %}status-completed{% endif %}">
-                    {% if investment.status == 'active' %}
-                        <i class="fas fa-sync-alt me-1"></i>Active
-                    {% else %}
-                        <i class="fas fa-check me-1"></i>Completed
-                    {% endif %}
-                </span>
-            </div>
-            
-            <div class="investment-details">
-                <div class="detail-item">
-                    <span class="detail-label">Amount</span>
-                    <span class="detail-value">${{ investment.amount|floatformat:2 }}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Daily ROI</span>
-                    <span class="detail-value">{{ investment.plan.daily_roi }}%</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Expected Profit</span>
-                    <span class="detail-value">${{ investment.expected_profit|floatformat:2 }}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Current Profit</span>
-                    <span class="detail-value">${{ investment.actual_profit|floatformat:2 }}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Start Date</span>
-                    <span class="detail-value">{{ investment.start_date|date:"M d, Y" }}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">End Date</span>
-                    <span class="detail-value">{{ investment.end_date|date:"M d, Y" }}</span>
-                </div>
-            </div>
-            
-            {% if investment.status == 'active' %}
-            <div class="progress-bar-container">
-                <div class="progress-bar" style="width: {{ investment.progress_percentage }}%">
-                    {{ investment.progress_percentage }}%
-                </div>
-            </div>
-            <p class="text-center text-white-50 mb-0">
-                <i class="fas fa-clock me-1"></i>
-                {{ investment.days_remaining }} days remaining
-            </p>
-            {% endif %}
-        </div>
-        {% endfor %}
-    {% else %}
-        <div class="alert alert-info text-center">
-            <i class="fas fa-info-circle me-2"></i>
-            You don't have any investments yet.
-            <a href="{% url 'investments:plans' %}" class="alert-link">Browse investment plans</a>
-        </div>
-    {% endif %}
 </div>
 {% endblock %}

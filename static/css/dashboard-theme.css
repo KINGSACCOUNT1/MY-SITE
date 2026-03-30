@@ -1,0 +1,439 @@
+/* 
+ * Dashboard Dark Image Theme
+ * Elite Wealth Capital - Consistent dark styling for all dashboard pages
+ * No white colors - image-based dark theme throughout
+ */
+
+:root {
+    --gold: #FFD700;
+    --gold-hover: #FFC700;
+    --gold-dim: rgba(255, 215, 0, 0.7);
+    --navy: #0A1F44;
+    --dark-bg: #050B1A;
+    --success: #00D4AA;
+    --danger: #f44336;
+    --warning: #FFC107;
+    --info: #22d3ee;
+    --card-bg: rgba(10, 31, 68, 0.6);
+    --card-border: rgba(255, 215, 0, 0.2);
+    --card-border-hover: rgba(255, 215, 0, 0.5);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.5);
+}
+
+/* Page Container with Background Image */
+.dashboard-theme-page {
+    background: url('/static/images/offices/office-investors.jpg') center/cover no-repeat fixed;
+    min-height: 100vh;
+    position: relative;
+}
+
+.dashboard-theme-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(5, 11, 26, 0.94) 0%, rgba(10, 31, 68, 0.92) 100%);
+    z-index: 0;
+}
+
+.dashboard-theme-page > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Alternative: Solid dark gradient (no image) */
+.dashboard-theme-solid {
+    background: linear-gradient(135deg, #050B1A 0%, #0A1F44 100%);
+    min-height: 100vh;
+}
+
+/* Page Headers */
+.page-header-gold {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 25px 30px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+}
+
+.page-header-gold h1,
+.page-header-gold h2 {
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.page-header-gold p {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Cards */
+.card-dark {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 25px;
+    backdrop-filter: blur(15px);
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+}
+
+.card-dark:hover {
+    transform: translateY(-5px);
+    border-color: var(--card-border-hover);
+    box-shadow: 0 10px 40px rgba(255, 215, 0, 0.15);
+}
+
+.card-dark .card-title {
+    color: var(--gold);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Form Elements */
+.form-dark .form-label {
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.form-dark .form-control,
+.form-dark .form-select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    color: var(--text-primary);
+    padding: 12px 15px;
+}
+
+.form-dark .form-control:focus,
+.form-dark .form-select:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.15);
+    color: var(--text-primary);
+}
+
+.form-dark .form-control::placeholder {
+    color: var(--text-muted);
+}
+
+.form-dark .form-select option {
+    background: var(--navy);
+    color: var(--text-primary);
+}
+
+/* Buttons */
+.btn-gold {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    color: #000;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+    color: #000;
+}
+
+.btn-gold-outline {
+    background: transparent;
+    color: var(--gold);
+    border: 2px solid var(--gold);
+    padding: 10px 25px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-gold-outline:hover {
+    background: rgba(255, 215, 0, 0.15);
+    color: var(--gold);
+    transform: translateY(-2px);
+}
+
+/* Tables */
+.table-dark-custom {
+    width: 100%;
+    color: var(--text-primary);
+}
+
+.table-dark-custom th {
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 15px 10px;
+    border-bottom: 1px solid var(--card-border);
+    text-align: left;
+}
+
+.table-dark-custom td {
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.table-dark-custom tr:hover {
+    background: rgba(255, 215, 0, 0.05);
+}
+
+/* Status Badges */
+.badge-success-dark {
+    background: rgba(0, 212, 170, 0.2);
+    color: var(--success);
+    border: 1px solid var(--success);
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.badge-warning-dark {
+    background: rgba(255, 193, 7, 0.2);
+    color: var(--warning);
+    border: 1px solid var(--warning);
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.badge-danger-dark {
+    background: rgba(244, 67, 54, 0.2);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.badge-info-dark {
+    background: rgba(34, 211, 238, 0.2);
+    color: var(--info);
+    border: 1px solid var(--info);
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* Progress Bars */
+.progress-dark {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    height: 10px;
+    overflow: hidden;
+}
+
+.progress-dark .progress-fill {
+    background: linear-gradient(90deg, var(--gold), var(--success));
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+/* Stat Cards */
+.stat-card-dark {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 25px;
+    backdrop-filter: blur(15px);
+    transition: all 0.3s ease;
+}
+
+.stat-card-dark:hover {
+    transform: translateY(-5px);
+    border-color: var(--card-border-hover);
+}
+
+.stat-card-dark .stat-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.stat-card-dark .stat-value {
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.stat-card-dark .stat-value.profit {
+    color: var(--success);
+}
+
+.stat-card-dark .stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+/* Icon Gradients */
+.icon-purple { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; }
+.icon-green { background: linear-gradient(135deg, #11998e, #38ef7d); color: #fff; }
+.icon-gold { background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; }
+.icon-red { background: linear-gradient(135deg, #ee0979, #ff6a00); color: #fff; }
+.icon-blue { background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #fff; }
+.icon-pink { background: linear-gradient(135deg, #f472b6, #ec4899); color: #fff; }
+
+/* Alert Messages */
+.alert-dark {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid var(--card-border);
+    border-radius: 15px;
+    padding: 15px 20px;
+    color: var(--text-primary);
+}
+
+.alert-dark.alert-success { border-color: var(--success); background: rgba(0, 212, 170, 0.1); }
+.alert-dark.alert-warning { border-color: var(--warning); background: rgba(255, 193, 7, 0.1); }
+.alert-dark.alert-danger { border-color: var(--danger); background: rgba(244, 67, 54, 0.1); }
+
+/* Empty States */
+.empty-state-dark {
+    text-align: center;
+    padding: 50px 30px;
+    color: var(--text-muted);
+}
+
+.empty-state-dark i {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: rgba(255, 215, 0, 0.2);
+}
+
+.empty-state-dark a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.empty-state-dark a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile Navigation */
+.mobile-nav-dark {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #0A1F44 0%, #050B1A 100%);
+    border-top: 1px solid var(--card-border);
+    display: none;
+    justify-content: space-around;
+    z-index: 1000;
+}
+
+.mobile-nav-dark button {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 8px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav-dark button:hover,
+.mobile-nav-dark button:active {
+    background: rgba(255, 215, 0, 0.15);
+    color: var(--gold);
+}
+
+.mobile-nav-dark button i {
+    font-size: 1.3rem;
+    margin-bottom: 4px;
+}
+
+@media (max-width: 768px) {
+    .mobile-nav-dark { display: flex; }
+    .dashboard-theme-page { padding-bottom: 80px; }
+}
+
+/* Drawer Menu */
+.drawer-dark {
+    position: fixed;
+    left: 0;
+    top: 92px;
+    width: 280px;
+    height: calc(100vh - 92px - 70px);
+    background: linear-gradient(180deg, #0A1F44 0%, #050B1A 100%);
+    border-right: 1px solid var(--card-border);
+    z-index: 999;
+    overflow-y: auto;
+    display: none;
+}
+
+.drawer-dark.active { display: block; }
+
+.drawer-dark-backdrop {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 998;
+    display: none;
+}
+
+.drawer-dark-backdrop.active { display: block; }
+
+.drawer-dark-menu {
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+}
+
+.drawer-dark-menu a {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.drawer-dark-menu a:hover {
+    background: rgba(255, 215, 0, 0.1);
+    color: var(--gold);
+    border-left-color: var(--gold);
+}
+
+.drawer-dark-menu i {
+    width: 25px;
+    margin-right: 15px;
+    color: var(--gold);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    .stat-card-dark .stat-value { font-size: 1.4rem; }
+    .page-header-gold h1 { font-size: 1.5rem; }
+}
+
+/* Override Bootstrap white backgrounds */
+.card, .modal-content, .dropdown-menu, .list-group-item, .table {
+    background: transparent !important;
+    color: inherit !important;
+}
+
+/* Reset text colors */
+.text-muted { color: var(--text-muted) !important; }
+.text-dark { color: var(--text-primary) !important; }

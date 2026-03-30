@@ -6,321 +6,481 @@
 
 {% block extra_css %}
 <style>
+    /* Dashboard Image Theme */
+    .dashboard-page {
+        background: url('{% static "images/offices/office-investors.jpg" %}') center/cover no-repeat fixed;
+        min-height: 100vh;
+        position: relative;
+    }
+    
+    .dashboard-page::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(5, 11, 26, 0.92) 0%, rgba(10, 31, 68, 0.88) 100%);
+        z-index: 0;
+    }
+    
+    .dashboard-container {
+        position: relative;
+        z-index: 1;
+        padding: 30px 20px 100px;
+    }
+    
+    /* Welcome Header */
+    .welcome-header {
+        background: rgba(255, 215, 0, 0.1);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        border-radius: 20px;
+        padding: 25px 30px;
+        margin-bottom: 30px;
+        backdrop-filter: blur(10px);
+    }
+    
+    .welcome-header h2 {
+        color: #FFD700;
+        font-weight: 700;
+        margin-bottom: 5px;
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+    
+    .welcome-header .account-badge {
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        color: #000;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.85rem;
+    }
+    
+    /* Balance Cards */
+    .balance-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        border-radius: 20px;
+        padding: 25px;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+    
+    .balance-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(255, 215, 0, 0.5);
+        box-shadow: 0 10px 40px rgba(255, 215, 0, 0.15);
+    }
+    
+    .balance-card .card-label {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+    }
+    
+    .balance-card .card-value {
+        color: #fff;
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+    
+    .balance-card .card-value.profit {
+        color: #00D4AA;
+    }
+    
+    .balance-card .card-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+    
+    .balance-card .card-icon.balance { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; }
+    .balance-card .card-icon.invested { background: linear-gradient(135deg, #11998e, #38ef7d); color: #fff; }
+    .balance-card .card-icon.profit { background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; }
+    .balance-card .card-icon.withdrawn { background: linear-gradient(135deg, #ee0979, #ff6a00); color: #fff; }
+    
+    /* Quick Actions */
+    .actions-section {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        border-radius: 20px;
+        padding: 25px;
+        backdrop-filter: blur(10px);
+        margin-bottom: 30px;
+    }
+    
+    .section-title {
+        color: #FFD700;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .action-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 15px;
+        border-radius: 15px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+    }
+    
+    .action-btn i {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .action-btn span {
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    
+    .action-btn.invest { background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2)); color: #a78bfa; border-color: rgba(167, 139, 250, 0.3); }
+    .action-btn.invest:hover { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; transform: translateY(-3px); }
+    
+    .action-btn.deposit { background: linear-gradient(135deg, rgba(17, 153, 142, 0.2), rgba(56, 239, 125, 0.2)); color: #34d399; border-color: rgba(52, 211, 153, 0.3); }
+    .action-btn.deposit:hover { background: linear-gradient(135deg, #11998e, #38ef7d); color: #fff; transform: translateY(-3px); }
+    
+    .action-btn.withdraw { background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.2)); color: #fbbf24; border-color: rgba(251, 191, 36, 0.3); }
+    .action-btn.withdraw:hover { background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; transform: translateY(-3px); }
+    
+    .action-btn.cards { background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(59, 130, 246, 0.2)); color: #22d3ee; border-color: rgba(34, 211, 238, 0.3); }
+    .action-btn.cards:hover { background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #fff; transform: translateY(-3px); }
+    
+    .action-btn.loans { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2)); color: #c084fc; border-color: rgba(192, 132, 252, 0.3); }
+    .action-btn.loans:hover { background: linear-gradient(135deg, #8b5cf6, #ec4899); color: #fff; transform: translateY(-3px); }
+    
+    .action-btn.kyc { background: linear-gradient(135deg, rgba(244, 114, 182, 0.2), rgba(251, 113, 133, 0.2)); color: #f472b6; border-color: rgba(244, 114, 182, 0.3); }
+    .action-btn.kyc:hover { background: linear-gradient(135deg, #f472b6, #fb7185); color: #fff; transform: translateY(-3px); }
+    
+    /* Investments Table */
+    .investments-section {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        border-radius: 20px;
+        padding: 25px;
+        backdrop-filter: blur(10px);
+    }
+    
+    .investments-table {
+        width: 100%;
+        color: #fff;
+    }
+    
+    .investments-table th {
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 500;
+        padding: 15px 10px;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        text-align: left;
+    }
+    
+    .investments-table td {
+        padding: 15px 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        color: #fff;
+    }
+    
+    .investments-table tr:hover {
+        background: rgba(255, 215, 0, 0.05);
+    }
+    
+    .progress-bar-custom {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        height: 8px;
+        overflow: hidden;
+    }
+    
+    .progress-bar-custom .fill {
+        background: linear-gradient(90deg, #FFD700, #00D4AA);
+        height: 100%;
+        border-radius: 10px;
+        transition: width 0.3s ease;
+    }
+    
+    .no-investments {
+        text-align: center;
+        padding: 40px;
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .no-investments a {
+        color: #FFD700;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    
+    .no-investments a:hover {
+        text-decoration: underline;
+    }
+    
     /* Mobile Bottom Navigation */
     .mobile-bottom-nav {
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        background: #0A1F44;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        background: linear-gradient(135deg, #0A1F44 0%, #050B1A 100%);
+        border-top: 1px solid rgba(255, 215, 0, 0.3);
         display: none;
         justify-content: space-around;
         align-items: stretch;
         z-index: 1000;
         padding: 0;
-        margin: 0;
     }
 
     .mobile-bottom-nav button {
         flex: 1;
         background: none;
         border: none;
-        color: white;
+        color: rgba(255, 255, 255, 0.7);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         padding: 12px 8px;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         cursor: pointer;
         transition: all 0.3s ease;
-        border-radius: 0;
     }
 
-    .mobile-bottom-nav button:hover {
-        background: rgba(255, 215, 0, 0.2);
+    .mobile-bottom-nav button:hover,
+    .mobile-bottom-nav button:active {
+        background: rgba(255, 215, 0, 0.15);
         color: #FFD700;
     }
 
     .mobile-bottom-nav button i {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         margin-bottom: 4px;
     }
-
-    .mobile-bottom-nav button span {
-        display: block;
-        text-align: center;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    /* Hamburger Menu */
-    .mobile-drawer-toggle {
-        display: none;
-        background: none;
-        border: none;
-        color: white;
-        font-size: 1.5rem;
-        cursor: pointer;
-        padding: 10px;
-    }
-
+    
+    /* Mobile Drawer */
     .mobile-drawer {
         display: none;
         position: fixed;
         left: 0;
-        top: 134px;
+        top: 92px;
         width: 280px;
-        height: calc(100vh - 134px - 70px);
-        background: #f8f9fa;
+        height: calc(100vh - 92px - 70px);
+        background: linear-gradient(180deg, #0A1F44 0%, #050B1A 100%);
+        border-right: 1px solid rgba(255, 215, 0, 0.2);
         z-index: 999;
         overflow-y: auto;
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    .mobile-drawer.active {
-        display: block;
-    }
+    .mobile-drawer.active { display: block; }
 
     .mobile-drawer-backdrop {
         display: none;
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
         z-index: 998;
     }
 
-    .mobile-drawer-backdrop.active {
-        display: block;
-    }
+    .mobile-drawer-backdrop.active { display: block; }
 
     .mobile-drawer-menu {
         list-style: none;
-        padding: 0;
+        padding: 10px 0;
         margin: 0;
-    }
-
-    .mobile-drawer-menu li {
-        border-bottom: 1px solid #e0e0e0;
     }
 
     .mobile-drawer-menu a {
         display: flex;
         align-items: center;
-        padding: 15px 20px;
-        color: #333;
+        padding: 15px 25px;
+        color: rgba(255, 255, 255, 0.8);
         text-decoration: none;
         transition: all 0.3s ease;
+        border-left: 3px solid transparent;
     }
 
     .mobile-drawer-menu a:hover {
         background: rgba(255, 215, 0, 0.1);
         color: #FFD700;
+        border-left-color: #FFD700;
     }
 
     .mobile-drawer-menu i {
-        width: 30px;
+        width: 25px;
         margin-right: 15px;
         color: #FFD700;
     }
 
-    /* Adjust body and container for mobile nav */
     @media (max-width: 768px) {
-        body {
-            padding-bottom: 80px;
-        }
-
-        .mobile-bottom-nav {
-            display: flex;
-        }
-
-        .mobile-drawer-toggle {
-            display: block;
-        }
-
-        .container {
-            padding: 0 15px;
-        }
-
-        /* Stack balance cards vertically on small screens */
-        .balance-cards-row .col-md-3 {
-            min-width: 100%;
-        }
-
-        /* Improve quick action buttons for mobile */
-        .quick-actions-row .col-md-3 {
-            min-width: 50%;
-        }
-
-        /* Make table responsive */
-        .table-responsive {
-            font-size: 0.85rem;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .mobile-bottom-nav button span {
-            font-size: 0.65rem;
-        }
-
-        .mobile-drawer {
-            width: 100%;
-            max-width: 280px;
-        }
+        .mobile-bottom-nav { display: flex; }
+        .dashboard-container { padding-bottom: 100px; }
+        .balance-card .card-value { font-size: 1.4rem; }
+        .action-btn { padding: 15px 10px; }
+        .action-btn i { font-size: 1.4rem; }
+        .action-btn span { font-size: 0.8rem; }
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <div class="row mb-4">
-        <div class="col-12">
-            <h2 class="fw-bold">Welcome back, {{ user.full_name }}!</h2>
-            <p class="text-muted">Account Type: <span class="badge bg-primary">{{ user.get_account_type_display }}</span></p>
+<div class="dashboard-page">
+    <div class="dashboard-container container">
+        <!-- Welcome Header -->
+        <div class="welcome-header">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div>
+                    <h2>Welcome back, {{ user.full_name }}!</h2>
+                    <span class="account-badge">{{ user.get_account_type_display }}</span>
+                </div>
+                <div class="mt-2 mt-md-0">
+                    <a href="{% url 'accounts:profile' %}" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-cog me-1"></i> Settings
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- Balance Cards -->
-    <div class="row g-4 mb-4 balance-cards-row">
-        <div class="col-md-3 col-sm-6">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+        <!-- Balance Cards -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="balance-card">
+                    <div class="d-flex justify-content-between align-items-start">
                         <div>
-                            <p class="text-muted mb-1 small">Balance</p>
-                            <h4 class="mb-0 fw-bold">${{ user.balance|floatformat:2|intcomma }}</h4>
+                            <p class="card-label">Available Balance</p>
+                            <h3 class="card-value">${{ user.balance|floatformat:2|intcomma }}</h3>
                         </div>
-                        <div class="text-primary"><i class="fas fa-wallet fa-2x"></i></div>
+                        <div class="card-icon balance"><i class="fas fa-wallet"></i></div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-3 col-sm-6">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="balance-card">
+                    <div class="d-flex justify-content-between align-items-start">
                         <div>
-                            <p class="text-muted mb-1 small">Total Invested</p>
-                            <h4 class="mb-0 fw-bold">${{ total_invested|floatformat:2|intcomma }}</h4>
+                            <p class="card-label">Total Invested</p>
+                            <h3 class="card-value">${{ total_invested|floatformat:2|intcomma }}</h3>
                         </div>
-                        <div class="text-success"><i class="fas fa-chart-line fa-2x"></i></div>
+                        <div class="card-icon invested"><i class="fas fa-chart-line"></i></div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-3 col-sm-6">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="balance-card">
+                    <div class="d-flex justify-content-between align-items-start">
                         <div>
-                            <p class="text-muted mb-1 small">Total Profit</p>
-                            <h4 class="mb-0 fw-bold text-success">${{ total_profit|floatformat:2|intcomma }}</h4>
+                            <p class="card-label">Total Profit</p>
+                            <h3 class="card-value profit">${{ total_profit|floatformat:2|intcomma }}</h3>
                         </div>
-                        <div class="text-warning"><i class="fas fa-trophy fa-2x"></i></div>
+                        <div class="card-icon profit"><i class="fas fa-trophy"></i></div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-3 col-sm-6">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="balance-card">
+                    <div class="d-flex justify-content-between align-items-start">
                         <div>
-                            <p class="text-muted mb-1 small">Withdrawn</p>
-                            <h4 class="mb-0 fw-bold">${{ total_withdrawn|floatformat:2|intcomma }}</h4>
+                            <p class="card-label">Total Withdrawn</p>
+                            <h3 class="card-value">${{ total_withdrawn|floatformat:2|intcomma }}</h3>
                         </div>
-                        <div class="text-info"><i class="fas fa-hand-holding-usd fa-2x"></i></div>
+                        <div class="card-icon withdrawn"><i class="fas fa-hand-holding-usd"></i></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Quick Actions -->
-    <div class="row mb-4 quick-actions-row">
-        <div class="col-12">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title mb-3">Quick Actions</h5>
-                    <div class="row g-2">
-                        <div class="col-md-2 col-6">
-                            <a href="/investments/plans/" class="btn btn-primary w-100"><i class="fas fa-chart-line me-2"></i>Invest</a>
-                        </div>
-                        <div class="col-md-2 col-6">
-                            <a href="/investments/deposit/" class="btn btn-success w-100"><i class="fas fa-plus-circle me-2"></i>Deposit</a>
-                        </div>
-                        <div class="col-md-2 col-6">
-                            <a href="/investments/withdraw/" class="btn btn-warning w-100"><i class="fas fa-minus-circle me-2"></i>Withdraw</a>
-                        </div>
-                        <div class="col-md-2 col-6">
-                            <a href="/investments/cards/" class="btn btn-info w-100"><i class="fas fa-credit-card me-2"></i>Cards</a>
-                        </div>
-                        <div class="col-md-2 col-6">
-                            <a href="/investments/loans/" class="btn btn-secondary w-100"><i class="fas fa-hand-holding-usd me-2"></i>Loans</a>
-                        </div>
-                        <div class="col-md-2 col-6">
-                            <a href="/investments/agent/" class="btn btn-dark w-100"><i class="fas fa-user-tie me-2"></i>Agent</a>
-                        </div>
-                    </div>
-                            <a href="/investments/withdraw/" class="btn btn-warning w-100"><i class="fas fa-minus-circle me-2"></i>Withdraw</a>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <a href="/kyc/" class="btn btn-info w-100"><i class="fas fa-id-card me-2"></i>KYC</a>
-                        </div>
-                    </div>
+        <!-- Quick Actions -->
+        <div class="actions-section">
+            <h5 class="section-title"><i class="fas fa-bolt"></i> Quick Actions</h5>
+            <div class="row g-3">
+                <div class="col-4 col-md-2">
+                    <a href="{% url 'investments:plans' %}" class="action-btn invest w-100">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Invest</span>
+                    </a>
+                </div>
+                <div class="col-4 col-md-2">
+                    <a href="{% url 'investments:deposit' %}" class="action-btn deposit w-100">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Add Funds</span>
+                    </a>
+                </div>
+                <div class="col-4 col-md-2">
+                    <a href="{% url 'investments:withdraw' %}" class="action-btn withdraw w-100">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>Withdraw</span>
+                    </a>
+                </div>
+                <div class="col-4 col-md-2">
+                    <a href="{% url 'investments:cards' %}" class="action-btn cards w-100">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Cards</span>
+                    </a>
+                </div>
+                <div class="col-4 col-md-2">
+                    <a href="{% url 'investments:loans' %}" class="action-btn loans w-100">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <span>Loans</span>
+                    </a>
+                </div>
+                <div class="col-4 col-md-2">
+                    <a href="{% url 'kyc:status' %}" class="action-btn kyc w-100">
+                        <i class="fas fa-id-card"></i>
+                        <span>KYC</span>
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Active Investments -->
-    <div class="row">
-        <div class="col-12">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title mb-3">Active Investments</h5>
-                    {% if active_investments %}
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Plan</th>
-                                        <th>Amount</th>
-                                        <th>Daily ROI</th>
-                                        <th>Progress</th>
-                                        <th>Days Left</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for inv in active_investments %}
-                                    <tr>
-                                        <td>{{ inv.plan.name }}</td>
-                                        <td>${{ inv.amount|floatformat:2|intcomma }}</td>
-                                        <td>{{ inv.plan.daily_roi }}%</td>
-                                        <td>
-                                            <div class="progress" style="height: 20px;">
-                                                <div class="progress-bar" style="width: {{ inv.progress_percentage }}%">{{ inv.progress_percentage }}%</div>
-                                            </div>
-                                        </td>
-                                        <td>{{ inv.days_remaining }} days</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    {% else %}
-                        <p class="text-muted">No active investments. <a href="/investments/plans/">Start investing now!</a></p>
-                    {% endif %}
+        <!-- Active Investments -->
+        <div class="investments-section">
+            <h5 class="section-title"><i class="fas fa-chart-pie"></i> Active Investments</h5>
+            {% if active_investments %}
+                <div class="table-responsive">
+                    <table class="investments-table">
+                        <thead>
+                            <tr>
+                                <th>Plan</th>
+                                <th>Amount</th>
+                                <th>Daily ROI</th>
+                                <th>Progress</th>
+                                <th>Days Left</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for inv in active_investments %}
+                            <tr>
+                                <td><strong>{{ inv.plan.name }}</strong></td>
+                                <td>${{ inv.amount|floatformat:2|intcomma }}</td>
+                                <td style="color: #00D4AA;">{{ inv.plan.daily_roi }}%</td>
+                                <td style="min-width: 150px;">
+                                    <div class="progress-bar-custom">
+                                        <div class="fill" style="width: {{ inv.progress_percentage }}%;"></div>
+                                    </div>
+                                    <small style="color: rgba(255,255,255,0.5);">{{ inv.progress_percentage }}%</small>
+                                </td>
+                                <td>{{ inv.days_remaining }} days</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
-            </div>
+            {% else %}
+                <div class="no-investments">
+                    <i class="fas fa-chart-line fa-3x mb-3" style="color: rgba(255,215,0,0.3);"></i>
+                    <p>No active investments yet.</p>
+                    <a href="{% url 'investments:plans' %}"><i class="fas fa-rocket me-1"></i> Start Investing Now</a>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -331,40 +491,32 @@
     <ul class="mobile-drawer-menu">
         <li><a href="{% url 'dashboard:dashboard' %}"><i class="fas fa-home"></i>Dashboard</a></li>
         <li><a href="{% url 'dashboard:transactions_overview' %}"><i class="fas fa-exchange-alt"></i>Transactions</a></li>
-        <li><a href="/investments/deposit/"><i class="fas fa-plus-circle"></i>Add Funds</a></li>
-        <li><a href="/investments/cards/"><i class="fas fa-credit-card"></i>Virtual Cards</a></li>
-        <li><a href="/investments/loans/"><i class="fas fa-hand-holding-usd"></i>Loans</a></li>
-        <li><a href="/investments/agent/"><i class="fas fa-user-tie"></i>Become Agent</a></li>
+        <li><a href="{% url 'investments:deposit' %}"><i class="fas fa-plus-circle"></i>Add Funds</a></li>
+        <li><a href="{% url 'investments:cards' %}"><i class="fas fa-credit-card"></i>Virtual Cards</a></li>
+        <li><a href="{% url 'investments:loans' %}"><i class="fas fa-hand-holding-usd"></i>Loans</a></li>
+        <li><a href="{% url 'investments:agent' %}"><i class="fas fa-user-tie"></i>Become Agent</a></li>
         <li><a href="{% url 'dashboard:certificates_view' %}"><i class="fas fa-award"></i>Certificates</a></li>
         <li><a href="{% url 'dashboard:upgrade_plans' %}"><i class="fas fa-star"></i>Upgrade Plan</a></li>
-        <li><a href="{% url 'dashboard:partner_integrations' %}"><i class="fas fa-link"></i>Integrations</a></li>
-        <li><a href="{% url 'dashboard:testimonials_manage' %}"><i class="fas fa-comments"></i>Testimonials</a></li>
-        <li><a href="{% url 'dashboard:global_presence_info' %}"><i class="fas fa-globe"></i>Global Presence</a></li>
         <li><a href="{% url 'dashboard:activity_log' %}"><i class="fas fa-history"></i>Activity Log</a></li>
-        <li><a href="/accounts/profile/"><i class="fas fa-user"></i>Profile Settings</a></li>
-        <li><a href="/accounts/logout/"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+        <li><a href="{% url 'accounts:profile' %}"><i class="fas fa-user"></i>Profile Settings</a></li>
+        <li><a href="{% url 'accounts:logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
     </ul>
 </div>
 
 <!-- Mobile Bottom Navigation Bar -->
 <div class="mobile-bottom-nav">
-    <button onclick="window.location.href='/investments/deposit/'"><i class="fas fa-plus-circle"></i><span>Add Funds</span></button>
-    <button onclick="window.location.href='/investments/withdraw/'"><i class="fas fa-money-bill-wave"></i><span>Withdraw</span></button>
-    <button onclick="window.location.href='/investments/loans/'"><i class="fas fa-hand-holding-usd"></i><span>Loans</span></button>
+    <button onclick="window.location.href='{% url 'investments:deposit' %}'"><i class="fas fa-plus-circle"></i><span>Add Funds</span></button>
+    <button onclick="window.location.href='{% url 'investments:withdraw' %}'"><i class="fas fa-money-bill-wave"></i><span>Withdraw</span></button>
+    <button onclick="window.location.href='{% url 'investments:loans' %}'"><i class="fas fa-hand-holding-usd"></i><span>Loans</span></button>
     <button onclick="toggleDrawer()"><i class="fas fa-bars"></i><span>Menu</span></button>
 </div>
 
 <script>
     function toggleDrawer() {
-        const drawer = document.getElementById('mobileDrawer');
-        const backdrop = document.getElementById('drawerBackdrop');
-        drawer.classList.toggle('active');
-        backdrop.classList.toggle('active');
+        document.getElementById('mobileDrawer').classList.toggle('active');
+        document.getElementById('drawerBackdrop').classList.toggle('active');
     }
-
     document.getElementById('drawerBackdrop').addEventListener('click', toggleDrawer);
-    
-    // Close drawer when a link is clicked
     document.querySelectorAll('.mobile-drawer-menu a').forEach(link => {
         link.addEventListener('click', toggleDrawer);
     });
