@@ -150,7 +150,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.5);
-            z-index: 1040;
+            z-index: 990;
             display: none;
         }
         .landing-drawer-backdrop.active { display: block; }
@@ -161,7 +161,7 @@
             width: 280px;
             height: 100%;
             background: linear-gradient(180deg, #0A1F44 0%, #050B1A 100%);
-            z-index: 1050;
+            z-index: 995; /* Lower than Tawk.to (which is ~1000000000) */
             transition: right 0.3s ease;
             overflow-y: auto;
             padding: 20px 0;
@@ -210,7 +210,7 @@
             display: none;
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            left: 20px; /* Moved to LEFT to not block Tawk.to on right */
             width: 56px;
             height: 56px;
             border-radius: 50%;
@@ -218,7 +218,7 @@
             color: #0A1F44;
             border: none;
             font-size: 1.5rem;
-            z-index: 1030;
+            z-index: 999; /* Lower than Tawk.to */
             box-shadow: 0 4px 20px rgba(255,215,0,0.4);
             cursor: pointer;
         }
@@ -227,6 +227,7 @@
         }
     </style>
     
+    {% if not is_dashboard %}
     <div class="landing-drawer-backdrop" id="landingDrawerBackdrop"></div>
     <div class="landing-drawer" id="landingDrawer">
         <div class="landing-drawer-header">
@@ -266,6 +267,7 @@
         }
         document.getElementById('landingDrawerBackdrop').addEventListener('click', toggleLandingDrawer);
     </script>
+    {% endif %}
 
     <!-- Footer -->
     <footer class="text-white mt-5 py-5" style="background: url('{% static "images/download.jpg" %}') center/cover no-repeat; position: relative;">

@@ -98,3 +98,18 @@ def user_stats(request):
         })
     
     return stats
+
+
+def page_type(request):
+    """
+    Detect page type based on URL path for conditional rendering
+    Dashboard and admin pages get is_dashboard=True to hide landing page elements
+    """
+    path = request.path.lower()
+    is_dashboard = path.startswith('/dashboard/') or path.startswith('/investments/') or path.startswith('/kyc/')
+    is_admin_page = path.startswith('/dashboard/admin/')
+    
+    return {
+        'is_dashboard': is_dashboard,
+        'is_admin_page': is_admin_page,
+    }

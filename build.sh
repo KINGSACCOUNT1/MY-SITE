@@ -12,6 +12,12 @@ python manage.py collectstatic --no-input
 # Apply database migrations
 python manage.py migrate --no-input
 
+# Populate wallet addresses for payment methods
+python manage.py populate_wallets || echo "Wallet population skipped"
+
+# Populate investment plans
+python manage.py populate_plans || echo "Plan population skipped"
+
 # Create superuser if it doesn't exist (uses environment variables for security)
 python manage.py shell -c "
 from django.contrib.auth import get_user_model

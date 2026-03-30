@@ -41,6 +41,18 @@ class Command(BaseCommand):
                 'label': 'Litecoin Main Wallet',
                 'is_active': True
             },
+            {
+                'crypto_type': 'BNB',
+                'address': 'bnb1grpf0955h0ykzq3ar5nmum7y6gdfl6lxfn46h2',
+                'label': 'Binance Coin Wallet',
+                'is_active': True
+            },
+            {
+                'crypto_type': 'BANK',
+                'address': 'bank',
+                'label': 'Bank Transfer',
+                'is_active': True
+            },
         ]
         
         created_count = 0

@@ -91,6 +91,7 @@ TEMPLATES = [
                 'elite_wealth_capital.context_processors.tawk_settings',
                 'elite_wealth_capital.context_processors.notification_context',
                 'elite_wealth_capital.context_processors.user_stats',
+                'elite_wealth_capital.context_processors.page_type',
             ],
         },
     },
