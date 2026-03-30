@@ -116,6 +116,7 @@ def signup_view(request):
                 )
             except CustomUser.DoesNotExist:
                 user.balance = 0.00  # Invalid referral code = $0
+                messages.warning(request, 'Invalid referral code. No bonus applied.')
         else:
             # No referral code = $0 starting balance
             user.balance = 0.00
@@ -128,7 +129,11 @@ def signup_view(request):
         # Auto-login
         login(request, user)
         
-        messages.success(request, 'Account created successfully! Welcome bonus of $20 credited.')
+        # Show appropriate message based on referral status
+        if referral_code and user.balance > 0:
+            messages.success(request, f'Account created successfully! Welcome bonus of ${user.balance:.0f} credited.')
+        else:
+            messages.success(request, 'Account created successfully! Welcome to Elite Wealth Capital.')
         return redirect('dashboard:dashboard')
     
     return render(request, 'accounts/signup.html')
