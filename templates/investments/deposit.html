@@ -5,61 +5,196 @@
 
 {% block extra_css %}
 <style>
-    /* Payment Method Grid */
-    .payment-methods {
+    /* Step Indicator */
+    .steps-indicator {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+    
+    .step {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        opacity: 0.5;
+    }
+    
+    .step.active {
+        opacity: 1;
+    }
+    
+    .step.completed {
+        opacity: 1;
+    }
+    
+    .step-number {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: var(--bg-card);
+        border: 2px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+    }
+    
+    .step.active .step-number {
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        border-color: var(--gold);
+        color: var(--bg-darkest);
+    }
+    
+    .step.completed .step-number {
+        background: var(--success);
+        border-color: var(--success);
+        color: #fff;
+    }
+    
+    /* Payment Type Selection */
+    .payment-type-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .payment-type-card {
+        background: var(--bg-card);
+        border: 2px solid var(--border-color);
+        border-radius: 20px;
+        padding: 40px 30px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .payment-type-card:hover {
+        border-color: rgba(255, 215, 0, 0.5);
+        transform: translateY(-5px);
+    }
+    
+    .payment-type-card.selected {
+        border-color: var(--gold);
+        background: rgba(255, 215, 0, 0.1);
+    }
+    
+    .payment-type-card i {
+        font-size: 3.5rem;
+        margin-bottom: 15px;
+        display: block;
+    }
+    
+    .payment-type-card h4 {
+        margin-bottom: 10px;
+    }
+    
+    .payment-type-card p {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+    /* Crypto Methods */
+    .crypto-methods {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 15px;
         margin-bottom: 30px;
     }
     
-    .payment-method {
+    .crypto-method {
         background: var(--bg-card);
         border: 2px solid var(--border-color);
         border-radius: 15px;
-        padding: 25px 15px;
+        padding: 20px 15px;
         text-align: center;
         cursor: pointer;
         transition: all 0.3s ease;
     }
     
-    .payment-method:hover {
+    .crypto-method:hover {
         border-color: rgba(255, 215, 0, 0.5);
         transform: translateY(-3px);
     }
     
-    .payment-method.selected {
+    .crypto-method.selected {
         border-color: var(--gold);
         background: rgba(255, 215, 0, 0.1);
     }
     
-    .payment-method i {
+    .crypto-method i {
         font-size: 2rem;
         margin-bottom: 10px;
         display: block;
     }
     
-    .payment-method .name {
+    .crypto-method .name {
         font-weight: 600;
         font-size: 0.95rem;
-        margin-bottom: 5px;
     }
     
-    .payment-method .symbol {
-        color: var(--text-muted);
-        font-size: 0.8rem;
+    /* Amount Input */
+    .amount-input-container {
+        background: var(--bg-card);
+        border: 2px solid var(--border-color);
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 25px;
     }
     
-    /* Wallet Details */
-    .wallet-section {
-        display: none;
-        margin-top: 25px;
+    .amount-display {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
     }
     
-    .wallet-section.active {
-        display: block;
+    .currency-symbol {
+        font-size: 2.5rem;
+        color: var(--gold);
+        font-weight: 700;
     }
     
+    .amount-value {
+        font-size: 3.5rem;
+        font-weight: 800;
+        background: transparent;
+        border: none;
+        color: var(--text-primary);
+        text-align: center;
+        width: 200px;
+    }
+    
+    .amount-value:focus {
+        outline: none;
+    }
+    
+    .quick-amounts {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .quick-amount {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border-color);
+        padding: 8px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: var(--text-secondary);
+    }
+    
+    .quick-amount:hover {
+        background: rgba(255, 215, 0, 0.1);
+        border-color: var(--gold);
+        color: var(--gold);
+    }
+    
+    /* Wallet Address */
     .wallet-card {
         background: var(--bg-card);
         border: 1px solid var(--border-color);
@@ -102,55 +237,71 @@
         transform: scale(1.05);
     }
     
-    /* Bank Section */
-    .bank-section {
+    /* Bank Chat Section */
+    .bank-chat-section {
         text-align: center;
-        padding: 30px;
-    }
-    
-    .bank-section i.fa-headset {
-        font-size: 3rem;
-        color: var(--gold);
-        margin-bottom: 15px;
-    }
-    
-    /* Form */
-    .deposit-form {
+        padding: 40px 30px;
         background: var(--bg-card);
-        border: 1px solid var(--border-color);
-        border-radius: 15px;
-        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 25px;
     }
     
-    .form-group {
+    .bank-chat-section i.fa-headset {
+        font-size: 4rem;
+        color: var(--gold);
         margin-bottom: 20px;
     }
     
-    .form-label {
-        display: block;
-        color: var(--text-secondary);
-        margin-bottom: 8px;
-        font-size: 0.9rem;
-    }
-    
-    .form-input {
-        width: 100%;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid var(--border-color);
-        border-radius: 10px;
-        padding: 12px 15px;
-        color: var(--text-primary);
-        font-size: 1rem;
+    .chat-btn {
+        background: linear-gradient(135deg, #25D366, #128C7E);
+        color: #fff;
+        border: none;
+        padding: 15px 40px;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
         transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
     }
     
-    .form-input:focus {
-        outline: none;
+    .chat-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+    }
+    
+    /* Upload Section */
+    .upload-section {
+        background: var(--bg-card);
+        border: 2px dashed var(--border-color);
+        border-radius: 20px;
+        padding: 40px;
+        text-align: center;
+        margin-bottom: 25px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .upload-section:hover {
         border-color: var(--gold);
     }
     
-    .form-input[type="file"] {
-        padding: 10px;
+    .upload-section.has-file {
+        border-style: solid;
+        border-color: var(--success);
+        background: rgba(0, 212, 170, 0.1);
+    }
+    
+    .upload-section i {
+        font-size: 3rem;
+        color: var(--text-muted);
+        margin-bottom: 15px;
+    }
+    
+    .upload-section.has-file i {
+        color: var(--success);
     }
     
     /* Info Box */
@@ -188,6 +339,12 @@
         align-items: center;
         justify-content: center;
         margin-right: 15px;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
     }
     
     .pending-info h5 {
@@ -208,15 +365,31 @@
         color: var(--warning);
     }
     
+    /* Section visibility */
+    .step-section {
+        display: none;
+    }
+    
+    .step-section.active {
+        display: block;
+    }
+    
     @media (max-width: 991px) {
-        .payment-methods {
+        .crypto-methods {
             grid-template-columns: repeat(2, 1fr);
         }
     }
     
     @media (max-width: 576px) {
-        .payment-methods {
+        .payment-type-grid {
             grid-template-columns: 1fr;
+        }
+        .crypto-methods {
+            grid-template-columns: 1fr 1fr;
+        }
+        .amount-value {
+            font-size: 2.5rem;
+            width: 150px;
         }
     }
 </style>
@@ -226,8 +399,8 @@
 <!-- Top Bar -->
 <div class="topbar">
     <div class="topbar-title">
-        <h1><i class="fas fa-plus-circle me-2"></i>Add Funds</h1>
-        <p>Deposit money to your account using crypto or bank transfer</p>
+        <h1><i class="fas fa-plus-circle me-2" style="color: var(--gold);"></i>Add Funds</h1>
+        <p>Deposit money to your account</p>
     </div>
     <a href="{% url 'dashboard:dashboard' %}" class="btn-outline">
         <i class="fas fa-arrow-left me-2"></i>Back
@@ -235,7 +408,7 @@
 </div>
 
 {% if pending_deposits %}
-<!-- Pending Deposits -->
+<!-- Pending Deposits Alert -->
 <div class="card-dark mb-4">
     <h5 class="mb-3" style="color: var(--warning);"><i class="fas fa-clock me-2"></i>Pending Deposits</h5>
     {% for deposit in pending_deposits %}
@@ -245,60 +418,157 @@
         </div>
         <div class="pending-info">
             <h5>{{ deposit.crypto_type }} Deposit</h5>
-            <small>{{ deposit.created_at|date:"M d, Y H:i" }}</small>
+            <small>{{ deposit.created_at|date:"M d, Y H:i" }} - Awaiting confirmation</small>
         </div>
         <div class="pending-amount">
             <div class="amount">${{ deposit.amount|floatformat:2 }}</div>
-            <a href="{% url 'investments:deposit_status' deposit.id %}" class="btn-outline" style="padding: 5px 15px; font-size: 0.8rem;">View Status</a>
+            <a href="{% url 'investments:deposit_status' deposit.id %}" class="btn-gold" style="padding: 8px 15px; font-size: 0.8rem;">View Status</a>
         </div>
     </div>
     {% endfor %}
 </div>
 {% endif %}
 
-<!-- Payment Methods -->
-<div class="card-dark">
-    <h5 class="mb-4"><i class="fas fa-wallet me-2"></i>Select Payment Method</h5>
-    
-    {% if wallets %}
-    <div class="payment-methods">
-        {% for type, wallet in wallets.items %}
-        <div class="payment-method" data-method="{{ type }}" data-address="{{ wallet.address }}" onclick="selectMethod(this)">
-            {% if type == 'BTC' %}
-                <i class="fab fa-bitcoin" style="color: #F7931A;"></i>
-            {% elif type == 'ETH' %}
-                <i class="fab fa-ethereum" style="color: #627EEA;"></i>
-            {% elif type == 'USDT' %}
-                <i class="fas fa-dollar-sign" style="color: #26A17B;"></i>
-            {% elif type == 'USDC' %}
-                <i class="fas fa-circle" style="color: #2775CA;"></i>
-            {% elif type == 'LTC' %}
-                <i class="fas fa-coins" style="color: #345D9D;"></i>
-            {% elif type == 'BNB' %}
-                <i class="fas fa-coins" style="color: #F3BA2F;"></i>
-            {% elif type == 'BANK' %}
+<!-- Steps Indicator -->
+<div class="steps-indicator">
+    <div class="step active" id="step1-indicator">
+        <div class="step-number">1</div>
+        <span>Payment Type</span>
+    </div>
+    <div class="step" id="step2-indicator">
+        <div class="step-number">2</div>
+        <span>Amount</span>
+    </div>
+    <div class="step" id="step3-indicator">
+        <div class="step-number">3</div>
+        <span>Payment</span>
+    </div>
+    <div class="step" id="step4-indicator">
+        <div class="step-number">4</div>
+        <span>Confirm</span>
+    </div>
+</div>
+
+<form method="POST" enctype="multipart/form-data" id="depositForm">
+    {% csrf_token %}
+    <input type="hidden" name="payment_method" id="paymentMethodInput">
+    <input type="hidden" name="crypto_type" id="cryptoTypeInput" value="">
+
+<!-- STEP 1: Choose Payment Type -->
+<div class="step-section active" id="step1">
+    <div class="card-dark">
+        <h4 class="mb-4 text-center">How would you like to deposit?</h4>
+        
+        <div class="payment-type-grid">
+            <div class="payment-type-card" onclick="selectPaymentType('bank')">
                 <i class="fas fa-university" style="color: var(--gold);"></i>
-            {% else %}
-                <i class="fas fa-coins" style="color: var(--gold);"></i>
-            {% endif %}
-            <div class="name">{% if type == 'BANK' %}Bank Transfer{% else %}{{ wallet.label|default:type }}{% endif %}</div>
-            <div class="symbol">{{ type }}</div>
+                <h4>Bank Transfer</h4>
+                <p>Wire transfer or local bank payment. Get account details via live chat.</p>
+            </div>
+            
+            <div class="payment-type-card" onclick="selectPaymentType('crypto')">
+                <i class="fab fa-bitcoin" style="color: #F7931A;"></i>
+                <h4>Cryptocurrency</h4>
+                <p>Pay with BTC, ETH, USDT, or other supported cryptocurrencies.</p>
+            </div>
         </div>
-        {% endfor %}
     </div>
-    {% else %}
-    <div class="info-box" style="background: rgba(255, 71, 87, 0.1); border-color: rgba(255, 71, 87, 0.3);">
-        <i class="fas fa-exclamation-triangle" style="color: var(--error);"></i>
-        <strong>Payment methods not configured.</strong> Please contact support.
+</div>
+
+<!-- STEP 2: Enter Amount -->
+<div class="step-section" id="step2">
+    <div class="card-dark">
+        <h4 class="mb-4 text-center">Enter Deposit Amount</h4>
+        
+        <div class="amount-input-container">
+            <div class="amount-display">
+                <span class="currency-symbol">$</span>
+                <input type="number" class="amount-value" id="amountInput" name="amount" min="10" step="0.01" placeholder="0" required>
+            </div>
+            <p class="text-center" style="color: var(--text-muted); margin-bottom: 20px;">Minimum deposit: $10</p>
+            
+            <div class="quick-amounts">
+                <span class="quick-amount" onclick="setAmount(100)">$100</span>
+                <span class="quick-amount" onclick="setAmount(250)">$250</span>
+                <span class="quick-amount" onclick="setAmount(500)">$500</span>
+                <span class="quick-amount" onclick="setAmount(1000)">$1,000</span>
+                <span class="quick-amount" onclick="setAmount(5000)">$5,000</span>
+            </div>
+        </div>
+        
+        <div class="d-flex gap-3 mt-4">
+            <button type="button" class="btn-outline flex-fill" onclick="goToStep(1)">
+                <i class="fas fa-arrow-left me-2"></i>Back
+            </button>
+            <button type="button" class="btn-gold flex-fill" onclick="goToStep(3)">
+                Continue<i class="fas fa-arrow-right ms-2"></i>
+            </button>
+        </div>
     </div>
-    {% endif %}
+</div>
+
+<!-- STEP 3: Payment Details -->
+<div class="step-section" id="step3">
+    <!-- Bank Section -->
+    <div id="bankPaymentSection" style="display: none;">
+        <div class="bank-chat-section">
+            <i class="fas fa-headset"></i>
+            <h3 style="margin-bottom: 10px;">Get Bank Account Details</h3>
+            <p style="color: var(--text-muted); margin-bottom: 25px; max-width: 400px; margin-left: auto; margin-right: auto;">
+                Click below to chat with our support team. They will provide you with the correct bank account details for your transfer.
+            </p>
+            <button type="button" class="chat-btn" onclick="openTawkChat()">
+                <i class="fas fa-comments"></i>Start Live Chat
+            </button>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 20px;">
+                <i class="fas fa-shield-alt me-1"></i>Secure 24/7 Support
+            </p>
+        </div>
+        
+        <div class="info-box">
+            <i class="fas fa-info-circle"></i>
+            <strong>Important:</strong> After receiving bank details and making payment, return here to upload your payment screenshot.
+        </div>
+    </div>
     
-    <!-- Crypto Wallet Section -->
-    <div class="wallet-section" id="cryptoSection">
-        <div class="wallet-card">
-            <h5><i class="fas fa-qrcode me-2"></i>Send to this Address</h5>
-            <p style="color: var(--text-muted); margin-bottom: 15px;">
-                Send <span id="selectedCoin" style="color: var(--gold);">BTC</span> to the address below
+    <!-- Crypto Section -->
+    <div id="cryptoPaymentSection" style="display: none;">
+        <div class="card-dark mb-4">
+            <h5 class="mb-4"><i class="fas fa-coins me-2"></i>Select Cryptocurrency</h5>
+            
+            {% if wallets %}
+            <div class="crypto-methods">
+                {% for type, wallet in wallets.items %}
+                {% if type != 'BANK' %}
+                <div class="crypto-method" data-method="{{ type }}" data-address="{{ wallet.address }}" onclick="selectCrypto(this)">
+                    {% if type == 'BTC' %}
+                        <i class="fab fa-bitcoin" style="color: #F7931A;"></i>
+                    {% elif type == 'ETH' %}
+                        <i class="fab fa-ethereum" style="color: #627EEA;"></i>
+                    {% elif type == 'USDT' %}
+                        <i class="fas fa-dollar-sign" style="color: #26A17B;"></i>
+                    {% elif type == 'USDC' %}
+                        <i class="fas fa-circle" style="color: #2775CA;"></i>
+                    {% elif type == 'LTC' %}
+                        <i class="fas fa-coins" style="color: #345D9D;"></i>
+                    {% elif type == 'BNB' %}
+                        <i class="fas fa-coins" style="color: #F3BA2F;"></i>
+                    {% else %}
+                        <i class="fas fa-coins" style="color: var(--gold);"></i>
+                    {% endif %}
+                    <div class="name">{{ wallet.label|default:type }}</div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="wallet-card" id="walletDetailsCard" style="display: none;">
+            <h5><i class="fas fa-wallet me-2"></i>Send Payment</h5>
+            <p style="color: var(--text-muted);">
+                Send exactly <strong style="color: var(--gold);">$<span id="displayAmount">0</span></strong> worth of 
+                <strong id="selectedCoin" style="color: var(--gold);">-</strong> to:
             </p>
             <div class="wallet-address-box">
                 <span class="wallet-address" id="walletAddress">-</span>
@@ -307,112 +577,174 @@
                 </button>
             </div>
             <div class="info-box mt-3">
-                <i class="fas fa-info-circle"></i>
-                <small>Only send the selected cryptocurrency. Sending other assets may result in permanent loss.</small>
+                <i class="fas fa-exclamation-triangle"></i>
+                <small>Only send <span id="coinWarning">the selected cryptocurrency</span>. Wrong currency = permanent loss!</small>
             </div>
         </div>
     </div>
     
-    <!-- Bank Transfer Section -->
-    <div class="wallet-section" id="bankSection">
-        <div class="wallet-card">
-            <div class="bank-section">
-                <i class="fas fa-headset"></i>
-                <h4 style="margin-bottom: 10px;">Get Bank Details via Chat</h4>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">
-                    Click the button below to chat with our support team for personalized bank transfer details
-                </p>
-                <button type="button" class="btn-gold" onclick="if(typeof Tawk_API !== 'undefined') Tawk_API.toggle(); else alert('Chat is loading...');">
-                    <i class="fas fa-comments me-2"></i>Chat with Support
-                </button>
-                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 15px;">
-                    <i class="fas fa-clock me-1"></i>Our team is available 24/7
-                </p>
-            </div>
-        </div>
+    <div class="d-flex gap-3 mt-4">
+        <button type="button" class="btn-outline flex-fill" onclick="goToStep(2)">
+            <i class="fas fa-arrow-left me-2"></i>Back
+        </button>
+        <button type="button" class="btn-gold flex-fill" onclick="goToStep(4)" id="continueToUpload">
+            I've Made Payment<i class="fas fa-arrow-right ms-2"></i>
+        </button>
     </div>
 </div>
 
-<!-- Deposit Form -->
-<div class="deposit-form mt-4" id="depositForm" style="display: none;">
-    <h5 class="mb-4"><i class="fas fa-paper-plane me-2"></i>Submit Deposit</h5>
-    
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="hidden" name="payment_method" id="paymentMethodInput">
-        <input type="hidden" name="crypto_type" id="cryptoTypeInput">
+<!-- STEP 4: Upload Proof -->
+<div class="step-section" id="step4">
+    <div class="card-dark">
+        <h4 class="mb-4 text-center"><i class="fas fa-upload me-2"></i>Upload Payment Proof</h4>
         
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="form-label" for="deposit-amount">Amount (USD)</label>
-                    <input type="number" id="deposit-amount" name="amount" class="form-input" min="10" step="0.01" placeholder="Minimum $10" required>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="form-label" for="transaction_hash">Transaction Hash (Optional)</label>
-                    <input type="text" id="transaction_hash" name="transaction_hash" class="form-input" placeholder="Enter transaction hash">
-                </div>
-            </div>
+        <div class="upload-section" id="uploadArea" onclick="document.getElementById('proofImage').click()">
+            <i class="fas fa-cloud-upload-alt" id="uploadIcon"></i>
+            <h5 id="uploadText">Click to upload payment screenshot</h5>
+            <p style="color: var(--text-muted);" id="uploadHint">PNG, JPG, or PDF - Max 5MB</p>
+            <input type="file" id="proofImage" name="proof_image" accept="image/*,.pdf" style="display: none;" onchange="handleFileSelect(this)" required>
         </div>
         
         <div class="form-group">
-            <label class="form-label" for="proof_image">Payment Screenshot</label>
-            <input type="file" id="proof_image" name="proof_image" class="form-input" accept="image/*" required>
-            <small style="color: var(--text-muted);">Upload screenshot of your payment for verification</small>
+            <label class="form-label">Transaction Hash / Reference (Optional)</label>
+            <input type="text" name="transaction_hash" class="form-input" placeholder="Enter transaction hash or bank reference">
         </div>
         
         <div class="info-box">
-            <i class="fas fa-info-circle"></i>
-            Deposits are usually confirmed within 1-24 hours after payment verification.
+            <i class="fas fa-clock"></i>
+            <strong>Processing Time:</strong> Deposits are verified within 1-24 hours. You'll receive a notification once confirmed.
         </div>
         
-        <button type="submit" class="btn-gold btn-lg w-100">
-            <i class="fas fa-check me-2"></i>Submit Deposit
-        </button>
-    </form>
+        <div class="d-flex gap-3 mt-4">
+            <button type="button" class="btn-outline flex-fill" onclick="goToStep(3)">
+                <i class="fas fa-arrow-left me-2"></i>Back
+            </button>
+            <button type="submit" class="btn-gold flex-fill">
+                <i class="fas fa-check me-2"></i>Submit Deposit
+            </button>
+        </div>
+    </div>
 </div>
 
-<script>
-let selectedMethod = null;
+</form>
 
-function selectMethod(element) {
-    // Remove selected from all
-    document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected'));
+<script>
+let paymentType = '';
+let selectedCrypto = '';
+let currentStep = 1;
+
+function selectPaymentType(type) {
+    paymentType = type;
+    document.getElementById('paymentMethodInput').value = type === 'bank' ? 'BANK' : 'CRYPTO';
     
-    // Add selected to clicked
-    element.classList.add('selected');
+    // Mark selected
+    document.querySelectorAll('.payment-type-card').forEach(el => el.classList.remove('selected'));
+    event.currentTarget.classList.add('selected');
     
-    const method = element.dataset.method;
-    const address = element.dataset.address;
-    
-    selectedMethod = method;
-    
-    // Update hidden inputs
-    document.getElementById('paymentMethodInput').value = method;
-    document.getElementById('cryptoTypeInput').value = method;
-    
-    // Show appropriate section
-    if (method === 'BANK') {
-        document.getElementById('cryptoSection').classList.remove('active');
-        document.getElementById('bankSection').classList.add('active');
-    } else {
-        document.getElementById('bankSection').classList.remove('active');
-        document.getElementById('cryptoSection').classList.add('active');
-        document.getElementById('selectedCoin').textContent = method;
-        document.getElementById('walletAddress').textContent = address;
+    // Show appropriate section in step 3
+    if (type === 'bank') {
+        document.getElementById('cryptoTypeInput').value = 'BANK';
     }
     
-    // Show deposit form
-    document.getElementById('depositForm').style.display = 'block';
+    // Go to step 2
+    setTimeout(() => goToStep(2), 300);
+}
+
+function setAmount(amount) {
+    document.getElementById('amountInput').value = amount;
+}
+
+function selectCrypto(element) {
+    document.querySelectorAll('.crypto-method').forEach(el => el.classList.remove('selected'));
+    element.classList.add('selected');
+    
+    selectedCrypto = element.dataset.method;
+    const address = element.dataset.address;
+    
+    document.getElementById('cryptoTypeInput').value = selectedCrypto;
+    document.getElementById('selectedCoin').textContent = selectedCrypto;
+    document.getElementById('coinWarning').textContent = selectedCrypto;
+    document.getElementById('walletAddress').textContent = address;
+    document.getElementById('walletDetailsCard').style.display = 'block';
+    
+    const amount = document.getElementById('amountInput').value || 0;
+    document.getElementById('displayAmount').textContent = amount;
+}
+
+function goToStep(step) {
+    // Validation
+    if (step === 2 && !paymentType) {
+        alert('Please select a payment type');
+        return;
+    }
+    
+    if (step === 3) {
+        const amount = parseFloat(document.getElementById('amountInput').value);
+        if (!amount || amount < 10) {
+            alert('Please enter a valid amount (minimum $10)');
+            return;
+        }
+        document.getElementById('displayAmount').textContent = amount;
+    }
+    
+    if (step === 4 && paymentType === 'crypto' && !selectedCrypto) {
+        alert('Please select a cryptocurrency');
+        return;
+    }
+    
+    // Update step indicators
+    for (let i = 1; i <= 4; i++) {
+        const indicator = document.getElementById(`step${i}-indicator`);
+        indicator.classList.remove('active', 'completed');
+        if (i < step) indicator.classList.add('completed');
+        if (i === step) indicator.classList.add('active');
+    }
+    
+    // Show appropriate section
+    document.querySelectorAll('.step-section').forEach(el => el.classList.remove('active'));
+    document.getElementById(`step${step}`).classList.add('active');
+    
+    // Show payment type specific content in step 3
+    if (step === 3) {
+        document.getElementById('bankPaymentSection').style.display = paymentType === 'bank' ? 'block' : 'none';
+        document.getElementById('cryptoPaymentSection').style.display = paymentType === 'crypto' ? 'block' : 'none';
+    }
+    
+    currentStep = step;
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function openTawkChat() {
+    if (typeof Tawk_API !== 'undefined' && Tawk_API.toggle) {
+        Tawk_API.toggle();
+    } else {
+        alert('Live chat is loading. Please try again in a moment.');
+    }
 }
 
 function copyAddress() {
     const address = document.getElementById('walletAddress').textContent;
     navigator.clipboard.writeText(address).then(() => {
-        alert('Address copied to clipboard!');
+        const btn = event.currentTarget;
+        btn.innerHTML = '<i class="fas fa-check me-1"></i>Copied!';
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fas fa-copy me-1"></i>Copy';
+        }, 2000);
     });
+}
+
+function handleFileSelect(input) {
+    const uploadArea = document.getElementById('uploadArea');
+    const uploadIcon = document.getElementById('uploadIcon');
+    const uploadText = document.getElementById('uploadText');
+    const uploadHint = document.getElementById('uploadHint');
+    
+    if (input.files && input.files[0]) {
+        uploadArea.classList.add('has-file');
+        uploadIcon.className = 'fas fa-check-circle';
+        uploadText.textContent = input.files[0].name;
+        uploadHint.textContent = 'Click to change file';
+    }
 }
 </script>
 {% endblock %}

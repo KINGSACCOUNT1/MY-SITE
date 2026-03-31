@@ -421,6 +421,9 @@
             <a href="{% url 'investments:deposit' %}" class="nav-item {% if request.resolver_match.url_name == 'deposit' %}active{% endif %}">
                 <i class="fas fa-plus-circle"></i> Add Funds
             </a>
+            <a href="{% url 'investments:plans' %}" class="nav-item {% if request.resolver_match.url_name == 'plans' %}active{% endif %}" style="background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,165,0,0.15)); border-left: 3px solid var(--gold);">
+                <i class="fas fa-rocket" style="color: var(--gold);"></i> <strong style="color: var(--gold);">Invest Now</strong>
+            </a>
             <a href="{% url 'investments:withdraw' %}" class="nav-item {% if request.resolver_match.url_name == 'withdraw' %}active{% endif %}">
                 <i class="fas fa-minus-circle"></i> Withdraw
             </a>

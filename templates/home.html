@@ -1989,43 +1989,67 @@ function playCompanyVideo() {
         
         <!-- Upgrade Plans Section -->
         <div class="upgrade-plans-section" data-aos="fade-up" data-aos-delay="200">
-            <h3 class="plans-title">Investment Plans & Daily Returns</h3>
-            <p class="plans-subtitle">Choose the plan that matches your investment goals</p>
+            <h3 class="plans-title">Account Upgrade Tiers</h3>
+            <p class="plans-subtitle">Upgrade your account to unlock premium features and higher earning potential</p>
             
             <div class="plans-grid">
                 <div class="plan-card">
-                    <div class="plan-name">🎯 Basic</div>
-                    <div class="plan-range">$100 - $4,999</div>
-                    <div class="plan-rate">3.5%</div>
-                    <div style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-bottom: 15px;">Daily Returns</div>
+                    <div class="plan-badge" style="background: #4ade80; color: #000; padding: 5px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; display: inline-block; margin-bottom: 15px;">STARTER</div>
+                    <div class="plan-name">🎯 Basic Account</div>
+                    <div class="plan-range">Free Registration</div>
+                    <div class="plan-rate" style="font-size: 1.5rem;">Standard</div>
+                    <div style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-bottom: 15px;">Access Level</div>
                     <div class="plan-description">
-                        Perfect for beginners. Start your investment journey with flexible, low entry requirements.
+                        <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
+                            <li style="padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1);"><i class="fas fa-check text-success me-2"></i>Access to all investment plans</li>
+                            <li style="padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1);"><i class="fas fa-check text-success me-2"></i>Basic support response</li>
+                            <li style="padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1);"><i class="fas fa-check text-success me-2"></i>Standard withdrawal speed</li>
+                            <li style="padding: 5px 0;"><i class="fas fa-check text-success me-2"></i>Email notifications</li>
+                        </ul>
                     </div>
-                    <a href="{% url 'investments:plans' %}" class="plan-btn">Choose Plan</a>
+                    <a href="{% url 'accounts:signup' %}" class="plan-btn">Get Started Free</a>
+                </div>
+                
+                <div class="plan-card" style="border: 2px solid var(--gold); position: relative;">
+                    <div class="plan-badge" style="background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; padding: 5px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; display: inline-block; margin-bottom: 15px;">POPULAR</div>
+                    <div class="plan-name">⭐ VIP Account</div>
+                    <div class="plan-range">$500 One-Time Upgrade</div>
+                    <div class="plan-rate" style="font-size: 1.5rem;">Enhanced</div>
+                    <div style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-bottom: 15px;">Access Level</div>
+                    <div class="plan-description">
+                        <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
+                            <li style="padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1);"><i class="fas fa-check text-warning me-2"></i>All Basic features plus:</li>
+                            <li style="padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1);"><i class="fas fa-check text-warning me-2"></i>Priority support (24h response)</li>
+                            <li style="padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1);"><i class="fas fa-check text-warning me-2"></i>Faster withdrawals</li>
+                            <li style="padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1);"><i class="fas fa-check text-warning me-2"></i>Exclusive market insights</li>
+                            <li style="padding: 5px 0;"><i class="fas fa-check text-warning me-2"></i>5% bonus on first deposit</li>
+                        </ul>
+                    </div>
+                    <a href="{% url 'accounts:login' %}" class="plan-btn">Upgrade to VIP</a>
                 </div>
                 
                 <div class="plan-card">
-                    <div class="plan-name">⭐ VIP</div>
-                    <div class="plan-range">$5,000 - $24,999</div>
-                    <div class="plan-rate">4.5%</div>
-                    <div style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-bottom: 15px;">Daily Returns</div>
+                    <div class="plan-badge" style="background: linear-gradient(135deg, #a855f7, #6366f1); color: #fff; padding: 5px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; display: inline-block; margin-bottom: 15px;">PREMIUM</div>
+                    <div class="plan-name">👑 Elite Account</div>
+                    <div class="plan-range">$2,000 One-Time Upgrade</div>
+                    <div class="plan-rate" style="font-size: 1.5rem;">Premium</div>
+                    <div style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-bottom: 15px;">Access Level</div>
                     <div class="plan-description">
-                        Enhanced returns and priority support. Ideal for serious investors looking to grow wealth.
+                        <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
+                            <li style="padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1);"><i class="fas fa-crown text-warning me-2"></i>All VIP features plus:</li>
+                            <li style="padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1);"><i class="fas fa-crown text-warning me-2"></i>Dedicated account manager</li>
+                            <li style="padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1);"><i class="fas fa-crown text-warning me-2"></i>Instant withdrawals</li>
+                            <li style="padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1);"><i class="fas fa-crown text-warning me-2"></i>Private investment opportunities</li>
+                            <li style="padding: 5px 0;"><i class="fas fa-crown text-warning me-2"></i>10% bonus on all deposits</li>
+                        </ul>
                     </div>
-                    <a href="{% url 'investments:plans' %}" class="plan-btn">Choose Plan</a>
-                </div>
-                
-                <div class="plan-card">
-                    <div class="plan-name">👑 Elite</div>
-                    <div class="plan-range">$25,000+</div>
-                    <div class="plan-rate">6.5%</div>
-                    <div style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-bottom: 15px;">Daily Returns</div>
-                    <div class="plan-description">
-                        Premium benefits with maximum returns. Dedicated account manager and exclusive opportunities.
-                    </div>
-                    <a href="{% url 'investments:plans' %}" class="plan-btn">Choose Plan</a>
+                    <a href="{% url 'accounts:login' %}" class="plan-btn">Upgrade to Elite</a>
                 </div>
             </div>
+            
+            <p style="text-align: center; color: rgba(255,255,255,0.6); margin-top: 30px; font-size: 0.9rem;">
+                <i class="fas fa-info-circle me-2"></i>Note: Account upgrades are separate from investment plans. Actual investment returns depend on plans created by management.
+            </p>
         </div>
     </div>
 </div>
