@@ -4,7 +4,6 @@ from django.contrib import messages
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.db import transaction
-from accounts.models import CustomUser
 from .models import (InvestmentPlan, Investment, Deposit, Withdrawal, WalletAddress,
                      Loan, LoanRepayment, VirtualCard, Coupon, AgentApplication, CryptoTicker)
 from decimal import Decimal, InvalidOperation
@@ -351,7 +350,7 @@ def withdraw_view(request):
                 return redirect('investments:withdraw')
         
         # Lock user row to prevent race conditions
-        user = CustomUser.objects.select_for_update().get(pk=request.user.pk)
+        user = request.user.__class__.objects.select_for_update().get(pk=request.user.pk)
         
         if not user.can_withdraw(amount):
             messages.error(request, 'Insufficient balance, KYC not verified, or amount too low.')
