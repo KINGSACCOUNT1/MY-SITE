@@ -9,12 +9,11 @@ from .models import CustomUser, ActivityLog, Referral
 class CustomUserAdmin(UserAdmin):
     list_display = ['email', 'full_name', 'balance_display', 'invested_display', 
                     'profit_display', 'account_badge', 'kyc_badge', 'status_badge', 
-                    'referral_code', 'joined_date', 'quick_actions']
+                    'referral_code', 'joined_date']
     list_filter = ['is_active', 'is_staff', 'account_type', 'kyc_status', 
-                   'email_verified', 'two_fa_enabled', 'date_joined']
-    search_fields = ['email', 'full_name', 'phone', 'referral_code', 'country']
+                   'email_verified', 'date_joined']
+    search_fields = ['email', 'full_name', 'phone', 'referral_code']
     ordering = ['-date_joined']
-    list_select_related = ['referred_by']
     
     fieldsets = (
         ('Login Credentials', {
