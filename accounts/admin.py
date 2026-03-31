@@ -59,17 +59,23 @@ class CustomUserAdmin(UserAdmin):
                        'last_activity', 'failed_login_attempts', 'locked_until']
     
     def balance_display(self, obj):
-        color = 'green' if obj.balance >= 0 else 'red'
-        return format_html('<strong style="color: {};">${:,.2f}</strong>', color, obj.balance)
+        balance = obj.balance or 0
+        color = 'green' if balance >= 0 else 'red'
+        return format_html('<strong style="color: {};">${:,.2f}</strong>', color, balance)
     balance_display.short_description = 'Balance'
+    balance_display.admin_order_field = 'balance'
     
     def invested_display(self, obj):
-        return format_html('<span style="color: blue;">${:,.2f}</span>', obj.invested_amount)
+        amount = obj.invested_amount or 0
+        return format_html('<span style="color: blue;">${:,.2f}</span>', amount)
     invested_display.short_description = 'Invested'
+    invested_display.admin_order_field = 'invested_amount'
     
     def profit_display(self, obj):
-        return format_html('<span style="color: green;">${:,.2f}</span>', obj.total_profit)
+        profit = obj.total_profit or 0
+        return format_html('<span style="color: green;">${:,.2f}</span>', profit)
     profit_display.short_description = 'Profit'
+    profit_display.admin_order_field = 'total_profit'
     
     def account_badge(self, obj):
         colors = {
@@ -115,8 +121,11 @@ class CustomUserAdmin(UserAdmin):
     status_badge.short_description = 'Status'
     
     def joined_date(self, obj):
-        return obj.date_joined.strftime('%Y-%m-%d')
+        if obj.date_joined:
+            return obj.date_joined.strftime('%Y-%m-%d')
+        return '-'
     joined_date.short_description = 'Joined'
+    joined_date.admin_order_field = 'date_joined'
     
     def quick_actions(self, obj):
         return format_html(
