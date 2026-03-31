@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Licenses & Certificates - Elite Wealth Capital{% endblock %}
+{% block title %}Company Certificate - Elite Wealth Capital Incorporated Global{% endblock %}
 
 {% block extra_css %}
 <style>
     :root {
         --navy: #0A1F44;
         --gold: #FFD700;
+        --gold-dark: #D4AF37;
         --emerald: #00A86B;
     }
 
@@ -18,194 +19,352 @@
     }
 
     .certificates-container {
-        max-width: 1000px;
+        max-width: 900px;
         margin: 0 auto;
         padding: 20px;
     }
 
-    /* Certificate Card - Official Document Style */
-    .certificate-card {
-        background: linear-gradient(145deg, #fffef5 0%, #fefce8 100%);
-        border: 4px double var(--gold);
-        border-radius: 12px;
-        padding: 2.5rem;
+    /* Main Certificate - Official Document Style */
+    .main-certificate {
+        background: linear-gradient(145deg, #fffef8 0%, #fefce8 100%);
+        border: 8px double var(--gold);
+        border-radius: 4px;
+        padding: 50px;
         position: relative;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        box-shadow: 
+            0 0 0 2px #fff,
+            0 0 0 6px var(--gold-dark),
+            0 20px 60px rgba(0, 0, 0, 0.4);
         margin-bottom: 2rem;
-        transition: transform 0.3s ease;
     }
 
-    .certificate-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-    }
-
-    .certificate-card::before {
-        content: '';
+    /* Gold corner ornaments */
+    .main-certificate::before,
+    .main-certificate::after {
+        content: '❧';
         position: absolute;
-        top: 12px;
-        left: 12px;
-        right: 12px;
-        bottom: 12px;
-        border: 2px solid rgba(255, 215, 0, 0.3);
-        border-radius: 8px;
+        font-size: 2.5rem;
+        color: var(--gold-dark);
+    }
+    .main-certificate::before {
+        top: 15px;
+        left: 20px;
+    }
+    .main-certificate::after {
+        bottom: 15px;
+        right: 20px;
+        transform: rotate(180deg);
+    }
+
+    /* Watermark stamp */
+    .watermark-stamp {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-30deg);
+        font-size: 8rem;
+        color: rgba(212, 175, 55, 0.08);
+        font-weight: bold;
         pointer-events: none;
+        z-index: 0;
+        white-space: nowrap;
     }
 
-    .cert-header {
+    .cert-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Company Logo Area */
+    .cert-logo-area {
         text-align: center;
-        margin-bottom: 2rem;
-        padding-bottom: 1.5rem;
-        border-bottom: 3px solid var(--gold);
+        margin-bottom: 30px;
     }
 
-    .cert-icon {
-        width: 80px;
-        height: 80px;
-        margin: 0 auto 1rem;
-        background: linear-gradient(135deg, var(--gold), #FFA500);
+    .cert-logo {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 15px;
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 2.5rem;
-        box-shadow: 0 8px 16px rgba(255, 215, 0, 0.3);
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        border: 4px solid #fff;
+        outline: 3px solid var(--gold-dark);
     }
 
-    .cert-title {
+    .cert-logo img {
+        width: 70%;
+        height: 70%;
+        object-fit: contain;
+    }
+
+    .cert-logo i {
+        font-size: 3rem;
         color: var(--navy);
+    }
+
+    /* Certificate Header */
+    .cert-main-title {
+        font-family: 'Georgia', 'Times New Roman', serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--navy);
+        text-transform: uppercase;
+        letter-spacing: 6px;
+        margin-bottom: 8px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .cert-sub-title {
+        font-family: 'Georgia', serif;
+        font-size: 1rem;
+        color: var(--gold-dark);
+        letter-spacing: 4px;
+        margin-bottom: 25px;
+        font-style: italic;
+    }
+
+    .cert-divider {
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--gold), var(--gold-dark), var(--gold), transparent);
+        margin: 25px 0;
+    }
+
+    .cert-company-name {
+        font-family: 'Georgia', serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--navy);
+        text-align: center;
+        margin: 30px 0;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+
+    .cert-established {
+        text-align: center;
+        font-family: 'Georgia', serif;
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 30px;
+    }
+
+    .cert-description {
+        text-align: center;
+        font-family: 'Georgia', serif;
+        font-size: 1.1rem;
+        color: #444;
+        line-height: 1.8;
+        margin: 20px auto;
+        max-width: 700px;
+    }
+
+    /* Timeline Section */
+    .timeline-section {
+        margin: 40px 0;
+        padding: 30px 20px;
+        background: rgba(212, 175, 55, 0.05);
+        border-radius: 8px;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .timeline-title {
+        text-align: center;
+        font-family: 'Georgia', serif;
+        font-size: 1.3rem;
+        color: var(--navy);
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+
+    .timeline-grid {
+        display: grid;
+        gap: 20px;
+    }
+
+    .timeline-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        border-left: 5px solid var(--gold);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        transition: transform 0.3s;
+    }
+
+    .timeline-item:hover {
+        transform: translateX(5px);
+    }
+
+    .timeline-flag {
+        font-size: 2.5rem;
+        min-width: 50px;
+        text-align: center;
+    }
+
+    .timeline-content h4 {
+        font-family: 'Georgia', serif;
+        color: var(--navy);
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .timeline-year {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        color: var(--navy);
+        padding: 3px 12px;
+        border-radius: 15px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin-right: 10px;
+    }
+
+    .timeline-content p {
+        color: #555;
+        font-size: 0.95rem;
+        margin: 8px 0 0;
+        line-height: 1.5;
+    }
+
+    /* Signature Section */
+    .signature-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px dashed var(--gold-dark);
+    }
+
+    .signature-box {
+        text-align: center;
+        width: 200px;
+    }
+
+    .signature-line {
+        border-bottom: 2px solid var(--navy);
+        margin-bottom: 8px;
+        height: 50px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        font-family: 'Brush Script MT', cursive;
+        font-size: 1.5rem;
+        color: var(--navy);
+    }
+
+    .signature-label {
+        font-size: 0.85rem;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .official-stamp {
+        text-align: center;
+    }
+
+    .stamp-circle {
+        width: 100px;
+        height: 100px;
+        border: 4px double var(--gold-dark);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        background: rgba(212, 175, 55, 0.1);
+        transform: rotate(-15deg);
+    }
+
+    .stamp-circle i {
         font-size: 1.8rem;
-        font-weight: 800;
-        margin-bottom: 0.5rem;
+        color: var(--gold-dark);
+    }
+
+    .stamp-text {
+        font-size: 0.6rem;
+        color: var(--navy);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 5px;
+    }
+
+    /* Certificate Number */
+    .cert-number {
+        text-align: center;
+        margin-top: 30px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+        color: #888;
         letter-spacing: 2px;
     }
 
-    .cert-subtitle {
-        color: #666;
-        font-size: 1rem;
-        font-weight: 500;
-    }
-
-    .cert-company {
-        font-size: 1.6rem;
-        font-weight: 800;
-        color: var(--navy);
-        margin: 1.5rem 0;
-        font-family: 'Georgia', serif;
-        text-align: center;
-    }
-
-    .cert-info {
-        display: grid;
-        gap: 1rem;
-        margin: 1.5rem 0;
-    }
-
-    .cert-info-row {
-        display: flex;
-        justify-content: space-between;
-        padding: 0.75rem;
-        background: rgba(255, 215, 0, 0.05);
-        border-radius: 6px;
-        border-left: 4px solid var(--gold);
-    }
-
-    .cert-label {
-        font-weight: 600;
-        color: var(--navy);
-    }
-
-    .cert-value {
-        font-weight: 500;
-        color: #555;
-    }
-
-    .ornament {
-        text-align: center;
-        color: var(--gold);
-        font-size: 1.5rem;
-        margin: 1rem 0;
-    }
-
     /* Regulatory Badges */
-    .badges-container {
+    .badges-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 15px;
         margin-top: 2rem;
     }
 
-    .regulatory-badge {
+    .reg-badge {
         background: linear-gradient(135deg, var(--emerald), #008F5D);
         color: white;
-        padding: 1.5rem;
+        padding: 20px 15px;
         border-radius: 10px;
         text-align: center;
-        box-shadow: 0 10px 25px rgba(0, 168, 107, 0.2);
+        box-shadow: 0 8px 20px rgba(0, 168, 107, 0.2);
         transition: transform 0.3s ease;
     }
 
-    .regulatory-badge:hover {
+    .reg-badge:hover {
         transform: scale(1.05);
     }
 
-    .badge-icon {
-        font-size: 3rem;
-        margin-bottom: 0.5rem;
+    .reg-badge i {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        display: block;
     }
 
-    .badge-title {
-        font-size: 1.2rem;
+    .reg-badge-title {
+        font-size: 0.9rem;
         font-weight: 700;
-        margin-bottom: 0.5rem;
     }
 
-    .badge-number {
-        font-size: 0.95rem;
-        opacity: 0.9;
-        font-weight: 600;
-        background: rgba(255, 255, 255, 0.1);
-        padding: 0.5rem;
-        border-radius: 6px;
-        margin-top: 0.5rem;
-    }
-
-    .download-btn {
-        display: inline-block;
-        background: linear-gradient(135deg, var(--gold), #FFA500);
-        color: var(--navy);
-        padding: 1rem 2.5rem;
-        border-radius: 50px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 1.1rem;
-        margin-top: 2rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
-        border: none;
-        cursor: pointer;
-    }
-
-    .download-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 30px rgba(255, 215, 0, 0.4);
+    .reg-badge-sub {
+        font-size: 0.75rem;
+        opacity: 0.85;
+        margin-top: 5px;
     }
 
     .page-header {
         text-align: center;
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
     }
 
     .page-header h1 {
         color: var(--gold);
-        font-size: 2.5rem;
-        font-weight: 800;
+        font-size: 2rem;
+        font-weight: 700;
         margin-bottom: 0.5rem;
     }
 
     .page-header p {
         color: rgba(255,255,255,0.7);
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     .back-link {
@@ -214,7 +373,7 @@
         gap: 8px;
         color: var(--gold);
         text-decoration: none;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         font-weight: 600;
         transition: color 0.3s;
     }
@@ -223,19 +382,49 @@
         color: #FFA500;
     }
 
+    .download-btn {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        color: var(--navy);
+        padding: 15px 40px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-top: 2rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        border: none;
+        cursor: pointer;
+    }
+
+    .download-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(255, 215, 0, 0.4);
+    }
+
     @media (max-width: 768px) {
-        .certificate-card {
-            padding: 1.5rem;
+        .main-certificate {
+            padding: 30px 20px;
         }
-        .cert-title {
+        .cert-main-title {
             font-size: 1.4rem;
+            letter-spacing: 3px;
         }
-        .cert-info-row {
+        .cert-company-name {
+            font-size: 1.5rem;
+        }
+        .signature-section {
             flex-direction: column;
-            gap: 0.5rem;
+            align-items: center;
+            gap: 30px;
         }
-        .badges-container {
-            grid-template-columns: 1fr;
+        .timeline-item {
+            flex-direction: column;
+            text-align: center;
+        }
+        .watermark-stamp {
+            font-size: 4rem;
         }
     }
 </style>
@@ -251,202 +440,158 @@
 
         <!-- Page Header -->
         <div class="page-header">
-            <h1>🏆 Licenses & Certificates</h1>
-            <p>Official regulatory licenses and company certifications</p>
+            <h1><i class="fas fa-certificate me-2"></i>Official Company Certificate</h1>
+            <p>Elite Wealth Capital Incorporated Global - Certification of Operations</p>
         </div>
 
-        <!-- Certificate of Incorporation -->
-        <div class="certificate-card">
-            <div class="cert-header">
-                <div class="cert-icon">🏅</div>
-                <h2 class="cert-title">CERTIFICATE OF INCORPORATION</h2>
-                <p class="cert-subtitle">Business Registration Document</p>
-            </div>
-
-            <div class="ornament">✦ ✦ ✦</div>
-
-            <p class="cert-company">Elite Wealth Capital Limited</p>
+        <!-- Main Certificate -->
+        <div class="main-certificate">
+            <!-- Watermark -->
+            <div class="watermark-stamp">CERTIFIED</div>
             
-            <div class="cert-info">
-                <div class="cert-info-row">
-                    <span class="cert-label">Company Name:</span>
-                    <span class="cert-value">Elite Wealth Capital Limited</span>
+            <div class="cert-content">
+                <!-- Logo -->
+                <div class="cert-logo-area">
+                    <div class="cert-logo">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h1 class="cert-main-title">Certificate of Excellence</h1>
+                    <p class="cert-sub-title">Global Investment Operations</p>
                 </div>
-                <div class="cert-info-row">
-                    <span class="cert-label">Registration Number:</span>
-                    <span class="cert-value">EWC-2024-UK-15847392</span>
+
+                <div class="cert-divider"></div>
+
+                <p class="cert-description">This is to certify that</p>
+
+                <h2 class="cert-company-name">Elite Wealth Capital<br>Incorporated Global</h2>
+
+                <p class="cert-established">Est. 2014 • Headquarters: Oslo, Norway</p>
+
+                <p class="cert-description">
+                    Is a duly registered and licensed global investment corporation, authorized to 
+                    conduct financial services, cryptocurrency trading, real estate investments, 
+                    and wealth management operations across multiple jurisdictions worldwide.
+                </p>
+
+                <div class="cert-divider"></div>
+
+                <!-- Global Expansion Timeline -->
+                <div class="timeline-section">
+                    <h3 class="timeline-title">Global Expansion History</h3>
+                    <div class="timeline-grid">
+                        <div class="timeline-item">
+                            <div class="timeline-flag">🇳🇴</div>
+                            <div class="timeline-content">
+                                <h4><span class="timeline-year">2014/2015</span> Norway - Foundation</h4>
+                                <p><strong>50 Years of Excellence in Production</strong> — Established in Oslo with focus on traditional commodities, oil & gas investments, and Nordic market expertise. Built foundation for sustainable wealth creation.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-flag">🇬🇧</div>
+                            <div class="timeline-content">
+                                <h4><span class="timeline-year">2016</span> United Kingdom - Financial Hub</h4>
+                                <p><strong>Shares & Crypto Trading Division</strong> — Opened London office in Canary Wharf. Launched cryptocurrency trading platform and global shares investment services. FCA regulated operations.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-flag">🇺🇸</div>
+                            <div class="timeline-content">
+                                <h4><span class="timeline-year">2018</span> United States - Real Assets</h4>
+                                <p><strong>Real Estate & Agriculture</strong> — Established presence in New York and Texas. Expanded into commercial real estate, agricultural land investments, and renewable energy projects across North America.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-flag">🌏</div>
+                            <div class="timeline-content">
+                                <h4><span class="timeline-year">2020</span> Asia - Innovation Hub</h4>
+                                <p><strong>Innovation in Wealth Management</strong> — Opened offices in Singapore and Tokyo. Pioneered AI-driven portfolio management and blockchain-based asset tokenization for Asian markets.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-flag">🌍</div>
+                            <div class="timeline-content">
+                                <h4><span class="timeline-year">2022</span> Africa - Sustainable Growth</h4>
+                                <p><strong>Sustainable Investment Initiative</strong> — Launched African operations focusing on sustainable agriculture, solar energy, and community development investments. Committed to ESG principles and local economic empowerment.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="cert-info-row">
-                    <span class="cert-label">Date of Incorporation:</span>
-                    <span class="cert-value">January 15, 2024</span>
+
+                <div class="cert-divider"></div>
+
+                <!-- Signature Section -->
+                <div class="signature-section">
+                    <div class="signature-box">
+                        <div class="signature-line">J. Harrison</div>
+                        <p class="signature-label">Chief Executive Officer</p>
+                    </div>
+
+                    <div class="official-stamp">
+                        <div class="stamp-circle">
+                            <i class="fas fa-check-circle"></i>
+                            <span class="stamp-text">Verified</span>
+                        </div>
+                    </div>
+
+                    <div class="signature-box">
+                        <div class="signature-line">M. Williams</div>
+                        <p class="signature-label">Board Secretary</p>
+                    </div>
                 </div>
-                <div class="cert-info-row">
-                    <span class="cert-label">Jurisdiction:</span>
-                    <span class="cert-value">United Kingdom</span>
-                </div>
-                <div class="cert-info-row">
-                    <span class="cert-label">Business Type:</span>
-                    <span class="cert-value">Investment & Financial Services</span>
-                </div>
-                <div class="cert-info-row">
-                    <span class="cert-label">Registered Address:</span>
-                    <span class="cert-value">Canary Wharf, London, UK</span>
-                </div>
-                <div class="cert-info-row">
-                    <span class="cert-label">Status:</span>
-                    <span class="cert-value" style="color: var(--emerald); font-weight: 700;">✓ Active & Compliant</span>
-                </div>
+
+                <!-- Certificate Number -->
+                <p class="cert-number">
+                    Certificate No: EWC-GLOBAL-2024-00001<br>
+                    Issue Date: January 15, 2024 • Valid Indefinitely
+                </p>
             </div>
-
-            <div class="ornament">✦ ✦ ✦</div>
-
-            <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 1.5rem;">
-                This certificate confirms that Elite Wealth Capital Limited is duly incorporated 
-                and authorized to conduct investment and financial services operations.
-            </p>
         </div>
 
-        <!-- Financial Services License -->
-        <div class="certificate-card">
-            <div class="cert-header">
-                <div class="cert-icon">🛡️</div>
-                <h2 class="cert-title">FINANCIAL SERVICES LICENSE</h2>
-                <p class="cert-subtitle">Investment Operations Authorization</p>
+        <!-- Regulatory Badges -->
+        <div class="badges-grid">
+            <div class="reg-badge">
+                <i class="fas fa-shield-halved"></i>
+                <div class="reg-badge-title">FCA Regulated</div>
+                <div class="reg-badge-sub">United Kingdom</div>
             </div>
-
-            <div class="ornament">✦ ✦ ✦</div>
-
-            <p class="cert-company">Elite Wealth Capital Limited</p>
-            
-            <div class="cert-info">
-                <div class="cert-info-row">
-                    <span class="cert-label">License Type:</span>
-                    <span class="cert-value">Investment & Trading Operations</span>
-                </div>
-                <div class="cert-info-row">
-                    <span class="cert-label">License Number:</span>
-                    <span class="cert-value">FCA-EWC-2024-001-UK</span>
-                </div>
-                <div class="cert-info-row">
-                    <span class="cert-label">Issue Date:</span>
-                    <span class="cert-value">February 1, 2024</span>
-                </div>
-                <div class="cert-info-row">
-                    <span class="cert-label">Valid Until:</span>
-                    <span class="cert-value">January 31, 2029</span>
-                </div>
-                <div class="cert-info-row">
-                    <span class="cert-label">Authorized Services:</span>
-                    <span class="cert-value">Portfolio Management, Trading, Custody</span>
-                </div>
-                <div class="cert-info-row">
-                    <span class="cert-label">Regulatory Body:</span>
-                    <span class="cert-value">Financial Conduct Authority (FCA)</span>
-                </div>
-                <div class="cert-info-row">
-                    <span class="cert-label">Compliance Status:</span>
-                    <span class="cert-value" style="color: var(--emerald); font-weight: 700;">✓ FCA Compliant</span>
-                </div>
+            <div class="reg-badge">
+                <i class="fas fa-landmark"></i>
+                <div class="reg-badge-title">SEC Registered</div>
+                <div class="reg-badge-sub">United States</div>
             </div>
-
-            <div class="ornament">✦ ✦ ✦</div>
-
-            <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 1.5rem;">
-                This license authorizes Elite Wealth Capital to provide investment management, 
-                trading services, and custody operations under strict regulatory oversight.
-            </p>
-        </div>
-
-        <!-- Crypto Asset License -->
-        <div class="certificate-card">
-            <div class="cert-header">
-                <div class="cert-icon">₿</div>
-                <h2 class="cert-title">CRYPTO ASSET REGISTRATION</h2>
-                <p class="cert-subtitle">Digital Asset Service Provider</p>
+            <div class="reg-badge">
+                <i class="fas fa-file-contract"></i>
+                <div class="reg-badge-title">MAS Licensed</div>
+                <div class="reg-badge-sub">Singapore</div>
             </div>
-
-            <div class="ornament">✦ ✦ ✦</div>
-
-            <p class="cert-company">Elite Wealth Capital Limited</p>
-            
-            <div class="cert-info">
-                <div class="cert-info-row">
-                    <span class="cert-label">Registration Type:</span>
-                    <span class="cert-value">Crypto Asset Service Provider (CASP)</span>
-                </div>
-                <div class="cert-info-row">
-                    <span class="cert-label">Registration Number:</span>
-                    <span class="cert-value">CASP-EWC-2024-UK-00847</span>
-                </div>
-                <div class="cert-info-row">
-                    <span class="cert-label">FinCEN MSB Number:</span>
-                    <span class="cert-value">31000208547912</span>
-                </div>
-                <div class="cert-info-row">
-                    <span class="cert-label">Authorized Activities:</span>
-                    <span class="cert-value">Exchange, Custody, Transfer Services</span>
-                </div>
-                <div class="cert-info-row">
-                    <span class="cert-label">AML/CFT Compliance:</span>
-                    <span class="cert-value" style="color: var(--emerald); font-weight: 700;">✓ Fully Compliant</span>
-                </div>
+            <div class="reg-badge">
+                <i class="fab fa-bitcoin"></i>
+                <div class="reg-badge-title">Crypto Certified</div>
+                <div class="reg-badge-sub">CASP Registered</div>
             </div>
-
-            <div class="ornament">✦ ✦ ✦</div>
-        </div>
-
-        <!-- Regulatory Compliance Badges -->
-        <div class="badges-container">
-            <div class="regulatory-badge">
-                <div class="badge-icon">🛡️</div>
-                <div class="badge-title">FCA Regulated</div>
-                <p style="font-size: 0.9rem; margin-top: 0.5rem;">Financial Conduct Authority</p>
-                <div class="badge-number">FCA Compliant</div>
+            <div class="reg-badge">
+                <i class="fas fa-lock"></i>
+                <div class="reg-badge-title">ISO 27001</div>
+                <div class="reg-badge-sub">Security Standard</div>
             </div>
-
-            <div class="regulatory-badge">
-                <div class="badge-icon">📜</div>
-                <div class="badge-title">UK Registered</div>
-                <p style="font-size: 0.9rem; margin-top: 0.5rem;">Companies House</p>
-                <div class="badge-number">EWC-2024-UK</div>
-            </div>
-
-            <div class="regulatory-badge">
-                <div class="badge-icon">🔐</div>
-                <div class="badge-title">ISO 27001</div>
-                <p style="font-size: 0.9rem; margin-top: 0.5rem;">Information Security</p>
-                <div class="badge-number">Certified</div>
-            </div>
-
-            <div class="regulatory-badge">
-                <div class="badge-icon">🇪🇺</div>
-                <div class="badge-title">GDPR Compliant</div>
-                <p style="font-size: 0.9rem; margin-top: 0.5rem;">Data Protection</p>
-                <div class="badge-number">EU Standard</div>
-            </div>
-
-            <div class="regulatory-badge">
-                <div class="badge-icon">🇺🇸</div>
-                <div class="badge-title">FinCEN MSB</div>
-                <p style="font-size: 0.9rem; margin-top: 0.5rem;">Money Services Business</p>
-                <div class="badge-number">31000208547912</div>
-            </div>
-
-            <div class="regulatory-badge">
-                <div class="badge-icon">✅</div>
-                <div class="badge-title">SOC 2 Type II</div>
-                <p style="font-size: 0.9rem; margin-top: 0.5rem;">Security Audit</p>
-                <div class="badge-number">Certified</div>
+            <div class="reg-badge">
+                <i class="fas fa-leaf"></i>
+                <div class="reg-badge-title">ESG Certified</div>
+                <div class="reg-badge-sub">Sustainability</div>
             </div>
         </div>
 
         <!-- Download Button -->
-        <div style="text-align: center; margin-top: 3rem;">
+        <div style="text-align: center; margin-top: 2rem;">
             <button class="download-btn" onclick="downloadCertificate()">
-                📥 Download Certificate Package
+                <i class="fas fa-download me-2"></i>Download Official Certificate
             </button>
-            <p style="color: rgba(255,255,255,0.6); margin-top: 1rem; font-size: 0.9rem;">
-                Download official PDF copies of all licenses and certificates
+            <p style="color: rgba(255,255,255,0.6); margin-top: 1rem; font-size: 0.85rem;">
+                For official verified copies, contact: support@elitewealthcapita.uk
             </p>
         </div>
     </div>
@@ -454,12 +599,14 @@
 
 <script>
 function downloadCertificate() {
-    alert('Certificate package download will begin shortly. This includes:\n\n' +
+    alert('Official Certificate Download\n\n' +
+          'Certificate Package Includes:\n' +
           '✓ Certificate of Incorporation\n' +
-          '✓ Financial Services License\n' +
-          '✓ Crypto Asset Registration\n' +
+          '✓ Global Operations License\n' +
+          '✓ Financial Services Authorization\n' +
           '✓ Regulatory Compliance Documents\n\n' +
-          'Please contact support@elitewealthcapita.uk for official copies.');
+          'For verified official copies, please email:\n' +
+          'support@elitewealthcapita.uk');
 }
 </script>
 {% endblock %}

@@ -28,9 +28,9 @@
             padding-top: 92px;
         }
         .navbar { 
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
             top: 42px;
         }
         .navbar-brand {
@@ -41,6 +41,7 @@
         .nav-link {
             color: rgba(255, 255, 255, 0.9) !important;
             transition: color 0.3s ease;
+            padding: 10px 15px !important;
         }
         .nav-link:hover {
             color: #FFD700 !important;
@@ -55,6 +56,58 @@
             background-color: #FFD700 !important;
             color: #000 !important;
         }
+        /* Enhanced Mobile Navbar Collapse */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: linear-gradient(180deg, #0A1F44 0%, #050B1A 100%);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                padding: 20px;
+                border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+            .navbar-nav {
+                width: 100%;
+            }
+            .navbar-nav .nav-item {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .navbar-nav .nav-item:last-child {
+                border-bottom: none;
+            }
+            .navbar-nav .nav-link {
+                padding: 15px 10px !important;
+                font-size: 1.1rem;
+            }
+            .navbar-nav .dropdown-menu {
+                background: rgba(0, 0, 0, 0.3);
+                border: none;
+                padding: 0;
+                margin: 0;
+            }
+            .navbar-nav .dropdown-item {
+                color: rgba(255, 255, 255, 0.8);
+                padding: 12px 20px;
+            }
+            .navbar-nav .dropdown-item:hover {
+                background: rgba(255, 215, 0, 0.1);
+                color: #FFD700;
+            }
+            .navbar-toggler {
+                border: 2px solid #FFD700;
+                padding: 8px 12px;
+            }
+            .navbar-toggler:focus {
+                box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+            }
+            .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23FFD700' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            }
+        }
     </style>
 </head>
 <body>
@@ -66,12 +119,12 @@
             <a class="navbar-brand fw-bold" href="/">
                 <img src="{% static 'images/logo.png' %}" alt="Elite Wealth Capital" height="40" class="me-2" loading="eager">Elite Wealth Capital
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav-landing" aria-controls="navbarNav-landing">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav-landing" aria-controls="navbarNav-landing" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav-landing">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}" data-translate="home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}" data-translate="home"><i class="fas fa-home me-1 d-lg-none"></i>Home</a></li>
                     
                     <!-- Investment Sectors Dropdown -->
                     <li class="nav-item dropdown">
@@ -104,8 +157,39 @@
                         </ul>
                     </li>
                     
+                    <!-- Company Dropdown (visible on mobile via hamburger) -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="fas fa-building-columns me-1"></i>Company
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'dashboard:about' %}">
+                                <i class="fas fa-info-circle me-2"></i>About Us
+                            </a></li>
+                            <li><a class="dropdown-item" href="{% url 'dashboard:team' %}">
+                                <i class="fas fa-users me-2"></i>Our Team
+                            </a></li>
+                            <li><a class="dropdown-item" href="{% url 'dashboard:certificates' %}">
+                                <i class="fas fa-certificate me-2"></i>Certificates
+                            </a></li>
+                            <li><a class="dropdown-item" href="{% url 'dashboard:reviews_page' %}">
+                                <i class="fas fa-star me-2"></i>Reviews
+                            </a></li>
+                            <li><a class="dropdown-item" href="{% url 'dashboard:news' %}">
+                                <i class="fas fa-newspaper me-2"></i>News
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'dashboard:faq' %}">
+                                <i class="fas fa-question-circle me-2"></i>FAQ
+                            </a></li>
+                            <li><a class="dropdown-item" href="{% url 'dashboard:contact' %}">
+                                <i class="fas fa-envelope me-2"></i>Contact
+                            </a></li>
+                        </ul>
+                    </li>
+                    
                     {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:dashboard' %}" data-translate="dashboard">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:dashboard' %}" data-translate="dashboard"><i class="fas fa-tachometer-alt me-1 d-lg-none"></i>Dashboard</a></li>
                         {% if user.is_staff %}
                         <li class="nav-item"><a class="nav-link text-warning" href="/admin/"><i class="fas fa-shield-alt me-1"></i>Admin</a></li>
                         {% endif %}
@@ -125,8 +209,8 @@
                             </ul>
                         </li>
                     {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}" data-translate="login">Login</a></li>
-                        <li class="nav-item"><a class="nav-link btn btn-light text-primary px-3" href="{% url 'accounts:signup' %}" data-translate="signup">Sign Up</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}" data-translate="login"><i class="fas fa-sign-in-alt me-1 d-lg-none"></i>Login</a></li>
+                        <li class="nav-item"><a class="nav-link btn btn-light text-primary px-3 ms-lg-2" href="{% url 'accounts:signup' %}" data-translate="signup"><i class="fas fa-user-plus me-1 d-lg-none"></i>Sign Up</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -147,134 +231,6 @@
 
     <!-- Main Content -->
     {% block content %}{% endblock %}
-
-    <!-- Mobile Drawer for Landing Pages -->
-    <style>
-        .landing-drawer-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 990;
-            display: none;
-        }
-        .landing-drawer-backdrop.active { display: block; }
-        .landing-drawer {
-            position: fixed;
-            top: 0;
-            right: -280px;
-            width: 280px;
-            height: 100%;
-            background: linear-gradient(180deg, #0A1F44 0%, #050B1A 100%);
-            z-index: 995; /* Lower than Tawk.to (which is ~1000000000) */
-            transition: right 0.3s ease;
-            overflow-y: auto;
-            padding: 20px 0;
-        }
-        .landing-drawer.active { right: 0; }
-        .landing-drawer-header {
-            padding: 15px 20px;
-            border-bottom: 1px solid rgba(255,215,0,0.2);
-            margin-bottom: 15px;
-        }
-        .landing-drawer-header h5 {
-            color: #FFD700;
-            font-weight: 700;
-            margin: 0;
-        }
-        .landing-drawer-menu {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .landing-drawer-menu li a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 20px;
-            color: rgba(255,255,255,0.85);
-            text-decoration: none;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-        .landing-drawer-menu li a:hover {
-            background: rgba(255,215,0,0.1);
-            color: #FFD700;
-        }
-        .landing-drawer-menu li a i {
-            width: 20px;
-            text-align: center;
-            color: #FFD700;
-        }
-        .landing-drawer-divider {
-            height: 1px;
-            background: rgba(255,215,0,0.2);
-            margin: 15px 20px;
-        }
-        .mobile-menu-btn {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            left: 20px; /* Moved to LEFT to not block Tawk.to on right */
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: #0A1F44;
-            border: none;
-            font-size: 1.5rem;
-            z-index: 999; /* Lower than Tawk.to */
-            box-shadow: 0 4px 20px rgba(255,215,0,0.4);
-            cursor: pointer;
-        }
-        @media (max-width: 991px) {
-            .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
-        }
-    </style>
-    
-    {% if not is_dashboard %}
-    <div class="landing-drawer-backdrop" id="landingDrawerBackdrop"></div>
-    <div class="landing-drawer" id="landingDrawer">
-        <div class="landing-drawer-header">
-            <h5><i class="fas fa-bars me-2"></i>Menu</h5>
-        </div>
-        <ul class="landing-drawer-menu">
-            <li><a href="{% url 'home' %}"><i class="fas fa-home"></i>Home</a></li>
-            <li><a href="{% url 'investments:plans' %}"><i class="fas fa-chart-line"></i>Investment Plans</a></li>
-            <li><a href="{% url 'dashboard:about' %}"><i class="fas fa-info-circle"></i>About Us</a></li>
-            <li><a href="{% url 'dashboard:team' %}"><i class="fas fa-users"></i>Our Team</a></li>
-            <li><a href="{% url 'dashboard:faq' %}"><i class="fas fa-question-circle"></i>FAQ</a></li>
-            <li><a href="{% url 'dashboard:contact' %}"><i class="fas fa-envelope"></i>Contact</a></li>
-            <div class="landing-drawer-divider"></div>
-            <li><a href="{% url 'investments:sector' 'crypto' %}"><i class="fab fa-bitcoin"></i>Crypto Trading</a></li>
-            <li><a href="{% url 'investments:sector' 'real-estate' %}"><i class="fas fa-building"></i>Real Estate</a></li>
-            <li><a href="{% url 'investments:sector' 'oil-gas' %}"><i class="fas fa-oil-can"></i>Oil & Gas</a></li>
-            <li><a href="{% url 'investments:sector' 'agriculture' %}"><i class="fas fa-seedling"></i>Agriculture</a></li>
-            <li><a href="{% url 'investments:sector' 'solar' %}"><i class="fas fa-solar-panel"></i>Solar Energy</a></li>
-            <li><a href="{% url 'investments:sector' 'stocks' %}"><i class="fas fa-chart-bar"></i>Global Shares</a></li>
-            <div class="landing-drawer-divider"></div>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'dashboard:dashboard' %}"><i class="fas fa-tachometer-alt"></i>My Dashboard</a></li>
-            <li><a href="{% url 'accounts:logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
-            {% else %}
-            <li><a href="{% url 'accounts:login' %}" style="color: #FFD700;"><i class="fas fa-sign-in-alt"></i>Login</a></li>
-            <li><a href="{% url 'accounts:signup' %}" style="background: linear-gradient(135deg, #FFD700, #FFA500); color: #0A1F44; margin: 10px 20px; border-radius: 8px; justify-content: center;"><i class="fas fa-user-plus"></i>Create Account</a></li>
-            {% endif %}
-        </ul>
-    </div>
-    <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleLandingDrawer()">
-        <i class="fas fa-bars"></i>
-    </button>
-    <script>
-        function toggleLandingDrawer() {
-            document.getElementById('landingDrawer').classList.toggle('active');
-            document.getElementById('landingDrawerBackdrop').classList.toggle('active');
-        }
-        document.getElementById('landingDrawerBackdrop').addEventListener('click', toggleLandingDrawer);
-    </script>
-    {% endif %}
 
     <!-- Footer -->
     <footer class="text-white mt-5 py-5" style="background: url('{% static "images/download.jpg" %}') center/cover no-repeat; position: relative;">
