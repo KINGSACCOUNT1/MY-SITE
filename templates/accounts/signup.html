@@ -19,28 +19,28 @@
                         {% csrf_token %}
                         
                         <div class="mb-3">
-                            <label class="form-label">Full Name</label>
-                            <input type="text" name="full_name" class="form-control form-control-lg" required>
+                            <label class="form-label" for="full_name">Full Name</label>
+                            <input type="text" id="full_name" name="full_name" class="form-control form-control-lg" required>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Email Address</label>
-                            <input type="email" name="email" class="form-control form-control-lg" required>
+                            <label class="form-label" for="email">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-control form-control-lg" required>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control form-control-lg" required>
+                            <label class="form-label" for="password">Password</label>
+                            <input type="password" id="password" name="password" class="form-control form-control-lg" required>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Confirm Password</label>
-                            <input type="password" name="password_confirm" class="form-control form-control-lg" required>
+                            <label class="form-label" for="password_confirm">Confirm Password</label>
+                            <input type="password" id="password_confirm" name="password_confirm" class="form-control form-control-lg" required>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Referral Code <span class="text-success">(Get $20 bonus!)</span></label>
-                            <input type="text" name="referral_code" class="form-control form-control-lg" placeholder="Enter code for $20 welcome bonus">
+                            <label class="form-label" for="referral_code">Referral Code <span class="text-success">(Get $20 bonus!)</span></label>
+                            <input type="text" id="referral_code" name="referral_code" class="form-control form-control-lg" placeholder="Enter code for $20 welcome bonus">
                             <small class="text-muted">Have a referral code? Enter it to receive $20 welcome bonus!</small>
                         </div>
 

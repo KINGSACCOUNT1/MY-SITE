@@ -216,22 +216,31 @@
 </div>
 
 <script>
-    const depositId = {{ deposit.id }};
+document.addEventListener('DOMContentLoaded', function() {
+    // Single polling mechanism - no duplicates
     let pollInterval = null;
-    let countdownValue = 5;
     let countdownInterval = null;
+    let countdownValue = 5;
+    const POLL_INTERVAL = 5000; // 5 seconds
+    const depositId = {{ deposit.id }};
 
     function checkDepositStatus() {
         fetch(`/investments/api/deposit-status/${depositId}/`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                return response.json();
+            })
             .then(data => {
                 updateUI(data.status);
+                
+                // Stop polling if status is final
                 if (data.status === 'confirmed' || data.status === 'rejected') {
-                    clearInterval(pollInterval);
-                    clearInterval(countdownInterval);
+                    stopPolling();
                 }
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => {
+                console.error('Status check failed:', error);
+            });
     }
 
     function updateUI(status) {
@@ -251,26 +260,47 @@
         }
     }
 
-    function startCountdown() {
+    function updateCountdownDisplay() {
         const el = document.getElementById('countdown');
-        countdownValue = 5;
-        el.textContent = countdownValue;
+        if (el) el.textContent = countdownValue;
+    }
+
+    function startPolling() {
+        // Clear any existing intervals first
+        stopPolling();
         
+        // Initial check
+        checkDepositStatus();
+        countdownValue = 5;
+        updateCountdownDisplay();
+        
+        // Single countdown that resets every 5 seconds
         countdownInterval = setInterval(() => {
             countdownValue--;
-            el.textContent = countdownValue;
             if (countdownValue <= 0) {
-                clearInterval(countdownInterval);
+                countdownValue = 5;
                 checkDepositStatus();
-                startCountdown();
             }
+            updateCountdownDisplay();
         }, 1000);
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        checkDepositStatus();
-        startCountdown();
-        pollInterval = setInterval(checkDepositStatus, 5000);
-    });
+    function stopPolling() {
+        if (pollInterval) {
+            clearInterval(pollInterval);
+            pollInterval = null;
+        }
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+        }
+    }
+
+    // Cleanup on page leave
+    window.addEventListener('beforeunload', stopPolling);
+
+    // Start single polling mechanism
+    startPolling();
+});
 </script>
 {% endblock %}

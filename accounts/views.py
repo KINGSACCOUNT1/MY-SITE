@@ -8,19 +8,36 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.db.models import Sum
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from django_ratelimit.decorators import ratelimit
 import secrets
 import json
 from .models import CustomUser, ActivityLog, Referral
 from investments.models import Investment, Deposit, Withdrawal
 
 
+@ratelimit(key='ip', rate='5/m', method='POST', block=True)
+@ratelimit(key='post:email', rate='10/h', method='POST', block=True)
 def login_view(request):
+    # Handle rate limit exceeded
+    if getattr(request, 'limited', False):
+        messages.error(request, 'Too many login attempts. Please try again later.')
+        return redirect('accounts:login')
+    
     if request.user.is_authenticated:
         return redirect('dashboard:dashboard')
     
     if request.method == 'POST':
-        email = request.POST.get('email', '').lower()
+        email = request.POST.get('email', '').strip().lower()
         password = request.POST.get('password')
+        
+        # Validate email format
+        try:
+            validate_email(email)
+        except ValidationError:
+            messages.error(request, 'Please enter a valid email address')
+            return redirect('accounts:login')
         
         user = authenticate(request, username=email, password=password)
         
@@ -56,16 +73,30 @@ def login_view(request):
     return render(request, 'accounts/login.html')
 
 
+@ratelimit(key='ip', rate='3/m', method='POST', block=True)
+@ratelimit(key='ip', rate='10/h', method='POST', block=True)
 def signup_view(request):
+    # Handle rate limit exceeded
+    if getattr(request, 'limited', False):
+        messages.error(request, 'Too many signup attempts. Please try again later.')
+        return redirect('accounts:signup')
+    
     if request.user.is_authenticated:
         return redirect('dashboard:dashboard')
     
     if request.method == 'POST':
-        email = request.POST.get('email', '').lower()
+        email = request.POST.get('email', '').strip().lower()
         full_name = request.POST.get('full_name')
         password = request.POST.get('password')
         password_confirm = request.POST.get('password_confirm')
         referral_code = request.POST.get('referral_code', '').upper()
+        
+        # Validate email format
+        try:
+            validate_email(email)
+        except ValidationError:
+            messages.error(request, 'Please enter a valid email address')
+            return redirect('accounts:signup')
         
         # Validation
         if password != password_confirm:
@@ -173,8 +204,18 @@ def edit_profile(request):
         action = request.POST.get('action')
         
         if action == 'update_personal':
+            new_email = request.POST.get('email', user.email).strip().lower()
+            
+            # Validate email format if changed
+            if new_email != user.email:
+                try:
+                    validate_email(new_email)
+                except ValidationError:
+                    messages.error(request, 'Please enter a valid email address')
+                    return redirect(f'accounts:edit_profile?tab={active_tab}')
+            
             user.full_name = request.POST.get('full_name', user.full_name)
-            user.email = request.POST.get('email', user.email)
+            user.email = new_email
             user.phone = request.POST.get('phone', user.phone)
             user.country = request.POST.get('country', user.country)
             user.save()
@@ -354,4 +395,34 @@ def referral_leaderboard(request):
         referral_count=Count('referrals_made')
     ).filter(referral_count__gt=0).order_by('-referral_count')[:20]
     
-    return render(request, 'accounts/referral_leaderboard.html', {'top_referrers': top_referrers})
+    return render(request, 'accounts/referrals.html', {'top_referrers': top_referrers})
+
+
+@ratelimit(key='ip', rate='3/m', method='POST', block=True)
+@ratelimit(key='post:email', rate='5/h', method='POST', block=True)
+def password_reset_view(request):
+    """Custom password reset view with rate limiting"""
+    from django.contrib.auth.forms import PasswordResetForm
+    from django.contrib.auth.tokens import default_token_generator
+    from django.contrib.sites.shortcuts import get_current_site
+    
+    # Handle rate limit exceeded
+    if getattr(request, 'limited', False):
+        messages.error(request, 'Too many password reset attempts. Please try again later.')
+        return redirect('accounts:password_reset')
+    
+    if request.method == 'POST':
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            form.save(
+                request=request,
+                use_https=request.is_secure(),
+                token_generator=default_token_generator,
+                email_template_name='registration/password_reset_email.html',
+                subject_template_name='registration/password_reset_subject.txt',
+            )
+            return redirect('accounts:password_reset_done')
+    else:
+        form = PasswordResetForm()
+    
+    return render(request, 'accounts/password_reset.html', {'form': form})

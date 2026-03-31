@@ -145,8 +145,8 @@
             
             <!-- Document Type Selection -->
             <div class="upload-section">
-                <label class="upload-label">Document Type *</label>
-                <select name="document_type" class="upload-input" required>
+                <label class="upload-label" for="document_type">Document Type *</label>
+                <select id="document_type" name="document_type" class="upload-input" required>
                     <option value="">-- Select Document Type --</option>
                     <option value="passport">Passport</option>
                     <option value="drivers_license">Driver's License</option>
@@ -157,11 +157,12 @@
             
             <!-- Front Image -->
             <div class="upload-section">
-                <label class="upload-label">
+                <label class="upload-label" for="front_image">
                     <i class="fas fa-image me-2"></i>Document Front *
                 </label>
                 <input 
                     type="file" 
+                    id="front_image"
                     name="front_image" 
                     class="upload-input" 
                     accept="image/jpeg,image/png,image/jpg"
@@ -173,17 +174,18 @@
                     Clear photo of the front side of your document
                 </p>
                 <div class="preview-container" id="frontPreview">
-                    <img src="" alt="Front Preview" class="preview-image">
+                    <img src="" alt="Front Preview" class="preview-image" loading="lazy">
                 </div>
             </div>
             
             <!-- Back Image -->
             <div class="upload-section">
-                <label class="upload-label">
+                <label class="upload-label" for="back_image">
                     <i class="fas fa-image me-2"></i>Document Back *
                 </label>
                 <input 
                     type="file" 
+                    id="back_image"
                     name="back_image" 
                     class="upload-input" 
                     accept="image/jpeg,image/png,image/jpg"
@@ -195,17 +197,18 @@
                     Clear photo of the back side of your document
                 </p>
                 <div class="preview-container" id="backPreview">
-                    <img src="" alt="Back Preview" class="preview-image">
+                    <img src="" alt="Back Preview" class="preview-image" loading="lazy">
                 </div>
             </div>
             
             <!-- Selfie Image -->
             <div class="upload-section">
-                <label class="upload-label">
+                <label class="upload-label" for="selfie_image">
                     <i class="fas fa-user-circle me-2"></i>Selfie with Document *
                 </label>
                 <input 
                     type="file" 
+                    id="selfie_image"
                     name="selfie_image" 
                     class="upload-input" 
                     accept="image/jpeg,image/png,image/jpg"
@@ -217,7 +220,7 @@
                     Hold your document next to your face
                 </p>
                 <div class="preview-container" id="selfiePreview">
-                    <img src="" alt="Selfie Preview" class="preview-image">
+                    <img src="" alt="Selfie Preview" class="preview-image" loading="lazy">
                 </div>
             </div>
             

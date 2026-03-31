@@ -305,9 +305,9 @@
                 <div class="news-card">
                     <div class="news-image">
                         {% if article.image_url %}
-                            <img src="{{ article.image_url }}" alt="{{ article.title }}">
+                            <img src="{{ article.image_url }}" alt="{{ article.title }}" loading="lazy">
                         {% else %}
-                            <img src="{% static 'images/news-bitcoin.jpg' %}" alt="{{ article.title }}">
+                            <img src="{% static 'images/news-bitcoin.jpg' %}" alt="{{ article.title }}" loading="lazy">
                         {% endif %}
                         <div class="news-category">{{ article.get_category_display }}</div>
                     </div>

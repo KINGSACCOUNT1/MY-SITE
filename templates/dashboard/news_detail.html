@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load bleach_tags %}
 
 {% block title %}{{ article.title }} - Elite Wealth Capital{% endblock %}
 
@@ -346,9 +347,9 @@
     <!-- Hero Image -->
     <div class="article-hero">
         {% if article.image_url %}
-            <img src="{{ article.image_url }}" alt="{{ article.title }}">
+            <img src="{{ article.image_url }}" alt="{{ article.title }}" loading="lazy">
         {% else %}
-            <img src="{% static 'images/news-bitcoin.jpg' %}" alt="{{ article.title }}">
+            <img src="{% static 'images/news-bitcoin.jpg' %}" alt="{{ article.title }}" loading="lazy">
         {% endif %}
     </div>
     
@@ -356,7 +357,7 @@
     <div class="article-content">
         <!-- Main Content -->
         <div class="article-body">
-            {{ article.content|safe }}
+            {{ article.content|bleach_clean }}
         </div>
         
         <!-- Sidebar -->
@@ -455,10 +456,10 @@
             <i class="fas fa-arrow-left"></i> Back to All Articles
         </a>
         <div class="article-tags">
-            <a href="#" class="tag">#cryptocurrency</a>
-            <a href="#" class="tag">#investment</a>
-            <a href="#" class="tag">#market</a>
-            <a href="#" class="tag">#wealth</a>
+            <a href="{% url 'dashboard:news' %}?tag=cryptocurrency" class="tag">#cryptocurrency</a>
+            <a href="{% url 'dashboard:news' %}?tag=investment" class="tag">#investment</a>
+            <a href="{% url 'dashboard:news' %}?tag=market" class="tag">#market</a>
+            <a href="{% url 'dashboard:news' %}?tag=wealth" class="tag">#wealth</a>
         </div>
     </div>
 </div>

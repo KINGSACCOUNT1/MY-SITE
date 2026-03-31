@@ -221,7 +221,7 @@
         <div class="profile-avatar-section">
             <div class="profile-avatar">
                 {% if user.profile_image %}
-                    <img src="{{ user.profile_image.url }}" alt="Profile">
+                    <img src="{{ user.profile_image.url }}" alt="Profile" loading="lazy">
                 {% else %}
                     {{ user.full_name|slice:":1"|upper }}
                 {% endif %}

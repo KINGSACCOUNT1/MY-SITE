@@ -1,7 +1,37 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.exceptions import ValidationError
 from .models import KYCDocument
+
+ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/jpg']
+MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
+
+
+def validate_uploaded_file(file_obj, field_name):
+    """Validate uploaded file type and size."""
+    if not file_obj:
+        return
+    
+    # Check file size
+    if file_obj.size > MAX_FILE_SIZE:
+        raise ValidationError(f'{field_name} exceeds maximum size of 10MB')
+    
+    # Check file type
+    if file_obj.content_type not in ALLOWED_IMAGE_TYPES:
+        raise ValidationError(f'{field_name} must be JPEG or PNG image')
+    
+    # Verify it's actually an image by checking magic bytes
+    file_obj.seek(0)
+    header = file_obj.read(8)
+    file_obj.seek(0)
+    
+    # JPEG starts with FF D8 FF, PNG starts with 89 50 4E 47
+    is_jpeg = header[:3] == b'\xff\xd8\xff'
+    is_png = header[:8] == b'\x89PNG\r\n\x1a\n'
+    
+    if not (is_jpeg or is_png):
+        raise ValidationError(f'{field_name} is not a valid image file')
 
 
 @login_required
@@ -24,6 +54,15 @@ def upload_kyc(request):
         
         if not all([document_type, front_image, back_image, selfie_image]):
             messages.error(request, 'All fields are required.')
+            return redirect('kyc:upload')
+        
+        # Validate uploaded files
+        try:
+            validate_uploaded_file(front_image, 'Front image')
+            validate_uploaded_file(back_image, 'Back image')
+            validate_uploaded_file(selfie_image, 'Selfie image')
+        except ValidationError as e:
+            messages.error(request, str(e))
             return redirect('kyc:upload')
         
         # Create or update KYC document

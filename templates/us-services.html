@@ -249,7 +249,7 @@
             <a href="{% url 'dashboard:dashboard' %}" class="nav-brand"
                 style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
                 <img src="{% static 'images/logo.webp' %}" alt="Elite Wealth Capital"
-                    style="height: 40px; width: auto; object-fit: contain;">
+                    style="height: 40px; width: auto; object-fit: contain;" loading="lazy">
                 <div class="logo-placeholder" style="background: none; border: none; padding: 0;">
                     <span class="logo-text">ELITE</span>
                     <span class="logo-subtext">WEALTH CAPITA</span>
@@ -627,7 +627,7 @@
                                     <li>Survey & research tasks</li>
                                 </ul>
                             </div>
-                            <a href="{% url 'agent_application' %}" class="btn-service btn-primary-service"
+                            <a href="{% url 'investments:agent' %}" class="btn-service btn-primary-service"
                                 style="display: inline-block; margin-top: 1rem; background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%); color: #000;">
                                 Apply Now →
                             </a>
@@ -647,7 +647,7 @@
                                     <li>Technical support</li>
                                 </ul>
                             </div>
-                            <a href="{% url 'agent_application' %}" class="btn-service btn-primary-service"
+                            <a href="{% url 'investments:agent' %}" class="btn-service btn-primary-service"
                                 style="display: inline-block; margin-top: 1rem; background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);">
                                 Remote Jobs →
                             </a>
@@ -685,7 +685,7 @@
                 <h3 style="color: #fff; margin-bottom: 0.5rem;">Need Help with US Services?</h3>
                 <p style="color: #94a3b8; margin-bottom: 1.5rem;">Our support team is available 24/7 to assist you with
                     any questions about US government services integration.</p>
-                <a href="{% url 'dispute' %}" class="btn-service btn-primary-service">
+                <a href="{% url 'dashboard:dispute' %}" class="btn-service btn-primary-service">
                     Contact Support →
                 </a>
             </div>

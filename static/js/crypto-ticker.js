@@ -14,7 +14,15 @@ class CryptoTicker {
     init() {
         this.createTickerContainer();
         this.fetchPrices();
-        setInterval(() => this.fetchPrices(), 30000); // Update every 30 seconds
+        // Store the interval ID for cleanup
+        this.priceInterval = setInterval(() => this.fetchPrices(), 30000); // Update every 30 seconds
+    }
+
+    destroy() {
+        if (this.priceInterval) {
+            clearInterval(this.priceInterval);
+            this.priceInterval = null;
+        }
     }
 
     createTickerContainer() {
@@ -99,6 +107,9 @@ class CryptoTicker {
         try {
             // Use our Django API endpoint that fetches from CoinGecko
             const response = await fetch('/investments/api/ticker/');
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
             const result = await response.json();
             
             if (result.success && result.tickers) {

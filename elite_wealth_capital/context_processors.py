@@ -45,7 +45,6 @@ def tawk_settings(request):
     return {
         'TAWK_PROPERTY_ID': getattr(settings, 'TAWK_PROPERTY_ID', ''),
         'TAWK_WIDGET_ID': getattr(settings, 'TAWK_WIDGET_ID', ''),
-        'TAWK_API_KEY': getattr(settings, 'TAWK_API_KEY', ''),
         'TAWK_ENABLED': bool(getattr(settings, 'TAWK_PROPERTY_ID', '')),
     }
 

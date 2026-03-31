@@ -374,9 +374,10 @@
                     
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label text-white">Full Name *</label>
+                            <label class="form-label text-white" for="contact_name">Full Name *</label>
                             <input 
                                 type="text" 
+                                id="contact_name"
                                 name="name" 
                                 class="form-control" 
                                 placeholder="Your name"
@@ -385,9 +386,10 @@
                         </div>
                         
                         <div class="col-md-6 mb-3">
-                            <label class="form-label text-white">Email Address *</label>
+                            <label class="form-label text-white" for="contact_email">Email Address *</label>
                             <input 
                                 type="email" 
+                                id="contact_email"
                                 name="email" 
                                 class="form-control" 
                                 placeholder="your@email.com"
@@ -397,8 +399,8 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label class="form-label text-white">Subject *</label>
-                        <select name="subject" class="form-select" required>
+                        <label class="form-label text-white" for="subject">Subject *</label>
+                        <select id="subject" name="subject" class="form-select" required>
                             <option value="">Select a category</option>
                             <option value="general">General Inquiry</option>
                             <option value="technical">Technical Issue</option>
@@ -412,8 +414,9 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label class="form-label text-white">Message Details *</label>
+                        <label class="form-label text-white" for="message">Message Details *</label>
                         <textarea 
+                            id="message"
                             name="message" 
                             class="form-control" 
                             placeholder="Please describe your issue or question in detail..."
@@ -424,7 +427,7 @@
                     </div>
                     
                     <div class="mb-4">
-                        <label class="form-label text-white">
+                        <label class="form-label text-white" for="fileInput">
                             <i class="fas fa-paperclip me-2"></i>
                             Attach Files (Optional)
                         </label>
@@ -682,7 +685,7 @@
             </div>
             
             <div class="text-center mt-4">
-                <a href="#" class="btn btn-submit">View All Tickets</a>
+                <a href="{% url 'dashboard:contact' %}" class="btn btn-submit">Submit New Ticket</a>
             </div>
         </div>
     </div>

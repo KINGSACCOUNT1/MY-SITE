@@ -14,8 +14,10 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security Settings
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-dev-key-change-in-production')
-DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
+SECRET_KEY = os.getenv('SECRET_KEY')
+if not SECRET_KEY:
+    raise ValueError("SECRET_KEY environment variable must be set")
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = os.getenv(
     'ALLOWED_HOSTS',
@@ -48,6 +50,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_celery_beat',
     'django_celery_results',
+    'django_ratelimit',
     
     # Cloud Storage
     'cloudinary_storage',
@@ -178,9 +181,9 @@ COMPANY_ADDRESS = os.getenv('COMPANY_ADDRESS', 'London, United Kingdom')
 COMPANY_WEBSITE = os.getenv('COMPANY_WEBSITE', 'https://elitewealthcapital.uk')
 
 # Tawk.to Live Chat
-TAWK_PROPERTY_ID = os.getenv('TAWK_PROPERTY_ID', '69c1f2a729e9681c3d64de5d')
-TAWK_WIDGET_ID = os.getenv('TAWK_WIDGET_ID', '1jkepnodo')
-TAWK_API_KEY = os.getenv('TAWK_API_KEY', '75b4b0e9a4e6de42cd75e44db37824ae55f3fe00')
+TAWK_PROPERTY_ID = os.getenv('TAWK_PROPERTY_ID', '')
+TAWK_WIDGET_ID = os.getenv('TAWK_WIDGET_ID', '')
+TAWK_API_KEY = os.getenv('TAWK_API_KEY', '')
 
 # Cache Configuration (improves performance)
 CACHES = {
@@ -190,6 +193,13 @@ CACHES = {
         'TIMEOUT': 300,  # 5 minutes
     }
 }
+
+# Rate limit settings - use locmem for dev, Redis recommended for production
+RATELIMIT_USE_CACHE = 'default'
+RATELIMIT_FAIL_OPEN = True  # Don't block if cache is unavailable
+
+# Silence ratelimit cache warnings for development (use Redis in production)
+SILENCED_SYSTEM_CHECKS = ['django_ratelimit.E003', 'django_ratelimit.W001']
 
 # Celery Configuration
 CELERY_BROKER_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
@@ -206,17 +216,15 @@ CONN_MAX_AGE = 60  # Keep connections alive for 60 seconds
 
 # Security Settings (Production)
 if not DEBUG:
-    # Don't force HTTPS redirect - Render handles this
-    SECURE_SSL_REDIRECT = False
+    SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    # Don't use HSTS yet until site is stable
-    # SECURE_HSTS_SECONDS = 31536000
-    # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    # SECURE_HSTS_PRELOAD = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
 
 # CORS Settings
 CORS_ALLOW_ALL_ORIGINS = DEBUG

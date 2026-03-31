@@ -34,5 +34,8 @@ python-dotenv>=1.0
 # Utilities
 python-dateutil>=2.8
 
+# Security
+bleach>=6.1
+
 # PDF Generation (for receipts)
 reportlab>=4.0

@@ -15,11 +15,7 @@ urlpatterns = [
     path('profile/verify-2fa/', views.verify_2fa, name='verify_2fa'),
     
     # Password Reset
-    path('password-reset/', 
-         auth_views.PasswordResetView.as_view(
-             template_name='accounts/password_reset.html'
-         ), 
-         name='password_reset'),
+    path('password-reset/', views.password_reset_view, name='password_reset'),
     path('password-reset/done/', 
          auth_views.PasswordResetDoneView.as_view(
              template_name='accounts/password_reset_done.html'

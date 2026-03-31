@@ -457,8 +457,8 @@ def testimonials_manage(request):
     try:
         from dashboard.models import Testimonial
         user_testimonials = Testimonial.objects.filter(user=user).order_by('-created_at')
-    except:
-        pass
+    except (ImportError, Exception):
+        user_testimonials = []
     
     context = {
         'user': user,

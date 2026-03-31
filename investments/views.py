@@ -2,15 +2,47 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
+from django.core.exceptions import ValidationError
 from .models import (InvestmentPlan, Investment, Deposit, Withdrawal, WalletAddress,
                      Loan, LoanRepayment, VirtualCard, Coupon, AgentApplication, CryptoTicker)
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 from django.http import JsonResponse
+from django_ratelimit.decorators import ratelimit
 import urllib.request
 import json
 import logging
 
 logger = logging.getLogger(__name__)
+
+ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf']
+MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
+
+
+def validate_uploaded_file(file_obj, field_name):
+    """Validate uploaded file type and size."""
+    if not file_obj:
+        return
+    
+    # Check file size
+    if file_obj.size > MAX_FILE_SIZE:
+        raise ValidationError(f'{field_name} exceeds maximum size of 10MB')
+    
+    # Check file type
+    if file_obj.content_type not in ALLOWED_IMAGE_TYPES:
+        raise ValidationError(f'{field_name} must be JPEG, PNG image or PDF')
+    
+    # Verify file by checking magic bytes
+    file_obj.seek(0)
+    header = file_obj.read(8)
+    file_obj.seek(0)
+    
+    # JPEG starts with FF D8 FF, PNG starts with 89 50 4E 47, PDF starts with %PDF
+    is_jpeg = header[:3] == b'\xff\xd8\xff'
+    is_png = header[:8] == b'\x89PNG\r\n\x1a\n'
+    is_pdf = header[:4] == b'%PDF'
+    
+    if not (is_jpeg or is_png or is_pdf):
+        raise ValidationError(f'{field_name} is not a valid image or PDF file')
 
 
 def plans_list(request):
@@ -102,7 +134,15 @@ def create_investment(request, plan_id):
     plan = get_object_or_404(InvestmentPlan, id=plan_id, is_active=True)
     
     if request.method == 'POST':
-        amount = Decimal(request.POST.get('amount', 0))
+        try:
+            amount_str = request.POST.get('amount', '0')
+            amount = Decimal(amount_str)
+            if amount <= 0:
+                messages.error(request, 'Amount must be greater than zero')
+                return redirect('investments:invest', plan_id=plan_id)
+        except (InvalidOperation, ValueError):
+            messages.error(request, 'Invalid amount entered')
+            return redirect('investments:invest', plan_id=plan_id)
         
         # Validation
         if amount < plan.min_amount or amount > plan.max_amount:
@@ -161,7 +201,16 @@ def my_investments(request):
 def deposit_view(request):
     """Deposit funds"""
     if request.method == 'POST':
-        amount = Decimal(request.POST.get('amount', 0))
+        try:
+            amount_str = request.POST.get('amount', '0')
+            amount = Decimal(amount_str)
+            if amount <= 0:
+                messages.error(request, 'Amount must be greater than zero')
+                return redirect('investments:deposit')
+        except (InvalidOperation, ValueError):
+            messages.error(request, 'Invalid amount entered')
+            return redirect('investments:deposit')
+        
         crypto_type = request.POST.get('crypto_type', request.POST.get('payment_method', ''))
         tx_hash = request.POST.get('transaction_hash', request.POST.get('tx_hash', ''))
         proof_image = request.FILES.get('proof_image', request.FILES.get('proof', None))
@@ -237,7 +286,16 @@ def check_deposit_status_api(request, deposit_id):
 def withdraw_view(request):
     """Withdraw funds"""
     if request.method == 'POST':
-        amount = Decimal(request.POST.get('amount', 0))
+        try:
+            amount_str = request.POST.get('amount', '0')
+            amount = Decimal(amount_str)
+            if amount <= 0:
+                messages.error(request, 'Amount must be greater than zero')
+                return redirect('investments:withdraw')
+        except (InvalidOperation, ValueError):
+            messages.error(request, 'Invalid amount entered')
+            return redirect('investments:withdraw')
+        
         withdrawal_method = request.POST.get('withdrawal_method')
         crypto_type = request.POST.get('crypto_type', '')
         wallet_address = request.POST.get('wallet_address', '')
@@ -271,8 +329,25 @@ def withdraw_view(request):
 def loan_application(request):
     """Loan application and management"""
     if request.method == 'POST':
-        amount = Decimal(request.POST.get('amount'))
-        duration = int(request.POST.get('duration_days'))
+        try:
+            amount_str = request.POST.get('amount', '0')
+            amount = Decimal(amount_str)
+            if amount <= 0:
+                messages.error(request, 'Loan amount must be greater than zero')
+                return redirect('investments:loans')
+        except (InvalidOperation, ValueError):
+            messages.error(request, 'Invalid loan amount entered')
+            return redirect('investments:loans')
+        
+        try:
+            duration = int(request.POST.get('duration_days', 0))
+            if duration <= 0:
+                messages.error(request, 'Duration must be greater than zero')
+                return redirect('investments:loans')
+        except (ValueError, TypeError):
+            messages.error(request, 'Invalid duration entered')
+            return redirect('investments:loans')
+        
         purpose = request.POST.get('purpose')
         collateral = request.POST.get('collateral_description', '')
         
@@ -298,7 +373,15 @@ def loan_repay(request, loan_id):
     loan = get_object_or_404(Loan, id=loan_id, user=request.user)
     
     if request.method == 'POST':
-        amount = Decimal(request.POST.get('amount'))
+        try:
+            amount_str = request.POST.get('amount', '0')
+            amount = Decimal(amount_str)
+            if amount <= 0:
+                messages.error(request, 'Repayment amount must be greater than zero')
+                return redirect('investments:loans')
+        except (InvalidOperation, ValueError):
+            messages.error(request, 'Invalid repayment amount entered')
+            return redirect('investments:loans')
         
         if amount > request.user.balance:
             messages.error(request, 'Insufficient balance.')
@@ -359,12 +442,28 @@ def agent_page(request):
         city = request.POST.get('city')
         experience = request.POST.get('experience')
         marketing_plan = request.POST.get('marketing_plan')
-        expected_referrals = int(request.POST.get('expected_referrals', 0))
+        
+        try:
+            expected_referrals = int(request.POST.get('expected_referrals', 0))
+            if expected_referrals < 0:
+                expected_referrals = 0
+        except (ValueError, TypeError):
+            expected_referrals = 0
+        
         social_media_links = request.POST.get('social_media_links', '')
         website = request.POST.get('website', '')
         id_document = request.FILES.get('id_document')
         
+        # Validate uploaded file
+        if id_document:
+            try:
+                validate_uploaded_file(id_document, 'ID document')
+            except ValidationError as e:
+                messages.error(request, str(e))
+                return redirect('investments:agent')
+        
         AgentApplication.objects.create(
+            user=request.user,
             full_name=full_name,
             phone=phone,
             country=country,
@@ -380,12 +479,10 @@ def agent_page(request):
         messages.success(request, 'Agent application submitted successfully! We will review and respond within 48 hours.')
         return redirect('investments:agent')
     
-    # Get user's agent application if exists
+    # Get user's agent application if exists (secure lookup by user FK)
     try:
-        agent_application = AgentApplication.objects.filter(
-            full_name__icontains=request.user.full_name
-        ).first()
-    except:
+        agent_application = AgentApplication.objects.get(user=request.user)
+    except AgentApplication.DoesNotExist:
         agent_application = None
     
     # Get referral stats for this user
@@ -408,12 +505,17 @@ def agent_page(request):
     return render(request, 'investments/agent.html', context)
 
 
+@ratelimit(key='ip', rate='60/m', method='GET', block=False)
 def crypto_ticker_api(request):
     """
     JSON endpoint for live crypto price ticker.
     Fetches prices from CoinGecko API for cryptos configured in CryptoTicker model.
     Returns fallback data if no tickers configured or API fails.
     """
+    # Handle rate limit exceeded gracefully (block=False means we check manually)
+    if getattr(request, 'limited', False):
+        return JsonResponse({'success': False, 'error': 'Rate limit exceeded. Please try again later.'}, status=429)
+    
     tickers = CryptoTicker.objects.filter(is_active=True).order_by('display_order')
 
     # Default fallback tickers if none configured in database

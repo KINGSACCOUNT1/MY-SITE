@@ -197,7 +197,7 @@
                 <div class="profile-card">
                     <div class="profile-header">
                         {% if user.profile_image %}
-                            <img src="{{ user.profile_image.url }}" alt="Profile" class="profile-avatar">
+                            <img src="{{ user.profile_image.url }}" alt="Profile" class="profile-avatar" loading="lazy">
                         {% else %}
                             <div class="profile-avatar-placeholder">
                                 {{ user.full_name|slice:":1"|upper }}

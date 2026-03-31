@@ -83,7 +83,18 @@ class TestimonialPopup {
     init() {
         this.createPopupElement();
         setTimeout(() => this.showRandomTestimonial(), 8000);
-        setInterval(() => this.showRandomTestimonial(), 25000);
+        // Store the interval ID for cleanup
+        this.popupInterval = setInterval(() => this.showRandomTestimonial(), 25000);
+    }
+
+    destroy() {
+        if (this.popupInterval) {
+            clearInterval(this.popupInterval);
+            this.popupInterval = null;
+        }
+        if (this.popupElement) {
+            this.popupElement.remove();
+        }
     }
 
     createPopupElement() {

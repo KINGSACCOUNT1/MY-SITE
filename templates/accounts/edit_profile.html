@@ -351,10 +351,10 @@
             <a class="navbar-brand" href="{% url 'dashboard:dashboard' %}">
                 <i class="fas fa-crown"></i> Elite Wealth Capital
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav-profile" aria-controls="navbarNav-profile">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse" id="navbarNav-profile">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'accounts:profile' %}">Profile</a></li>
@@ -370,7 +370,7 @@
             <div class="row align-items-center">
                 <div class="col-md-3 text-center mb-3 mb-md-0">
                     {% if user.profile_image %}
-                        <img src="{{ user.profile_image.url }}" alt="{{ user.full_name }}" class="profile-avatar">
+                        <img src="{{ user.profile_image.url }}" alt="{{ user.full_name }}" class="profile-avatar" loading="lazy">
                     {% else %}
                         <div class="profile-avatar" style="background: linear-gradient(135deg, var(--navy) 0%, var(--emerald) 100%); display: flex; align-items: center; justify-content: center; font-size: 3rem;">
                             <i class="fas fa-user" style="color: white;"></i>
@@ -437,14 +437,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-label">Full Name</label>
-                                    <input type="text" class="form-control" name="full_name" value="{{ user.full_name }}" required>
+                                    <label class="form-label" for="full_name">Full Name</label>
+                                    <input type="text" class="form-control" id="full_name" name="full_name" value="{{ user.full_name }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-label">Email Address</label>
-                                    <input type="email" class="form-control" name="email" value="{{ user.email }}" required>
+                                    <label class="form-label" for="email">Email Address</label>
+                                    <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
                                 </div>
                             </div>
                         </div>
@@ -452,14 +452,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-label">Phone Number</label>
-                                    <input type="tel" class="form-control" name="phone" value="{{ user.phone }}" placeholder="+1 (555) 000-0000">
+                                    <label class="form-label" for="phone">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" value="{{ user.phone }}" placeholder="+1 (555) 000-0000">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-label">Country</label>
-                                    <input type="text" class="form-control" name="country" value="{{ user.country }}" placeholder="United States">
+                                    <label class="form-label" for="country">Country</label>
+                                    <input type="text" class="form-control" id="country" name="country" value="{{ user.country }}" placeholder="United States">
                                 </div>
                             </div>
                         </div>
@@ -626,22 +626,22 @@
                         <input type="hidden" name="action" value="change_password">
                         
                         <div class="form-group">
-                            <label class="form-label">Current Password</label>
-                            <input type="password" class="form-control" name="old_password" required>
+                            <label class="form-label" for="old_password">Current Password</label>
+                            <input type="password" class="form-control" id="old_password" name="old_password" required>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-label">New Password</label>
-                                    <input type="password" class="form-control" name="new_password" required>
+                                    <label class="form-label" for="new_password">New Password</label>
+                                    <input type="password" class="form-control" id="new_password" name="new_password" required>
                                     <small class="text-muted">At least 8 characters</small>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" name="confirm_password" required>
+                                    <label class="form-label" for="confirm_password">Confirm Password</label>
+                                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
                                 </div>
                             </div>
                         </div>
@@ -698,7 +698,7 @@
                             <h5>Current Profile Picture</h5>
                             <div style="background: #f8f9fa; border-radius: 10px; padding: 30px; text-align: center;">
                                 {% if user.profile_image %}
-                                    <img src="{{ user.profile_image.url }}" alt="Current Avatar" style="max-width: 200px; max-height: 200px; border-radius: 8px;">
+                                    <img src="{{ user.profile_image.url }}" alt="Current Avatar" style="max-width: 200px; max-height: 200px; border-radius: 8px;" loading="lazy">
                                 {% else %}
                                     <div style="width: 200px; height: 200px; background: linear-gradient(135deg, var(--navy) 0%, var(--emerald) 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
                                         <i class="fas fa-user" style="color: white; font-size: 4rem;"></i>
@@ -724,7 +724,7 @@
 
                     <div id="previewContainer" style="display: none;">
                         <h5 class="mt-4">Preview</h5>
-                        <img id="previewImage" src="" alt="Preview" style="max-width: 200px; max-height: 200px; border-radius: 8px; margin-bottom: 20px;">
+                        <img id="previewImage" src="" alt="Preview" style="max-width: 200px; max-height: 200px; border-radius: 8px; margin-bottom: 20px;" loading="lazy">
                         <br>
                         <button type="button" class="btn btn-primary" onclick="uploadAvatar()">
                             <i class="fas fa-upload me-2"></i>Upload Profile Picture

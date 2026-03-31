@@ -165,13 +165,18 @@
     function initNavbarScroll() {
         const navbar = document.querySelector('.navbar');
         if (!navbar) return;
+        let scrollTimeout;
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+            if (scrollTimeout) return;
+            scrollTimeout = setTimeout(() => {
+                scrollTimeout = null;
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }, 100);
+        }, { passive: true });
     }
 
     // Initialize on DOM Load
@@ -181,7 +186,12 @@
         initCryptoTicker();
         initScrollAnimations();
         initNavbarScroll();
-        setInterval(initCryptoTicker, 60000);
+        const tickerInterval = setInterval(initCryptoTicker, 60000);
+
+        // Add cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (tickerInterval) clearInterval(tickerInterval);
+        });
     });
 
     // Export functions globally
