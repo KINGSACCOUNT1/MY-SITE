@@ -41,11 +41,19 @@ def site_settings(request):
 def tawk_settings(request):
     """
     Tawk.to chat widget configuration
+    Uses hardcoded defaults if environment variables are not set
     """
+    # Default Tawk.to credentials (fallback if env vars empty)
+    DEFAULT_PROPERTY_ID = '683b5c2ec873e91904870c54'
+    DEFAULT_WIDGET_ID = '1jkepnodo'
+    
+    property_id = getattr(settings, 'TAWK_PROPERTY_ID', '') or DEFAULT_PROPERTY_ID
+    widget_id = getattr(settings, 'TAWK_WIDGET_ID', '') or DEFAULT_WIDGET_ID
+    
     return {
-        'TAWK_PROPERTY_ID': getattr(settings, 'TAWK_PROPERTY_ID', ''),
-        'TAWK_WIDGET_ID': getattr(settings, 'TAWK_WIDGET_ID', ''),
-        'TAWK_ENABLED': bool(getattr(settings, 'TAWK_PROPERTY_ID', '')),
+        'TAWK_PROPERTY_ID': property_id,
+        'TAWK_WIDGET_ID': widget_id,
+        'TAWK_ENABLED': bool(property_id),
     }
 
 

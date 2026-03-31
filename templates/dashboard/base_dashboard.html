@@ -447,6 +447,17 @@
                 <i class="fas fa-users"></i> Agent Program
             </a>
             
+            <div class="nav-section">Support</div>
+            <a href="javascript:void(0);" onclick="openLiveChat()" class="nav-item" style="background: rgba(0, 212, 170, 0.1); border-left: 3px solid var(--success);">
+                <i class="fas fa-comments" style="color: var(--success);"></i> <span style="color: var(--success);">Live Chat</span>
+            </a>
+            <a href="{% url 'dashboard:contact' %}" class="nav-item {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+                <i class="fas fa-envelope"></i> Contact Us
+            </a>
+            <a href="{% url 'dashboard:faq' %}" class="nav-item {% if request.resolver_match.url_name == 'faq' %}active{% endif %}">
+                <i class="fas fa-question-circle"></i> FAQ
+            </a>
+            
             <div class="nav-section">Account</div>
             <a href="{% url 'dashboard:settings' %}" class="nav-item {% if request.resolver_match.url_name == 'settings' or 'kyc' in request.path %}active{% endif %}">
                 <i class="fas fa-cog"></i> Settings
@@ -511,14 +522,41 @@
     <!-- Tawk.to Chat Widget -->
     <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    
+    // Open live chat function
+    function openLiveChat() {
+        if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+            Tawk_API.maximize();
+        } else {
+            // Tawk not loaded yet, wait and retry
+            var attempts = 0;
+            var checkTawk = setInterval(function() {
+                attempts++;
+                if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+                    clearInterval(checkTawk);
+                    Tawk_API.maximize();
+                } else if (attempts > 10) {
+                    clearInterval(checkTawk);
+                    alert('Live chat is loading. Please try again in a moment.');
+                }
+            }, 500);
+        }
+    }
+    
+    // Load Tawk.to script
     (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/{{ TAWK_PROPERTY_ID|default:"683b5c2ec873e91904870c54" }}/{{ TAWK_WIDGET_ID|default:"1jkepnodo" }}';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/{{ TAWK_PROPERTY_ID }}/{{ TAWK_WIDGET_ID }}';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
     })();
+    
+    // Auto-show welcome message after load
+    Tawk_API.onLoad = function() {
+        console.log('Tawk.to chat loaded successfully');
+    };
     </script>
     
     {% block extra_js %}{% endblock %}
