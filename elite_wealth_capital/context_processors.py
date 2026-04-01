@@ -44,7 +44,8 @@ def tawk_settings(request):
     Uses hardcoded defaults if environment variables are not set
     """
     # Default Tawk.to credentials (fallback if env vars empty)
-    DEFAULT_PROPERTY_ID = '683b5c2ec873e91904870c54'
+    # From: https://tawk.to/chat/69c1f2a729e9681c3d64de5d/1jkepnodo
+    DEFAULT_PROPERTY_ID = '69c1f2a729e9681c3d64de5d'
     DEFAULT_WIDGET_ID = '1jkepnodo'
     
     property_id = getattr(settings, 'TAWK_PROPERTY_ID', '') or DEFAULT_PROPERTY_ID
