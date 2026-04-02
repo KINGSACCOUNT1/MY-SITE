@@ -86,6 +86,6 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-# Custom error pages (will be implemented later)
-# handler404 = 'accounts.views.custom_404'
-# handler500 = 'accounts.views.custom_500'
+# Custom error handlers (enabled for production)
+handler404 = 'accounts.views.custom_404'
+handler500 = 'accounts.views.custom_500'
