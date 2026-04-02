@@ -289,12 +289,22 @@
                         <li><a href="{% url 'dashboard:reviews_page' %}" class="text-white-50 text-decoration-none">Reviews</a></li>
                         <li><a href="{% url 'dashboard:terms' %}" class="text-white-50 text-decoration-none">Terms of Service</a></li>
                         <li><a href="{% url 'dashboard:privacy_policy' %}" class="text-white-50 text-decoration-none">Privacy Policy</a></li>
+                        <li class="mt-2">
+                            <a href="{% url 'dashboard:install_app' %}" class="text-decoration-none" style="color: #FFD700;">
+                                <i class="fas fa-mobile-alt me-1"></i>Install App
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-md-3">
                     <h6 style="color: #00A86B; font-weight: 600;">Contact</h6>
                     <p class="small text-white-50 mb-2">Email: {{ COMPANY_EMAIL|default:"admin@elitewealthcapita.uk" }}</p>
-                    <p class="small text-white-50">Available 24/7 for support</p>
+                    <p class="small text-white-50 mb-3">Available 24/7 for support</p>
+                    
+                    <!-- Install App Button -->
+                    <a href="{% url 'dashboard:install_app' %}" class="btn btn-sm px-3 py-2" style="background: linear-gradient(135deg, #FFD700, #FFA500); color: #0A1F44; font-weight: 600; border-radius: 8px;">
+                        <i class="fas fa-download me-1"></i>Install App
+                    </a>
                 </div>
             </div>
             <hr class="bg-white-50" style="opacity: 0.2;">

@@ -534,3 +534,8 @@ def settings_page(request):
     }
     return render(request, 'dashboard/settings.html', context)
 
+
+def install_app(request):
+    """Install App page with instructions for iOS and Android"""
+    return render(request, 'dashboard/install_app.html')
+

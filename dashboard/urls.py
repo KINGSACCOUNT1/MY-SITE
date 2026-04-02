@@ -35,4 +35,7 @@ urlpatterns = [
     path('certificates-public/', views.certificates, name='certificates'),
     path('news/', views.news_list, name='news'),
     path('news/<slug:slug>/', views.news_detail, name='news_detail'),
+    
+    # Install App page
+    path('install/', views.install_app, name='install_app'),
 ]

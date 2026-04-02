@@ -163,7 +163,8 @@ def signup_view(request):
                         referrer=referrer,
                         referred=user,
                         bonus_amount=30.00,
-                        status='completed'
+                        status='credited',
+                        credited_at=timezone.now()
                     )
                     
                     # Create notification for referrer

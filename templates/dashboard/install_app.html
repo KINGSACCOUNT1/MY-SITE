@@ -1,0 +1,381 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Install App - Elite Wealth Capital{% endblock %}
+
+{% block extra_css %}
+<style>
+    .install-hero {
+        background: linear-gradient(135deg, #0A1F44 0%, #050B1A 100%);
+        padding: 80px 0;
+        text-align: center;
+        color: white;
+    }
+    .install-hero h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+    .install-hero h1 span {
+        color: #FFD700;
+    }
+    .install-hero p {
+        font-size: 1.2rem;
+        opacity: 0.8;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .install-section {
+        padding: 60px 0;
+        background: #f8f9fa;
+    }
+    .install-card {
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        height: 100%;
+        transition: transform 0.3s ease;
+    }
+    .install-card:hover {
+        transform: translateY(-5px);
+    }
+    .install-card .icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 25px;
+        font-size: 2.5rem;
+    }
+    .install-card.ios .icon {
+        background: linear-gradient(135deg, #5856D6, #007AFF);
+        color: white;
+    }
+    .install-card.android .icon {
+        background: linear-gradient(135deg, #34A853, #0F9D58);
+        color: white;
+    }
+    .install-card.desktop .icon {
+        background: linear-gradient(135deg, #FFD700, #FFA500);
+        color: #0A1F44;
+    }
+    .install-card h3 {
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #0A1F44;
+    }
+    .install-steps {
+        text-align: left;
+        padding-left: 0;
+        list-style: none;
+        counter-reset: step;
+    }
+    .install-steps li {
+        position: relative;
+        padding-left: 45px;
+        margin-bottom: 15px;
+        font-size: 1rem;
+        color: #555;
+    }
+    .install-steps li::before {
+        counter-increment: step;
+        content: counter(step);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        background: #FFD700;
+        color: #0A1F44;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.9rem;
+    }
+    .share-section {
+        background: linear-gradient(135deg, #0A1F44 0%, #050B1A 100%);
+        padding: 60px 0;
+        text-align: center;
+        color: white;
+    }
+    .share-section h2 {
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+    .share-section p {
+        opacity: 0.8;
+        margin-bottom: 30px;
+    }
+    .share-link-box {
+        background: rgba(255,255,255,0.1);
+        border: 2px solid #FFD700;
+        border-radius: 15px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        max-width: 600px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+    }
+    .share-link-box input {
+        flex: 1;
+        min-width: 200px;
+        background: transparent;
+        border: none;
+        color: #FFD700;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+    .share-link-box input:focus {
+        outline: none;
+    }
+    .btn-copy {
+        background: #FFD700;
+        color: #0A1F44;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .btn-copy:hover {
+        background: #FFA500;
+        transform: scale(1.05);
+    }
+    .share-buttons {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    .share-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.3rem;
+        transition: transform 0.3s ease;
+        text-decoration: none;
+    }
+    .share-btn:hover {
+        transform: scale(1.1);
+        color: white;
+    }
+    .share-btn.whatsapp { background: #25D366; }
+    .share-btn.telegram { background: #0088cc; }
+    .share-btn.twitter { background: #1DA1F2; }
+    .share-btn.facebook { background: #4267B2; }
+    .share-btn.email { background: #EA4335; }
+    
+    .features-section {
+        padding: 60px 0;
+        background: white;
+    }
+    .feature-item {
+        text-align: center;
+        padding: 30px;
+    }
+    .feature-item i {
+        font-size: 3rem;
+        color: #FFD700;
+        margin-bottom: 20px;
+    }
+    .feature-item h4 {
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #0A1F44;
+    }
+    .feature-item p {
+        color: #666;
+        font-size: 0.95rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="install-hero">
+    <div class="container">
+        <h1>Install <span>Elite Wealth Capital</span> App</h1>
+        <p>Access your investments anytime, anywhere. Install our app on your phone for the best experience.</p>
+    </div>
+</section>
+
+<!-- Installation Instructions -->
+<section class="install-section">
+    <div class="container">
+        <div class="row g-4">
+            <!-- iPhone -->
+            <div class="col-lg-4 col-md-6">
+                <div class="install-card ios">
+                    <div class="icon">
+                        <i class="fab fa-apple"></i>
+                    </div>
+                    <h3>iPhone / iPad</h3>
+                    <ul class="install-steps">
+                        <li>Open <strong>Safari</strong> browser (required)</li>
+                        <li>Visit <strong>elitewealthcapita.uk</strong></li>
+                        <li>Tap the <strong>Share</strong> button <i class="fas fa-share-square"></i></li>
+                        <li>Scroll and tap <strong>"Add to Home Screen"</strong></li>
+                        <li>Name it and tap <strong>Add</strong></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Android -->
+            <div class="col-lg-4 col-md-6">
+                <div class="install-card android">
+                    <div class="icon">
+                        <i class="fab fa-android"></i>
+                    </div>
+                    <h3>Android</h3>
+                    <ul class="install-steps">
+                        <li>Open <strong>Chrome</strong> browser</li>
+                        <li>Visit <strong>elitewealthcapita.uk</strong></li>
+                        <li>Tap the <strong>3-dot menu</strong> <i class="fas fa-ellipsis-v"></i></li>
+                        <li>Tap <strong>"Install app"</strong> or <strong>"Add to Home Screen"</strong></li>
+                        <li>Confirm by tapping <strong>Install</strong></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Desktop -->
+            <div class="col-lg-4 col-md-6">
+                <div class="install-card desktop">
+                    <div class="icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3>Desktop (Chrome/Edge)</h3>
+                    <ul class="install-steps">
+                        <li>Open <strong>Chrome</strong> or <strong>Edge</strong></li>
+                        <li>Visit <strong>elitewealthcapita.uk</strong></li>
+                        <li>Click the <strong>install icon</strong> in address bar <i class="fas fa-plus-square"></i></li>
+                        <li>Or click <strong>3-dot menu → Install</strong></li>
+                        <li>Click <strong>Install</strong> to confirm</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Share Section -->
+<section class="share-section">
+    <div class="container">
+        <h2>Share With Friends</h2>
+        <p>Invite your friends to install the app and earn referral bonuses!</p>
+        
+        <div class="share-link-box">
+            <input type="text" id="shareLink" value="https://elitewealthcapita.uk/dashboard/install/" readonly>
+            <button class="btn-copy" onclick="copyLink()">
+                <i class="fas fa-copy me-2"></i>Copy Link
+            </button>
+        </div>
+        
+        <div class="share-buttons">
+            <a href="https://wa.me/?text=Install%20Elite%20Wealth%20Capital%20App%20for%20easy%20investing!%20https://elitewealthcapita.uk/dashboard/install/" target="_blank" class="share-btn whatsapp" title="Share on WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://t.me/share/url?url=https://elitewealthcapita.uk/dashboard/install/&text=Install%20Elite%20Wealth%20Capital%20App%20for%20easy%20investing!" target="_blank" class="share-btn telegram" title="Share on Telegram">
+                <i class="fab fa-telegram-plane"></i>
+            </a>
+            <a href="https://twitter.com/intent/tweet?text=Install%20Elite%20Wealth%20Capital%20App%20for%20easy%20investing!&url=https://elitewealthcapita.uk/dashboard/install/" target="_blank" class="share-btn twitter" title="Share on Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://elitewealthcapita.uk/dashboard/install/" target="_blank" class="share-btn facebook" title="Share on Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="mailto:?subject=Install%20Elite%20Wealth%20Capital%20App&body=Install%20Elite%20Wealth%20Capital%20App%20for%20easy%20investing!%20https://elitewealthcapita.uk/dashboard/install/" class="share-btn email" title="Share via Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-6">
+                <div class="feature-item">
+                    <i class="fas fa-bolt"></i>
+                    <h4>Fast Access</h4>
+                    <p>One tap to open from your home screen</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="feature-item">
+                    <i class="fas fa-wifi"></i>
+                    <h4>Works Offline</h4>
+                    <p>View cached data without internet</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="feature-item">
+                    <i class="fas fa-expand"></i>
+                    <h4>Full Screen</h4>
+                    <p>No browser bars, app-like experience</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="feature-item">
+                    <i class="fas fa-bell"></i>
+                    <h4>Notifications</h4>
+                    <p>Get alerts for your investments</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function copyLink() {
+    const linkInput = document.getElementById('shareLink');
+    linkInput.select();
+    linkInput.setSelectionRange(0, 99999);
+    
+    navigator.clipboard.writeText(linkInput.value).then(function() {
+        const btn = document.querySelector('.btn-copy');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check me-2"></i>Copied!';
+        btn.style.background = '#00D4AA';
+        
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.background = '#FFD700';
+        }, 2000);
+    });
+}
+
+// Web Share API for mobile
+if (navigator.share) {
+    document.querySelector('.share-link-box').insertAdjacentHTML('afterend', `
+        <button onclick="nativeShare()" class="btn btn-lg mt-3" style="background: #FFD700; color: #0A1F44; font-weight: 600;">
+            <i class="fas fa-share-alt me-2"></i>Share via Phone
+        </button>
+    `);
+}
+
+function nativeShare() {
+    navigator.share({
+        title: 'Elite Wealth Capital App',
+        text: 'Install Elite Wealth Capital App for easy investing!',
+        url: 'https://elitewealthcapita.uk/dashboard/install/'
+    });
+}
+</script>
+{% endblock %}
