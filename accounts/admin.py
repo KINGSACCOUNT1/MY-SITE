@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
+from decimal import Decimal
 from .models import CustomUser, ActivityLog, Referral
 
 
@@ -21,6 +22,7 @@ class CustomUserAdmin(UserAdmin):
         }),
         ('💰 FINANCIAL MANAGEMENT', {
             'fields': ('balance', 'invested_amount', 'total_profit', 'total_withdrawn', 'referral_bonus'),
+            'description': '<strong style="color: green;">⚠️ When you change the balance, the user will receive a notification!</strong>'
         }),
         ('Referral System', {
             'fields': ('referral_code', 'referred_by')
@@ -59,6 +61,42 @@ class CustomUserAdmin(UserAdmin):
         except:
             return '$0.00'
     balance_display.short_description = 'Balance'
+    
+    def save_model(self, request, obj, form, change):
+        """Track balance changes and notify user"""
+        if change:
+            try:
+                old_user = CustomUser.objects.get(pk=obj.pk)
+                old_balance = Decimal(str(old_user.balance or 0))
+                new_balance = Decimal(str(obj.balance or 0))
+                
+                # Check if balance changed
+                if old_balance != new_balance:
+                    difference = new_balance - old_balance
+                    
+                    # Create notification for balance change
+                    from notifications.models import Notification
+                    
+                    if difference > 0:
+                        # Amount added
+                        Notification.objects.create(
+                            user=obj,
+                            title='Funds Added to Account',
+                            message=f'${difference:,.2f} has been added to your account. Your new balance is ${new_balance:,.2f}.',
+                            notification_type='deposit'
+                        )
+                    else:
+                        # Amount deducted
+                        Notification.objects.create(
+                            user=obj,
+                            title='Balance Adjustment',
+                            message=f'${abs(difference):,.2f} has been deducted from your account. Your new balance is ${new_balance:,.2f}.',
+                            notification_type='withdrawal'
+                        )
+            except CustomUser.DoesNotExist:
+                pass
+        
+        super().save_model(request, obj, form, change)
 
 
 @admin.register(ActivityLog)

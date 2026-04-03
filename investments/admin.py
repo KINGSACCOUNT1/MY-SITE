@@ -243,37 +243,107 @@ class DepositAdmin(admin.ModelAdmin):
 
 @admin.register(Withdrawal)
 class WithdrawalAdmin(admin.ModelAdmin):
-    list_display = ['user', 'amount_display', 'withdrawal_method', 'crypto_type', 
-                    'wallet_address_short', 'status', 'created_at']
+    list_display = ['user', 'amount_display', 'user_balance_display', 'withdrawal_method', 'crypto_type', 
+                    'wallet_address_short', 'status_badge', 'created_at', 'quick_actions']
     list_filter = ['status', 'withdrawal_method', 'crypto_type', 'created_at']
-    search_fields = ['user__email', 'wallet_address']
-    readonly_fields = ['user', 'created_at', 'processed_by', 'processed_at', 'tx_hash']
+    search_fields = ['user__email', 'wallet_address', 'user__full_name']
+    readonly_fields = ['user', 'amount', 'withdrawal_method', 'crypto_type', 'wallet_address', 
+                       'bank_name', 'account_number', 'account_name',
+                       'created_at', 'processed_by', 'processed_at']
     list_select_related = ['user', 'processed_by']
-    actions = ['approve_withdrawal', 'reject_withdrawal', 'mark_completed']
+    actions = ['approve_and_complete_withdrawal', 'cancel_withdrawal']
+    ordering = ['-created_at']
+    
+    fieldsets = (
+        ('👤 User Information', {
+            'fields': ('user',),
+        }),
+        ('💰 Withdrawal Details', {
+            'fields': ('amount', 'withdrawal_method', 'crypto_type', 'wallet_address'),
+            'description': '<strong style="color: blue;">Amount has already been deducted from user balance when they requested</strong>'
+        }),
+        ('🏦 Bank Details (if bank transfer)', {
+            'fields': ('bank_name', 'account_number', 'account_name'),
+            'classes': ('collapse',)
+        }),
+        ('✅ Status & Processing', {
+            'fields': ('status', 'tx_hash', 'admin_note', 'processed_by', 'processed_at'),
+            'description': '<strong style="color: green;">Use actions below to Approve/Complete or Cancel withdrawal</strong>'
+        }),
+    )
     
     def amount_display(self, obj):
-        return format_html('<strong>${:,.2f}</strong>', obj.amount)
+        return format_html('<strong style="color: green;">${:,.2f}</strong>', obj.amount)
     amount_display.short_description = 'Amount'
+    
+    def user_balance_display(self, obj):
+        return format_html('<span style="color: blue;">${:,.2f}</span>', obj.user.balance)
+    user_balance_display.short_description = 'User Balance'
     
     def wallet_address_short(self, obj):
         if obj.wallet_address:
-            return f'{obj.wallet_address[:10]}...'
+            return format_html('<code>{}</code>', f'{obj.wallet_address[:15]}...')
+        elif obj.bank_name:
+            return format_html('<span>🏦 {}</span>', obj.bank_name[:15])
         return '-'
-    wallet_address_short.short_description = 'Wallet'
+    wallet_address_short.short_description = 'Destination'
     
-    def approve_withdrawal(self, request, queryset):
-        queryset.filter(status='pending').update(status='approved', processed_by=request.user)
-        self.message_user(request, f'{queryset.count()} withdrawals approved.')
-    approve_withdrawal.short_description = 'Approve selected'
+    def status_badge(self, obj):
+        colors = {'pending': '#f39c12', 'approved': '#3498db', 'completed': '#27ae60', 'rejected': '#e74c3c'}
+        icons = {'pending': '⏳', 'approved': '✅', 'completed': '💸', 'rejected': '❌'}
+        color = colors.get(obj.status, 'gray')
+        icon = icons.get(obj.status, '')
+        return format_html(
+            '<span style="background-color: {}; color: white; padding: 3px 10px; border-radius: 15px; font-weight: bold;">{} {}</span>',
+            color, icon, obj.get_status_display()
+        )
+    status_badge.short_description = 'Status'
+    
+    def quick_actions(self, obj):
+        if obj.status == 'pending':
+            return format_html(
+                '<span style="color: orange; font-weight: bold;">⏳ NEEDS REVIEW</span>'
+            )
+        elif obj.status == 'completed':
+            return format_html('<span style="color: green;">💸 Sent to user</span>')
+        elif obj.status == 'rejected':
+            return format_html('<span style="color: red;">❌ Cancelled - funds returned</span>')
+        return format_html('<span style="color: blue;">✅ Approved</span>')
+    quick_actions.short_description = 'Action Needed'
     
     @transaction.atomic
-    def reject_withdrawal(self, request, queryset):
-        """Reject withdrawals and return funds atomically"""
+    def approve_and_complete_withdrawal(self, request, queryset):
+        """Approve withdrawal and mark as completed - funds already deducted"""
+        from notifications.models import Notification
+        count = 0
+        for withdrawal in queryset.filter(status='pending'):
+            withdrawal.status = 'completed'
+            withdrawal.processed_by = request.user
+            withdrawal.processed_at = timezone.now()
+            withdrawal.save()
+            
+            # Send success notification to user
+            Notification.objects.create(
+                user=withdrawal.user,
+                title='Withdrawal Successful',
+                message=f'Your withdrawal of ${withdrawal.amount:,.2f} has been processed successfully and sent to your wallet/account!',
+                notification_type='withdrawal'
+            )
+            count += 1
+        
+        self.message_user(request, f'💸 {count} withdrawal(s) approved and completed! Users notified.')
+    approve_and_complete_withdrawal.short_description = '✅ Approve & Complete (Send to User)'
+    
+    @transaction.atomic
+    def cancel_withdrawal(self, request, queryset):
+        """Cancel/Reject withdrawal and return funds to user"""
+        from notifications.models import Notification
+        count = 0
         for withdrawal in queryset.filter(status='pending').select_for_update():
-            # Atomically update user balance using F() expression
-            from django.db.models import F
+            # Return funds to user balance
             withdrawal.user.__class__.objects.filter(pk=withdrawal.user.pk).update(
-                balance=F('balance') + withdrawal.amount
+                balance=F('balance') + withdrawal.amount,
+                total_withdrawn=F('total_withdrawn') - withdrawal.amount
             )
             
             withdrawal.status = 'rejected'
@@ -281,35 +351,20 @@ class WithdrawalAdmin(admin.ModelAdmin):
             withdrawal.processed_at = timezone.now()
             withdrawal.save()
             
-            # Send notification
-            Notification.objects.create(
-                user=withdrawal.user,
-                title='Withdrawal Rejected',
-                message=f'Your withdrawal request of ${withdrawal.amount:,.2f} has been rejected.',
-                notification_type='withdrawal'
-            )
-        
-        self.message_user(request, f'{queryset.count()} withdrawals rejected.')
-    reject_withdrawal.short_description = 'Reject selected'
-    
-    def mark_completed(self, request, queryset):
-        """Mark withdrawals as completed and notify users"""
-        for withdrawal in queryset.filter(status='approved'):
-            withdrawal.status = 'completed'
-            withdrawal.processed_by = request.user
-            withdrawal.processed_at = timezone.now()
-            withdrawal.save()
+            # Refresh user to get updated balance
+            withdrawal.user.refresh_from_db()
             
-            # Send notification
+            # Send notification - funds credited back
             Notification.objects.create(
                 user=withdrawal.user,
-                title='Withdrawal Completed',
-                message=f'Your withdrawal of ${withdrawal.amount:,.2f} has been processed successfully!',
+                title='Withdrawal Cancelled',
+                message=f'Your withdrawal request of ${withdrawal.amount:,.2f} has been cancelled. The funds have been credited back to your account. New balance: ${withdrawal.user.balance:,.2f}',
                 notification_type='withdrawal'
             )
+            count += 1
         
-        self.message_user(request, f'{queryset.count()} withdrawals completed.')
-    mark_completed.short_description = 'Mark as completed'
+        self.message_user(request, f'❌ {count} withdrawal(s) cancelled. Funds returned to users!')
+    cancel_withdrawal.short_description = '❌ Cancel & Return Funds to User'
 
 
 @admin.register(WalletAddress)

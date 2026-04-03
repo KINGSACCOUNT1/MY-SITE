@@ -357,15 +357,17 @@ def withdraw_view(request):
             import re
             # Basic crypto address validation patterns
             patterns = {
-                'BTC': r'^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39}$',
+                'BTC': r'^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,62}$',
                 'ETH': r'^0x[a-fA-F0-9]{40}$',
-                'USDT': r'^(0x[a-fA-F0-9]{40}|T[A-Za-z1-9]{33})$',  # ERC-20 or TRC-20
+                'USDT': r'^(0x[a-fA-F0-9]{40}|T[A-Za-z1-9]{33,34})$',  # ERC-20 or TRC-20
                 'USDC': r'^0x[a-fA-F0-9]{40}$',
                 'LTC': r'^[LM3][a-km-zA-HJ-NP-Z1-9]{26,33}$',
+                'BNB': r'^(0x[a-fA-F0-9]{40}|bnb[a-z0-9]{38,42})$',  # BEP-20 or BNB Beacon
             }
             pattern = patterns.get(crypto_type)
+            # Only validate if we have a pattern for this crypto type
             if pattern and not re.match(pattern, wallet_address):
-                messages.error(request, f'Invalid {crypto_type} wallet address format')
+                messages.error(request, f'Invalid {crypto_type} wallet address format. Please check and try again.')
                 return redirect('investments:withdraw')
         
         # Lock user row to prevent race conditions
