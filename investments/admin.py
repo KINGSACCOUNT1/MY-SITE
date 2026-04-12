@@ -34,15 +34,15 @@ class InvestmentAdmin(admin.ModelAdmin):
     actions = ['mark_completed', 'cancel_investments', 'export_to_csv']
     
     def amount_display(self, obj):
-        return format_html('<strong>${:,.2f}</strong>', obj.amount)
+        return format_html('<strong>${}</strong>', f'{obj.amount:,.2f}')
     amount_display.short_description = 'Amount'
     
     def expected_profit_display(self, obj):
-        return format_html('<span style="color: blue;">${:,.2f}</span>', obj.expected_profit)
+        return format_html('<span style="color: blue;">${}</span>', f'{obj.expected_profit:,.2f}')
     expected_profit_display.short_description = 'Expected Profit'
     
     def actual_profit_display(self, obj):
-        return format_html('<span style="color: green;">${:,.2f}</span>', obj.actual_profit)
+        return format_html('<span style="color: green;">${}</span>', f'{obj.actual_profit:,.2f}')
     actual_profit_display.short_description = 'Actual Profit'
     
     def progress(self, obj):
@@ -114,7 +114,7 @@ class DepositAdmin(admin.ModelAdmin):
     )
     
     def amount_display(self, obj):
-        return format_html('<strong style="color: green;">${:,.2f}</strong>', obj.amount)
+        return format_html('<strong style="color: green;">${}</strong>', f'{obj.amount:,.2f}')
     amount_display.short_description = 'Amount'
     
     def payment_method_display(self, obj):
@@ -273,11 +273,11 @@ class WithdrawalAdmin(admin.ModelAdmin):
     )
     
     def amount_display(self, obj):
-        return format_html('<strong style="color: green;">${:,.2f}</strong>', obj.amount)
+        return format_html('<strong style="color: green;">${}</strong>', f'{obj.amount:,.2f}')
     amount_display.short_description = 'Amount'
     
     def user_balance_display(self, obj):
-        return format_html('<span style="color: blue;">${:,.2f}</span>', obj.user.balance)
+        return format_html('<span style="color: blue;">${}</span>', f'{obj.user.balance:,.2f}')
     user_balance_display.short_description = 'User Balance'
     
     def wallet_address_short(self, obj):
@@ -408,11 +408,11 @@ class LoanAdmin(admin.ModelAdmin):
     search_fields = ['user__email']
     
     def amount_display(self, obj):
-        return format_html('<strong>${:,.2f}</strong>', obj.amount)
+        return format_html('<strong>${}</strong>', f'{obj.amount:,.2f}')
     amount_display.short_description = 'Amount'
     
     def remaining_display(self, obj):
-        return format_html('${:,.2f}', obj.remaining_balance)
+        return format_html('${}', f'{obj.remaining_balance:,.2f}')
     remaining_display.short_description = 'Remaining'
 
 
@@ -425,7 +425,7 @@ class VirtualCardAdmin(admin.ModelAdmin):
     list_select_related = ['user']
     
     def balance_display(self, obj):
-        return format_html('${:,.2f}', obj.balance)
+        return format_html('${}', f'{obj.balance:,.2f}')
     balance_display.short_description = 'Balance'
 
 
