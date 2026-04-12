@@ -5,7 +5,10 @@ dj-database-url>=2.1
 django-ratelimit>=4.1
 
 # Modern Admin UI
-django-jazzmin>=3.0
+django-jazzmin>=3.0,<4.0
+
+# 2FA Support
+pyotp>=2.8
 
 # Database
 psycopg2-binary>=2.9
