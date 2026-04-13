@@ -230,8 +230,8 @@ if not DEBUG:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
 
-# CORS Settings
-CORS_ALLOW_ALL_ORIGINS = DEBUG
+# CORS Settings - Never allow all origins in production
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     'https://elitewealthcapita.uk',
     'https://www.elitewealthcapita.uk',

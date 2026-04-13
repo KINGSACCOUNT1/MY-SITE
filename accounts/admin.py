@@ -58,7 +58,7 @@ class CustomUserAdmin(UserAdmin):
         try:
             balance = float(obj.balance or 0)
             return f'${balance:,.2f}'
-        except:
+        except (ValueError, TypeError):
             return '$0.00'
     balance_display.short_description = 'Balance'
     
