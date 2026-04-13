@@ -15,6 +15,10 @@ python manage.py collectstatic --no-input
 echo "=== Applying Migrations ==="
 python manage.py migrate --no-input
 
+# Fix any duplicate media paths in database
+echo "=== Fixing Media Paths ==="
+python manage.py fix_media_paths || echo "Media path fix skipped"
+
 # Load investment plans fixture (if exists)
 echo "=== Loading Investment Plans ==="
 python manage.py loaddata investments/fixtures/investment_plans.json || echo "Investment plans fixture skipped"

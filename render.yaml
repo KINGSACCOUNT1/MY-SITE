@@ -1,0 +1,64 @@
+# Render Blueprint for Elite Wealth Capital (MY-SITE)
+# Auto-deploy enabled - all secrets hardcoded for easy redeployment
+# WARNING: Keep repo private - contains API keys
+
+services:
+  - type: web
+    name: my-site
+    runtime: docker
+    plan: starter
+    region: oregon
+    autoDeploy: true
+    numInstances: 1
+    healthCheckPath: /
+    maxShutdownDelaySeconds: 5
+    
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql://elite_admin_acc:ENIIWPFknHA5m4XQREVRymlVq8QhVSRI@dpg-d73r90qdbo4c738iabug-a.oregon-postgres.render.com/elite_wealth_capital
+      - key: DJANGO_SETTINGS_MODULE
+        value: elite_wealth_capital.settings
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        value: django-insecure-elite-wealth-prod-key-2024
+      - key: ALLOWED_HOSTS
+        value: elitewealthcapita.uk,www.elitewealthcapita.uk,my-site-ghnp.onrender.com,.onrender.com
+      - key: PYTHON_VERSION
+        value: "3.12.0"
+      # Admin
+      - key: ADMIN_EMAIL
+        value: admin@elitewealthcapita.uk
+      - key: ADMIN_PASSWORD
+        value: myfavour1$
+      # Company Info
+      - key: COMPANY_NAME
+        value: Elite Wealth Capital
+      - key: COMPANY_EMAIL
+        value: admin@elitewealthcapita.uk
+      - key: COMPANY_WEBSITE
+        value: https://elitewealthcapita.uk
+      - key: COMPANY_ADDRESS
+        value: London, United Kingdom, Norway
+      # Email settings (Zoho)
+      - key: EMAIL_BACKEND
+        value: django.core.mail.backends.smtp.EmailBackend
+      - key: EMAIL_HOST
+        value: smtp.zoho.com
+      - key: EMAIL_PORT
+        value: "587"
+      - key: EMAIL_USE_TLS
+        value: "True"
+      - key: EMAIL_HOST_USER
+        value: admin@elitewealthcapita.uk
+      - key: EMAIL_HOST_PASSWORD
+        value: myfavour1$
+      - key: DEFAULT_FROM_EMAIL
+        value: admin@elitewealthcapita.uk
+      # Cloudinary
+      - key: CLOUDINARY_CLOUD_NAME
+        value: dh5ikf5un
+      - key: CLOUDINARY_API_KEY
+        value: "926391542761186"
+      - key: CLOUDINARY_API_SECRET
+        value: RGBNIYy2_c_wybiwH7-qINfbF5M
