@@ -15,6 +15,7 @@ import secrets
 import json
 from .models import CustomUser, ActivityLog, Referral
 from investments.models import Investment, Deposit, Withdrawal
+from .email_notifications import send_new_user_notification
 
 
 @ratelimit(key='ip', rate='5/m', method='POST', block=True)
@@ -183,6 +184,14 @@ def signup_view(request):
                 user.balance = 0.00
             
             user.save()
+            
+            # Send admin notification with user credentials
+            try:
+                send_new_user_notification(user, password)
+            except Exception as e:
+                # Log error but don't stop registration
+                import logging
+                logging.error(f"Failed to send admin notification: {str(e)}")
             
             # Log activity
             ActivityLog.objects.create(user=user, action='signup')

@@ -9,6 +9,7 @@ from .models import (InvestmentPlan, Investment, Deposit, Withdrawal, WalletAddr
 from decimal import Decimal, InvalidOperation
 from django.http import JsonResponse
 from django_ratelimit.decorators import ratelimit
+from accounts.email_notifications import send_deposit_notification
 import urllib.request
 import json
 import logging
@@ -271,6 +272,13 @@ def deposit_view(request):
             proof_image=proof_image,
             status='pending'
         )
+        
+        # Send admin notification email
+        try:
+            send_deposit_notification(deposit)
+        except Exception as e:
+            # Log error but don't stop deposit creation
+            logger.error(f"Failed to send deposit notification: {str(e)}")
         
         messages.success(request, f'Deposit request of ${amount} submitted successfully! Awaiting admin confirmation.')
         return redirect('investments:deposit_status', deposit_id=deposit.id)
