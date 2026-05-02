@@ -19,9 +19,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'elite_wealth_capital.settings')
 django.setup()
 
 from django.core import serializers
-from accounts.models import CustomUser, Referral
-from investments.models import Investment, InvestmentPlan, WalletAddress
-from kyc.models import KYCVerification
+from accounts.models import CustomUser, Referral, ActivityLog
+from investments.models import (Investment, InvestmentPlan, WalletAddress, 
+                                Deposit, Withdrawal)
 from notifications.models import Notification
 
 def backup_database():
@@ -41,11 +41,13 @@ def backup_database():
     # Models to backup
     models_to_backup = [
         CustomUser,
+        ActivityLog,
         Referral,
-        Investment,
         InvestmentPlan,
+        Investment,
+        Deposit,
+        Withdrawal,
         WalletAddress,
-        KYCVerification,
         Notification,
     ]
     

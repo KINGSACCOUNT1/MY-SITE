@@ -1,0 +1,88 @@
+# Render Blueprint for Elite Wealth Capital - NEW DEPLOYMENT
+# Deploy to: NEW Render Account (KINGSACCOUNT1)
+# Auto-deploy from GitHub: KINGSACCOUNT1/MY-SITE
+
+services:
+  - type: web
+    name: elite-wealth-capital
+    runtime: docker
+    plan: starter
+    region: oregon  # Change if needed: oregon, frankfurt, singapore
+    autoDeploy: true
+    branch: main
+    repo: https://github.com/KINGSACCOUNT1/MY-SITE
+    numInstances: 1
+    healthCheckPath: /
+    maxShutdownDelaySeconds: 5
+    
+    envVars:
+      # Django Core Settings
+      - key: DJANGO_SETTINGS_MODULE
+        value: elite_wealth_capital.settings
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        value: piXH726f4vholE0FbCyzTka8xdSN3VKwIOUDQ1P5AJcrjWgsuY
+      - key: ALLOWED_HOSTS
+        value: elitewealthcapita.uk,www.elitewealthcapita.uk,.onrender.com
+      - key: PYTHON_VERSION
+        value: "3.12.0"
+      
+      # Database - Will be auto-filled by Render when you create PostgreSQL
+      - key: DATABASE_URL
+        fromDatabase:
+          name: elite-wealth-db
+          property: connectionString
+      
+      # Email Configuration (Zoho SMTP) - UPDATED PASSWORD
+      - key: EMAIL_BACKEND
+        value: django.core.mail.backends.smtp.EmailBackend
+      - key: EMAIL_HOST
+        value: smtp.zoho.com
+      - key: EMAIL_PORT
+        value: "587"
+      - key: EMAIL_USE_TLS
+        value: "True"
+      - key: EMAIL_HOST_USER
+        value: admin@elitewealthcapita.uk
+      - key: EMAIL_HOST_PASSWORD
+        value: eAXHqJSWHGvM
+      - key: DEFAULT_FROM_EMAIL
+        value: admin@elitewealthcapita.uk
+      - key: ADMIN_EMAIL
+        value: admin@elitewealthcapita.uk
+      
+      # Company Information
+      - key: COMPANY_NAME
+        value: Elite Wealth Capital
+      - key: COMPANY_EMAIL
+        value: admin@elitewealthcapita.uk
+      - key: COMPANY_PHONE
+        value: +47 22 33 44 55
+      - key: COMPANY_ADDRESS
+        value: London, United Kingdom
+      - key: COMPANY_WEBSITE
+        value: https://elitewealthcapita.uk
+      
+      # Cloudinary (Media Storage) - KEEP SAME CREDENTIALS
+      - key: CLOUDINARY_CLOUD_NAME
+        value: dh5ikf5un
+      - key: CLOUDINARY_API_KEY
+        value: "926391542761186"
+      - key: CLOUDINARY_API_SECRET
+        value: RGBNIYy2_c_wybiwH7-qINfbF5M
+      
+      # Tawk.to Live Chat
+      - key: TAWK_PROPERTY_ID
+        value: 69c1f2a729e9681c3d64de5d
+      - key: TAWK_WIDGET_ID
+        value: 1jkepnodo
+
+# PostgreSQL Database
+databases:
+  - name: elite-wealth-db
+    databaseName: elite_wealth_capital
+    user: elite_admin
+    plan: starter  # Free tier
+    region: oregon  # Must match web service region
+    postgresMajorVersion: 16
