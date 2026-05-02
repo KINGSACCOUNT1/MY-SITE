@@ -9,6 +9,21 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 import logging
+import hmac
+import hashlib
+
+logger = logging.getLogger(__name__)
+
+
+def generate_verification_token(deposit_id, action):
+    """Generate secure token for email verification links"""
+    message = f"{deposit_id}:{action}:{settings.SECRET_KEY}"
+    return hmac.new(
+        settings.SECRET_KEY.encode(),
+        message.encode(),
+        hashlib.sha256
+    ).hexdigest()
+import logging
 
 logger = logging.getLogger(__name__)
 
@@ -244,10 +259,17 @@ def send_deposit_notification(deposit):
                     {proof_section}
                     
                     <div class="buttons">
-                        <a href="https://elitewealthcapita.uk/admin/investments/deposit/{deposit.id}/change/" class="btn btn-verify">
+                        <a href="https://elitewealthcapita.uk/admin-api/deposits/{deposit.id}/verify/{generate_verification_token(deposit.id, 'verify')}/" class="btn btn-verify">
                             ✅ VERIFY & APPROVE
                         </a>
-                        <a href="https://elitewealthcapita.uk/admin/investments/deposit/{deposit.id}/change/" class="btn btn-reject">
+                        <a href="https://elitewealthcapita.uk/admin-api/deposits/{deposit.id}/reject/{generate_verification_token(deposit.id, 'reject')}/" class="btn btn-reject">
+                            ❌ REJECT DEPOSIT
+                        </a>
+                    </div>
+                    
+                    <p style="color: #7f8c8d; font-size: 12px; text-align: center; margin-top: 20px;">
+                        💡 Click the buttons above to instantly verify or reject this deposit without logging into the admin panel.
+                    </p>
                             ❌ REJECT
                         </a>
                     </div>
