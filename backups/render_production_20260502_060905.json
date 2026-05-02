@@ -1,0 +1,2172 @@
+[
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$Z48TUEXY0rBBMOVgti3zPe$PdkNtY0BBhZaWtrfD7eiWXbwZVmqzDyWpw3M5J85UpI=",
+    "email": "ly.co.ms.e.ri.ndit.y@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Eric Johnson",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "0.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "0.00",
+    "referral_bonus": "0.00",
+    "referral_code": "2KDIZUHM",
+    "referred_by": null,
+    "account_type": "starter",
+    "kyc_status": "pending",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "fmifUBq2Fu1YgvimGkqaGN1iT0D9UYPPi2deVtvUj-o",
+    "email_verification_sent_at": "2026-04-04T17:39:58.750Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-04-04T17:39:58.739Z",
+    "date_updated": "2026-04-04T17:39:58.751Z",
+    "last_login": "2026-04-04T17:40:32.349Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$W8K1FdK1bZM5x53suogHU9$pB4Msmz6B6dtzI+i4tGd2dUT5NVZd/RmtMFG1XlMH4E=",
+    "email": "admin@elitewealthcapita.uk",
+    "is_active": true,
+    "is_staff": true,
+    "is_superuser": true,
+    "full_name": "",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "250.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "0.00",
+    "referral_bonus": "0.00",
+    "referral_code": "355IXVD5",
+    "referred_by": null,
+    "account_type": "starter",
+    "kyc_status": "pending",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "",
+    "email_verification_sent_at": null,
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-03-31T22:59:15.616Z",
+    "date_updated": "2026-04-12T23:41:32.399Z",
+    "last_login": "2026-04-12T00:08:23.235Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$DI4Mx4Bg108XwnHnWUodt1$nXMi6ON56QoinfK0Spl+M1UJJQ+hbIVzqgK+TeW0OFk=",
+    "email": "jamaichoi537@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Jamai Choi",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "434690.00",
+    "invested_amount": "6920.00",
+    "total_profit": "46490.00",
+    "total_withdrawn": "48060.00",
+    "referral_bonus": "0.00",
+    "referral_code": "L7MM1KMJ",
+    "referred_by": null,
+    "account_type": "advance",
+    "kyc_status": "verified",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "RFQZNvxbIWI1QJsLPsrKs5YpGJOn6EobuofK9lAAuGI",
+    "email_verification_sent_at": "2026-04-18T12:05:38.806Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-04-18T12:05:38.803Z",
+    "date_updated": "2026-04-18T14:40:59.316Z",
+    "last_login": "2026-04-18T12:05:54.989Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$MsWy0rFxstUGAPmucYOuGv$cAEEDGzvQ0Ms4H5R5x3yWuPSDA9RHaSSIYkfkUXYCc4=",
+    "email": "narapim637@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Nara Pim",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "0.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "0.00",
+    "referral_bonus": "0.00",
+    "referral_code": "IQBZKJ4W",
+    "referred_by": null,
+    "account_type": "beginner",
+    "kyc_status": "pending",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "EtAGiK6lV06R-KutB2m53X9Zi7TtNqukQTta0-xT9Zc",
+    "email_verification_sent_at": "2026-03-28T13:31:40.772Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-03-28T13:31:40.759Z",
+    "date_updated": "2026-03-28T13:31:40.772Z",
+    "last_login": "2026-03-28T13:31:40.781Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$HLzzYsGNinUwT18ZweNoA0$vSW7f8P413wwZOPJCblat4BpLHYLyQykmBwZZOeTy8s=",
+    "email": "nadia2968844@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Nadiaa",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "0.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "0.00",
+    "referral_bonus": "0.00",
+    "referral_code": "499AW066",
+    "referred_by": null,
+    "account_type": "starter",
+    "kyc_status": "pending",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "4h5qEPqQfQiCfSiB3AXfXlTc4eKJUcBIGC14x5sDQRw",
+    "email_verification_sent_at": "2026-04-17T19:14:50.991Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-04-17T19:14:50.979Z",
+    "date_updated": "2026-04-17T19:14:50.991Z",
+    "last_login": "2026-04-17T19:15:34.489Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$HeHEa7NsQP7ItzB42xnvxd$+Fg2nEjngJ0X+GE9Oi8W9IlHteoM2w+4rSdPzl+cOZU=",
+    "email": "smartpointprep@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Kirshna",
+    "phone": "03123904173",
+    "country": "Pakistan",
+    "profile_image": "",
+    "balance": "43342.00",
+    "invested_amount": "600.00",
+    "total_profit": "650.00",
+    "total_withdrawn": "80.00",
+    "referral_bonus": "0.00",
+    "referral_code": "TQ80AVFB",
+    "referred_by": null,
+    "account_type": "advance",
+    "kyc_status": "verified",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": true,
+    "email_verification_token": "3uXvxmXfZ_khOMpg_6hycZ48cRYBT9lZRgP1iI0XE_U",
+    "email_verification_sent_at": "2026-04-02T07:58:45.067Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": "2026-04-23T09:33:03.095Z",
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-04-02T07:58:45.058Z",
+    "date_updated": "2026-04-23T09:03:03.095Z",
+    "last_login": "2026-04-26T10:44:14.684Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$WEHcEeY9XKtQicrh8Jhr9N$Xj438uwlK7m+jgdUuXk8z2MZYaLlB5C/CZW9NvYdSPE=",
+    "email": "samiwattog786@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Sami Ullah",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "169.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "0.00",
+    "referral_bonus": "0.00",
+    "referral_code": "DO3YNVFG",
+    "referred_by": null,
+    "account_type": "beginner",
+    "kyc_status": "pending",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "LzfoiF_9lfnNijJ-at4xPABIn6U89gCAIgIu9iIx4_o",
+    "email_verification_sent_at": "2026-03-28T14:00:22.362Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-03-28T14:00:22.357Z",
+    "date_updated": "2026-03-30T13:28:07.290Z",
+    "last_login": "2026-04-25T14:42:53.319Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$T50q9wT0vkBL4makbqWakv$CaVqNsfVHaGcGOLUJlaMyEoeH+W9CpdDVXogGR5f9Ec=",
+    "email": "mahnazkazal@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Mahnaz Kazalbasch",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "0.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "0.00",
+    "referral_bonus": "0.00",
+    "referral_code": "M441LG94",
+    "referred_by": null,
+    "account_type": "starter",
+    "kyc_status": "pending",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "EWEvt1vb7byWxlQ-TgoaEaIox98tj4WA6wwB6Z_TsM8",
+    "email_verification_sent_at": "2026-04-11T05:12:27.051Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-04-11T05:12:27.035Z",
+    "date_updated": "2026-04-11T05:12:27.051Z",
+    "last_login": "2026-04-11T05:15:27.161Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$LOGa0jrQTRVrUZNHzgkdVy$lef2hixqyT0UotKT82sWoIrIEpRcu47EK5b8aNL9X/A=",
+    "email": "bupphaarinya@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Achara buppha ",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "257107.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "8300.00",
+    "referral_bonus": "0.00",
+    "referral_code": "YH1HOGSZ",
+    "referred_by": null,
+    "account_type": "beginner",
+    "kyc_status": "verified",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "A63d9kcPs2CXz1qkYBro3Gsmj9yZkrPK4PPO1EuCjyg",
+    "email_verification_sent_at": "2026-03-30T00:12:00.203Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-03-30T00:12:00.192Z",
+    "date_updated": "2026-04-27T05:35:32.393Z",
+    "last_login": "2026-04-22T09:29:17.493Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$aXQQhsWm4zMI3PyWeZQQC7$fKLsJ6SUfIqrpHKh3rTYBqxfHJk9jsLgM50NAsBYNKI=",
+    "email": "akaboy2004@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Wisdom Godswill",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "0.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "0.00",
+    "referral_bonus": "0.00",
+    "referral_code": "08UC8LAG",
+    "referred_by": null,
+    "account_type": "starter",
+    "kyc_status": "pending",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "qd3MKAUO3Y445qTbU8PTw3CiUAhNV7zSJCuaH4d3m7E",
+    "email_verification_sent_at": "2026-04-29T20:59:17.451Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-04-29T20:59:17.439Z",
+    "date_updated": "2026-04-29T20:59:17.451Z",
+    "last_login": "2026-04-29T20:59:38.734Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$pI2iirSwBFtY91AYOM7PvA$KLv09gg16ffSxJcwb1GcoeTDgyz34/WjGGnA/CSNZUA=",
+    "email": "muskmanagement71@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Elon Musk ",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "865057.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "0.00",
+    "referral_bonus": "0.00",
+    "referral_code": "41M0QLKC",
+    "referred_by": null,
+    "account_type": "beginner",
+    "kyc_status": "verified",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "DpGGqcMqReU4otDn3wybytAs3L3gdkPZBT5zQlIJD0s",
+    "email_verification_sent_at": "2026-03-29T18:37:46.655Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-03-29T18:37:46.644Z",
+    "date_updated": "2026-03-30T13:30:26.104Z",
+    "last_login": "2026-03-29T18:37:46.667Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$Seu4Le5dFCjuPJPyAiEfL4$oKIxEfJsA29L3uEWgkRD2qAXpqyD4Dvt864asnRSJdE=",
+    "email": "nabeelsardar419@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Nabeel ur rehman",
+    "phone": "03115293025",
+    "country": "Pakistan",
+    "profile_image": "",
+    "balance": "30.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "48600.00",
+    "referral_bonus": "0.00",
+    "referral_code": "XAOK1NVL",
+    "referred_by": null,
+    "account_type": "starter",
+    "kyc_status": "verified",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": true,
+    "email_verification_token": "1aGblGAEv-M5STA6oii0nHlFueXgRUoWQp6muylXXlM",
+    "email_verification_sent_at": "2026-04-01T15:08:22.188Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-04-01T15:08:22.173Z",
+    "date_updated": "2026-04-02T01:35:01.466Z",
+    "last_login": "2026-04-17T12:45:21.285Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "narapim637@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-28T13:31:40.775Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "samiwattog786@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-28T14:00:22.365Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "samiwattog786@gmail.com"
+    ],
+    "action": "logout",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-28T14:06:06.826Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "samiwattog786@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-28T14:06:21.969Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "samiwattog786@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-28T15:20:55.969Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "muskmanagement71@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-29T18:37:46.658Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "bupphaarinya@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-30T00:12:00.206Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "samiwattog786@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-30T03:16:47.290Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 16,
+  "fields": {
+    "user": [
+      "samiwattog786@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-31T06:43:21.305Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 19,
+  "fields": {
+    "user": [
+      "nabeelsardar419@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-01T15:08:22.192Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 20,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-02T07:58:45.070Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 21,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-02T07:58:58.852Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 22,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "action": "logout",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-03T06:04:07.615Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 23,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-03T06:04:12.656Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 24,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-03T14:14:17.370Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 25,
+  "fields": {
+    "user": [
+      "ly.co.ms.e.ri.ndit.y@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-04T17:39:58.753Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 26,
+  "fields": {
+    "user": [
+      "ly.co.ms.e.ri.ndit.y@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-04T17:40:32.350Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 27,
+  "fields": {
+    "user": [
+      "admin@elitewealthcapita.uk"
+    ],
+    "action": "logout",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-11T02:53:12.759Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 28,
+  "fields": {
+    "user": [
+      "mahnazkazal@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-11T05:12:27.054Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 29,
+  "fields": {
+    "user": [
+      "mahnazkazal@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-11T05:15:27.163Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 30,
+  "fields": {
+    "user": [
+      "nabeelsardar419@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-17T12:45:21.292Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 31,
+  "fields": {
+    "user": [
+      "nadia2968844@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-17T19:14:50.993Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 32,
+  "fields": {
+    "user": [
+      "nadia2968844@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-17T19:15:34.490Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 33,
+  "fields": {
+    "user": [
+      "jamaichoi537@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-18T12:05:38.809Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 34,
+  "fields": {
+    "user": [
+      "jamaichoi537@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-18T12:05:54.991Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 35,
+  "fields": {
+    "user": [
+      "bupphaarinya@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-22T09:29:03.205Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 36,
+  "fields": {
+    "user": [
+      "bupphaarinya@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-22T09:29:17.494Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 37,
+  "fields": {
+    "user": [
+      "samiwattog786@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-25T14:42:53.321Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 38,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-26T10:44:14.685Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 39,
+  "fields": {
+    "user": [
+      "akaboy2004@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-29T20:59:17.454Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 40,
+  "fields": {
+    "user": [
+      "akaboy2004@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-29T20:59:38.020Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 41,
+  "fields": {
+    "user": [
+      "akaboy2004@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-29T20:59:38.735Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 1,
+  "fields": {
+    "name": "Starter Mild Plan",
+    "description": "Perfect for beginners. Start your investment journey with our entry-level plan. Low risk, guaranteed returns. Earn 10% profit after just 24 hours!",
+    "category": "crypto",
+    "icon": "fa-seedling",
+    "min_amount": "50.00",
+    "max_amount": "999.00",
+    "daily_roi": "10.00",
+    "duration_days": 1,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 1,
+    "created_at": "2026-03-31T06:57:00.518Z",
+    "updated_at": "2026-03-31T06:57:00.518Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 2,
+  "fields": {
+    "name": "DeFi Staking Portfolio",
+    "description": "Diversified DeFi staking across Ethereum, Cardano, and Polkadot networks. Automated yield optimization.",
+    "category": "crypto",
+    "icon": "fas fa-coins",
+    "min_amount": "1000.00",
+    "max_amount": "100000.00",
+    "daily_roi": "3.20",
+    "duration_days": 60,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.536Z",
+    "updated_at": "2026-03-30T00:04:40.536Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 3,
+  "fields": {
+    "name": "Altcoin Trading Bot",
+    "description": "AI-powered trading bot executing high-frequency trades on 50+ altcoins. Proven algorithm with risk management.",
+    "category": "crypto",
+    "icon": "fas fa-robot",
+    "min_amount": "2000.00",
+    "max_amount": "200000.00",
+    "daily_roi": "4.50",
+    "duration_days": 45,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.537Z",
+    "updated_at": "2026-03-30T00:04:40.537Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 4,
+  "fields": {
+    "name": "Crypto Index Fund",
+    "description": "Balanced portfolio tracking top 20 cryptocurrencies by market cap. Lower risk, steady growth.",
+    "category": "crypto",
+    "icon": "fas fa-chart-area",
+    "min_amount": "250.00",
+    "max_amount": "25000.00",
+    "daily_roi": "1.80",
+    "duration_days": 90,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.539Z",
+    "updated_at": "2026-03-30T00:04:40.539Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 5,
+  "fields": {
+    "name": "London Prime Properties",
+    "description": "Tokenized shares in luxury London residential properties. Prime locations in Mayfair, Chelsea, and Kensington.",
+    "category": "real_estate",
+    "icon": "fas fa-building",
+    "min_amount": "5000.00",
+    "max_amount": "500000.00",
+    "daily_roi": "0.80",
+    "duration_days": 365,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.541Z",
+    "updated_at": "2026-03-30T00:04:40.541Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 6,
+  "fields": {
+    "name": "US Commercial Real Estate",
+    "description": "Office buildings and retail spaces in New York, Los Angeles, and Miami. Long-term rental income.",
+    "category": "real_estate",
+    "icon": "fas fa-city",
+    "min_amount": "10000.00",
+    "max_amount": "1000000.00",
+    "daily_roi": "0.60",
+    "duration_days": 730,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.542Z",
+    "updated_at": "2026-03-30T00:04:40.542Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 7,
+  "fields": {
+    "name": "Property Development Fund",
+    "description": "New construction projects across UK. Higher returns from property appreciation and sales.",
+    "category": "real_estate",
+    "icon": "fas fa-hard-hat",
+    "min_amount": "15000.00",
+    "max_amount": "750000.00",
+    "daily_roi": "1.20",
+    "duration_days": 540,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.544Z",
+    "updated_at": "2026-03-30T00:04:40.544Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 8,
+  "fields": {
+    "name": "Vacation Rental Portfolio",
+    "description": "Short-term rental properties in tourist hotspots. Airbnb and Booking.com managed.",
+    "category": "real_estate",
+    "icon": "fas fa-hotel",
+    "min_amount": "3000.00",
+    "max_amount": "100000.00",
+    "daily_roi": "1.50",
+    "duration_days": 180,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.545Z",
+    "updated_at": "2026-03-30T00:04:40.545Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 9,
+  "fields": {
+    "name": "North Sea Drilling Project",
+    "description": "Investment in proven North Sea oil reserves. Partnership with major energy companies.",
+    "category": "oil_gas",
+    "icon": "fas fa-oil-can",
+    "min_amount": "25000.00",
+    "max_amount": "2000000.00",
+    "daily_roi": "1.10",
+    "duration_days": 1095,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.547Z",
+    "updated_at": "2026-03-30T00:04:40.547Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 10,
+  "fields": {
+    "name": "Norwegian Gas Pipeline",
+    "description": "Natural gas extraction and distribution infrastructure. Stable long-term returns from European demand.",
+    "category": "oil_gas",
+    "icon": "fas fa-industry",
+    "min_amount": "50000.00",
+    "max_amount": "5000000.00",
+    "daily_roi": "0.90",
+    "duration_days": 1825,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.549Z",
+    "updated_at": "2026-03-30T00:04:40.549Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 11,
+  "fields": {
+    "name": "Oil Futures Trading",
+    "description": "Commodities trading in crude oil futures. Professional traders managing positions.",
+    "category": "oil_gas",
+    "icon": "fas fa-chart-line",
+    "min_amount": "10000.00",
+    "max_amount": "500000.00",
+    "daily_roi": "2.30",
+    "duration_days": 90,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.550Z",
+    "updated_at": "2026-03-30T00:04:40.550Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 12,
+  "fields": {
+    "name": "Energy Storage Fund",
+    "description": "Strategic petroleum reserves and storage facilities. Profit from price arbitrage.",
+    "category": "oil_gas",
+    "icon": "fas fa-battery-full",
+    "min_amount": "20000.00",
+    "max_amount": "1000000.00",
+    "daily_roi": "1.40",
+    "duration_days": 365,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.552Z",
+    "updated_at": "2026-03-30T00:04:40.552Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 13,
+  "fields": {
+    "name": "Organic Farm Co-operative",
+    "description": "Sustainable organic farming across UK and Ireland. Direct farm-to-market distribution network.",
+    "category": "agriculture",
+    "icon": "fas fa-seedling",
+    "min_amount": "2000.00",
+    "max_amount": "100000.00",
+    "daily_roi": "1.30",
+    "duration_days": 180,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.554Z",
+    "updated_at": "2026-03-30T00:04:40.554Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 14,
+  "fields": {
+    "name": "Livestock Trading Fund",
+    "description": "Cattle and livestock trading operations. Profit from breeding, raising, and market sales.",
+    "category": "agriculture",
+    "icon": "fas fa-horse-head",
+    "min_amount": "5000.00",
+    "max_amount": "250000.00",
+    "daily_roi": "1.70",
+    "duration_days": 270,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.555Z",
+    "updated_at": "2026-03-30T00:04:40.555Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 15,
+  "fields": {
+    "name": "AgriTech Ventures",
+    "description": "Investment in agricultural technology startups. Precision farming, drones, and automation.",
+    "category": "agriculture",
+    "icon": "fas fa-tractor",
+    "min_amount": "10000.00",
+    "max_amount": "500000.00",
+    "daily_roi": "2.10",
+    "duration_days": 365,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.557Z",
+    "updated_at": "2026-03-30T00:04:40.557Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 16,
+  "fields": {
+    "name": "Grain Commodity Trading",
+    "description": "Wheat, corn, and soybean futures trading. Global agricultural commodity markets.",
+    "category": "agriculture",
+    "icon": "fas fa-wheat-awn",
+    "min_amount": "3000.00",
+    "max_amount": "150000.00",
+    "daily_roi": "1.90",
+    "duration_days": 120,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.558Z",
+    "updated_at": "2026-03-30T00:04:40.558Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 17,
+  "fields": {
+    "name": "European Solar Farm Fund",
+    "description": "Large-scale solar installations across Spain, Portugal, and Southern France. Government-backed feed-in tariffs.",
+    "category": "solar",
+    "icon": "fas fa-solar-panel",
+    "min_amount": "8000.00",
+    "max_amount": "400000.00",
+    "daily_roi": "1.00",
+    "duration_days": 730,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.560Z",
+    "updated_at": "2026-03-30T00:04:40.560Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 18,
+  "fields": {
+    "name": "African Solar Initiative",
+    "description": "Renewable energy projects in Kenya, Ghana, and South Africa. High impact, high returns.",
+    "category": "agriculture",
+    "icon": "fas fa-sun",
+    "min_amount": "300.00",
+    "max_amount": "1000.00",
+    "daily_roi": "20.00",
+    "duration_days": 1,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 1,
+    "created_at": "2026-03-30T00:04:40.561Z",
+    "updated_at": "2026-03-31T09:06:28.902Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 19,
+  "fields": {
+    "name": "Residential Solar Leasing",
+    "description": "Install solar panels on residential properties. Income from energy sales and leasing agreements.",
+    "category": "solar",
+    "icon": "fas fa-home",
+    "min_amount": "3000.00",
+    "max_amount": "75000.00",
+    "daily_roi": "1.40",
+    "duration_days": 540,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.563Z",
+    "updated_at": "2026-03-30T00:04:40.563Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 20,
+  "fields": {
+    "name": "Green Energy ETF",
+    "description": "Diversified renewable energy portfolio. Solar, wind, and hydro investments worldwide.",
+    "category": "solar",
+    "icon": "fas fa-leaf",
+    "min_amount": "1000.00",
+    "max_amount": "50000.00",
+    "daily_roi": "1.10",
+    "duration_days": 365,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.565Z",
+    "updated_at": "2026-03-30T00:04:40.565Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 21,
+  "fields": {
+    "name": "Tech Giants Portfolio",
+    "description": "Blue-chip technology stocks: Apple, Microsoft, Google, Amazon. Long-term growth strategy.",
+    "category": "stocks",
+    "icon": "fab fa-apple",
+    "min_amount": "1000.00",
+    "max_amount": "100000.00",
+    "daily_roi": "0.90",
+    "duration_days": 365,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.566Z",
+    "updated_at": "2026-03-30T00:04:40.566Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 22,
+  "fields": {
+    "name": "Emerging Markets Fund",
+    "description": "High-growth opportunities in Asian and African markets. Exposure to developing economies.",
+    "category": "stocks",
+    "icon": "fas fa-globe-asia",
+    "min_amount": "2500.00",
+    "max_amount": "150000.00",
+    "daily_roi": "2.80",
+    "duration_days": 180,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.568Z",
+    "updated_at": "2026-03-30T00:04:40.568Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 23,
+  "fields": {
+    "name": "Dividend Aristocrats",
+    "description": "Companies with 25+ years of dividend increases. Reliable income from blue-chip stocks.",
+    "category": "stocks",
+    "icon": "fas fa-crown",
+    "min_amount": "5000.00",
+    "max_amount": "250000.00",
+    "daily_roi": "0.70",
+    "duration_days": 730,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.569Z",
+    "updated_at": "2026-03-30T00:04:40.569Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 24,
+  "fields": {
+    "name": "Gold & Precious Metals",
+    "description": "Physical gold, silver, and platinum holdings. Hedge against inflation and market volatility.",
+    "category": "stocks",
+    "icon": "fas fa-gem",
+    "min_amount": "2000.00",
+    "max_amount": "500000.00",
+    "daily_roi": "0.50",
+    "duration_days": 365,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.571Z",
+    "updated_at": "2026-03-30T00:04:40.571Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 25,
+  "fields": {
+    "name": "Starter Plan",
+    "description": "Perfect for beginners starting their investment journey",
+    "category": "crypto",
+    "icon": "fa-rocket",
+    "min_amount": "50.00",
+    "max_amount": "999.99",
+    "daily_roi": "2.50",
+    "duration_days": 30,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 1,
+    "created_at": "2026-04-10T23:20:34.100Z",
+    "updated_at": "2026-04-27T02:21:41.365Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 26,
+  "fields": {
+    "name": "Bronze Plan",
+    "description": "Balanced returns for steady growth",
+    "category": "crypto",
+    "icon": "fa-medal",
+    "min_amount": "1000.00",
+    "max_amount": "4999.99",
+    "daily_roi": "3.50",
+    "duration_days": 30,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 2,
+    "created_at": "2026-04-10T23:20:34.109Z",
+    "updated_at": "2026-04-27T02:21:41.382Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 27,
+  "fields": {
+    "name": "Silver Plan",
+    "description": "Enhanced returns for serious investors",
+    "category": "crypto",
+    "icon": "fa-gem",
+    "min_amount": "5000.00",
+    "max_amount": "14999.99",
+    "daily_roi": "5.00",
+    "duration_days": 45,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 3,
+    "created_at": "2026-04-10T23:20:34.117Z",
+    "updated_at": "2026-04-27T02:21:41.387Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 28,
+  "fields": {
+    "name": "Gold Plan",
+    "description": "Premium returns for high-net-worth individuals",
+    "category": "crypto",
+    "icon": "fa-crown",
+    "min_amount": "15000.00",
+    "max_amount": "49999.99",
+    "daily_roi": "7.00",
+    "duration_days": 60,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 4,
+    "created_at": "2026-04-10T23:20:34.126Z",
+    "updated_at": "2026-04-27T02:21:41.391Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 29,
+  "fields": {
+    "name": "Platinum Plan",
+    "description": "Maximum returns for elite investors",
+    "category": "crypto",
+    "icon": "fa-trophy",
+    "min_amount": "50000.00",
+    "max_amount": "999999.99",
+    "daily_roi": "10.00",
+    "duration_days": 90,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 5,
+    "created_at": "2026-04-10T23:20:34.133Z",
+    "updated_at": "2026-04-27T02:21:41.396Z"
+  }
+},
+{
+  "model": "investments.deposit",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "admin@elitewealthcapita.uk"
+    ],
+    "amount": "250.00",
+    "crypto_type": "USDT",
+    "payment_method": "crypto",
+    "tx_hash": "",
+    "proof_image": "deposits/IMG_0143_wqohox",
+    "status": "confirmed",
+    "confirmed_by": [
+      "admin@elitewealthcapita.uk"
+    ],
+    "confirmed_at": "2026-04-12T23:41:32.402Z",
+    "admin_note": "",
+    "created_at": "2026-04-10T23:32:08.023Z"
+  }
+},
+{
+  "model": "investments.deposit",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "akaboy2004@gmail.com"
+    ],
+    "amount": "250.00",
+    "crypto_type": "USDT",
+    "payment_method": "crypto",
+    "tx_hash": "",
+    "proof_image": "media/deposits/IMG_6783_ohi9e7",
+    "status": "pending",
+    "confirmed_by": null,
+    "confirmed_at": null,
+    "admin_note": "",
+    "created_at": "2026-04-29T21:00:36.685Z"
+  }
+},
+{
+  "model": "investments.withdrawal",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "nabeelsardar419@gmail.com"
+    ],
+    "amount": "48600.00",
+    "withdrawal_method": "crypto",
+    "crypto_type": "USDT",
+    "wallet_address": "Pending - Address not recorded",
+    "bank_name": "",
+    "account_number": "",
+    "account_name": "",
+    "status": "pending",
+    "processed_by": null,
+    "processed_at": null,
+    "tx_hash": "",
+    "admin_note": "",
+    "created_at": "2026-04-03T17:52:35.939Z"
+  }
+},
+{
+  "model": "investments.withdrawal",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "amount": "30.00",
+    "withdrawal_method": "crypto",
+    "crypto_type": "USDT",
+    "wallet_address": "TRC20-wallet-address",
+    "bank_name": "",
+    "account_number": "",
+    "account_name": "",
+    "status": "completed",
+    "processed_by": null,
+    "processed_at": "2026-01-04T17:57:49.421Z",
+    "tx_hash": "",
+    "admin_note": "",
+    "created_at": "2026-01-03T17:57:49.421Z"
+  }
+},
+{
+  "model": "investments.withdrawal",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "amount": "50.00",
+    "withdrawal_method": "crypto",
+    "crypto_type": "BTC",
+    "wallet_address": "BTC-wallet-address",
+    "bank_name": "",
+    "account_number": "",
+    "account_name": "",
+    "status": "completed",
+    "processed_by": null,
+    "processed_at": "2026-02-03T17:57:49.708Z",
+    "tx_hash": "",
+    "admin_note": "",
+    "created_at": "2026-02-02T17:57:49.708Z"
+  }
+},
+{
+  "model": "investments.withdrawal",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "bupphaarinya@gmail.com"
+    ],
+    "amount": "8300.00",
+    "withdrawal_method": "crypto",
+    "crypto_type": "USDT",
+    "wallet_address": "TKYDJbG8akLXhFXzm6x7c6Yca7C7Fji9Y3",
+    "bank_name": "",
+    "account_number": "",
+    "account_name": "",
+    "status": "pending",
+    "processed_by": null,
+    "processed_at": null,
+    "tx_hash": "",
+    "admin_note": "",
+    "created_at": "2026-04-27T05:35:32.396Z"
+  }
+},
+{
+  "model": "investments.walletaddress",
+  "pk": 7,
+  "fields": {
+    "crypto_type": "BANK",
+    "address": "Contact Support via Chat",
+    "label": "Bank Transfer - Contact Support",
+    "network": "Bank Wire",
+    "qr_code": "",
+    "qr_code_image": "",
+    "is_active": true,
+    "created_at": "2026-04-10T23:20:33.296Z",
+    "updated_at": "2026-04-27T02:21:40.610Z"
+  }
+},
+{
+  "model": "investments.walletaddress",
+  "pk": 8,
+  "fields": {
+    "crypto_type": "BTC",
+    "address": "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
+    "label": "Bitcoin Main Wallet",
+    "network": "Bitcoin Network",
+    "qr_code": "",
+    "qr_code_image": "",
+    "is_active": true,
+    "created_at": "2026-04-12T23:07:22.004Z",
+    "updated_at": "2026-04-27T02:21:40.582Z"
+  }
+},
+{
+  "model": "investments.walletaddress",
+  "pk": 9,
+  "fields": {
+    "crypto_type": "ETH",
+    "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb8",
+    "label": "Ethereum Main Wallet",
+    "network": "ERC-20",
+    "qr_code": "",
+    "qr_code_image": "",
+    "is_active": true,
+    "created_at": "2026-04-12T23:08:20.283Z",
+    "updated_at": "2026-04-27T02:21:40.587Z"
+  }
+},
+{
+  "model": "investments.walletaddress",
+  "pk": 10,
+  "fields": {
+    "crypto_type": "USDT",
+    "address": "TQjXhJ3X8e9YJp4hZvQ2nJZRWr8FnEyKzZ",
+    "label": "USDT TRC-20 Wallet",
+    "network": "TRC-20",
+    "qr_code": "",
+    "qr_code_image": "",
+    "is_active": true,
+    "created_at": "2026-04-12T23:09:19.576Z",
+    "updated_at": "2026-04-27T02:21:40.592Z"
+  }
+},
+{
+  "model": "investments.walletaddress",
+  "pk": 11,
+  "fields": {
+    "crypto_type": "USDC",
+    "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb8",
+    "label": "USDC Main Wallet",
+    "network": "ERC-20",
+    "qr_code": "",
+    "qr_code_image": "",
+    "is_active": true,
+    "created_at": "2026-04-12T23:10:17.486Z",
+    "updated_at": "2026-04-27T02:21:40.596Z"
+  }
+},
+{
+  "model": "investments.walletaddress",
+  "pk": 12,
+  "fields": {
+    "crypto_type": "LTC",
+    "address": "ltc1qg6hpzwkgkg4p8qftygvwsj0f23zk5nkr5skhqd",
+    "label": "Litecoin Main Wallet",
+    "network": "Litecoin Network",
+    "qr_code": "",
+    "qr_code_image": "",
+    "is_active": true,
+    "created_at": "2026-04-12T23:19:06.034Z",
+    "updated_at": "2026-04-27T02:21:40.601Z"
+  }
+},
+{
+  "model": "investments.walletaddress",
+  "pk": 13,
+  "fields": {
+    "crypto_type": "BNB",
+    "address": "bnb1grpf0955h0ykzq3ar5nmum7y6gdfl6lxfn46h2",
+    "label": "Binance Coin Wallet",
+    "network": "BEP-20",
+    "qr_code": "",
+    "qr_code_image": "",
+    "is_active": true,
+    "created_at": "2026-04-12T23:19:06.044Z",
+    "updated_at": "2026-04-27T02:21:40.605Z"
+  }
+},
+{
+  "model": "investments.virtualcard",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "card_number": "4466919501193518",
+    "cvv": "635",
+    "expiry_month": 12,
+    "expiry_year": 2028,
+    "card_holder_name": "Kirshna",
+    "billing_address": "District Tando Allahyar Sindh Pakistan",
+    "card_type": "standard",
+    "balance": "0.00",
+    "daily_limit": "1000.00",
+    "monthly_limit": "10000.00",
+    "is_online_enabled": true,
+    "is_international_enabled": false,
+    "status": "pending",
+    "created_at": "2026-04-03T05:50:58.089Z",
+    "updated_at": "2026-04-03T05:50:58.089Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 1,
+  "fields": {
+    "symbol": "BTC",
+    "name": "Bitcoin",
+    "coingecko_id": "bitcoin",
+    "is_active": true,
+    "display_order": 1,
+    "created_at": "2026-03-29T23:53:17.296Z",
+    "updated_at": "2026-03-29T23:53:17.296Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 2,
+  "fields": {
+    "symbol": "ETH",
+    "name": "Ethereum",
+    "coingecko_id": "ethereum",
+    "is_active": true,
+    "display_order": 2,
+    "created_at": "2026-03-29T23:53:17.301Z",
+    "updated_at": "2026-03-29T23:53:17.301Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 3,
+  "fields": {
+    "symbol": "USDT",
+    "name": "Tether",
+    "coingecko_id": "tether",
+    "is_active": true,
+    "display_order": 3,
+    "created_at": "2026-03-29T23:53:17.304Z",
+    "updated_at": "2026-03-29T23:53:17.304Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 4,
+  "fields": {
+    "symbol": "BNB",
+    "name": "BNB",
+    "coingecko_id": "binancecoin",
+    "is_active": true,
+    "display_order": 4,
+    "created_at": "2026-03-29T23:53:17.308Z",
+    "updated_at": "2026-03-29T23:53:17.308Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 5,
+  "fields": {
+    "symbol": "SOL",
+    "name": "Solana",
+    "coingecko_id": "solana",
+    "is_active": true,
+    "display_order": 5,
+    "created_at": "2026-03-29T23:53:17.311Z",
+    "updated_at": "2026-03-29T23:53:17.311Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 6,
+  "fields": {
+    "symbol": "XRP",
+    "name": "XRP",
+    "coingecko_id": "ripple",
+    "is_active": true,
+    "display_order": 6,
+    "created_at": "2026-03-29T23:53:17.315Z",
+    "updated_at": "2026-03-29T23:53:17.315Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 7,
+  "fields": {
+    "symbol": "USDC",
+    "name": "USD Coin",
+    "coingecko_id": "usd-coin",
+    "is_active": true,
+    "display_order": 7,
+    "created_at": "2026-03-29T23:53:17.355Z",
+    "updated_at": "2026-03-29T23:53:17.355Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 8,
+  "fields": {
+    "symbol": "ADA",
+    "name": "Cardano",
+    "coingecko_id": "cardano",
+    "is_active": true,
+    "display_order": 8,
+    "created_at": "2026-03-29T23:53:17.359Z",
+    "updated_at": "2026-03-29T23:53:17.359Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 9,
+  "fields": {
+    "symbol": "DOGE",
+    "name": "Dogecoin",
+    "coingecko_id": "dogecoin",
+    "is_active": true,
+    "display_order": 9,
+    "created_at": "2026-03-29T23:53:17.362Z",
+    "updated_at": "2026-03-29T23:53:17.362Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 10,
+  "fields": {
+    "symbol": "TRX",
+    "name": "TRON",
+    "coingecko_id": "tron",
+    "is_active": true,
+    "display_order": 10,
+    "created_at": "2026-03-29T23:53:17.366Z",
+    "updated_at": "2026-03-29T23:53:17.366Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 11,
+  "fields": {
+    "symbol": "DOT",
+    "name": "Polkadot",
+    "coingecko_id": "polkadot",
+    "is_active": true,
+    "display_order": 11,
+    "created_at": "2026-03-29T23:53:17.369Z",
+    "updated_at": "2026-03-29T23:53:17.369Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 12,
+  "fields": {
+    "symbol": "MATIC",
+    "name": "Polygon",
+    "coingecko_id": "matic-network",
+    "is_active": true,
+    "display_order": 12,
+    "created_at": "2026-03-29T23:53:17.372Z",
+    "updated_at": "2026-03-29T23:53:17.372Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 13,
+  "fields": {
+    "symbol": "LTC",
+    "name": "Litecoin",
+    "coingecko_id": "litecoin",
+    "is_active": true,
+    "display_order": 13,
+    "created_at": "2026-03-29T23:53:17.376Z",
+    "updated_at": "2026-03-29T23:53:17.376Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 14,
+  "fields": {
+    "symbol": "SHIB",
+    "name": "Shiba Inu",
+    "coingecko_id": "shiba-inu",
+    "is_active": true,
+    "display_order": 14,
+    "created_at": "2026-03-29T23:53:17.379Z",
+    "updated_at": "2026-03-29T23:53:17.379Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 15,
+  "fields": {
+    "symbol": "AVAX",
+    "name": "Avalanche",
+    "coingecko_id": "avalanche-2",
+    "is_active": true,
+    "display_order": 15,
+    "created_at": "2026-03-29T23:53:17.382Z",
+    "updated_at": "2026-03-29T23:53:17.382Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 16,
+  "fields": {
+    "symbol": "UNI",
+    "name": "Uniswap",
+    "coingecko_id": "uniswap",
+    "is_active": true,
+    "display_order": 16,
+    "created_at": "2026-03-29T23:53:17.385Z",
+    "updated_at": "2026-03-29T23:53:17.385Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 17,
+  "fields": {
+    "symbol": "LINK",
+    "name": "Chainlink",
+    "coingecko_id": "chainlink",
+    "is_active": true,
+    "display_order": 17,
+    "created_at": "2026-03-29T23:53:17.389Z",
+    "updated_at": "2026-03-29T23:53:17.389Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 18,
+  "fields": {
+    "symbol": "ATOM",
+    "name": "Cosmos",
+    "coingecko_id": "cosmos",
+    "is_active": true,
+    "display_order": 18,
+    "created_at": "2026-03-29T23:53:17.392Z",
+    "updated_at": "2026-03-29T23:53:17.392Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 19,
+  "fields": {
+    "symbol": "XLM",
+    "name": "Stellar",
+    "coingecko_id": "stellar",
+    "is_active": true,
+    "display_order": 19,
+    "created_at": "2026-03-29T23:53:17.395Z",
+    "updated_at": "2026-03-29T23:53:17.395Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 20,
+  "fields": {
+    "symbol": "XMR",
+    "name": "Monero",
+    "coingecko_id": "monero",
+    "is_active": true,
+    "display_order": 20,
+    "created_at": "2026-03-29T23:53:17.399Z",
+    "updated_at": "2026-03-29T23:53:17.399Z"
+  }
+},
+{
+  "model": "dashboard.contactmessage",
+  "pk": 1,
+  "fields": {
+    "name": "Ashwani Sharma",
+    "email": "ashwani@rocketdigitaltech.com",
+    "subject": "withdrawal",
+    "message": "Hello http://elitewealthcapita.uk,\r\n \r\nIf you’re looking to boost your website’s visibility, I can help you achieve top Google rankings.\r\n \r\nI’ll prepare a complete SEO plan with actionable steps and potential growth insights for your products or services.\r\n \r\nOnce you share your target keywords and target market, I’ll send a full proposal.\r\n \r\nBest Regards,\r\nAshwani",
+    "is_read": false,
+    "created_at": "2026-04-01T23:48:52.638Z"
+  }
+},
+{
+  "model": "dashboard.contactmessage",
+  "pk": 2,
+  "fields": {
+    "name": "Leeza Bindra",
+    "email": "leeza.rocketdigitaltech@gmail.com",
+    "subject": "billing",
+    "message": "Hello http://elitewealthcapita.uk,\r\n \r\nI came across your business online and wanted to reach out.\r\n\r\nIf you are considering improving your website design or creating a new website, we can help with modern, responsive, and user-friendly website development.\r\n\r\nPlease let me know if you would like to see our portfolio or discuss your requirements.\r\n \r\nBest Regards,\r\nLeeza",
+    "is_read": false,
+    "created_at": "2026-04-02T23:57:12.825Z"
+  }
+},
+{
+  "model": "dashboard.contactmessage",
+  "pk": 4,
+  "fields": {
+    "name": "Ananya Singh",
+    "email": "ananya@rocketdigitaltech.com",
+    "subject": "general",
+    "message": "Hello http://elitewealthcapita.uk,\r\n \r\nIf you’re looking to boost your website’s visibility, I can help you achieve top Google rankings.\r\n \r\nI’ll prepare a complete SEO plan with actionable steps and potential growth insights for your products or services.\r\n \r\nOnce you share your target keywords and target market, I’ll send a full proposal.\r\n \r\nBest Regards,\r\nAnanya",
+    "is_read": false,
+    "created_at": "2026-04-16T20:28:11.355Z"
+  }
+},
+{
+  "model": "dashboard.contactmessage",
+  "pk": 5,
+  "fields": {
+    "name": "Triumph Resources LLC",
+    "email": "procurement.dept@consultant.com",
+    "subject": "kyc",
+    "message": "Dear Sir or Madam,\r\n\r\nI hope this message finds you well.\r\n\r\nWe are currently engaging with qualified buyers and mandates seeking a reliable supply of energy products through verified seller-side channels. Our current inventory includes EN590 10ppm, Jet Fuel A1, D6, and LNG.\r\n\r\nWe offer flexible transaction structures tailored to logistical requirements, including STS, TTO, TTV, TTT, FOB, and CIF, with escrow options available where applicable. We are open to discussing both immediate spot purchases and long-term contract allocations, provided they align with buyer capabilities.\r\n\r\nOur operations prioritize transparent documentation, rigorous procedures, and efficient execution. Furthermore, all intermediary interests are protected under standard NCNDA/IMFPA agreements.\r\n\r\nIf these offerings align with your current procurement objectives, we invite you to reach out for a detailed review of our procedures and commercial terms. For further information or to initiate a formal inquiry, please contact our team directly at procurement@triumphresourcesllc.com\r\n\r\nKindly advise if you would like to proceed with the next stage of our protocols.\r\n\r\nBest regards,\r\n\r\nCharles Jerkins\r\nSales Director\r\nTriumph Resources LLC",
+    "is_read": false,
+    "created_at": "2026-04-16T21:26:45.434Z"
+  }
+},
+{
+  "model": "dashboard.contactmessage",
+  "pk": 7,
+  "fields": {
+    "name": "Triumph Resources LLC",
+    "email": "procurement.dept@consultant.com",
+    "subject": "investment",
+    "message": "Dear Sir or Madam,\r\n\r\nI hope this message finds you well.\r\n\r\nWe are currently engaging with qualified buyers and mandates seeking a reliable supply of energy products through verified seller-side channels. Our current inventory includes EN590 10ppm, Jet Fuel A1, D6, and LNG.\r\n\r\nWe offer flexible transaction structures tailored to logistical requirements, including STS, TTO, TTV, TTT, FOB, and CIF, with escrow options available where applicable. We are open to discussing both immediate spot purchases and long-term contract allocations, provided they align with buyer capabilities.\r\n\r\nOur operations prioritize transparent documentation, rigorous procedures, and efficient execution. Furthermore, all intermediary interests are protected under standard NCNDA/IMFPA agreements.\r\n\r\nIf these offerings align with your current procurement objectives, we invite you to reach out for a detailed review of our procedures and commercial terms. For further information or to initiate a formal inquiry, please contact our team directly at procurement@triumphresourcesllc.com\r\n\r\nKindly advise if you would like to proceed with the next stage of our protocols.\r\n\r\nBest regards,\r\n\r\nCharles Jerkins\r\nSales Director\r\nTriumph Resources LLC",
+    "is_read": false,
+    "created_at": "2026-04-17T04:25:09.548Z"
+  }
+},
+{
+  "model": "dashboard.contactmessage",
+  "pk": 8,
+  "fields": {
+    "name": "Triumph Resources LLC",
+    "email": "procurement.dept@consultant.com",
+    "subject": "technical",
+    "message": "Dear Sir or Madam,\r\n\r\nI hope this message finds you well.\r\n\r\nWe are currently engaging with qualified buyers and mandates seeking a reliable supply of energy products through verified seller-side channels. Our current inventory includes EN590 10ppm, Jet Fuel A1, D6, and LNG.\r\n\r\nWe offer flexible transaction structures tailored to logistical requirements, including STS, TTO, TTV, TTT, FOB, and CIF, with escrow options available where applicable. We are open to discussing both immediate spot purchases and long-term contract allocations, provided they align with buyer capabilities.\r\n\r\nOur operations prioritize transparent documentation, rigorous procedures, and efficient execution. Furthermore, all intermediary interests are protected under standard NCNDA/IMFPA agreements.\r\n\r\nIf these offerings align with your current procurement objectives, we invite you to reach out for a detailed review of our procedures and commercial terms. For further information or to initiate a formal inquiry, please contact our team directly at procurement@triumphresourcesllc.com\r\n\r\nKindly advise if you would like to proceed with the next stage of our protocols.\r\n\r\nBest regards,\r\n\r\nCharles Jerkins\r\nSales Director\r\nTriumph Resources LLC",
+    "is_read": false,
+    "created_at": "2026-04-17T06:57:39.474Z"
+  }
+},
+{
+  "model": "dashboard.contactmessage",
+  "pk": 10,
+  "fields": {
+    "name": "Ananya Singh",
+    "email": "ananya@rocketdigitaltech.com",
+    "subject": "investment",
+    "message": "Hello http://elitewealthcapita.uk,\r\n \r\nI wanted to reach out to see if you’re open to exploring ways to grow your website traffic and boost online performance.\r\n \r\nWe offer customized SEO services that deliver measurable improvements.\r\n \r\nOnce you share your target keywords and target market, I’ll send a full proposal.\r\n \r\nBest Regards,\r\nAnanya",
+    "is_read": false,
+    "created_at": "2026-04-23T20:14:12.418Z"
+  }
+},
+{
+  "model": "dashboard.adminactivitylog",
+  "pk": 1,
+  "fields": {
+    "admin_user": null,
+    "action_type": "balance_edit",
+    "description": 

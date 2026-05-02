@@ -1,0 +1,4598 @@
+[
+{
+  "model": "investments.investmentplan",
+  "pk": 1,
+  "fields": {
+    "name": "Starter Mild Plan",
+    "description": "Perfect for beginners. Start your investment journey with our entry-level plan. Low risk, guaranteed returns. Earn 10% profit after just 24 hours!",
+    "category": "crypto",
+    "icon": "fa-seedling",
+    "min_amount": "50.00",
+    "max_amount": "999.00",
+    "daily_roi": "10.00",
+    "duration_days": 1,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 1,
+    "created_at": "2026-03-31T06:57:00.518Z",
+    "updated_at": "2026-03-31T06:57:00.518Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 2,
+  "fields": {
+    "name": "DeFi Staking Portfolio",
+    "description": "Diversified DeFi staking across Ethereum, Cardano, and Polkadot networks. Automated yield optimization.",
+    "category": "crypto",
+    "icon": "fas fa-coins",
+    "min_amount": "1000.00",
+    "max_amount": "100000.00",
+    "daily_roi": "3.20",
+    "duration_days": 60,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.536Z",
+    "updated_at": "2026-03-30T00:04:40.536Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 3,
+  "fields": {
+    "name": "Altcoin Trading Bot",
+    "description": "AI-powered trading bot executing high-frequency trades on 50+ altcoins. Proven algorithm with risk management.",
+    "category": "crypto",
+    "icon": "fas fa-robot",
+    "min_amount": "2000.00",
+    "max_amount": "200000.00",
+    "daily_roi": "4.50",
+    "duration_days": 45,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.537Z",
+    "updated_at": "2026-03-30T00:04:40.537Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 4,
+  "fields": {
+    "name": "Crypto Index Fund",
+    "description": "Balanced portfolio tracking top 20 cryptocurrencies by market cap. Lower risk, steady growth.",
+    "category": "crypto",
+    "icon": "fas fa-chart-area",
+    "min_amount": "250.00",
+    "max_amount": "25000.00",
+    "daily_roi": "1.80",
+    "duration_days": 90,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.539Z",
+    "updated_at": "2026-03-30T00:04:40.539Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 5,
+  "fields": {
+    "name": "London Prime Properties",
+    "description": "Tokenized shares in luxury London residential properties. Prime locations in Mayfair, Chelsea, and Kensington.",
+    "category": "real_estate",
+    "icon": "fas fa-building",
+    "min_amount": "5000.00",
+    "max_amount": "500000.00",
+    "daily_roi": "0.80",
+    "duration_days": 365,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.541Z",
+    "updated_at": "2026-03-30T00:04:40.541Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 6,
+  "fields": {
+    "name": "US Commercial Real Estate",
+    "description": "Office buildings and retail spaces in New York, Los Angeles, and Miami. Long-term rental income.",
+    "category": "real_estate",
+    "icon": "fas fa-city",
+    "min_amount": "10000.00",
+    "max_amount": "1000000.00",
+    "daily_roi": "0.60",
+    "duration_days": 730,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.542Z",
+    "updated_at": "2026-03-30T00:04:40.542Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 7,
+  "fields": {
+    "name": "Property Development Fund",
+    "description": "New construction projects across UK. Higher returns from property appreciation and sales.",
+    "category": "real_estate",
+    "icon": "fas fa-hard-hat",
+    "min_amount": "15000.00",
+    "max_amount": "750000.00",
+    "daily_roi": "1.20",
+    "duration_days": 540,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.544Z",
+    "updated_at": "2026-03-30T00:04:40.544Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 8,
+  "fields": {
+    "name": "Vacation Rental Portfolio",
+    "description": "Short-term rental properties in tourist hotspots. Airbnb and Booking.com managed.",
+    "category": "real_estate",
+    "icon": "fas fa-hotel",
+    "min_amount": "3000.00",
+    "max_amount": "100000.00",
+    "daily_roi": "1.50",
+    "duration_days": 180,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.545Z",
+    "updated_at": "2026-03-30T00:04:40.545Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 9,
+  "fields": {
+    "name": "North Sea Drilling Project",
+    "description": "Investment in proven North Sea oil reserves. Partnership with major energy companies.",
+    "category": "oil_gas",
+    "icon": "fas fa-oil-can",
+    "min_amount": "25000.00",
+    "max_amount": "2000000.00",
+    "daily_roi": "1.10",
+    "duration_days": 1095,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.547Z",
+    "updated_at": "2026-03-30T00:04:40.547Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 10,
+  "fields": {
+    "name": "Norwegian Gas Pipeline",
+    "description": "Natural gas extraction and distribution infrastructure. Stable long-term returns from European demand.",
+    "category": "oil_gas",
+    "icon": "fas fa-industry",
+    "min_amount": "50000.00",
+    "max_amount": "5000000.00",
+    "daily_roi": "0.90",
+    "duration_days": 1825,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.549Z",
+    "updated_at": "2026-03-30T00:04:40.549Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 11,
+  "fields": {
+    "name": "Oil Futures Trading",
+    "description": "Commodities trading in crude oil futures. Professional traders managing positions.",
+    "category": "oil_gas",
+    "icon": "fas fa-chart-line",
+    "min_amount": "10000.00",
+    "max_amount": "500000.00",
+    "daily_roi": "2.30",
+    "duration_days": 90,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.550Z",
+    "updated_at": "2026-03-30T00:04:40.550Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 12,
+  "fields": {
+    "name": "Energy Storage Fund",
+    "description": "Strategic petroleum reserves and storage facilities. Profit from price arbitrage.",
+    "category": "oil_gas",
+    "icon": "fas fa-battery-full",
+    "min_amount": "20000.00",
+    "max_amount": "1000000.00",
+    "daily_roi": "1.40",
+    "duration_days": 365,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.552Z",
+    "updated_at": "2026-03-30T00:04:40.552Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 13,
+  "fields": {
+    "name": "Organic Farm Co-operative",
+    "description": "Sustainable organic farming across UK and Ireland. Direct farm-to-market distribution network.",
+    "category": "agriculture",
+    "icon": "fas fa-seedling",
+    "min_amount": "2000.00",
+    "max_amount": "100000.00",
+    "daily_roi": "1.30",
+    "duration_days": 180,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.554Z",
+    "updated_at": "2026-03-30T00:04:40.554Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 14,
+  "fields": {
+    "name": "Livestock Trading Fund",
+    "description": "Cattle and livestock trading operations. Profit from breeding, raising, and market sales.",
+    "category": "agriculture",
+    "icon": "fas fa-horse-head",
+    "min_amount": "5000.00",
+    "max_amount": "250000.00",
+    "daily_roi": "1.70",
+    "duration_days": 270,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.555Z",
+    "updated_at": "2026-03-30T00:04:40.555Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 15,
+  "fields": {
+    "name": "AgriTech Ventures",
+    "description": "Investment in agricultural technology startups. Precision farming, drones, and automation.",
+    "category": "agriculture",
+    "icon": "fas fa-tractor",
+    "min_amount": "10000.00",
+    "max_amount": "500000.00",
+    "daily_roi": "2.10",
+    "duration_days": 365,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.557Z",
+    "updated_at": "2026-03-30T00:04:40.557Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 16,
+  "fields": {
+    "name": "Grain Commodity Trading",
+    "description": "Wheat, corn, and soybean futures trading. Global agricultural commodity markets.",
+    "category": "agriculture",
+    "icon": "fas fa-wheat-awn",
+    "min_amount": "3000.00",
+    "max_amount": "150000.00",
+    "daily_roi": "1.90",
+    "duration_days": 120,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.558Z",
+    "updated_at": "2026-03-30T00:04:40.558Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 17,
+  "fields": {
+    "name": "European Solar Farm Fund",
+    "description": "Large-scale solar installations across Spain, Portugal, and Southern France. Government-backed feed-in tariffs.",
+    "category": "solar",
+    "icon": "fas fa-solar-panel",
+    "min_amount": "8000.00",
+    "max_amount": "400000.00",
+    "daily_roi": "1.00",
+    "duration_days": 730,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.560Z",
+    "updated_at": "2026-03-30T00:04:40.560Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 18,
+  "fields": {
+    "name": "African Solar Initiative",
+    "description": "Renewable energy projects in Kenya, Ghana, and South Africa. High impact, high returns.",
+    "category": "agriculture",
+    "icon": "fas fa-sun",
+    "min_amount": "300.00",
+    "max_amount": "1000.00",
+    "daily_roi": "20.00",
+    "duration_days": 1,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 1,
+    "created_at": "2026-03-30T00:04:40.561Z",
+    "updated_at": "2026-03-31T09:06:28.902Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 19,
+  "fields": {
+    "name": "Residential Solar Leasing",
+    "description": "Install solar panels on residential properties. Income from energy sales and leasing agreements.",
+    "category": "solar",
+    "icon": "fas fa-home",
+    "min_amount": "3000.00",
+    "max_amount": "75000.00",
+    "daily_roi": "1.40",
+    "duration_days": 540,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.563Z",
+    "updated_at": "2026-03-30T00:04:40.563Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 20,
+  "fields": {
+    "name": "Green Energy ETF",
+    "description": "Diversified renewable energy portfolio. Solar, wind, and hydro investments worldwide.",
+    "category": "solar",
+    "icon": "fas fa-leaf",
+    "min_amount": "1000.00",
+    "max_amount": "50000.00",
+    "daily_roi": "1.10",
+    "duration_days": 365,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.565Z",
+    "updated_at": "2026-03-30T00:04:40.565Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 21,
+  "fields": {
+    "name": "Tech Giants Portfolio",
+    "description": "Blue-chip technology stocks: Apple, Microsoft, Google, Amazon. Long-term growth strategy.",
+    "category": "stocks",
+    "icon": "fab fa-apple",
+    "min_amount": "1000.00",
+    "max_amount": "100000.00",
+    "daily_roi": "0.90",
+    "duration_days": 365,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.566Z",
+    "updated_at": "2026-03-30T00:04:40.566Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 22,
+  "fields": {
+    "name": "Emerging Markets Fund",
+    "description": "High-growth opportunities in Asian and African markets. Exposure to developing economies.",
+    "category": "stocks",
+    "icon": "fas fa-globe-asia",
+    "min_amount": "2500.00",
+    "max_amount": "150000.00",
+    "daily_roi": "2.80",
+    "duration_days": 180,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.568Z",
+    "updated_at": "2026-03-30T00:04:40.568Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 23,
+  "fields": {
+    "name": "Dividend Aristocrats",
+    "description": "Companies with 25+ years of dividend increases. Reliable income from blue-chip stocks.",
+    "category": "stocks",
+    "icon": "fas fa-crown",
+    "min_amount": "5000.00",
+    "max_amount": "250000.00",
+    "daily_roi": "0.70",
+    "duration_days": 730,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.569Z",
+    "updated_at": "2026-03-30T00:04:40.569Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 24,
+  "fields": {
+    "name": "Gold & Precious Metals",
+    "description": "Physical gold, silver, and platinum holdings. Hedge against inflation and market volatility.",
+    "category": "stocks",
+    "icon": "fas fa-gem",
+    "min_amount": "2000.00",
+    "max_amount": "500000.00",
+    "daily_roi": "0.50",
+    "duration_days": 365,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 0,
+    "created_at": "2026-03-30T00:04:40.571Z",
+    "updated_at": "2026-03-30T00:04:40.571Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 25,
+  "fields": {
+    "name": "Starter Plan",
+    "description": "Perfect for beginners starting their investment journey",
+    "category": "crypto",
+    "icon": "fa-rocket",
+    "min_amount": "50.00",
+    "max_amount": "999.99",
+    "daily_roi": "2.50",
+    "duration_days": 30,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 1,
+    "created_at": "2026-04-10T23:20:34.100Z",
+    "updated_at": "2026-04-27T02:21:41.365Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 26,
+  "fields": {
+    "name": "Bronze Plan",
+    "description": "Balanced returns for steady growth",
+    "category": "crypto",
+    "icon": "fa-medal",
+    "min_amount": "1000.00",
+    "max_amount": "4999.99",
+    "daily_roi": "3.50",
+    "duration_days": 30,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 2,
+    "created_at": "2026-04-10T23:20:34.109Z",
+    "updated_at": "2026-04-27T02:21:41.382Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 27,
+  "fields": {
+    "name": "Silver Plan",
+    "description": "Enhanced returns for serious investors",
+    "category": "crypto",
+    "icon": "fa-gem",
+    "min_amount": "5000.00",
+    "max_amount": "14999.99",
+    "daily_roi": "5.00",
+    "duration_days": 45,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 3,
+    "created_at": "2026-04-10T23:20:34.117Z",
+    "updated_at": "2026-04-27T02:21:41.387Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 28,
+  "fields": {
+    "name": "Gold Plan",
+    "description": "Premium returns for high-net-worth individuals",
+    "category": "crypto",
+    "icon": "fa-crown",
+    "min_amount": "15000.00",
+    "max_amount": "49999.99",
+    "daily_roi": "7.00",
+    "duration_days": 60,
+    "is_active": true,
+    "is_featured": true,
+    "sort_order": 4,
+    "created_at": "2026-04-10T23:20:34.126Z",
+    "updated_at": "2026-04-27T02:21:41.391Z"
+  }
+},
+{
+  "model": "investments.investmentplan",
+  "pk": 29,
+  "fields": {
+    "name": "Platinum Plan",
+    "description": "Maximum returns for elite investors",
+    "category": "crypto",
+    "icon": "fa-trophy",
+    "min_amount": "50000.00",
+    "max_amount": "999999.99",
+    "daily_roi": "10.00",
+    "duration_days": 90,
+    "is_active": true,
+    "is_featured": false,
+    "sort_order": 5,
+    "created_at": "2026-04-10T23:20:34.133Z",
+    "updated_at": "2026-04-27T02:21:41.396Z"
+  }
+},
+{
+  "model": "investments.walletaddress",
+  "pk": 7,
+  "fields": {
+    "crypto_type": "BANK",
+    "address": "Contact Support via Chat",
+    "label": "Bank Transfer - Contact Support",
+    "network": "Bank Wire",
+    "qr_code": "",
+    "qr_code_image": "",
+    "is_active": true,
+    "created_at": "2026-04-10T23:20:33.296Z",
+    "updated_at": "2026-04-27T02:21:40.610Z"
+  }
+},
+{
+  "model": "investments.walletaddress",
+  "pk": 8,
+  "fields": {
+    "crypto_type": "BTC",
+    "address": "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
+    "label": "Bitcoin Main Wallet",
+    "network": "Bitcoin Network",
+    "qr_code": "",
+    "qr_code_image": "",
+    "is_active": true,
+    "created_at": "2026-04-12T23:07:22.004Z",
+    "updated_at": "2026-04-27T02:21:40.582Z"
+  }
+},
+{
+  "model": "investments.walletaddress",
+  "pk": 9,
+  "fields": {
+    "crypto_type": "ETH",
+    "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb8",
+    "label": "Ethereum Main Wallet",
+    "network": "ERC-20",
+    "qr_code": "",
+    "qr_code_image": "",
+    "is_active": true,
+    "created_at": "2026-04-12T23:08:20.283Z",
+    "updated_at": "2026-04-27T02:21:40.587Z"
+  }
+},
+{
+  "model": "investments.walletaddress",
+  "pk": 10,
+  "fields": {
+    "crypto_type": "USDT",
+    "address": "TQjXhJ3X8e9YJp4hZvQ2nJZRWr8FnEyKzZ",
+    "label": "USDT TRC-20 Wallet",
+    "network": "TRC-20",
+    "qr_code": "",
+    "qr_code_image": "",
+    "is_active": true,
+    "created_at": "2026-04-12T23:09:19.576Z",
+    "updated_at": "2026-04-27T02:21:40.592Z"
+  }
+},
+{
+  "model": "investments.walletaddress",
+  "pk": 11,
+  "fields": {
+    "crypto_type": "USDC",
+    "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb8",
+    "label": "USDC Main Wallet",
+    "network": "ERC-20",
+    "qr_code": "",
+    "qr_code_image": "",
+    "is_active": true,
+    "created_at": "2026-04-12T23:10:17.486Z",
+    "updated_at": "2026-04-27T02:21:40.596Z"
+  }
+},
+{
+  "model": "investments.walletaddress",
+  "pk": 12,
+  "fields": {
+    "crypto_type": "LTC",
+    "address": "ltc1qg6hpzwkgkg4p8qftygvwsj0f23zk5nkr5skhqd",
+    "label": "Litecoin Main Wallet",
+    "network": "Litecoin Network",
+    "qr_code": "",
+    "qr_code_image": "",
+    "is_active": true,
+    "created_at": "2026-04-12T23:19:06.034Z",
+    "updated_at": "2026-04-27T02:21:40.601Z"
+  }
+},
+{
+  "model": "investments.walletaddress",
+  "pk": 13,
+  "fields": {
+    "crypto_type": "BNB",
+    "address": "bnb1grpf0955h0ykzq3ar5nmum7y6gdfl6lxfn46h2",
+    "label": "Binance Coin Wallet",
+    "network": "BEP-20",
+    "qr_code": "",
+    "qr_code_image": "",
+    "is_active": true,
+    "created_at": "2026-04-12T23:19:06.044Z",
+    "updated_at": "2026-04-27T02:21:40.605Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 1,
+  "fields": {
+    "symbol": "BTC",
+    "name": "Bitcoin",
+    "coingecko_id": "bitcoin",
+    "is_active": true,
+    "display_order": 1,
+    "created_at": "2026-03-29T23:53:17.296Z",
+    "updated_at": "2026-03-29T23:53:17.296Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 2,
+  "fields": {
+    "symbol": "ETH",
+    "name": "Ethereum",
+    "coingecko_id": "ethereum",
+    "is_active": true,
+    "display_order": 2,
+    "created_at": "2026-03-29T23:53:17.301Z",
+    "updated_at": "2026-03-29T23:53:17.301Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 3,
+  "fields": {
+    "symbol": "USDT",
+    "name": "Tether",
+    "coingecko_id": "tether",
+    "is_active": true,
+    "display_order": 3,
+    "created_at": "2026-03-29T23:53:17.304Z",
+    "updated_at": "2026-03-29T23:53:17.304Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 4,
+  "fields": {
+    "symbol": "BNB",
+    "name": "BNB",
+    "coingecko_id": "binancecoin",
+    "is_active": true,
+    "display_order": 4,
+    "created_at": "2026-03-29T23:53:17.308Z",
+    "updated_at": "2026-03-29T23:53:17.308Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 5,
+  "fields": {
+    "symbol": "SOL",
+    "name": "Solana",
+    "coingecko_id": "solana",
+    "is_active": true,
+    "display_order": 5,
+    "created_at": "2026-03-29T23:53:17.311Z",
+    "updated_at": "2026-03-29T23:53:17.311Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 6,
+  "fields": {
+    "symbol": "XRP",
+    "name": "XRP",
+    "coingecko_id": "ripple",
+    "is_active": true,
+    "display_order": 6,
+    "created_at": "2026-03-29T23:53:17.315Z",
+    "updated_at": "2026-03-29T23:53:17.315Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 7,
+  "fields": {
+    "symbol": "USDC",
+    "name": "USD Coin",
+    "coingecko_id": "usd-coin",
+    "is_active": true,
+    "display_order": 7,
+    "created_at": "2026-03-29T23:53:17.355Z",
+    "updated_at": "2026-03-29T23:53:17.355Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 8,
+  "fields": {
+    "symbol": "ADA",
+    "name": "Cardano",
+    "coingecko_id": "cardano",
+    "is_active": true,
+    "display_order": 8,
+    "created_at": "2026-03-29T23:53:17.359Z",
+    "updated_at": "2026-03-29T23:53:17.359Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 9,
+  "fields": {
+    "symbol": "DOGE",
+    "name": "Dogecoin",
+    "coingecko_id": "dogecoin",
+    "is_active": true,
+    "display_order": 9,
+    "created_at": "2026-03-29T23:53:17.362Z",
+    "updated_at": "2026-03-29T23:53:17.362Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 10,
+  "fields": {
+    "symbol": "TRX",
+    "name": "TRON",
+    "coingecko_id": "tron",
+    "is_active": true,
+    "display_order": 10,
+    "created_at": "2026-03-29T23:53:17.366Z",
+    "updated_at": "2026-03-29T23:53:17.366Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 11,
+  "fields": {
+    "symbol": "DOT",
+    "name": "Polkadot",
+    "coingecko_id": "polkadot",
+    "is_active": true,
+    "display_order": 11,
+    "created_at": "2026-03-29T23:53:17.369Z",
+    "updated_at": "2026-03-29T23:53:17.369Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 12,
+  "fields": {
+    "symbol": "MATIC",
+    "name": "Polygon",
+    "coingecko_id": "matic-network",
+    "is_active": true,
+    "display_order": 12,
+    "created_at": "2026-03-29T23:53:17.372Z",
+    "updated_at": "2026-03-29T23:53:17.372Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 13,
+  "fields": {
+    "symbol": "LTC",
+    "name": "Litecoin",
+    "coingecko_id": "litecoin",
+    "is_active": true,
+    "display_order": 13,
+    "created_at": "2026-03-29T23:53:17.376Z",
+    "updated_at": "2026-03-29T23:53:17.376Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 14,
+  "fields": {
+    "symbol": "SHIB",
+    "name": "Shiba Inu",
+    "coingecko_id": "shiba-inu",
+    "is_active": true,
+    "display_order": 14,
+    "created_at": "2026-03-29T23:53:17.379Z",
+    "updated_at": "2026-03-29T23:53:17.379Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 15,
+  "fields": {
+    "symbol": "AVAX",
+    "name": "Avalanche",
+    "coingecko_id": "avalanche-2",
+    "is_active": true,
+    "display_order": 15,
+    "created_at": "2026-03-29T23:53:17.382Z",
+    "updated_at": "2026-03-29T23:53:17.382Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 16,
+  "fields": {
+    "symbol": "UNI",
+    "name": "Uniswap",
+    "coingecko_id": "uniswap",
+    "is_active": true,
+    "display_order": 16,
+    "created_at": "2026-03-29T23:53:17.385Z",
+    "updated_at": "2026-03-29T23:53:17.385Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 17,
+  "fields": {
+    "symbol": "LINK",
+    "name": "Chainlink",
+    "coingecko_id": "chainlink",
+    "is_active": true,
+    "display_order": 17,
+    "created_at": "2026-03-29T23:53:17.389Z",
+    "updated_at": "2026-03-29T23:53:17.389Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 18,
+  "fields": {
+    "symbol": "ATOM",
+    "name": "Cosmos",
+    "coingecko_id": "cosmos",
+    "is_active": true,
+    "display_order": 18,
+    "created_at": "2026-03-29T23:53:17.392Z",
+    "updated_at": "2026-03-29T23:53:17.392Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 19,
+  "fields": {
+    "symbol": "XLM",
+    "name": "Stellar",
+    "coingecko_id": "stellar",
+    "is_active": true,
+    "display_order": 19,
+    "created_at": "2026-03-29T23:53:17.395Z",
+    "updated_at": "2026-03-29T23:53:17.395Z"
+  }
+},
+{
+  "model": "investments.cryptoticker",
+  "pk": 20,
+  "fields": {
+    "symbol": "XMR",
+    "name": "Monero",
+    "coingecko_id": "monero",
+    "is_active": true,
+    "display_order": 20,
+    "created_at": "2026-03-29T23:53:17.399Z",
+    "updated_at": "2026-03-29T23:53:17.399Z"
+  }
+},
+{
+  "model": "dashboard.contactmessage",
+  "pk": 1,
+  "fields": {
+    "name": "Ashwani Sharma",
+    "email": "ashwani@rocketdigitaltech.com",
+    "subject": "withdrawal",
+    "message": "Hello http://elitewealthcapita.uk,\r\n \r\nIf you’re looking to boost your website’s visibility, I can help you achieve top Google rankings.\r\n \r\nI’ll prepare a complete SEO plan with actionable steps and potential growth insights for your products or services.\r\n \r\nOnce you share your target keywords and target market, I’ll send a full proposal.\r\n \r\nBest Regards,\r\nAshwani",
+    "is_read": false,
+    "created_at": "2026-04-01T23:48:52.638Z"
+  }
+},
+{
+  "model": "dashboard.contactmessage",
+  "pk": 2,
+  "fields": {
+    "name": "Leeza Bindra",
+    "email": "leeza.rocketdigitaltech@gmail.com",
+    "subject": "billing",
+    "message": "Hello http://elitewealthcapita.uk,\r\n \r\nI came across your business online and wanted to reach out.\r\n\r\nIf you are considering improving your website design or creating a new website, we can help with modern, responsive, and user-friendly website development.\r\n\r\nPlease let me know if you would like to see our portfolio or discuss your requirements.\r\n \r\nBest Regards,\r\nLeeza",
+    "is_read": false,
+    "created_at": "2026-04-02T23:57:12.825Z"
+  }
+},
+{
+  "model": "dashboard.contactmessage",
+  "pk": 4,
+  "fields": {
+    "name": "Ananya Singh",
+    "email": "ananya@rocketdigitaltech.com",
+    "subject": "general",
+    "message": "Hello http://elitewealthcapita.uk,\r\n \r\nIf you’re looking to boost your website’s visibility, I can help you achieve top Google rankings.\r\n \r\nI’ll prepare a complete SEO plan with actionable steps and potential growth insights for your products or services.\r\n \r\nOnce you share your target keywords and target market, I’ll send a full proposal.\r\n \r\nBest Regards,\r\nAnanya",
+    "is_read": false,
+    "created_at": "2026-04-16T20:28:11.355Z"
+  }
+},
+{
+  "model": "dashboard.contactmessage",
+  "pk": 5,
+  "fields": {
+    "name": "Triumph Resources LLC",
+    "email": "procurement.dept@consultant.com",
+    "subject": "kyc",
+    "message": "Dear Sir or Madam,\r\n\r\nI hope this message finds you well.\r\n\r\nWe are currently engaging with qualified buyers and mandates seeking a reliable supply of energy products through verified seller-side channels. Our current inventory includes EN590 10ppm, Jet Fuel A1, D6, and LNG.\r\n\r\nWe offer flexible transaction structures tailored to logistical requirements, including STS, TTO, TTV, TTT, FOB, and CIF, with escrow options available where applicable. We are open to discussing both immediate spot purchases and long-term contract allocations, provided they align with buyer capabilities.\r\n\r\nOur operations prioritize transparent documentation, rigorous procedures, and efficient execution. Furthermore, all intermediary interests are protected under standard NCNDA/IMFPA agreements.\r\n\r\nIf these offerings align with your current procurement objectives, we invite you to reach out for a detailed review of our procedures and commercial terms. For further information or to initiate a formal inquiry, please contact our team directly at procurement@triumphresourcesllc.com\r\n\r\nKindly advise if you would like to proceed with the next stage of our protocols.\r\n\r\nBest regards,\r\n\r\nCharles Jerkins\r\nSales Director\r\nTriumph Resources LLC",
+    "is_read": false,
+    "created_at": "2026-04-16T21:26:45.434Z"
+  }
+},
+{
+  "model": "dashboard.contactmessage",
+  "pk": 7,
+  "fields": {
+    "name": "Triumph Resources LLC",
+    "email": "procurement.dept@consultant.com",
+    "subject": "investment",
+    "message": "Dear Sir or Madam,\r\n\r\nI hope this message finds you well.\r\n\r\nWe are currently engaging with qualified buyers and mandates seeking a reliable supply of energy products through verified seller-side channels. Our current inventory includes EN590 10ppm, Jet Fuel A1, D6, and LNG.\r\n\r\nWe offer flexible transaction structures tailored to logistical requirements, including STS, TTO, TTV, TTT, FOB, and CIF, with escrow options available where applicable. We are open to discussing both immediate spot purchases and long-term contract allocations, provided they align with buyer capabilities.\r\n\r\nOur operations prioritize transparent documentation, rigorous procedures, and efficient execution. Furthermore, all intermediary interests are protected under standard NCNDA/IMFPA agreements.\r\n\r\nIf these offerings align with your current procurement objectives, we invite you to reach out for a detailed review of our procedures and commercial terms. For further information or to initiate a formal inquiry, please contact our team directly at procurement@triumphresourcesllc.com\r\n\r\nKindly advise if you would like to proceed with the next stage of our protocols.\r\n\r\nBest regards,\r\n\r\nCharles Jerkins\r\nSales Director\r\nTriumph Resources LLC",
+    "is_read": false,
+    "created_at": "2026-04-17T04:25:09.548Z"
+  }
+},
+{
+  "model": "dashboard.contactmessage",
+  "pk": 8,
+  "fields": {
+    "name": "Triumph Resources LLC",
+    "email": "procurement.dept@consultant.com",
+    "subject": "technical",
+    "message": "Dear Sir or Madam,\r\n\r\nI hope this message finds you well.\r\n\r\nWe are currently engaging with qualified buyers and mandates seeking a reliable supply of energy products through verified seller-side channels. Our current inventory includes EN590 10ppm, Jet Fuel A1, D6, and LNG.\r\n\r\nWe offer flexible transaction structures tailored to logistical requirements, including STS, TTO, TTV, TTT, FOB, and CIF, with escrow options available where applicable. We are open to discussing both immediate spot purchases and long-term contract allocations, provided they align with buyer capabilities.\r\n\r\nOur operations prioritize transparent documentation, rigorous procedures, and efficient execution. Furthermore, all intermediary interests are protected under standard NCNDA/IMFPA agreements.\r\n\r\nIf these offerings align with your current procurement objectives, we invite you to reach out for a detailed review of our procedures and commercial terms. For further information or to initiate a formal inquiry, please contact our team directly at procurement@triumphresourcesllc.com\r\n\r\nKindly advise if you would like to proceed with the next stage of our protocols.\r\n\r\nBest regards,\r\n\r\nCharles Jerkins\r\nSales Director\r\nTriumph Resources LLC",
+    "is_read": false,
+    "created_at": "2026-04-17T06:57:39.474Z"
+  }
+},
+{
+  "model": "dashboard.contactmessage",
+  "pk": 10,
+  "fields": {
+    "name": "Ananya Singh",
+    "email": "ananya@rocketdigitaltech.com",
+    "subject": "investment",
+    "message": "Hello http://elitewealthcapita.uk,\r\n \r\nI wanted to reach out to see if you’re open to exploring ways to grow your website traffic and boost online performance.\r\n \r\nWe offer customized SEO services that deliver measurable improvements.\r\n \r\nOnce you share your target keywords and target market, I’ll send a full proposal.\r\n \r\nBest Regards,\r\nAnanya",
+    "is_read": false,
+    "created_at": "2026-04-23T20:14:12.418Z"
+  }
+},
+{
+  "model": "dashboard.sitesettings",
+  "pk": 1,
+  "fields": {
+    "stripe_api_key": "",
+    "stripe_publishable_key": "",
+    "paypal_client_id": "",
+    "paypal_client_secret": "",
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": 587,
+    "smtp_username": "",
+    "smtp_password": "",
+    "from_email": "",
+    "company_name": "Elite Wealth Capital",
+    "company_email": "admin@elitewealthcapital.uk",
+    "company_phone": "+44 20 7946 0958",
+    "company_address": "London, United Kingdom",
+    "company_website": "https://elitewealthcapital.uk",
+    "support_email": "support@elitewealthcapital.uk",
+    "maintenance_mode": false,
+    "enable_registrations": true,
+    "enable_deposits": true,
+    "enable_withdrawals": true,
+    "enable_two_factor": true,
+    "enable_ip_whitelist": false,
+    "session_timeout_minutes": 30,
+    "kyc_required": true,
+    "minimum_deposit": "100.00",
+    "maximum_withdrawal": "50000.00",
+    "updated_at": "2026-03-29T19:00:51.968Z"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "django_celery_beat",
+    "model": "crontabschedule"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "django_celery_beat",
+    "model": "intervalschedule"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "django_celery_beat",
+    "model": "periodictask"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "django_celery_beat",
+    "model": "periodictasks"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "django_celery_beat",
+    "model": "solarschedule"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "django_celery_beat",
+    "model": "clockedschedule"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "django_celery_results",
+    "model": "taskresult"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "django_celery_results",
+    "model": "chordcounter"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "django_celery_results",
+    "model": "groupresult"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "accounts",
+    "model": "customuser"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "accounts",
+    "model": "referral"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "accounts",
+    "model": "activitylog"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "investments",
+    "model": "coupon"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "investments",
+    "model": "investmentplan"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "investments",
+    "model": "loan"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "investments",
+    "model": "walletaddress"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "investments",
+    "model": "virtualcard"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "investments",
+    "model": "loanrepayment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "investments",
+    "model": "investment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "investments",
+    "model": "deposit"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "investments",
+    "model": "couponusage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "investments",
+    "model": "agentapplication"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "investments",
+    "model": "accountupgrade"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "investments",
+    "model": "withdrawal"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "dashboard",
+    "model": "contactmessage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "dashboard",
+    "model": "newsarticle"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "dashboard",
+    "model": "newslettersubscription"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "dashboard",
+    "model": "dispute"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "dashboard",
+    "model": "certificate"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "dashboard",
+    "model": "sitesettings"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "dashboard",
+    "model": "adminsession"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "dashboard",
+    "model": "adminactivitylog"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "kyc",
+    "model": "kycdocument"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "notifications",
+    "model": "notification"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "investments",
+    "model": "cryptoticker"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add crontab",
+    "content_type": [
+      "django_celery_beat",
+      "crontabschedule"
+    ],
+    "codename": "add_crontabschedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change crontab",
+    "content_type": [
+      "django_celery_beat",
+      "crontabschedule"
+    ],
+    "codename": "change_crontabschedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete crontab",
+    "content_type": [
+      "django_celery_beat",
+      "crontabschedule"
+    ],
+    "codename": "delete_crontabschedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view crontab",
+    "content_type": [
+      "django_celery_beat",
+      "crontabschedule"
+    ],
+    "codename": "view_crontabschedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add interval",
+    "content_type": [
+      "django_celery_beat",
+      "intervalschedule"
+    ],
+    "codename": "add_intervalschedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change interval",
+    "content_type": [
+      "django_celery_beat",
+      "intervalschedule"
+    ],
+    "codename": "change_intervalschedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete interval",
+    "content_type": [
+      "django_celery_beat",
+      "intervalschedule"
+    ],
+    "codename": "delete_intervalschedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view interval",
+    "content_type": [
+      "django_celery_beat",
+      "intervalschedule"
+    ],
+    "codename": "view_intervalschedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add periodic task",
+    "content_type": [
+      "django_celery_beat",
+      "periodictask"
+    ],
+    "codename": "add_periodictask"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change periodic task",
+    "content_type": [
+      "django_celery_beat",
+      "periodictask"
+    ],
+    "codename": "change_periodictask"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete periodic task",
+    "content_type": [
+      "django_celery_beat",
+      "periodictask"
+    ],
+    "codename": "delete_periodictask"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view periodic task",
+    "content_type": [
+      "django_celery_beat",
+      "periodictask"
+    ],
+    "codename": "view_periodictask"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add periodic task track",
+    "content_type": [
+      "django_celery_beat",
+      "periodictasks"
+    ],
+    "codename": "add_periodictasks"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change periodic task track",
+    "content_type": [
+      "django_celery_beat",
+      "periodictasks"
+    ],
+    "codename": "change_periodictasks"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete periodic task track",
+    "content_type": [
+      "django_celery_beat",
+      "periodictasks"
+    ],
+    "codename": "delete_periodictasks"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view periodic task track",
+    "content_type": [
+      "django_celery_beat",
+      "periodictasks"
+    ],
+    "codename": "view_periodictasks"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add solar event",
+    "content_type": [
+      "django_celery_beat",
+      "solarschedule"
+    ],
+    "codename": "add_solarschedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change solar event",
+    "content_type": [
+      "django_celery_beat",
+      "solarschedule"
+    ],
+    "codename": "change_solarschedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete solar event",
+    "content_type": [
+      "django_celery_beat",
+      "solarschedule"
+    ],
+    "codename": "delete_solarschedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view solar event",
+    "content_type": [
+      "django_celery_beat",
+      "solarschedule"
+    ],
+    "codename": "view_solarschedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add clocked",
+    "content_type": [
+      "django_celery_beat",
+      "clockedschedule"
+    ],
+    "codename": "add_clockedschedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change clocked",
+    "content_type": [
+      "django_celery_beat",
+      "clockedschedule"
+    ],
+    "codename": "change_clockedschedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete clocked",
+    "content_type": [
+      "django_celery_beat",
+      "clockedschedule"
+    ],
+    "codename": "delete_clockedschedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view clocked",
+    "content_type": [
+      "django_celery_beat",
+      "clockedschedule"
+    ],
+    "codename": "view_clockedschedule"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add task result",
+    "content_type": [
+      "django_celery_results",
+      "taskresult"
+    ],
+    "codename": "add_taskresult"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change task result",
+    "content_type": [
+      "django_celery_results",
+      "taskresult"
+    ],
+    "codename": "change_taskresult"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete task result",
+    "content_type": [
+      "django_celery_results",
+      "taskresult"
+    ],
+    "codename": "delete_taskresult"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view task result",
+    "content_type": [
+      "django_celery_results",
+      "taskresult"
+    ],
+    "codename": "view_taskresult"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add chord counter",
+    "content_type": [
+      "django_celery_results",
+      "chordcounter"
+    ],
+    "codename": "add_chordcounter"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change chord counter",
+    "content_type": [
+      "django_celery_results",
+      "chordcounter"
+    ],
+    "codename": "change_chordcounter"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete chord counter",
+    "content_type": [
+      "django_celery_results",
+      "chordcounter"
+    ],
+    "codename": "delete_chordcounter"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view chord counter",
+    "content_type": [
+      "django_celery_results",
+      "chordcounter"
+    ],
+    "codename": "view_chordcounter"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add group result",
+    "content_type": [
+      "django_celery_results",
+      "groupresult"
+    ],
+    "codename": "add_groupresult"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change group result",
+    "content_type": [
+      "django_celery_results",
+      "groupresult"
+    ],
+    "codename": "change_groupresult"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete group result",
+    "content_type": [
+      "django_celery_results",
+      "groupresult"
+    ],
+    "codename": "delete_groupresult"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view group result",
+    "content_type": [
+      "django_celery_results",
+      "groupresult"
+    ],
+    "codename": "view_groupresult"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add User",
+    "content_type": [
+      "accounts",
+      "customuser"
+    ],
+    "codename": "add_customuser"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change User",
+    "content_type": [
+      "accounts",
+      "customuser"
+    ],
+    "codename": "change_customuser"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete User",
+    "content_type": [
+      "accounts",
+      "customuser"
+    ],
+    "codename": "delete_customuser"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view User",
+    "content_type": [
+      "accounts",
+      "customuser"
+    ],
+    "codename": "view_customuser"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Referral",
+    "content_type": [
+      "accounts",
+      "referral"
+    ],
+    "codename": "add_referral"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Referral",
+    "content_type": [
+      "accounts",
+      "referral"
+    ],
+    "codename": "change_referral"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Referral",
+    "content_type": [
+      "accounts",
+      "referral"
+    ],
+    "codename": "delete_referral"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Referral",
+    "content_type": [
+      "accounts",
+      "referral"
+    ],
+    "codename": "view_referral"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Activity Log",
+    "content_type": [
+      "accounts",
+      "activitylog"
+    ],
+    "codename": "add_activitylog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Activity Log",
+    "content_type": [
+      "accounts",
+      "activitylog"
+    ],
+    "codename": "change_activitylog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Activity Log",
+    "content_type": [
+      "accounts",
+      "activitylog"
+    ],
+    "codename": "delete_activitylog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Activity Log",
+    "content_type": [
+      "accounts",
+      "activitylog"
+    ],
+    "codename": "view_activitylog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Coupon",
+    "content_type": [
+      "investments",
+      "coupon"
+    ],
+    "codename": "add_coupon"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Coupon",
+    "content_type": [
+      "investments",
+      "coupon"
+    ],
+    "codename": "change_coupon"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Coupon",
+    "content_type": [
+      "investments",
+      "coupon"
+    ],
+    "codename": "delete_coupon"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Coupon",
+    "content_type": [
+      "investments",
+      "coupon"
+    ],
+    "codename": "view_coupon"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Investment Plan",
+    "content_type": [
+      "investments",
+      "investmentplan"
+    ],
+    "codename": "add_investmentplan"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Investment Plan",
+    "content_type": [
+      "investments",
+      "investmentplan"
+    ],
+    "codename": "change_investmentplan"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Investment Plan",
+    "content_type": [
+      "investments",
+      "investmentplan"
+    ],
+    "codename": "delete_investmentplan"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Investment Plan",
+    "content_type": [
+      "investments",
+      "investmentplan"
+    ],
+    "codename": "view_investmentplan"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Loan",
+    "content_type": [
+      "investments",
+      "loan"
+    ],
+    "codename": "add_loan"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Loan",
+    "content_type": [
+      "investments",
+      "loan"
+    ],
+    "codename": "change_loan"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Loan",
+    "content_type": [
+      "investments",
+      "loan"
+    ],
+    "codename": "delete_loan"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Loan",
+    "content_type": [
+      "investments",
+      "loan"
+    ],
+    "codename": "view_loan"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Wallet Address",
+    "content_type": [
+      "investments",
+      "walletaddress"
+    ],
+    "codename": "add_walletaddress"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Wallet Address",
+    "content_type": [
+      "investments",
+      "walletaddress"
+    ],
+    "codename": "change_walletaddress"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Wallet Address",
+    "content_type": [
+      "investments",
+      "walletaddress"
+    ],
+    "codename": "delete_walletaddress"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Wallet Address",
+    "content_type": [
+      "investments",
+      "walletaddress"
+    ],
+    "codename": "view_walletaddress"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Virtual Card",
+    "content_type": [
+      "investments",
+      "virtualcard"
+    ],
+    "codename": "add_virtualcard"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Virtual Card",
+    "content_type": [
+      "investments",
+      "virtualcard"
+    ],
+    "codename": "change_virtualcard"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Virtual Card",
+    "content_type": [
+      "investments",
+      "virtualcard"
+    ],
+    "codename": "delete_virtualcard"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Virtual Card",
+    "content_type": [
+      "investments",
+      "virtualcard"
+    ],
+    "codename": "view_virtualcard"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Loan Repayment",
+    "content_type": [
+      "investments",
+      "loanrepayment"
+    ],
+    "codename": "add_loanrepayment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Loan Repayment",
+    "content_type": [
+      "investments",
+      "loanrepayment"
+    ],
+    "codename": "change_loanrepayment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Loan Repayment",
+    "content_type": [
+      "investments",
+      "loanrepayment"
+    ],
+    "codename": "delete_loanrepayment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Loan Repayment",
+    "content_type": [
+      "investments",
+      "loanrepayment"
+    ],
+    "codename": "view_loanrepayment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Investment",
+    "content_type": [
+      "investments",
+      "investment"
+    ],
+    "codename": "add_investment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Investment",
+    "content_type": [
+      "investments",
+      "investment"
+    ],
+    "codename": "change_investment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Investment",
+    "content_type": [
+      "investments",
+      "investment"
+    ],
+    "codename": "delete_investment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Investment",
+    "content_type": [
+      "investments",
+      "investment"
+    ],
+    "codename": "view_investment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Deposit",
+    "content_type": [
+      "investments",
+      "deposit"
+    ],
+    "codename": "add_deposit"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Deposit",
+    "content_type": [
+      "investments",
+      "deposit"
+    ],
+    "codename": "change_deposit"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Deposit",
+    "content_type": [
+      "investments",
+      "deposit"
+    ],
+    "codename": "delete_deposit"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Deposit",
+    "content_type": [
+      "investments",
+      "deposit"
+    ],
+    "codename": "view_deposit"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Coupon Usage",
+    "content_type": [
+      "investments",
+      "couponusage"
+    ],
+    "codename": "add_couponusage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Coupon Usage",
+    "content_type": [
+      "investments",
+      "couponusage"
+    ],
+    "codename": "change_couponusage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Coupon Usage",
+    "content_type": [
+      "investments",
+      "couponusage"
+    ],
+    "codename": "delete_couponusage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Coupon Usage",
+    "content_type": [
+      "investments",
+      "couponusage"
+    ],
+    "codename": "view_couponusage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Agent Application",
+    "content_type": [
+      "investments",
+      "agentapplication"
+    ],
+    "codename": "add_agentapplication"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Agent Application",
+    "content_type": [
+      "investments",
+      "agentapplication"
+    ],
+    "codename": "change_agentapplication"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Agent Application",
+    "content_type": [
+      "investments",
+      "agentapplication"
+    ],
+    "codename": "delete_agentapplication"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Agent Application",
+    "content_type": [
+      "investments",
+      "agentapplication"
+    ],
+    "codename": "view_agentapplication"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Account Upgrade",
+    "content_type": [
+      "investments",
+      "accountupgrade"
+    ],
+    "codename": "add_accountupgrade"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Account Upgrade",
+    "content_type": [
+      "investments",
+      "accountupgrade"
+    ],
+    "codename": "change_accountupgrade"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Account Upgrade",
+    "content_type": [
+      "investments",
+      "accountupgrade"
+    ],
+    "codename": "delete_accountupgrade"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Account Upgrade",
+    "content_type": [
+      "investments",
+      "accountupgrade"
+    ],
+    "codename": "view_accountupgrade"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Withdrawal",
+    "content_type": [
+      "investments",
+      "withdrawal"
+    ],
+    "codename": "add_withdrawal"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Withdrawal",
+    "content_type": [
+      "investments",
+      "withdrawal"
+    ],
+    "codename": "change_withdrawal"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Withdrawal",
+    "content_type": [
+      "investments",
+      "withdrawal"
+    ],
+    "codename": "delete_withdrawal"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Withdrawal",
+    "content_type": [
+      "investments",
+      "withdrawal"
+    ],
+    "codename": "view_withdrawal"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Contact Message",
+    "content_type": [
+      "dashboard",
+      "contactmessage"
+    ],
+    "codename": "add_contactmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Contact Message",
+    "content_type": [
+      "dashboard",
+      "contactmessage"
+    ],
+    "codename": "change_contactmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Contact Message",
+    "content_type": [
+      "dashboard",
+      "contactmessage"
+    ],
+    "codename": "delete_contactmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Contact Message",
+    "content_type": [
+      "dashboard",
+      "contactmessage"
+    ],
+    "codename": "view_contactmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add News Article",
+    "content_type": [
+      "dashboard",
+      "newsarticle"
+    ],
+    "codename": "add_newsarticle"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change News Article",
+    "content_type": [
+      "dashboard",
+      "newsarticle"
+    ],
+    "codename": "change_newsarticle"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete News Article",
+    "content_type": [
+      "dashboard",
+      "newsarticle"
+    ],
+    "codename": "delete_newsarticle"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view News Article",
+    "content_type": [
+      "dashboard",
+      "newsarticle"
+    ],
+    "codename": "view_newsarticle"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Newsletter Subscription",
+    "content_type": [
+      "dashboard",
+      "newslettersubscription"
+    ],
+    "codename": "add_newslettersubscription"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Newsletter Subscription",
+    "content_type": [
+      "dashboard",
+      "newslettersubscription"
+    ],
+    "codename": "change_newslettersubscription"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Newsletter Subscription",
+    "content_type": [
+      "dashboard",
+      "newslettersubscription"
+    ],
+    "codename": "delete_newslettersubscription"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Newsletter Subscription",
+    "content_type": [
+      "dashboard",
+      "newslettersubscription"
+    ],
+    "codename": "view_newslettersubscription"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Dispute",
+    "content_type": [
+      "dashboard",
+      "dispute"
+    ],
+    "codename": "add_dispute"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Dispute",
+    "content_type": [
+      "dashboard",
+      "dispute"
+    ],
+    "codename": "change_dispute"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Dispute",
+    "content_type": [
+      "dashboard",
+      "dispute"
+    ],
+    "codename": "delete_dispute"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Dispute",
+    "content_type": [
+      "dashboard",
+      "dispute"
+    ],
+    "codename": "view_dispute"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Certificate",
+    "content_type": [
+      "dashboard",
+      "certificate"
+    ],
+    "codename": "add_certificate"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Certificate",
+    "content_type": [
+      "dashboard",
+      "certificate"
+    ],
+    "codename": "change_certificate"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Certificate",
+    "content_type": [
+      "dashboard",
+      "certificate"
+    ],
+    "codename": "delete_certificate"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Certificate",
+    "content_type": [
+      "dashboard",
+      "certificate"
+    ],
+    "codename": "view_certificate"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Site Settings",
+    "content_type": [
+      "dashboard",
+      "sitesettings"
+    ],
+    "codename": "add_sitesettings"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Site Settings",
+    "content_type": [
+      "dashboard",
+      "sitesettings"
+    ],
+    "codename": "change_sitesettings"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Site Settings",
+    "content_type": [
+      "dashboard",
+      "sitesettings"
+    ],
+    "codename": "delete_sitesettings"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Site Settings",
+    "content_type": [
+      "dashboard",
+      "sitesettings"
+    ],
+    "codename": "view_sitesettings"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Admin Session",
+    "content_type": [
+      "dashboard",
+      "adminsession"
+    ],
+    "codename": "add_adminsession"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Admin Session",
+    "content_type": [
+      "dashboard",
+      "adminsession"
+    ],
+    "codename": "change_adminsession"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Admin Session",
+    "content_type": [
+      "dashboard",
+      "adminsession"
+    ],
+    "codename": "delete_adminsession"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Admin Session",
+    "content_type": [
+      "dashboard",
+      "adminsession"
+    ],
+    "codename": "view_adminsession"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Admin Activity Log",
+    "content_type": [
+      "dashboard",
+      "adminactivitylog"
+    ],
+    "codename": "add_adminactivitylog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Admin Activity Log",
+    "content_type": [
+      "dashboard",
+      "adminactivitylog"
+    ],
+    "codename": "change_adminactivitylog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Admin Activity Log",
+    "content_type": [
+      "dashboard",
+      "adminactivitylog"
+    ],
+    "codename": "delete_adminactivitylog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Admin Activity Log",
+    "content_type": [
+      "dashboard",
+      "adminactivitylog"
+    ],
+    "codename": "view_adminactivitylog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add KYC Document",
+    "content_type": [
+      "kyc",
+      "kycdocument"
+    ],
+    "codename": "add_kycdocument"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change KYC Document",
+    "content_type": [
+      "kyc",
+      "kycdocument"
+    ],
+    "codename": "change_kycdocument"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete KYC Document",
+    "content_type": [
+      "kyc",
+      "kycdocument"
+    ],
+    "codename": "delete_kycdocument"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view KYC Document",
+    "content_type": [
+      "kyc",
+      "kycdocument"
+    ],
+    "codename": "view_kycdocument"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Notification",
+    "content_type": [
+      "notifications",
+      "notification"
+    ],
+    "codename": "add_notification"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Notification",
+    "content_type": [
+      "notifications",
+      "notification"
+    ],
+    "codename": "change_notification"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Notification",
+    "content_type": [
+      "notifications",
+      "notification"
+    ],
+    "codename": "delete_notification"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Notification",
+    "content_type": [
+      "notifications",
+      "notification"
+    ],
+    "codename": "view_notification"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Crypto Ticker",
+    "content_type": [
+      "investments",
+      "cryptoticker"
+    ],
+    "codename": "add_cryptoticker"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Crypto Ticker",
+    "content_type": [
+      "investments",
+      "cryptoticker"
+    ],
+    "codename": "change_cryptoticker"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Crypto Ticker",
+    "content_type": [
+      "investments",
+      "cryptoticker"
+    ],
+    "codename": "delete_cryptoticker"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Crypto Ticker",
+    "content_type": [
+      "investments",
+      "cryptoticker"
+    ],
+    "codename": "view_cryptoticker"
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$Z48TUEXY0rBBMOVgti3zPe$PdkNtY0BBhZaWtrfD7eiWXbwZVmqzDyWpw3M5J85UpI=",
+    "email": "ly.co.ms.e.ri.ndit.y@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Eric Johnson",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "0.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "0.00",
+    "referral_bonus": "0.00",
+    "referral_code": "2KDIZUHM",
+    "referred_by": null,
+    "account_type": "starter",
+    "kyc_status": "pending",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "fmifUBq2Fu1YgvimGkqaGN1iT0D9UYPPi2deVtvUj-o",
+    "email_verification_sent_at": "2026-04-04T17:39:58.750Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-04-04T17:39:58.739Z",
+    "date_updated": "2026-04-04T17:39:58.751Z",
+    "last_login": "2026-04-04T17:40:32.349Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$W8K1FdK1bZM5x53suogHU9$pB4Msmz6B6dtzI+i4tGd2dUT5NVZd/RmtMFG1XlMH4E=",
+    "email": "admin@elitewealthcapita.uk",
+    "is_active": true,
+    "is_staff": true,
+    "is_superuser": true,
+    "full_name": "",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "250.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "0.00",
+    "referral_bonus": "0.00",
+    "referral_code": "355IXVD5",
+    "referred_by": null,
+    "account_type": "starter",
+    "kyc_status": "pending",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "",
+    "email_verification_sent_at": null,
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-03-31T22:59:15.616Z",
+    "date_updated": "2026-04-12T23:41:32.399Z",
+    "last_login": "2026-04-12T00:08:23.235Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$DI4Mx4Bg108XwnHnWUodt1$nXMi6ON56QoinfK0Spl+M1UJJQ+hbIVzqgK+TeW0OFk=",
+    "email": "jamaichoi537@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Jamai Choi",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "434690.00",
+    "invested_amount": "6920.00",
+    "total_profit": "46490.00",
+    "total_withdrawn": "48060.00",
+    "referral_bonus": "0.00",
+    "referral_code": "L7MM1KMJ",
+    "referred_by": null,
+    "account_type": "advance",
+    "kyc_status": "verified",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "RFQZNvxbIWI1QJsLPsrKs5YpGJOn6EobuofK9lAAuGI",
+    "email_verification_sent_at": "2026-04-18T12:05:38.806Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-04-18T12:05:38.803Z",
+    "date_updated": "2026-04-18T14:40:59.316Z",
+    "last_login": "2026-04-18T12:05:54.989Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$MsWy0rFxstUGAPmucYOuGv$cAEEDGzvQ0Ms4H5R5x3yWuPSDA9RHaSSIYkfkUXYCc4=",
+    "email": "narapim637@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Nara Pim",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "0.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "0.00",
+    "referral_bonus": "0.00",
+    "referral_code": "IQBZKJ4W",
+    "referred_by": null,
+    "account_type": "beginner",
+    "kyc_status": "pending",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "EtAGiK6lV06R-KutB2m53X9Zi7TtNqukQTta0-xT9Zc",
+    "email_verification_sent_at": "2026-03-28T13:31:40.772Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-03-28T13:31:40.759Z",
+    "date_updated": "2026-03-28T13:31:40.772Z",
+    "last_login": "2026-03-28T13:31:40.781Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$HLzzYsGNinUwT18ZweNoA0$vSW7f8P413wwZOPJCblat4BpLHYLyQykmBwZZOeTy8s=",
+    "email": "nadia2968844@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Nadiaa",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "0.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "0.00",
+    "referral_bonus": "0.00",
+    "referral_code": "499AW066",
+    "referred_by": null,
+    "account_type": "starter",
+    "kyc_status": "pending",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "4h5qEPqQfQiCfSiB3AXfXlTc4eKJUcBIGC14x5sDQRw",
+    "email_verification_sent_at": "2026-04-17T19:14:50.991Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-04-17T19:14:50.979Z",
+    "date_updated": "2026-04-17T19:14:50.991Z",
+    "last_login": "2026-04-17T19:15:34.489Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$HeHEa7NsQP7ItzB42xnvxd$+Fg2nEjngJ0X+GE9Oi8W9IlHteoM2w+4rSdPzl+cOZU=",
+    "email": "smartpointprep@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Kirshna",
+    "phone": "03123904173",
+    "country": "Pakistan",
+    "profile_image": "",
+    "balance": "43342.00",
+    "invested_amount": "600.00",
+    "total_profit": "650.00",
+    "total_withdrawn": "80.00",
+    "referral_bonus": "0.00",
+    "referral_code": "TQ80AVFB",
+    "referred_by": null,
+    "account_type": "advance",
+    "kyc_status": "verified",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": true,
+    "email_verification_token": "3uXvxmXfZ_khOMpg_6hycZ48cRYBT9lZRgP1iI0XE_U",
+    "email_verification_sent_at": "2026-04-02T07:58:45.067Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": "2026-04-23T09:33:03.095Z",
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-04-02T07:58:45.058Z",
+    "date_updated": "2026-04-23T09:03:03.095Z",
+    "last_login": "2026-04-26T10:44:14.684Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$WEHcEeY9XKtQicrh8Jhr9N$Xj438uwlK7m+jgdUuXk8z2MZYaLlB5C/CZW9NvYdSPE=",
+    "email": "samiwattog786@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Sami Ullah",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "169.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "0.00",
+    "referral_bonus": "0.00",
+    "referral_code": "DO3YNVFG",
+    "referred_by": null,
+    "account_type": "beginner",
+    "kyc_status": "pending",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "LzfoiF_9lfnNijJ-at4xPABIn6U89gCAIgIu9iIx4_o",
+    "email_verification_sent_at": "2026-03-28T14:00:22.362Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-03-28T14:00:22.357Z",
+    "date_updated": "2026-03-30T13:28:07.290Z",
+    "last_login": "2026-04-25T14:42:53.319Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$T50q9wT0vkBL4makbqWakv$CaVqNsfVHaGcGOLUJlaMyEoeH+W9CpdDVXogGR5f9Ec=",
+    "email": "mahnazkazal@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Mahnaz Kazalbasch",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "0.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "0.00",
+    "referral_bonus": "0.00",
+    "referral_code": "M441LG94",
+    "referred_by": null,
+    "account_type": "starter",
+    "kyc_status": "pending",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "EWEvt1vb7byWxlQ-TgoaEaIox98tj4WA6wwB6Z_TsM8",
+    "email_verification_sent_at": "2026-04-11T05:12:27.051Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-04-11T05:12:27.035Z",
+    "date_updated": "2026-04-11T05:12:27.051Z",
+    "last_login": "2026-04-11T05:15:27.161Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$LOGa0jrQTRVrUZNHzgkdVy$lef2hixqyT0UotKT82sWoIrIEpRcu47EK5b8aNL9X/A=",
+    "email": "bupphaarinya@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Achara buppha ",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "257107.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "8300.00",
+    "referral_bonus": "0.00",
+    "referral_code": "YH1HOGSZ",
+    "referred_by": null,
+    "account_type": "beginner",
+    "kyc_status": "verified",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "A63d9kcPs2CXz1qkYBro3Gsmj9yZkrPK4PPO1EuCjyg",
+    "email_verification_sent_at": "2026-03-30T00:12:00.203Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-03-30T00:12:00.192Z",
+    "date_updated": "2026-04-27T05:35:32.393Z",
+    "last_login": "2026-04-22T09:29:17.493Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$aXQQhsWm4zMI3PyWeZQQC7$fKLsJ6SUfIqrpHKh3rTYBqxfHJk9jsLgM50NAsBYNKI=",
+    "email": "akaboy2004@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Wisdom Godswill",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "0.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "0.00",
+    "referral_bonus": "0.00",
+    "referral_code": "08UC8LAG",
+    "referred_by": null,
+    "account_type": "starter",
+    "kyc_status": "pending",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "qd3MKAUO3Y445qTbU8PTw3CiUAhNV7zSJCuaH4d3m7E",
+    "email_verification_sent_at": "2026-04-29T20:59:17.451Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-04-29T20:59:17.439Z",
+    "date_updated": "2026-04-29T20:59:17.451Z",
+    "last_login": "2026-04-29T20:59:38.734Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$pI2iirSwBFtY91AYOM7PvA$KLv09gg16ffSxJcwb1GcoeTDgyz34/WjGGnA/CSNZUA=",
+    "email": "muskmanagement71@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Elon Musk ",
+    "phone": "",
+    "country": "",
+    "profile_image": "",
+    "balance": "865057.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "0.00",
+    "referral_bonus": "0.00",
+    "referral_code": "41M0QLKC",
+    "referred_by": null,
+    "account_type": "beginner",
+    "kyc_status": "verified",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": false,
+    "email_verification_token": "DpGGqcMqReU4otDn3wybytAs3L3gdkPZBT5zQlIJD0s",
+    "email_verification_sent_at": "2026-03-29T18:37:46.655Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-03-29T18:37:46.644Z",
+    "date_updated": "2026-03-30T13:30:26.104Z",
+    "last_login": "2026-03-29T18:37:46.667Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$Seu4Le5dFCjuPJPyAiEfL4$oKIxEfJsA29L3uEWgkRD2qAXpqyD4Dvt864asnRSJdE=",
+    "email": "nabeelsardar419@gmail.com",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "full_name": "Nabeel ur rehman",
+    "phone": "03115293025",
+    "country": "Pakistan",
+    "profile_image": "",
+    "balance": "30.00",
+    "invested_amount": "0.00",
+    "total_profit": "0.00",
+    "total_withdrawn": "48600.00",
+    "referral_bonus": "0.00",
+    "referral_code": "XAOK1NVL",
+    "referred_by": null,
+    "account_type": "starter",
+    "kyc_status": "verified",
+    "two_fa_enabled": false,
+    "two_fa_secret": "",
+    "email_verified": true,
+    "email_verification_token": "1aGblGAEv-M5STA6oii0nHlFueXgRUoWQp6muylXXlM",
+    "email_verification_sent_at": "2026-04-01T15:08:22.188Z",
+    "password_reset_token": "",
+    "password_reset_sent_at": null,
+    "failed_login_attempts": 0,
+    "locked_until": null,
+    "has_virtual_card": false,
+    "card_status": "",
+    "card_type": "",
+    "card_number": "",
+    "card_expiry": "",
+    "card_cvv": "",
+    "card_balance": "0.00",
+    "card_applied_date": null,
+    "card_approved_date": null,
+    "date_joined": "2026-04-01T15:08:22.173Z",
+    "date_updated": "2026-04-02T01:35:01.466Z",
+    "last_login": "2026-04-17T12:45:21.285Z",
+    "last_activity": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "narapim637@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-28T13:31:40.775Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "samiwattog786@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-28T14:00:22.365Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "samiwattog786@gmail.com"
+    ],
+    "action": "logout",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-28T14:06:06.826Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "samiwattog786@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-28T14:06:21.969Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "samiwattog786@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-28T15:20:55.969Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "muskmanagement71@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-29T18:37:46.658Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "bupphaarinya@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-30T00:12:00.206Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "samiwattog786@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-30T03:16:47.290Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 16,
+  "fields": {
+    "user": [
+      "samiwattog786@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-03-31T06:43:21.305Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 19,
+  "fields": {
+    "user": [
+      "nabeelsardar419@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-01T15:08:22.192Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 20,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-02T07:58:45.070Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 21,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-02T07:58:58.852Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 22,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "action": "logout",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-03T06:04:07.615Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 23,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-03T06:04:12.656Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 24,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-03T14:14:17.370Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 25,
+  "fields": {
+    "user": [
+      "ly.co.ms.e.ri.ndit.y@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-04T17:39:58.753Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 26,
+  "fields": {
+    "user": [
+      "ly.co.ms.e.ri.ndit.y@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-04T17:40:32.350Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 27,
+  "fields": {
+    "user": [
+      "admin@elitewealthcapita.uk"
+    ],
+    "action": "logout",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-11T02:53:12.759Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 28,
+  "fields": {
+    "user": [
+      "mahnazkazal@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-11T05:12:27.054Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 29,
+  "fields": {
+    "user": [
+      "mahnazkazal@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-11T05:15:27.163Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 30,
+  "fields": {
+    "user": [
+      "nabeelsardar419@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-17T12:45:21.292Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 31,
+  "fields": {
+    "user": [
+      "nadia2968844@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-17T19:14:50.993Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 32,
+  "fields": {
+    "user": [
+      "nadia2968844@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-17T19:15:34.490Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 33,
+  "fields": {
+    "user": [
+      "jamaichoi537@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-18T12:05:38.809Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 34,
+  "fields": {
+    "user": [
+      "jamaichoi537@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-18T12:05:54.991Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 35,
+  "fields": {
+    "user": [
+      "bupphaarinya@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-22T09:29:03.205Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 36,
+  "fields": {
+    "user": [
+      "bupphaarinya@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-22T09:29:17.494Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 37,
+  "fields": {
+    "user": [
+      "samiwattog786@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-25T14:42:53.321Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 38,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-26T10:44:14.685Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 39,
+  "fields": {
+    "user": [
+      "akaboy2004@gmail.com"
+    ],
+    "action": "signup",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-29T20:59:17.454Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 40,
+  "fields": {
+    "user": [
+      "akaboy2004@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-29T20:59:38.020Z"
+  }
+},
+{
+  "model": "accounts.activitylog",
+  "pk": 41,
+  "fields": {
+    "user": [
+      "akaboy2004@gmail.com"
+    ],
+    "action": "login",
+    "description": "",
+    "ip_address": null,
+    "user_agent": "",
+    "created_at": "2026-04-29T20:59:38.735Z"
+  }
+},
+{
+  "model": "investments.deposit",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "admin@elitewealthcapita.uk"
+    ],
+    "amount": "250.00",
+    "crypto_type": "USDT",
+    "payment_method": "crypto",
+    "tx_hash": "",
+    "proof_image": "deposits/IMG_0143_wqohox",
+    "status": "confirmed",
+    "confirmed_by": [
+      "admin@elitewealthcapita.uk"
+    ],
+    "confirmed_at": "2026-04-12T23:41:32.402Z",
+    "admin_note": "",
+    "created_at": "2026-04-10T23:32:08.023Z"
+  }
+},
+{
+  "model": "investments.deposit",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "akaboy2004@gmail.com"
+    ],
+    "amount": "250.00",
+    "crypto_type": "USDT",
+    "payment_method": "crypto",
+    "tx_hash": "",
+    "proof_image": "media/deposits/IMG_6783_ohi9e7",
+    "status": "pending",
+    "confirmed_by": null,
+    "confirmed_at": null,
+    "admin_note": "",
+    "created_at": "2026-04-29T21:00:36.685Z"
+  }
+},
+{
+  "model": "investments.withdrawal",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "nabeelsardar419@gmail.com"
+    ],
+    "amount": "48600.00",
+    "withdrawal_method": "crypto",
+    "crypto_type": "USDT",
+    "wallet_address": "Pending - Address not recorded",
+    "bank_name": "",
+    "account_number": "",
+    "account_name": "",
+    "status": "pending",
+    "processed_by": null,
+    "processed_at": null,
+    "tx_hash": "",
+    "admin_note": "",
+    "created_at": "2026-04-03T17:52:35.939Z"
+  }
+},
+{
+  "model": "investments.withdrawal",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "amount": "30.00",
+    "withdrawal_method": "crypto",
+    "crypto_type": "USDT",
+    "wallet_address": "TRC20-wallet-address",
+    "bank_name": "",
+    "account_number": "",
+    "account_name": "",
+    "status": "completed",
+    "processed_by": null,
+    "processed_at": "2026-01-04T17:57:49.421Z",
+    "tx_hash": "",
+    "admin_note": "",
+    "created_at": "2026-01-03T17:57:49.421Z"
+  }
+},
+{
+  "model": "investments.withdrawal",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "amount": "50.00",
+    "withdrawal_method": "crypto",
+    "crypto_type": "BTC",
+    "wallet_address": "BTC-wallet-address",
+    "bank_name": "",
+    "account_number": "",
+    "account_name": "",
+    "status": "completed",
+    "processed_by": null,
+    "processed_at": "2026-02-03T17:57:49.708Z",
+    "tx_hash": "",
+    "admin_note": "",
+    "created_at": "2026-02-02T17:57:49.708Z"
+  }
+},
+{
+  "model": "investments.withdrawal",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "bupphaarinya@gmail.com"
+    ],
+    "amount": "8300.00",
+    "withdrawal_method": "crypto",
+    "crypto_type": "USDT",
+    "wallet_address": "TKYDJbG8akLXhFXzm6x7c6Yca7C7Fji9Y3",
+    "bank_name": "",
+    "account_number": "",
+    "account_name": "",
+    "status": "pending",
+    "processed_by": null,
+    "processed_at": null,
+    "tx_hash": "",
+    "admin_note": "",
+    "created_at": "2026-04-27T05:35:32.396Z"
+  }
+},
+{
+  "model": "investments.virtualcard",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "card_number": "4466919501193518",
+    "cvv": "635",
+    "expiry_month": 12,
+    "expiry_year": 2028,
+    "card_holder_name": "Kirshna",
+    "billing_address": "District Tando Allahyar Sindh Pakistan",
+    "card_type": "standard",
+    "balance": "0.00",
+    "daily_limit": "1000.00",
+    "monthly_limit": "10000.00",
+    "is_online_enabled": true,
+    "is_international_enabled": false,
+    "status": "pending",
+    "created_at": "2026-04-03T05:50:58.089Z",
+    "updated_at": "2026-04-03T05:50:58.089Z"
+  }
+},
+{
+  "model": "dashboard.adminactivitylog",
+  "pk": 1,
+  "fields": {
+    "admin_user": null,
+    "action_type": "balance_edit",
+    "description": "Changed balance for samiwattog786@gmail.com: $0.00 → $169.00",
+    "target_user": [
+      "samiwattog786@gmail.com"
+    ],
+    "target_id": "b2920d6a-3019-4d78-bd82-cd46e7d8455f",
+    "target_type": "User",
+    "ip_address": "10.17.194.9",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "changes_before": {
+      "balance": "0.00"
+    },
+    "changes_after": {
+      "balance": "169.00"
+    },
+    "created_at": "2026-03-30T13:28:07.293Z"
+  }
+},
+{
+  "model": "dashboard.adminactivitylog",
+  "pk": 2,
+  "fields": {
+    "admin_user": null,
+    "action_type": "user_edit",
+    "description": "Edited user: muskmanagement71@gmail.com",
+    "target_user": [
+      "muskmanagement71@gmail.com"
+    ],
+    "target_id": "f2357ce1-5aaa-4d08-a0d3-b61f1030ccdb",
+    "target_type": "User",
+    "ip_address": "10.19.38.195",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "changes_before": {
+      "is_staff": false,
+      "is_active": true,
+      "kyc_status": "pending"
+    },
+    "changes_after": {
+      "is_staff": false,
+      "is_active": true,
+      "kyc_status": "verified"
+    },
+    "created_at": "2026-03-30T13:29:40.866Z"
+  }
+},
+{
+  "model": "dashboard.adminactivitylog",
+  "pk": 3,
+  "fields": {
+    "admin_user": null,
+    "action_type": "balance_edit",
+    "description": "Changed balance for muskmanagement71@gmail.com: $0.00 → $865057.00",
+    "target_user": [
+      "muskmanagement71@gmail.com"
+    ],
+    "target_id": "f2357ce1-5aaa-4d08-a0d3-b61f1030ccdb",
+    "target_type": "User",
+    "ip_address": "10.17.194.9",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "changes_before": {
+      "balance": "0.00"
+    },
+    "changes_after": {
+      "balance": "865057.00"
+    },
+    "created_at": "2026-03-30T13:30:26.107Z"
+  }
+},
+{
+  "model": "dashboard.adminactivitylog",
+  "pk": 4,
+  "fields": {
+    "admin_user": null,
+    "action_type": "user_edit",
+    "description": "Edited user: bupphaarinya@gmail.com",
+    "target_user": [
+      "bupphaarinya@gmail.com"
+    ],
+    "target_id": "d2befce6-a45d-4b00-a0a3-33fe28485561",
+    "target_type": "User",
+    "ip_address": "10.16.84.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "changes_before": {
+      "is_staff": false,
+      "is_active": true,
+      "kyc_status": "pending"
+    },
+    "changes_after": {
+      "is_staff": false,
+      "is_active": true,
+      "kyc_status": "verified"
+    },
+    "created_at": "2026-03-30T13:37:08.587Z"
+  }
+},
+{
+  "model": "dashboard.adminactivitylog",
+  "pk": 5,
+  "fields": {
+    "admin_user": null,
+    "action_type": "balance_edit",
+    "description": "Changed balance for bupphaarinya@gmail.com: $0.00 → $265407.00",
+    "target_user": [
+      "bupphaarinya@gmail.com"
+    ],
+    "target_id": "d2befce6-a45d-4b00-a0a3-33fe28485561",
+    "target_type": "User",
+    "ip_address": "10.17.247.71",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "changes_before": {
+      "balance": "0.00"
+    },
+    "changes_after": {
+      "balance": "265407.00"
+    },
+    "created_at": "2026-03-30T13:37:30.573Z"
+  }
+},
+{
+  "model": "dashboard.adminactivitylog",
+  "pk": 6,
+  "fields": {
+    "admin_user": null,
+    "action_type": "balance_edit",
+    "description": "Changed balance for bupphaarinya@gmail.com: $265407.00 → $265407.00",
+    "target_user": [
+      "bupphaarinya@gmail.com"
+    ],
+    "target_id": "d2befce6-a45d-4b00-a0a3-33fe28485561",
+    "target_type": "User",
+    "ip_address": "10.17.247.71",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "changes_before": {
+      "balance": "265407.00"
+    },
+    "changes_after": {
+      "balance": "265407.00"
+    },
+    "created_at": "2026-03-30T13:37:44.387Z"
+  }
+},
+{
+  "model": "dashboard.adminactivitylog",
+  "pk": 7,
+  "fields": {
+    "admin_user": null,
+    "action_type": "user_edit",
+    "description": "Edited user: kingsleyotisi46@gmail.com",
+    "target_user": null,
+    "target_id": "26fbb9c7-9699-4c16-a359-8ee110f2f178",
+    "target_type": "User",
+    "ip_address": "10.17.247.71",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "changes_before": {
+      "is_staff": false,
+      "is_active": true,
+      "kyc_status": "pending"
+    },
+    "changes_after": {
+      "is_staff": false,
+      "is_active": true,
+      "kyc_status": "verified"
+    },
+    "created_at": "2026-03-30T13:40:23.556Z"
+  }
+},
+{
+  "model": "dashboard.adminactivitylog",
+  "pk": 8,
+  "fields": {
+    "admin_user": null,
+    "action_type": "balance_edit",
+    "description": "Changed balance for kingsleyotisi46@gmail.com: $0.00 → $495696.00",
+    "target_user": null,
+    "target_id": "26fbb9c7-9699-4c16-a359-8ee110f2f178",
+    "target_type": "User",
+    "ip_address": "10.16.84.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "changes_before": {
+      "balance": "0.00"
+    },
+    "changes_after": {
+      "balance": "495696.00"
+    },
+    "created_at": "2026-03-30T13:40:41.391Z"
+  }
+},
+{
+  "model": "kyc.kycdocument",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "nabeelsardar419@gmail.com"
+    ],
+    "document_type": "national_id",
+    "document_number": "",
+    "issuing_country": "",
+    "issuing_authority": "",
+    "date_of_birth": null,
+    "nationality": "",
+    "issue_date": null,
+    "expires_at": null,
+    "front_image": "media/kyc/front/IMG_20260201_132846_tbkykq",
+    "back_image": "media/kyc/back/IMG_20260201_132858_drez0o",
+    "selfie_image": "media/kyc/selfie/IMG_20260304_162055_isoi5x",
+    "status": "submitted",
+    "rejection_reason": "",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "submitted_at": "2026-04-01T15:24:26.854Z",
+    "updated_at": "2026-04-01T15:24:29.847Z",
+    "created_at": "2026-04-01T15:24:29.847Z"
+  }
+},
+{
+  "model": "kyc.kycdocument",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "document_type": "national_id",
+    "document_number": "",
+    "issuing_country": "",
+    "issuing_authority": "",
+    "date_of_birth": null,
+    "nationality": "",
+    "issue_date": null,
+    "expires_at": null,
+    "front_image": "media/kyc/front/NIC_FRONT_SIDE_r8i9ne",
+    "back_image": "media/kyc/back/NIC_BACK_SIDE_nnmkoa",
+    "selfie_image": "media/kyc/selfie/EDIT_IMAGE_PASTE_gxjhwy",
+    "status": "submitted",
+    "rejection_reason": "",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "submitted_at": "2026-04-03T05:42:27.744Z",
+    "updated_at": "2026-04-03T05:42:31.085Z",
+    "created_at": "2026-04-03T05:42:31.085Z"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "title": "Funds Added to Account",
+    "message": "\\.00 has been added to your account. Your new balance is \\.",
+    "notification_type": "deposit",
+    "category": "general",
+    "priority": "normal",
+    "is_read": true,
+    "read_at": "2026-04-06T10:05:40.574Z",
+    "email_sent": false,
+    "action_url": "",
+    "created_at": "2026-04-03T17:54:20.587Z"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "title": "Funds Added to Account",
+    "message": "300.00 USD has been added to your account.",
+    "notification_type": "deposit",
+    "category": "general",
+    "priority": "normal",
+    "is_read": false,
+    "read_at": null,
+    "email_sent": false,
+    "action_url": "",
+    "created_at": "2026-04-03T17:56:15.519Z"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "title": "Profit Credited",
+    "message": "450.00 USD profit has been added to your account.",
+    "notification_type": "investment",
+    "category": "general",
+    "priority": "normal",
+    "is_read": false,
+    "read_at": null,
+    "email_sent": false,
+    "action_url": "",
+    "created_at": "2026-04-03T17:56:15.836Z"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "smartpointprep@gmail.com"
+    ],
+    "title": "Funds Added to Account",
+    "message": "$1,792.00 has been added to your account. Your new balance is $43,342.00.",
+    "notification_type": "deposit",
+    "category": "general",
+    "priority": "normal",
+    "is_read": false,
+    "read_at": null,
+    "email_sent": false,
+    "action_url": "",
+    "created_at": "2026-04-06T13:50:16.067Z"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 37,
+  "fields": {
+    "user": [
+      "admin@elitewealthcapita.uk"
+    ],
+    "title": "Deposit Confirmed",
+    "message": "Your deposit of $250.00 has been confirmed!",
+    "notification_type": "deposit",
+    "category": "general",
+    "priority": "normal",
+    "is_read": false,
+    "read_at": null,
+    "email_sent": false,
+    "action_url": "",
+    "created_at": "2026-04-12T23:41:32.402Z"
+  }
+},
+{
+  "model": "notifications.notification",
+  "pk": 38,
+  "fields": {
+    "user": [
+      "jamaichoi537@gmail.com"
+    ],
+    "title": "Funds Added to Account",
+    "message": "$434,690.00 has been added to your account. Your new balance is $434,690.00.",
+    "notification_type": "deposit",
+    "category": "general",
+    "priority": "normal",
+    "is_read": false,
+    "read_at": null,
+    "email_sent": false,
+    "action_url": "",
+    "created_at": "2026-04-18T14:40:59.315Z"
+  }
+}
+]
