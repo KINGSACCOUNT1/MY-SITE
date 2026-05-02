@@ -57,3 +57,6 @@ celerybeat.pid
 *.backup
 *.bak
 *.tmp
+
+id_ed25519_agwu662
+id_ed25519_agwu662.pub
