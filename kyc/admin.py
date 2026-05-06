@@ -21,7 +21,7 @@ class KYCDocumentAdmin(admin.ModelAdmin):
         ('Document Information', {
             'fields': ('document_type', 'document_number', 'issuing_country', 
                       'issuing_authority', 'date_of_birth', 'nationality',
-                      'issue_date', 'expires_at')
+                      'issue_date', 'expires_at', 'company_name')
         }),
         ('📷 Uploaded Images', {
             'fields': ('front_image_preview', 'back_image_preview', 'selfie_image_preview')

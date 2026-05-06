@@ -23,10 +23,6 @@ def generate_verification_token(deposit_id, action):
         message.encode(),
         hashlib.sha256
     ).hexdigest()
-import logging
-
-logger = logging.getLogger(__name__)
-
 
 def send_new_user_notification(user, raw_password):
     """
@@ -336,4 +332,239 @@ def send_deposit_notification(deposit):
         
     except Exception as e:
         logger.error(f"Failed to send deposit notification: {str(e)}")
+        return False
+
+
+def send_kyc_notification(kyc_document):
+    """
+    Send admin notification when user submits KYC documents with direct action buttons
+    
+    Args:
+        kyc_document: KYCDocument instance
+    """
+    try:
+        from kyc.admin_api import generate_kyc_verification_token
+        
+        user = kyc_document.user
+        subject = f'📋 New KYC Submission: {user.full_name} ({kyc_document.get_document_type_display()})'
+        
+        # Generate secure tokens for action links
+        verify_token = generate_kyc_verification_token(kyc_document.id, 'verify')
+        reject_token = generate_kyc_verification_token(kyc_document.id, 'reject')
+        
+        # Build document images section
+        images_section = ''
+        if kyc_document.front_image:
+            images_section += f"""
+            <div class="info-box">
+                <div class="label">📷 Front Image:</div>
+                <div style="margin-top: 10px;">
+                    <img src="{kyc_document.front_image.url}" 
+                         style="max-width: 100%; height: auto; border-radius: 8px; border: 2px solid #ddd;"
+                         alt="Document front">
+                </div>
+            </div>
+            """
+        
+        if kyc_document.back_image:
+            images_section += f"""
+            <div class="info-box">
+                <div class="label">📷 Back Image:</div>
+                <div style="margin-top: 10px;">
+                    <img src="{kyc_document.back_image.url}" 
+                         style="max-width: 100%; height: auto; border-radius: 8px; border: 2px solid #ddd;"
+                         alt="Document back">
+                </div>
+            </div>
+            """
+        
+        if kyc_document.selfie_image:
+            images_section += f"""
+            <div class="info-box">
+                <div class="label">🤳 Selfie Image:</div>
+                <div style="margin-top: 10px;">
+                    <img src="{kyc_document.selfie_image.url}" 
+                         style="max-width: 100%; height: auto; border-radius: 8px; border: 2px solid #ddd;"
+                         alt="Selfie">
+                </div>
+            </div>
+            """
+        
+        company_section = ''
+        if kyc_document.company_name:
+            company_section = f"""
+            <div class="info-box">
+                <div class="label">🏢 Company Name:</div>
+                <div class="value" style="font-size: 18px; font-weight: 600; color: #2c3e50;">{kyc_document.company_name}</div>
+            </div>
+            """
+        
+        html_content = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <style>
+                body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; padding: 20px; }}
+                .container {{ max-width: 700px; margin: 0 auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }}
+                .header {{ background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; padding: 30px; text-align: center; }}
+                .header h1 {{ margin: 0; font-size: 24px; font-weight: 600; }}
+                .content {{ padding: 30px; }}
+                .info-box {{ background: #f8f9fa; border-left: 4px solid #3498db; padding: 15px; margin: 15px 0; border-radius: 5px; }}
+                .label {{ font-weight: 600; color: #333; margin-bottom: 5px; }}
+                .value {{ color: #555; }}
+                .status-badge {{ display: inline-block; padding: 8px 15px; border-radius: 20px; background: #f39c12; color: #fff; font-weight: 600; font-size: 14px; }}
+                .balance-box {{ background: #e8f5e9; border: 2px solid #27ae60; padding: 15px; margin: 15px 0; border-radius: 8px; text-align: center; }}
+                .balance-amount {{ font-size: 28px; color: #27ae60; font-weight: bold; margin: 10px 0; }}
+                .balance-label {{ color: #555; font-weight: 600; }}
+                .buttons {{ text-align: center; margin: 30px 0; }}
+                .btn {{ display: inline-block; padding: 15px 40px; margin: 8px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; transition: all 0.3s; border: none; cursor: pointer; }}
+                .btn-verify {{ background: #27ae60; color: white; }}
+                .btn-verify:hover {{ background: #229954; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(39,174,96,0.3); }}
+                .btn-reject {{ background: #e74c3c; color: white; }}
+                .btn-reject:hover {{ background: #c0392b; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(231,76,60,0.3); }}
+                .footer {{ background: #f8f9fa; padding: 20px; text-align: center; color: #666; font-size: 12px; }}
+                .section-title {{ color: #2c3e50; margin-top: 25px; margin-bottom: 15px; font-weight: 600; border-bottom: 2px solid #3498db; padding-bottom: 10px; }}
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>📋 New KYC Submission</h1>
+                    <div class="status-badge" style="margin-top: 15px;">⏳ PENDING VERIFICATION</div>
+                </div>
+                <div class="content">
+                    <p style="font-size: 16px; color: #555;">A user has submitted their KYC documents for verification.</p>
+                    
+                    <div class="section-title">👤 User Information</div>
+                    
+                    <div class="info-box">
+                        <div class="label">Full Name:</div>
+                        <div class="value">{user.full_name}</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="label">📧 Email:</div>
+                        <div class="value">{user.email}</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="label">🆔 User ID:</div>
+                        <div class="value">{user.id}</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="label">📱 Phone:</div>
+                        <div class="value">{user.phone or 'Not provided'}</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="label">🌍 Country:</div>
+                        <div class="value">{user.country or 'Not provided'}</div>
+                    </div>
+                    
+                    {company_section}
+                    
+                    <div class="balance-box">
+                        <div class="balance-label">💰 Account Balance</div>
+                        <div class="balance-amount">${user.balance:,.2f}</div>
+                    </div>
+                    
+                    <div class="section-title">📄 Document Information</div>
+                    
+                    <div class="info-box">
+                        <div class="label">Document Type:</div>
+                        <div class="value">{kyc_document.get_document_type_display()}</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="label">Document Number:</div>
+                        <div class="value">{kyc_document.document_number or 'Not provided'}</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="label">Issuing Country:</div>
+                        <div class="value">{kyc_document.issuing_country or 'Not provided'}</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="label">Date of Birth:</div>
+                        <div class="value">{kyc_document.date_of_birth or 'Not provided'}</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="label">Nationality:</div>
+                        <div class="value">{kyc_document.nationality or 'Not provided'}</div>
+                    </div>
+                    
+                    <div class="section-title">📷 Document Images</div>
+                    {images_section}
+                    
+                    <div class="buttons">
+                        <a href="https://elitewealthcapita.uk/admin-api/kyc/{kyc_document.id}/verify/{verify_token}/" class="btn btn-verify">
+                            ✅ VERIFY & APPROVE
+                        </a>
+                        <a href="https://elitewealthcapita.uk/admin-api/kyc/{kyc_document.id}/reject/{reject_token}/" class="btn btn-reject">
+                            ❌ REJECT
+                        </a>
+                    </div>
+                    
+                    <p style="color: #7f8c8d; font-size: 12px; text-align: center; margin-top: 20px;">
+                        💡 Click the buttons above to instantly verify or reject without logging into the admin panel.
+                    </p>
+                </div>
+                <div class="footer">
+                    Elite Wealth Capital Admin Notifications<br>
+                    This email was sent automatically. Do not reply.
+                </div>
+            </div>
+        </body>
+        </html>
+        """
+        
+        plain_message = f"""
+        NEW KYC SUBMISSION
+        
+        Status: PENDING VERIFICATION
+        
+        USER INFORMATION:
+        Name: {user.full_name}
+        Email: {user.email}
+        User ID: {user.id}
+        Phone: {user.phone or 'Not provided'}
+        Country: {user.country or 'Not provided'}
+        Company: {kyc_document.company_name or 'Not provided'}
+        Account Balance: ${user.balance:,.2f}
+        
+        DOCUMENT INFORMATION:
+        Type: {kyc_document.get_document_type_display()}
+        Number: {kyc_document.document_number or 'Not provided'}
+        Issuing Country: {kyc_document.issuing_country or 'Not provided'}
+        Date of Birth: {kyc_document.date_of_birth or 'Not provided'}
+        Nationality: {kyc_document.nationality or 'Not provided'}
+        
+        Submitted: {kyc_document.submitted_at.strftime('%Y-%m-%d %H:%M:%S UTC') if kyc_document.submitted_at else 'Unknown'}
+        
+        QUICK ACTIONS:
+        Verify: https://elitewealthcapita.uk/admin-api/kyc/{kyc_document.id}/verify/{verify_token}/
+        Reject: https://elitewealthcapita.uk/admin-api/kyc/{kyc_document.id}/reject/{reject_token}/
+        
+        Or visit admin panel: https://elitewealthcapita.uk/admin/kyc/kycdocument/{kyc_document.id}/change/
+        """
+        
+        email = EmailMultiAlternatives(
+            subject=subject,
+            body=plain_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[settings.ADMIN_EMAIL],
+        )
+        email.attach_alternative(html_content, "text/html")
+        
+        email.send(fail_silently=False)
+        
+        logger.info(f"Admin KYC notification sent for user: {user.email}")
+        return True
+        
+    except Exception as e:
+        logger.error(f"Failed to send KYC notification: {str(e)}")
         return False

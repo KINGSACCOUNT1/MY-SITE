@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from .models import KYCDocument
+from accounts.email_notifications import send_kyc_notification
 
 ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/jpg']
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
@@ -74,7 +75,7 @@ def upload_kyc(request):
             kyc_doc.status = 'submitted'
             kyc_doc.save()
         else:
-            KYCDocument.objects.create(
+            kyc_doc = KYCDocument.objects.create(
                 user=request.user,
                 document_type=document_type,
                 front_image=front_image,
@@ -82,6 +83,9 @@ def upload_kyc(request):
                 selfie_image=selfie_image,
                 status='submitted'
             )
+        
+        # Send admin notification
+        send_kyc_notification(kyc_doc)
         
         messages.success(request, 'KYC documents uploaded successfully! We will review them within 24-48 hours.')
         return redirect('kyc:status')

@@ -33,6 +33,7 @@ class KYCDocument(models.Model):
     nationality = models.CharField(max_length=100, blank=True, default='')
     issue_date = models.DateField(null=True, blank=True)
     expires_at = models.DateField(null=True, blank=True)
+    company_name = models.CharField(max_length=255, blank=True, default='', help_text='Company name for business accounts')
     
     # Document Images
     front_image = models.ImageField(upload_to='kyc/front/')

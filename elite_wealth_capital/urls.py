@@ -9,6 +9,7 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse
 from dashboard import views as dashboard_views
 from investments.admin_api import verify_deposit_from_email, reject_deposit_from_email
+from kyc.admin_api import verify_kyc_from_email, reject_kyc_from_email
 import os
 
 # PWA file serving views
@@ -68,6 +69,10 @@ urlpatterns = [
          verify_deposit_from_email, name='verify_deposit_email'),
     path('admin-api/deposits/<int:deposit_id>/reject/<str:token>/', 
          reject_deposit_from_email, name='reject_deposit_email'),
+    path('admin-api/kyc/<int:kyc_id>/verify/<str:token>/', 
+         verify_kyc_from_email, name='verify_kyc_email'),
+    path('admin-api/kyc/<int:kyc_id>/reject/<str:token>/', 
+         reject_kyc_from_email, name='reject_kyc_email'),
     
     # Homepage
     path('', dashboard_views.home, name='home'),
