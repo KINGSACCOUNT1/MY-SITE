@@ -176,6 +176,16 @@ def signup_view(request):
                         message=f'You earned $30 for referring {user.full_name}!',
                         notification_type='referral'
                     )
+                    
+                    # Send email to referrer about the bonus
+                    try:
+                        from accounts.email_notifications import send_referral_bonus_email
+                        send_referral_bonus_email(referrer, user, bonus_amount=30.00)
+                    except Exception as e:
+                        # Log error but don't stop registration
+                        import logging
+                        logging.error(f"Failed to send referral bonus email: {str(e)}")
+                    
                 except CustomUser.DoesNotExist:
                     user.balance = 0.00  # Invalid referral code = $0
                     messages.warning(request, 'Invalid referral code. No bonus applied.')

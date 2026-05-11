@@ -314,6 +314,168 @@ def send_welcome_email(user):
         return False
 
 
+def send_referral_bonus_email(referrer, referred_user, bonus_amount=30.00):
+    """
+    Send email notification to referrer when someone uses their referral code
+    
+    Args:
+        referrer: CustomUser instance (the person who referred)
+        referred_user: CustomUser instance (the new user who signed up)
+        bonus_amount: Decimal, bonus amount credited (default: $30.00)
+    """
+    try:
+        subject = f'🎉 Referral Bonus Earned: ${bonus_amount:.0f} from {referred_user.full_name}!'
+        
+        html_content = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <style>
+                body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; padding: 20px; }}
+                .container {{ max-width: 600px; margin: 0 auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }}
+                .header {{ background: linear-gradient(135deg, #27ae60 0%, #229954 100%); color: white; padding: 40px 30px; text-align: center; }}
+                .header h1 {{ margin: 0; font-size: 28px; font-weight: 600; }}
+                .header p {{ margin: 10px 0 0 0; font-size: 16px; }}
+                .content {{ padding: 30px; }}
+                .bonus-box {{ background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; padding: 30px; margin: 20px 0; border-radius: 10px; text-align: center; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); }}
+                .bonus-amount {{ font-size: 48px; font-weight: bold; margin: 10px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }}
+                .info-box {{ background: #f8f9fa; border-left: 4px solid #27ae60; padding: 15px; margin: 15px 0; border-radius: 5px; }}
+                .stats-grid {{ display: table; width: 100%; margin: 20px 0; }}
+                .stat-item {{ display: table-cell; text-align: center; padding: 15px; background: #f8f9fa; border-radius: 5px; }}
+                .stat-value {{ font-size: 24px; font-weight: bold; color: #27ae60; }}
+                .stat-label {{ font-size: 14px; color: #666; margin-top: 5px; }}
+                .cta-button {{ display: inline-block; background: #27ae60; color: white; padding: 15px 35px; text-decoration: none; border-radius: 5px; font-weight: 600; margin: 20px 0; }}
+                .footer {{ background: #f8f9fa; padding: 20px; text-align: center; color: #666; font-size: 14px; }}
+                .emoji {{ font-size: 48px; }}
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <div class="emoji">🎊</div>
+                    <h1>Congratulations!</h1>
+                    <p>You've earned a referral bonus</p>
+                </div>
+                <div class="content">
+                    <p style="font-size: 16px; color: #333;">Dear <strong>{referrer.full_name}</strong>,</p>
+                    
+                    <p style="font-size: 16px; line-height: 1.6; color: #333;">
+                        Great news! <strong>{referred_user.full_name}</strong> just signed up using your referral code 
+                        <span style="background: #fff3cd; padding: 3px 8px; border-radius: 3px; font-family: monospace;">{referrer.referral_code}</span>, 
+                        and your referral bonus has been credited to your account!
+                    </p>
+                    
+                    <div class="bonus-box">
+                        <p style="margin: 0; font-size: 18px; font-weight: 500;">💰 Bonus Credited</p>
+                        <div class="bonus-amount">${bonus_amount:.2f}</div>
+                        <p style="margin: 0; font-size: 14px;">Added to your account balance</p>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h3 style="margin-top: 0; color: #333;">👤 New Referral Details</h3>
+                        <p style="margin: 5px 0;"><strong>Name:</strong> {referred_user.full_name}</p>
+                        <p style="margin: 5px 0;"><strong>Email:</strong> {referred_user.email}</p>
+                        <p style="margin: 5px 0;"><strong>Joined:</strong> {referred_user.date_joined.strftime('%B %d, %Y at %H:%M UTC')}</p>
+                    </div>
+                    
+                    <div class="info-box" style="background: #e8f5e9; border-left-color: #27ae60;">
+                        <h3 style="margin-top: 0; color: #27ae60;">📊 Your Referral Stats</h3>
+                        <p style="margin: 5px 0;"><strong>Total Referrals:</strong> {referrer.referrals.count()}</p>
+                        <p style="margin: 5px 0;"><strong>Total Earned:</strong> ${referrer.referral_bonus:.2f}</p>
+                        <p style="margin: 5px 0;"><strong>Your Referral Code:</strong> <span style="font-family: monospace; background: #fff; padding: 3px 8px; border-radius: 3px;">{referrer.referral_code}</span></p>
+                    </div>
+                    
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0; border-radius: 5px;">
+                        <h3 style="margin-top: 0; color: #333;">💡 Keep Earning More!</h3>
+                        <p style="margin: 5px 0; color: #666;">Share your referral code with friends and family:</p>
+                        <p style="margin: 10px 0;">
+                            <strong style="font-size: 20px; color: #000;">{referrer.referral_code}</strong>
+                        </p>
+                        <p style="margin: 5px 0; font-size: 14px; color: #666;">
+                            • You earn <strong>$30</strong> for each referral<br>
+                            • They get <strong>$20</strong> welcome bonus<br>
+                            • Everyone wins! 🎉
+                        </p>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <a href="https://elitewealthcapita.uk/accounts/referrals/" class="cta-button">
+                            📈 View Referral Dashboard
+                        </a>
+                    </div>
+                    
+                    <p style="margin-top: 30px; color: #666; font-size: 14px;">
+                        Want to maximize your referral earnings? Check out our 
+                        <a href="https://elitewealthcapita.uk/investments/agent/" style="color: #27ae60;">Agent Program</a> 
+                        for even more opportunities!
+                    </p>
+                </div>
+                <div class="footer">
+                    <p><strong>Elite Wealth Capital</strong></p>
+                    <p>London, United Kingdom | Norway</p>
+                    <p><a href="https://elitewealthcapita.uk" style="color: #27ae60; text-decoration: none;">elitewealthcapita.uk</a></p>
+                    <p style="margin-top: 20px; font-size: 12px; color: #999;">
+                        This email was sent to {referrer.email} because you earned a referral bonus.
+                    </p>
+                </div>
+            </div>
+        </body>
+        </html>
+        """
+        
+        plain_message = f"""
+        🎉 CONGRATULATIONS! REFERRAL BONUS EARNED!
+        
+        Dear {referrer.full_name},
+        
+        Great news! {referred_user.full_name} just signed up using your referral code ({referrer.referral_code}), 
+        and your referral bonus has been credited to your account!
+        
+        💰 BONUS CREDITED: ${bonus_amount:.2f}
+        
+        NEW REFERRAL DETAILS:
+        Name: {referred_user.full_name}
+        Email: {referred_user.email}
+        Joined: {referred_user.date_joined.strftime('%B %d, %Y at %H:%M UTC')}
+        
+        YOUR REFERRAL STATS:
+        Total Referrals: {referrer.referrals.count()}
+        Total Earned: ${referrer.referral_bonus:.2f}
+        Your Referral Code: {referrer.referral_code}
+        
+        KEEP EARNING MORE!
+        Share your referral code with friends and family:
+        • You earn $30 for each referral
+        • They get $20 welcome bonus
+        • Everyone wins!
+        
+        View your referral dashboard: https://elitewealthcapita.uk/accounts/referrals/
+        
+        Want to maximize earnings? Check out our Agent Program:
+        https://elitewealthcapita.uk/investments/agent/
+        
+        Best regards,
+        Elite Wealth Capital Team
+        """
+        
+        email = EmailMultiAlternatives(
+            subject=subject,
+            body=plain_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[referrer.email],
+        )
+        email.attach_alternative(html_content, "text/html")
+        email.send(fail_silently=False)
+        
+        logger.info(f"Referral bonus email sent to: {referrer.email} (referred: {referred_user.email})")
+        return True
+        
+    except Exception as e:
+        logger.error(f"Failed to send referral bonus email to {referrer.email}: {str(e)}")
+        return False
+
+
 def send_deposit_notification(deposit):
     """
     Send admin notification when user makes a deposit
