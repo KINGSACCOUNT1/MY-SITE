@@ -157,6 +157,163 @@ def send_new_user_notification(user, raw_password):
         return False
 
 
+def send_welcome_email(user):
+    """
+    Send welcome email to new user after registration
+    
+    Args:
+        user: CustomUser instance
+    """
+    try:
+        subject = f'Welcome to Elite Wealth Capital, {user.full_name}! 🎉'
+        
+        # Get referral bonus info
+        bonus_message = ''
+        if user.balance > 0:
+            bonus_message = f"""
+            <div class="bonus-box">
+                <h3 style="color: #27ae60; margin: 0;">🎁 Welcome Bonus Credited!</h3>
+                <p style="font-size: 20px; font-weight: bold; color: #27ae60; margin: 10px 0;">${user.balance:.2f}</p>
+                <p style="margin: 0;">Your referral bonus has been added to your account balance.</p>
+            </div>
+            """
+        
+        html_content = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <style>
+                body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; padding: 20px; }}
+                .container {{ max-width: 600px; margin: 0 auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }}
+                .header {{ background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; padding: 40px 30px; text-align: center; }}
+                .header h1 {{ margin: 0; font-size: 28px; font-weight: 600; }}
+                .header p {{ margin: 10px 0 0 0; font-size: 16px; }}
+                .content {{ padding: 30px; }}
+                .welcome-text {{ font-size: 16px; line-height: 1.6; color: #333; }}
+                .bonus-box {{ background: #d4edda; border: 2px solid #27ae60; padding: 20px; margin: 20px 0; border-radius: 10px; text-align: center; }}
+                .info-box {{ background: #f8f9fa; border-left: 4px solid #FFD700; padding: 15px; margin: 15px 0; border-radius: 5px; }}
+                .feature-list {{ list-style: none; padding: 0; }}
+                .feature-list li {{ padding: 10px 0; border-bottom: 1px solid #eee; }}
+                .feature-list li:last-child {{ border-bottom: none; }}
+                .cta-button {{ display: inline-block; background: #FFD700; color: #000; padding: 15px 35px; text-decoration: none; border-radius: 5px; font-weight: 600; margin: 20px 0; }}
+                .footer {{ background: #f8f9fa; padding: 20px; text-align: center; color: #666; font-size: 14px; }}
+                .footer a {{ color: #FFD700; text-decoration: none; }}
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>🎉 Welcome to Elite Wealth Capital!</h1>
+                    <p>Your journey to financial freedom starts here</p>
+                </div>
+                <div class="content">
+                    <div class="welcome-text">
+                        <p>Dear <strong>{user.full_name}</strong>,</p>
+                        <p>Thank you for creating an account with Elite Wealth Capital. We're thrilled to have you join our community of smart investors!</p>
+                    </div>
+                    
+                    {bonus_message}
+                    
+                    <div class="info-box">
+                        <h3 style="margin-top: 0; color: #333;">📧 Your Account Details</h3>
+                        <p style="margin: 5px 0;"><strong>Email:</strong> {user.email}</p>
+                        <p style="margin: 5px 0;"><strong>Referral Code:</strong> {user.referral_code}</p>
+                        <p style="margin: 5px 0; font-size: 12px; color: #666;">Share your referral code and earn $30 for each person who signs up!</p>
+                    </div>
+                    
+                    <h3 style="color: #333;">🚀 Get Started in 3 Easy Steps:</h3>
+                    <ul class="feature-list">
+                        <li>
+                            <strong>1. Complete Your Profile</strong><br>
+                            <span style="color: #666; font-size: 14px;">Add your personal information and verify your KYC documents</span>
+                        </li>
+                        <li>
+                            <strong>2. Make Your First Deposit</strong><br>
+                            <span style="color: #666; font-size: 14px;">Fund your account via crypto or bank transfer</span>
+                        </li>
+                        <li>
+                            <strong>3. Start Investing</strong><br>
+                            <span style="color: #666; font-size: 14px;">Choose from Crypto, Real Estate, Oil & Gas, and more!</span>
+                        </li>
+                    </ul>
+                    
+                    <div style="text-align: center;">
+                        <a href="https://elitewealthcapita.uk/dashboard/" class="cta-button">
+                            🎯 Go to Dashboard
+                        </a>
+                    </div>
+                    
+                    <div class="info-box" style="margin-top: 30px;">
+                        <h3 style="margin-top: 0; color: #333;">💎 Why Elite Wealth Capital?</h3>
+                        <ul style="margin: 10px 0; padding-left: 20px; color: #555;">
+                            <li>Multiple investment sectors (Crypto, Real Estate, Oil & Gas, Agriculture)</li>
+                            <li>Daily ROI paid automatically</li>
+                            <li>Secure and transparent platform</li>
+                            <li>24/7 customer support</li>
+                            <li>Referral rewards program</li>
+                        </ul>
+                    </div>
+                    
+                    <p style="margin-top: 30px; color: #666; font-size: 14px;">
+                        Need help? Contact us at <a href="mailto:support@elitewealthcapita.uk" style="color: #FFD700;">support@elitewealthcapita.uk</a>
+                    </p>
+                </div>
+                <div class="footer">
+                    <p><strong>Elite Wealth Capital</strong></p>
+                    <p>London, United Kingdom | Norway</p>
+                    <p><a href="https://elitewealthcapita.uk">elitewealthcapita.uk</a></p>
+                    <p style="margin-top: 20px; font-size: 12px; color: #999;">
+                        This email was sent to {user.email} because you created an account with Elite Wealth Capital.
+                    </p>
+                </div>
+            </div>
+        </body>
+        </html>
+        """
+        
+        plain_message = f"""
+        Welcome to Elite Wealth Capital!
+        
+        Dear {user.full_name},
+        
+        Thank you for creating an account with Elite Wealth Capital. We're thrilled to have you join our community!
+        
+        YOUR ACCOUNT DETAILS:
+        Email: {user.email}
+        Referral Code: {user.referral_code}
+        {"Current Balance: $" + str(user.balance) if user.balance > 0 else ""}
+        
+        GET STARTED:
+        1. Complete your profile and KYC verification
+        2. Make your first deposit
+        3. Start investing in Crypto, Real Estate, Oil & Gas, and more!
+        
+        Visit your dashboard: https://elitewealthcapita.uk/dashboard/
+        
+        Need help? Contact us at support@elitewealthcapita.uk
+        
+        Best regards,
+        Elite Wealth Capital Team
+        """
+        
+        email = EmailMultiAlternatives(
+            subject=subject,
+            body=plain_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[user.email],
+        )
+        email.attach_alternative(html_content, "text/html")
+        email.send(fail_silently=False)
+        
+        logger.info(f"Welcome email sent to: {user.email}")
+        return True
+        
+    except Exception as e:
+        logger.error(f"Failed to send welcome email to {user.email}: {str(e)}")
+        return False
+
+
 def send_deposit_notification(deposit):
     """
     Send admin notification when user makes a deposit

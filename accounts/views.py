@@ -193,6 +193,15 @@ def signup_view(request):
                 import logging
                 logging.error(f"Failed to send admin notification: {str(e)}")
             
+            # Send welcome email to the new user
+            try:
+                from accounts.email_notifications import send_welcome_email
+                send_welcome_email(user)
+            except Exception as e:
+                # Log error but don't stop registration
+                import logging
+                logging.error(f"Failed to send welcome email: {str(e)}")
+            
             # Log activity
             ActivityLog.objects.create(user=user, action='signup')
             
