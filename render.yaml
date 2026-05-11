@@ -62,3 +62,22 @@ services:
         value: "926391542761186"
       - key: CLOUDINARY_API_SECRET
         value: RGBNIYy2_c_wybiwH7-qINfbF5M
+
+  # Cron job to process investments automatically
+  - type: cron
+    name: investment-processor
+    runtime: docker
+    plan: starter
+    region: oregon
+    schedule: "0 * * * *"  # Run every hour at minute 0
+    dockerCommand: python manage.py process_investments
+    
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql://neondb_owner:npg_Pc4mXQWbVvH5@ep-holy-sea-a4989cmp-pooler.us-east-1.aws.neon.tech/my-elite-db?sslmode=require
+      - key: DJANGO_SETTINGS_MODULE
+        value: elite_wealth_capital.settings
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        value: django-insecure-elite-wealth-prod-key-2024

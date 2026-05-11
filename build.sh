@@ -43,4 +43,8 @@ else:
     print('Admin user already exists or ADMIN_PASSWORD not set')
 "
 
+# Setup cron job for investment processing (runs every hour)
+echo "=== Setting up investment processing cron job ==="
+python manage.py process_investments || echo "Initial investment processing skipped"
+
 echo "=== Build completed successfully! ==="
