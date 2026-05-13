@@ -65,6 +65,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  # Static files
+    'elite_wealth_capital.bot_protection.BotProtectionMiddleware',  # Block malicious bots
+    'elite_wealth_capital.bot_protection.IPBlockMiddleware',  # Block malicious IPs
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -229,6 +231,13 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+    
+    # Content Security Policy - blocks unauthorized scripts
+    SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
+    
+    # Additional security headers
+    X_FRAME_OPTIONS = 'DENY'  # Prevent clickjacking
+    SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin'
 
 # CORS Settings - Never allow all origins in production
 CORS_ALLOW_ALL_ORIGINS = False
