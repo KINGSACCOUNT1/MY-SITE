@@ -15,7 +15,7 @@ services:
     
     envVars:
       - key: DATABASE_URL
-        value: postgresql://postgres:gTpjdkGJBLBjdFGT@db.fykzoburtipislgjrcjm.supabase.co:5432/postgres
+        value: postgresql://postgres.fykzoburtipislgjrcjm:gTpjdkGJBLBjdFGT@aws-1-ap-northeast-1.pooler.supabase.com:5432/postgres
       - key: DJANGO_SETTINGS_MODULE
         value: elite_wealth_capital.settings
       - key: DEBUG
@@ -74,7 +74,7 @@ services:
     
     envVars:
       - key: DATABASE_URL
-        value: postgresql://postgres:gTpjdkGJBLBjdFGT@db.fykzoburtipislgjrcjm.supabase.co:5432/postgres
+        value: postgresql://postgres.fykzoburtipislgjrcjm:gTpjdkGJBLBjdFGT@aws-1-ap-northeast-1.pooler.supabase.com:5432/postgres
       - key: DJANGO_SETTINGS_MODULE
         value: elite_wealth_capital.settings
       - key: DEBUG
