@@ -1,0 +1,290 @@
+Output: Saved working directory and index state WIP on main: fc7b1f0 Refactor investment system: unify Buy Shares, decouple account upgrades, implement PDF receipts, and refine referral bonus transparency.
+remote: Enumerating objects: 1133, done.
+remote: Counting objects: 100% (87/87), done.
+remote: Compressing objects: 100% (37/37), done.
+Receiving objects:  19% (216/1133), 12.49 MiB | 2Receiving objects:  20% (227/1133), 12.49 MiB | 2Receiving objects:  21% (238/1133), 12.49 MiB | 2Receiving objects:  22% (250/1133), 12.49 MiB | 2Receiving objects:  23% (261/1133), 12.49 MiB | 2Receiving objects:  24% (272/1133), 12.49 MiB | 2Receiving objects:  24% (282/1133), 12.49 MiB | 2Receiving objects:  25% (284/1133), 12.49 MiB | 2Receiving objects:  26% (295/1133), 37.65 MiB | 3Receiving objects:  27% (306/1133), 37.65 MiB | 3Receiving objects:  28% (318/1133), 37.65 MiB | 3Receiving objects:  29% (329/1133), 37.65 MiB | 3Receiving objects:  30% (340/1133), 37.65 MiB | 3Receiving objects:  31% (352/1133), 37.65 MiB | 3Receiving objects:  32% (363/1133), 37.65 MiB | 3Receiving objects:  33% (374/1133), 37.65 MiB | 3Receiving objects:  34% (386/1133), 37.65 MiB | 3Receiving objects:  35% (397/1133), 37.65 MiB | 3Receiving objects:  36% (408/1133), 37.65 MiB | 3Receiving objects:  37% (420/1133), 37.65 MiB | 3Receiving objects:  38% (431/1133), 37.65 MiB | 3Receiving objects:  39% (442/1133), 37.65 MiB | 3Receiving objects:  40% (454/1133), 37.65 MiB | 3Receiving objects:  41% (465/1133), 37.65 MiB | 3Receiving objects:  42% (476/1133), 37.65 MiB | 3Receiving objects:  43% (488/1133), 37.65 MiB | 3Receiving objects:  44% (499/1133), 37.65 MiB | 3Receiving objects:  45% (510/1133), 37.65 MiB | 3Receiving objects:  46% (522/1133), 37.65 MiB | 3Receiving objects:  47% (533/1133), 37.65 MiB | 3Receiving objects:  48% (544/1133), 37.65 MiB | 3Receiving objects:  49% (556/1133), 37.65 MiB | 3Receiving objects:  50% (567/1133), 37.65 MiB | 3Receiving objects:  51% (578/1133), 37.65 MiB | 3Receiving objects:  52% (590/1133), 37.65 MiB | 3Receiving objects:  53% (601/1133), 37.65 MiB | 3Receiving objects:  54% (612/1133), 37.65 MiB | 3Receiving objects:  55% (624/1133), 37.65 MiB | 3Receiving objects:  56% (635/1133), 37.65 MiB | 3Receiving objects:  57% (646/1133), 37.65 MiB | 3Receiving objects:  58% (658/1133), 37.65 MiB | 3Receiving objects:  59% (669/1133), 37.65 MiB | 3Receiving objects:  60% (680/1133), 37.65 MiB | 3Receiving objects:  61% (692/1133), 37.65 MiB | 3Receiving objects:  62% (703/1133), 37.65 MiB | 3Receiving objects:  63% (714/1133), 37.65 MiB | 3Receiving objects:  64% (726/1133), 37.65 MiB | 3Receiving objects:  65% (737/1133), 37.65 MiB | 3Receiving objects:  66% (748/1133), 37.65 MiB | 3Receiving objects:  67% (760/1133), 37.65 MiB | 3Receiving objects:  68% (771/1133), 37.65 MiB | 3Receiving objects:  69% (782/1133), 37.65 MiB | 3Receiving objects:  70% (794/1133), 37.65 MiB | 3Receiving objects:  71% (805/1133), 37.65 MiB | 3Receiving objects:  72% (816/1133), 37.65 MiB | 3Receiving objects:  73% (828/1133), 37.65 MiB | 3Receiving objects:  74% (839/1133), 37.65 MiB | 3Receiving objects:  75% (850/1133), 37.65 MiB | 3Receiving objects:  76% (862/1133), 37.65 MiB | 3Receiving objects:  77% (873/1133), 37.65 MiB | 3Receiving objects:  78% (884/1133), 37.65 MiB | 3Receiving objects:  79% (896/1133), 37.65 MiB | 3Receiving objects:  80% (907/1133), 37.65 MiB | 3Receiving objects:  81% (918/1133), 37.65 MiB | 3Receiving objects:  82% (930/1133), 37.65 MiB | 3Receiving objects:  83% (941/1133), 37.65 MiB | 3Receiving objects:  84% (952/1133), 37.65 MiB | 3Receiving objects:  85% (964/1133), 37.65 MiB | 3Receiving objects:  86% (975/1133), 37.65 MiB | 3Receiving objects:  87% (986/1133), 37.65 MiB | 3Receiving objects:  88% (998/1133), 37.65 MiB | 3Receiving objects:  89% (1009/1133), 37.65 MiB | Receiving objects:  90% (1020/1133), 37.65 MiB | Receiving objects:  91% (1032/1133), 37.65 MiB | Receiving objects:  92% (1043/1133), 37.65 MiB | Receiving objects:  93% (1054/1133), 37.65 MiB | Receiving objects:  94% (1066/1133), 37.65 MiB | remote: Total 1133 (delta 50), reused 59 (delta 47), pack-reused 1046 (from 2)
+Receiving objects:  95% (1077/1133), 37.65 MiB | Receiving objects:  96% (1088/1133), 37.65 MiB | Receiving objects:  97% (1100/1133), 37.65 MiB | Receiving objects:  98% (1111/1133), 37.65 MiB | Receiving objects:  99% (1122/1133), 37.65 MiB | Receiving objects: 100% (1133/1133), 37.65 MiB | Receiving objects: 100% (1133/1133), 48.54 MiB | 38.09 MiB/s, done.
+Resolving deltas: 100% (619/619), done.
+From github.com:KINGSACCOUNT1/MY-SITE
+ * branch            main       -> FETCH_HEAD
+ * [new branch]      main       -> origin/main
+warning: unable to rmdir 'coach': Directory not empty
+warning: unable to rmdir 'external_repos/MY-BANK_WORK': Directory not empty
+warning: unable to rmdir 'my site': Directory not empty
+warning: unable to rmdir 'my-bank': Directory not empty
+Successfully rebased and updated refs/heads/main.
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+  (commit or discard the untracked or modified content in submodules)
+        modified:   .gemini/tmp/ubuntu/chats/session-2026-06-18T05-19-8f350d61.jsonl
+        modified:   .gemini/tmp/ubuntu/logs.json
+        modified:   coach (untracked content)
+        modified:   my site (modified content, untracked content)
+        modified:   my-bank (modified content, untracked content)
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/list_directory_list_directory__list_directory_1781760299147_0_3mbwbe.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/list_directory_list_directory__list_directory_1781760345485_0_2l5vzu.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/list_directory_list_directory__list_directory_1781760355715_0_nwk48s.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/list_directory_list_directory__list_directory_1781760375431_0_j8yp1f.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/list_directory_list_directory__list_directory_1781761957144_0_yn7kc.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/list_directory_list_directory__list_directory_1781762635773_0_akyii9.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/read_file_read_file__read_file_1781762496862_0_sd0t5n.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/read_file_read_file__read_file_1781762743272_0_mmzif.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/read_file_read_file__read_file_1781762831806_0_v8eygk.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781762741903_0_9z65.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781762752351_0_i9rwwk5.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781762818466_0_3s76f.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781762839904_0_z64ren.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781762849927_0_2je15h.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781762897801_0_ddugh.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781762907660_0_9u1nm1m.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781762956736_0_zk308.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781763156497_0_fxooa.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781763287233_0_6801qe.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781763295988_0_ou2f2.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command__run_shell_command_1781764976963_0.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command__run_shell_command_1781765250451_0.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760336226_0_9lnl33.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760386367_0_gv01hm.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760395427_0_wwplo.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760405894_0_xrxdun.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760407134_0_h1crpv.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760417304_0_wkb1i.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760425945_0_n2k8t.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760435581_0_owhqqe.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760445938_0_ucflvs.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760455821_0_s8xcir.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760475471_0_y213hj.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760478002_0_ns3hku.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760507082_0_a072y.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760515555_0_ppe6if.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760549703_0_g0vq4.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760556525_0_l2u75f.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760566612_0_lchopl.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760576947_0_bqg0sc.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760586301_0_kobu1e.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760607286_0_8lh6t.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760615299_0_eimxy9.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761156506_0_1cixmb.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761166238_0_ms2f37.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761356351_0_drb89b.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761376474_0_q00sfh.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761388056_0_uqbaz.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761397287_0_i8kq2.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761405433_0_l16kwf.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761415984_0_a4miwp.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761426407_0_w1s21u.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761436096_0_swxn1l.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761445550_0_f0ibc9v.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761457843_0_j105cu.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761465534_0_rm96zd.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761487151_0_39x1.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761507462_0_34xqwp.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761517077_0_rfjq8h.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761538002_0_eni2ss.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761545792_0_19hbrd.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761945793_0_faqi8c.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762045584_0_vr9hk.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762055734_0_85h8sp.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762467831_0_n8g2l8.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762486828_0_n3kpnh.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762498489_0_ype239.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762507248_0_er3s6.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762523206_0_ymtrzd.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762525062_0_4raps.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762526631_0_ny0lp.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762537044_0_n1rmcg.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762545731_0_fc30bj.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762556036_0_0wmvno.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762566336_0_1xbo7.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762576685_0_g4lye1.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762578632_0_038qw3.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762586680_0_1gq43.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762596436_0_jfqzx7.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762605612_0_4amrj.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762607326_0_zqitr3.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762608962_0_aa5w6f.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762616380_0_gfnzgk.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762628114_0_4fmdok.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762646182_0_sgzwh.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762655775_0_3kdcdu.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762760272_0_vq8ib9.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762767374_0_omqzlj.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762800036_0_b8s7r6.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762801672_0_48lj3d.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762809272_0_62nsz.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762841847_0_axyr4.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762857571_0_xsctqbv.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762866686_0_7gvtl8.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762875855_0_oc6c4h.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762886298_0_sgu2fl.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762916117_0_h28bv9.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762926552_0_ugoe5i.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762936849_0_fzu2vb.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762946022_0_302kp.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781763212590_0_p7896.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781763219793_0_5c3w9q.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781763227090_0_a9vsu.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781763255374_0_t3x0nu.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781763266981_0_vg8sqk.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781763276543_0_of6v1.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781763305361_0_fqf1xn.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781760292280_0_i5ha1p.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781761155073_0_r7ixuf.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781761337360_0_ohl7yj.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781761565916_0_4gus5j.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781761937187_0_fr1j2m.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781762037165_0_kmmwb.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781762460122_0_tqi5no.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781762717767_0_e998wp.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781763026968_0_28db4.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781763137443_0_wgzcb5.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781763250215_0_957b8f.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/write_file_write_file__write_file_1781763147265_0_q8xk2d.txt
+        .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/write_file_write_file__write_file_1781763253774_0_w2y4c.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Dropped refs/stash@{0} (a7ca239b6e91e7b815bc21de503952aa14cbbb6c)
+[main 094fe34] Refactor investment system and apply referral updates
+ 122 files changed, 7671 insertions(+)
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/list_directory_list_directory__list_directory_1781760299147_0_3mbwbe.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/list_directory_list_directory__list_directory_1781760345485_0_2l5vzu.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/list_directory_list_directory__list_directory_1781760355715_0_nwk48s.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/list_directory_list_directory__list_directory_1781760375431_0_j8yp1f.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/list_directory_list_directory__list_directory_1781761957144_0_yn7kc.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/list_directory_list_directory__list_directory_1781762635773_0_akyii9.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/read_file_read_file__read_file_1781762496862_0_sd0t5n.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/read_file_read_file__read_file_1781762743272_0_mmzif.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/read_file_read_file__read_file_1781762831806_0_v8eygk.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781762741903_0_9z65.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781762752351_0_i9rwwk5.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781762818466_0_3s76f.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781762839904_0_z64ren.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781762849927_0_2je15h.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781762897801_0_ddugh.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781762907660_0_9u1nm1m.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781762956736_0_zk308.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781763156497_0_fxooa.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781763287233_0_6801qe.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/replace_replace__replace_1781763295988_0_ou2f2.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command__run_shell_command_1781764976963_0.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command__run_shell_command_1781765250451_0.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760336226_0_9lnl33.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760386367_0_gv01hm.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760395427_0_wwplo.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760405894_0_xrxdun.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760407134_0_h1crpv.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760417304_0_wkb1i.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760425945_0_n2k8t.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760435581_0_owhqqe.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760445938_0_ucflvs.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760455821_0_s8xcir.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760475471_0_y213hj.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760478002_0_ns3hku.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760507082_0_a072y.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760515555_0_ppe6if.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760549703_0_g0vq4.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760556525_0_l2u75f.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760566612_0_lchopl.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760576947_0_bqg0sc.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760586301_0_kobu1e.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760607286_0_8lh6t.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781760615299_0_eimxy9.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761156506_0_1cixmb.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761166238_0_ms2f37.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761356351_0_drb89b.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761376474_0_q00sfh.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761388056_0_uqbaz.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761397287_0_i8kq2.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761405433_0_l16kwf.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761415984_0_a4miwp.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761426407_0_w1s21u.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761436096_0_swxn1l.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761445550_0_f0ibc9v.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761457843_0_j105cu.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761465534_0_rm96zd.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761487151_0_39x1.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761507462_0_34xqwp.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761517077_0_rfjq8h.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761538002_0_eni2ss.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761545792_0_19hbrd.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781761945793_0_faqi8c.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762045584_0_vr9hk.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762055734_0_85h8sp.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762467831_0_n8g2l8.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762486828_0_n3kpnh.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762498489_0_ype239.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762507248_0_er3s6.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762523206_0_ymtrzd.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762525062_0_4raps.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762526631_0_ny0lp.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762537044_0_n1rmcg.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762545731_0_fc30bj.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762556036_0_0wmvno.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762566336_0_1xbo7.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762576685_0_g4lye1.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762578632_0_038qw3.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762586680_0_1gq43.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762596436_0_jfqzx7.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762605612_0_4amrj.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762607326_0_zqitr3.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762608962_0_aa5w6f.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762616380_0_gfnzgk.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762628114_0_4fmdok.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762646182_0_sgzwh.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762655775_0_3kdcdu.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762760272_0_vq8ib9.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762767374_0_omqzlj.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762800036_0_b8s7r6.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762801672_0_48lj3d.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762809272_0_62nsz.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762841847_0_axyr4.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762857571_0_xsctqbv.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762866686_0_7gvtl8.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762875855_0_oc6c4h.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762886298_0_sgu2fl.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762916117_0_h28bv9.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762926552_0_ugoe5i.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762936849_0_fzu2vb.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781762946022_0_302kp.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781763212590_0_p7896.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781763219793_0_5c3w9q.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781763227090_0_a9vsu.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781763255374_0_t3x0nu.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781763266981_0_vg8sqk.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781763276543_0_of6v1.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/run_shell_command_run_shell_command__run_shell_command_1781763305361_0_fqf1xn.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781760292280_0_i5ha1p.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781761155073_0_r7ixuf.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781761337360_0_ohl7yj.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781761565916_0_4gus5j.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781761937187_0_fr1j2m.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781762037165_0_kmmwb.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781762460122_0_tqi5no.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781762717767_0_e998wp.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781763026968_0_28db4.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781763137443_0_wgzcb5.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/update_topic_update_topic__update_topic_1781763250215_0_957b8f.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/write_file_write_file__write_file_1781763147265_0_q8xk2d.txt
+ create mode 100644 .gemini/tmp/ubuntu/tool-outputs/session-8f350d61-72f3-43eb-898e-472a87f5f188/write_file_write_file__write_file_1781763253774_0_w2y4c.txt
+Enumerating objects: 7788, done.
+Counting objects: 100% (7788/7788), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (6836/6836), done.
+Writing objects:   0% (14/7787), 32.00 KiB | 3.00Writing objects:   0% (14/7787), 19.50 MiB | 2.72Writing objects:   1% (79/7787), 36.59 MiB | 4.77Writing objects:   2% (156/7787), 36.59 MiB | 4.7Writing objects:   3% (234/7787), 36.59 MiB | 4.7Writing objects:   4% (312/7787), 36.59 MiB | 4.7Writing objects:   4% (350/7787), 36.59 MiB | 4.7Writing objects:   5% (390/7787), 43.17 MiB | 5.2Writing objects:   6% (468/7787), 43.17 MiB | 5.2Writing objects:   7% (546/7787), 43.17 MiB | 5.2Writing objects:   8% (623/7787), 43.17 MiB | 5.2Writing objects:   9% (701/7787), 43.17 MiB | 5.2Writing objects:  10% (779/7787), 43.17 MiB | 5.2Writing objects:  11% (857/7787), 43.17 MiB | 5.2Writing objects:  12% (935/7787), 43.17 MiB | 5.2Writing objects:  13% (1013/7787), 43.17 MiB | 5.Writing objects:  14% (1091/7787), 43.17 MiB | 5.Writing objects:  15% (1169/7787), 43.17 MiB | 5.Writing objects:  16% (1246/7787), 53.73 MiB | 6.Writing objects:  17% (1324/7787), 53.73 MiB | 6.Writing objects:  18% (1402/7787), 53.73 MiB | 6.Writing objects:  18% (1405/7787), 53.73 MiB | 6.Writing objects:  19% (1480/7787), 66.62 MiB | 7.Writing objects:  20% (1558/7787), 74.63 MiB | 7.Writing objects:  20% (1569/7787), 74.63 MiB | 7.Writing objects:  21% (1636/7787), 74.63 MiB | 7.Writing objects:  22% (1714/7787), 74.63 MiB | 7.Writing objects:  23% (1792/7787), 90.02 MiB | 8.Writing objects:  23% (1834/7787), 96.66 MiB | 8.Writing objects:  24% (1869/7787), 96.66 MiB | 8.Writing objects:  24% (1906/7787), 102.77 MiB | 1Writing objects:  24% (1906/7787), 108.21 MiB | 1Writing objects:  24% (1916/7787), 109.24 MiB | 1Writing objects:  24% (1929/7787), 111.84 MiB | 9Writing objects:  24% (1931/7787), 112.27 MiB | 7Writing objects:  24% (1932/7787), 112.35 MiB | 5Writing objects:  24% (1937/7787), 113.98 MiB | 2Writing objects:  25% (1947/7787), 113.98 MiB | 2Writing objects:  26% (2025/7787), 113.98 MiB | 2Writing objects:  26% (2083/7787), 113.98 MiB | 2Writing objects:  27% (2103/7787), 113.98 MiB | 2Writing objects:  28% (2181/7787), 113.98 MiB | 2Writing objects:  29% (2259/7787), 113.98 MiB | 2Writing objects:  30% (2337/7787), 116.27 MiB | 2Writing objects:  30% (2375/7787), 118.66 MiB | 2Writing objects:  31% (2414/7787), 118.66 MiB | 2Writing objects:  31% (2442/7787), 125.20 MiB | 1Writing objects:  31% (2442/7787), 148.78 MiB | 2Writing objects:  32% (2492/7787), 162.86 MiB | 3Writing objects:  33% (2570/7787), 162.86 MiB | 3Writing objects:  34% (2648/7787), 162.86 MiB | 3Writing objects:  35% (2726/7787), 162.86 MiB | 3Writing objects:  35% (2773/7787), 162.86 MiB | 3Writing objects:  36% (2804/7787), 170.96 MiB | 4Writing objects:  37% (2882/7787), 170.96 MiB | 4Writing objects:  38% (2960/7787), 170.96 MiB | 4Writing objects:  39% (3037/7787), 170.96 MiB | 4Writing objects:  40% (3115/7787), 170.96 MiB | 4Writing objects:  41% (3193/7787), 178.19 MiB | 5Writing objects:  42% (3271/7787), 178.19 MiB | 5Writing objects:  43% (3349/7787), 178.19 MiB | 5Writing objects:  44% (3427/7787), 178.19 MiB | 5Writing objects:  45% (3505/7787), 178.19 MiB | 5Writing objects:  46% (3583/7787), 178.19 MiB | 5Writing objects:  47% (3660/7787), 178.19 MiB | 5Writing objects:  48% (3738/7787), 178.19 MiB | 5Writing objects:  49% (3816/7787), 178.19 MiB | 5Writing objects:  50% (3894/7787), 178.19 MiB | 5Writing objects:  51% (3972/7787), 178.19 MiB | 5Writing objects:  52% (4050/7787), 178.19 MiB | 5Writing objects:  53% (4128/7787), 178.19 MiB | 5Writing objects:  54% (4205/7787), 178.19 MiB | 5Writing objects:  55% (4283/7787), 178.19 MiB | 5Writing objects:  56% (4361/7787), 178.19 MiB | 5Writing objects:  57% (4439/7787), 178.19 MiB | 5Writing objects:  57% (4489/7787), 182.82 MiB | 5Writing objects:  58% (4517/7787), 182.82 MiB | 5Writing objects:  59% (4595/7787), 182.82 MiB | 5Writing objects:  60% (4673/7787), 182.82 MiB | 5Writing objects:  61% (4751/7787), 182.82 MiB | 5Writing objects:  62% (4828/7787), 182.82 MiB | 5Writing objects:  63% (4906/7787), 182.82 MiB | 5Writing objects:  64% (4984/7787), 182.82 MiB | 5Writing objects:  65% (5062/7787), 182.82 MiB | 5Writing objects:  66% (5140/7787), 182.82 MiB | 5Writing objects:  67% (5218/7787), 182.82 MiB | 5Writing objects:  68% (5296/7787), 182.82 MiB | 5Writing objects:  69% (5374/7787), 182.82 MiB | 5Writing objects:  70% (5451/7787), 182.82 MiB | 5Writing objects:  71% (5529/7787), 182.82 MiB | 5Writing objects:  72% (5607/7787), 182.82 MiB | 5Writing objects:  73% (5685/7787), 182.82 MiB | 5Writing objects:  74% (5763/7787), 182.82 MiB | 5Writing objects:  75% (5841/7787), 182.82 MiB | 5Writing objects:  76% (5919/7787), 182.82 MiB | 5Writing objects:  77% (5996/7787), 182.82 MiB | 5Writing objects:  78% (6074/7787), 182.82 MiB | 5Writing objects:  79% (6152/7787), 182.82 MiB | 5Writing objects:  80% (6230/7787), 182.82 MiB | 5Writing objects:  81% (6308/7787), 182.82 MiB | 5Writing objects:  81% (6336/7787), 182.82 MiB | 5Writing objects:  82% (6386/7787), 182.82 MiB | 5Writing objects:  83% (6464/7787), 182.82 MiB | 5Writing objects:  84% (6543/7787), 182.82 MiB | 5Writing objects:  85% (6619/7787), 182.82 MiB | 5Writing objects:  86% (6697/7787), 189.94 MiB | 6Writing objects:  87% (6775/7787), 189.94 MiB | 6Writing objects:  88% (6853/7787), 189.94 MiB | 6Writing objects:  89% (6931/7787), 189.94 MiB | 6Writing objects:  90% (7009/7787), 189.94 MiB | 6Writing objects:  91% (7087/7787), 189.94 MiB | 6Writing objects:  92% (7165/7787), 189.94 MiB | 6Writing objects:  93% (7242/7787), 189.94 MiB | 6Writing objects:  94% (7320/7787), 189.94 MiB | 6Writing objects:  95% (7398/7787), 189.94 MiB | 6Writing objects:  95% (7418/7787), 193.70 MiB | 6Writing objects:  96% (7477/7787), 197.98 MiB | 1Writing objects:  96% (7506/7787), 197.98 MiB | 1Writing objects:  97% (7554/7787), 197.98 MiB | 1Writing objects:  97% (7594/7787), 204.09 MiB | 7Writing objects:  97% (7609/7787), 207.62 MiB | 6Writing objects:  97% (7621/7787), 216.68 MiB | 4Writing objects:  97% (7621/7787), 229.37 MiB | 4Writing objects:  98% (7632/7787), 229.37 MiB | 4Writing objects:  98% (7685/7787), 234.10 MiB | 5Writing objects:  98% (7688/7787), 236.39 MiB | 4Writing objects:  99% (7710/7787), 236.39 MiB | 4Writing objects:  99% (7715/7787), 243.15 MiB | 4Writing objects:  99% (7734/7787), 243.15 MiB | 4Writing objects:  99% (7753/7787), 249.66 MiB | 4Writing objects: 100% (7787/7787), 249.66 MiB | 4Writing objects: 100% (7787/7787), 252.42 MiB | 5.67 MiB/s, done.
+Total 7787 (delta 916), reused 1 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (916/916), completed with 1 local object.
+remote: error: Trace: 01277c6781aa8729a3a189b4ee2db8c71408745cd182a6ed5fd44550db3b03b1
+remote: error: See https://gh.io/lfs for more information.
+remote: error: File .cache/ms-playwright-go/1.57.0/node is 115.51 MB; this exceeds GitHub's file size limit of 100.00 MB
+remote: error: File .local/bin/agy is 159.67 MB; this exceeds GitHub's file size limit of 100.00 MB
+remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.
+To github.com:KINGSACCOUNT1/MY-SITE.git
+ ! [remote rejected] main -> main (pre-receive hook declined)
+error: failed to push some refs to 'github.com:KINGSACCOUNT1/MY-SITE.git'
+Exit Code: 1
+Process Group PGID: 96441
