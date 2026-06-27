@@ -13,7 +13,10 @@ services:
       - key: DEBUG
         value: False
       - key: DATABASE_URL
-        sync: false
+        fromService:
+          type: pserv
+          name: postgres
+          envVarName: DATABASE_URL
       - key: ALLOWED_HOSTS
         value: "*"
       - key: EMAIL_BACKEND
